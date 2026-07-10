@@ -52,7 +52,7 @@ export default function HakkimizdaPage() {
       <section className="border-t border-line bg-paper">
         <div className="container-site py-16">
           <Reveal>
-            <div className="grid max-w-4xl items-center gap-10 md:grid-cols-[280px,1fr]">
+            <div className="grid max-w-4xl items-center gap-10 md:grid-cols-[280px_1fr]">
               <SiteImage
                 image={IMAGES.avukat}
                 aspectRatio="3/4"

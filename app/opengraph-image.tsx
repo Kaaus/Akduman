@@ -7,6 +7,14 @@ import { ImageResponse } from "next/og";
  * o sayfa özelinde kapağa döner.
  */
 
+/*
+ * Edge runtime zorunlu: @vercel/og'un Node derlemesi, Windows'ta Türkçe
+ * karakter içeren proje yollarında (ör. "Masaüstü") fileURLToPath hatası
+ * veriyor. Edge derlemesi varlıkları gömülü taşıdığı için bundan etkilenmez;
+ * Vercel'de de doğal olarak edge'de çalışır.
+ */
+export const runtime = "edge";
+
 export const alt =
   "Akduman Hukuk Bürosu — Ankara • Avukatlık & Hukuki Danışmanlık";
 export const size = { width: 1200, height: 630 };

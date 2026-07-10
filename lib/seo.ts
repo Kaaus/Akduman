@@ -85,7 +85,8 @@ export function faqSchema(items: FaqItem[]) {
 /** Hizmet sayfaları için Service şeması (provider → LegalService). */
 export function serviceSchema(slug: string) {
   const service = SERVICES.find((s) => s.slug === slug);
-  if (!service) return null;
+  // Slug'lar SERVICES kaydından gelir; bilinmeyen slug bir programlama hatasıdır.
+  if (!service) throw new Error(`Bilinmeyen hizmet slug'ı: ${slug}`);
   return {
     "@context": "https://schema.org",
     "@type": "Service",

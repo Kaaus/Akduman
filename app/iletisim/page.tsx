@@ -30,7 +30,7 @@ export default function IletisimPage() {
           <Breadcrumb items={[{ label: "İletişim" }]} />
           <h1 className="mt-6 text-navy-800">İletişim</h1>
 
-          <div className="mt-10 grid gap-14 lg:grid-cols-[2fr,3fr]">
+          <div className="mt-10 grid gap-14 lg:grid-cols-[2fr_3fr]">
             {/* Sol sütun: iletişim bilgileri */}
             <div>
               <ul className="space-y-6">
