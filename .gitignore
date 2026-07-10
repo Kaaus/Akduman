@@ -1,0 +1,16 @@
+# bağımlılıklar
+/node_modules
+
+# next.js build çıktısı
+/.next
+/out
+
+# ortam değişkenleri (gizli anahtarlar asla commit edilmez)
+.env
+.env.local
+.env*.local
+
+# çeşitli
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts

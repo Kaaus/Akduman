@@ -1,0 +1,28 @@
+{
+  "name": "akduman-hukuk-burosu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "akduman.av.tr — Akduman Hukuk Bürosu kurumsal web sitesi (Next.js + Tailwind)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "gray-matter": "4.0.3",
+    "lucide-react": "0.454.0",
+    "next": "14.2.21",
+    "next-mdx-remote": "5.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.15",
+    "typescript": "5.6.3"
+  }
+}
