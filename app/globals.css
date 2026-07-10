@@ -471,6 +471,11 @@
 .group:focus-within .btn-tertiary .btn-arrow {
   transform: translateX(4px);
 }
+/* Kart hover'ında başlık altı slider çizgisi de dolar (featured kart) */
+.group:hover .link-slide::after,
+.group:focus-within .link-slide::after {
+  transform: scaleX(1);
+}
 
 /* ─── Hareket azaltma: TÜM animasyon/geçişler kapanır ───────────────────── */
 

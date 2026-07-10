@@ -1,8 +1,9 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 import ContactForm from "@/components/ContactForm";
 import JsonLd from "@/components/JsonLd";
 import PlaceholderImage from "@/components/PlaceholderImage";
+import Reveal from "@/components/Reveal";
 import { WhatsAppIcon } from "@/components/WhatsAppFloat";
 import { breadcrumbSchema, buildMetadata, contactPageSchema } from "@/lib/seo";
 import { PLACEHOLDERS, SITE } from "@/lib/site";
@@ -13,6 +14,47 @@ export const metadata = buildMetadata({
     "Akduman Hukuk Bürosu iletişim bilgileri: adres, telefon ve iletişim formu. Çankaya/Ankara. ☎ +90 534 089 10 70",
   path: "/iletisim/",
 });
+
+/** Panel satırı: hover'da 4px kayar, ikon bronz parlar. */
+function PanelRow({
+  icon,
+  label,
+  children,
+  href,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  children: React.ReactNode;
+  href?: string;
+}) {
+  const inner = (
+    <span className="flex gap-4">
+      <span
+        aria-hidden="true"
+        className="mt-0.5 shrink-0 text-bronze-500 transition-colors duration-200 group-hover:text-bronze-300"
+      >
+        {icon}
+      </span>
+      <span>
+        <span className="block text-[14px] font-semibold text-white">{label}</span>
+        <span className="mt-1 block text-[15px] leading-relaxed text-[#F4F1EA]/[.88]">
+          {children}
+        </span>
+      </span>
+    </span>
+  );
+
+  const rowClass =
+    "group block transition-transform duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:translate-x-1";
+
+  return href ? (
+    <a href={href} className={rowClass} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>
+      {inner}
+    </a>
+  ) : (
+    <div className={rowClass}>{inner}</div>
+  );
+}
 
 export default function IletisimPage() {
   return (
@@ -28,75 +70,62 @@ export default function IletisimPage() {
       <section className="bg-white">
         <div className="container-site py-12 md:py-16">
           <Breadcrumb items={[{ label: "İletişim" }]} />
-          <h1 className="mt-6 text-navy-800">İletişim</h1>
+          <h1 className="mt-6">İletişim</h1>
 
-          <div className="mt-10 grid gap-14 lg:grid-cols-[2fr_3fr]">
-            {/* Sol sütun: iletişim bilgileri */}
-            <div>
-              <ul className="space-y-6">
-                <li className="flex gap-4">
-                  <MapPin size={20} strokeWidth={1.5} className="mt-1 shrink-0 text-bronze-500" aria-hidden="true" />
-                  <div>
-                    <p className="text-[14px] font-semibold text-navy-800">Adres</p>
-                    <p className="mt-1 text-muted">{SITE.address.full}</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <Phone size={20} strokeWidth={1.5} className="mt-1 shrink-0 text-bronze-500" aria-hidden="true" />
-                  <div>
-                    <p className="text-[14px] font-semibold text-navy-800">Telefon</p>
-                    <a
-                      href={SITE.telHref}
-                      className="mt-1 block text-muted transition-colors hover:text-bronze-600"
+          {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı */}
+          <Reveal className="mt-10">
+            <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
+              {/* Sol panel — navy-950 */}
+              <div className="bg-navy-950 p-8 md:p-10">
+                <div className="space-y-7">
+                  <PanelRow
+                    icon={<MapPin size={24} strokeWidth={1.5} />}
+                    label="Adres"
+                  >
+                    {SITE.address.full}
+                  </PanelRow>
+                  <PanelRow
+                    icon={<Phone size={24} strokeWidth={1.5} />}
+                    label="Telefon"
+                    href={SITE.telHref}
+                  >
+                    {SITE.phoneDisplay}
+                  </PanelRow>
+                  <PanelRow
+                    icon={<Mail size={24} strokeWidth={1.5} />}
+                    label="E-posta"
+                    href={SITE.mailHref}
+                  >
+                    {SITE.email}
+                  </PanelRow>
+                  {/* Çalışma saatleri yalnızca {{CALISMA_SAATLERI}} doluysa basılır */}
+                  {PLACEHOLDERS.CALISMA_SAATLERI && (
+                    <PanelRow
+                      icon={<Clock size={24} strokeWidth={1.5} />}
+                      label="Çalışma Saatleri"
                     >
-                      {SITE.phoneDisplay}
-                    </a>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <Mail size={20} strokeWidth={1.5} className="mt-1 shrink-0 text-bronze-500" aria-hidden="true" />
-                  <div>
-                    <p className="text-[14px] font-semibold text-navy-800">E-posta</p>
-                    <a
-                      href={SITE.mailHref}
-                      className="mt-1 block text-muted transition-colors hover:text-bronze-600"
-                    >
-                      {SITE.email}
-                    </a>
-                  </div>
-                </li>
-                {/* Çalışma saatleri yalnızca {{CALISMA_SAATLERI}} doluysa basılır */}
-                {PLACEHOLDERS.CALISMA_SAATLERI && (
-                  <li className="flex gap-4">
-                    <span className="mt-1 h-5 w-5 shrink-0" aria-hidden="true" />
-                    <div>
-                      <p className="text-[14px] font-semibold text-navy-800">
-                        Çalışma Saatleri
-                      </p>
-                      <p className="mt-1 text-muted">
-                        {PLACEHOLDERS.CALISMA_SAATLERI}
-                      </p>
-                    </div>
-                  </li>
-                )}
-              </ul>
+                      {PLACEHOLDERS.CALISMA_SAATLERI}
+                    </PanelRow>
+                  )}
+                </div>
 
-              <a
-                href={SITE.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary mt-9"
-              >
-                <WhatsAppIcon size={16} />
-                WhatsApp ile Yazın
-              </a>
-            </div>
+                <a
+                  href={SITE.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary-dark mt-10"
+                >
+                  <WhatsAppIcon size={16} />
+                  WhatsApp ile Yazın
+                </a>
+              </div>
 
-            {/* Sağ sütun: form (anasayfadakiyle aynı komponent) */}
-            <div>
-              <ContactForm />
+              {/* Sağ: form kartı (anasayfadakiyle aynı komponent) */}
+              <div className="bg-white p-8 md:p-10">
+                <ContactForm />
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

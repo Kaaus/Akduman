@@ -1,10 +1,15 @@
+import { ArrowRight, Phone } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
+import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
+import ProcessSteps from "@/components/ProcessSteps";
 import RelatedArticles from "@/components/RelatedArticles";
+import Reveal from "@/components/Reveal";
+import TocRail from "@/components/TocRail";
 import { breadcrumbSchema, buildMetadata, faqSchema, serviceSchema } from "@/lib/seo";
-import { getService, INFO_NOTE, type FaqItem } from "@/lib/site";
+import { getService, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
 
 /*
  * ═══════════════════════════════════════════════════════════════════
@@ -21,6 +26,13 @@ export const metadata = buildMetadata({
   description: service.metaDescription,
   path: `/${service.slug}/`,
 });
+
+const TOC = [
+  { id: "hizmetler", label: "Verdiğimiz Hizmetler" },
+  { id: "surec", label: "Süreç Nasıl İşler?" },
+  { id: "kavramlar", label: "Sık Kullanılan Kavramlar" },
+  { id: "sss", label: "Sıkça Sorulan Sorular" },
+];
 
 const FAQ: FaqItem[] = [
   {
@@ -58,22 +70,36 @@ export default function CezaHukukuPage() {
         ])}
       />
 
-      <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+      {/* Dar koyu şerit-hero */}
+      <section className="bg-navy-950">
+        <div className="container-site py-10 md:py-14">
           <Breadcrumb
+            variant="dark"
             items={[
               { label: "Faaliyet Alanlarımız", href: "/faaliyet-alanlarimiz/" },
               { label: service.title },
             ]}
           />
-          <p className="kicker mt-8">Faaliyet Alanlarımız</p>
-          <h1 className="mt-3 text-navy-800">{service.h1}</h1>
+          <h1 className="mt-6 !text-[#F4F1EA]">{service.h1}</h1>
+          {/* Lead: mevcut giriş metninin ilk cümlesi */}
+          <p className="mt-5 max-w-3xl text-[20px] leading-relaxed text-[#F4F1EA]/85">
+            Ceza hukuku; suç teşkil eden fiilleri, bu fiillere uygulanacak
+            yaptırımları ve yargılama sürecini düzenleyen hukuk dalıdır.
+          </p>
+          <a href={SITE.telHref} className="btn-tertiary-dark mt-6">
+            <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
+            Hemen Ara
+            <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
+          </a>
+        </div>
+      </section>
 
-          <div className="article-body mt-8">
-            {/* Giriş — orijinal metin korunarak */}
-            <p>
-              Ceza hukuku; suç teşkil eden fiilleri, bu fiillere uygulanacak
-              yaptırımları ve yargılama sürecini düzenleyen hukuk dalıdır.
+      {/* Gövde: 70ch + sağda TocRail */}
+      <section className="bg-white">
+        <div className="container-site flex gap-14 py-12 md:py-16">
+          <div className="article-body min-w-0 max-w-[70ch]">
+            {/* Giriş (kalan cümleler) — lead stili */}
+            <p className="lead">
               Akduman Hukuk Bürosu, ceza hukuku alanında şüpheli, sanık,
               müşteki ve mağdur konumundaki müvekkillerine soruşturma ve
               kovuşturma aşamalarında hukuki destek sağlamaktadır. Ceza
@@ -85,7 +111,7 @@ export default function CezaHukukuPage() {
 
             {/* ESKİ METİN BURAYA: kullanıcı canlı siteden yapıştıracak — gelince girişle harmanla */}
 
-            <h2>Ceza Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
+            <h2 id="hizmetler">Ceza Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
             <p>
               Büromuz, ceza yargılamasının soruşturma evresinden infaz
               aşamasına kadar tüm süreçlerinde müvekkillerine hukuki destek
@@ -143,43 +169,67 @@ export default function CezaHukukuPage() {
               </li>
             </ul>
 
-            <h2>Ceza Yargılaması Süreci Nasıl İşler?</h2>
+            <h2 id="surec">Ceza Yargılaması Süreci Nasıl İşler?</h2>
+            <ProcessSteps
+              steps={[
+                {
+                  title: "Soruşturma",
+                  body: (
+                    <p>
+                      Süreç; şikâyet, ihbar veya suçun başka biçimde
+                      öğrenilmesiyle başlamaktadır. Cumhuriyet savcılığı
+                      tarafından yürütülen bu evrede ifadeler alınmakta ve
+                      deliller toplanmaktadır. Bu aşamadaki beyan ve işlemler,
+                      dosyanın ilerleyen evrelerini doğrudan
+                      etkileyebilmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "İddianame ve Kovuşturmaya Geçiş",
+                  body: (
+                    <p>
+                      Soruşturma sonunda yeterli şüphe oluşursa iddianame
+                      düzenlenerek mahkemeye sunulmaktadır. İddianamenin
+                      kabulüyle kamu davası açılmakta ve kovuşturma evresine
+                      geçilmektedir. Yeterli şüphe oluşmazsa kovuşturmaya yer
+                      olmadığına dair karar verilebilmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Kovuşturma",
+                  body: (
+                    <p>
+                      Kovuşturma evresinde duruşmalar yapılmakta, deliller
+                      mahkeme önünde tartışılmakta ve savunma sunulmaktadır.
+                      Yargılamanın sonunda mahkeme; beraat, mahkûmiyet veya
+                      kanunda öngörülen diğer kararlardan birini vermektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Kanun Yolları",
+                  body: (
+                    <p>
+                      Verilen hükme karşı istinaf yoluna, istinaf
+                      incelemesinden geçen kararlara karşı ise kanunda
+                      öngörülen hâllerde temyiz yoluna başvurulabilmektedir.
+                    </p>
+                  ),
+                },
+              ]}
+            />
 
-            <h3>1. Soruşturma</h3>
-            <p>
-              Süreç; şikâyet, ihbar veya suçun başka biçimde öğrenilmesiyle
-              başlamaktadır. Cumhuriyet savcılığı tarafından yürütülen bu
-              evrede ifadeler alınmakta ve deliller toplanmaktadır. Bu
-              aşamadaki beyan ve işlemler, dosyanın ilerleyen evrelerini
-              doğrudan etkileyebilmektedir.
-            </p>
+            {/* Süre/hak-kaybı cümlesi mevcut metinden Callout'a taşındı */}
+            <Callout variant="uyari">
+              <p>
+                Kanun yolu başvuruları süreye tabi olduğundan sürelerin takibi
+                önem taşımaktadır.
+              </p>
+            </Callout>
 
-            <h3>2. İddianame ve Kovuşturmaya Geçiş</h3>
-            <p>
-              Soruşturma sonunda yeterli şüphe oluşursa iddianame düzenlenerek
-              mahkemeye sunulmaktadır. İddianamenin kabulüyle kamu davası
-              açılmakta ve kovuşturma evresine geçilmektedir. Yeterli şüphe
-              oluşmazsa kovuşturmaya yer olmadığına dair karar
-              verilebilmektedir.
-            </p>
-
-            <h3>3. Kovuşturma</h3>
-            <p>
-              Kovuşturma evresinde duruşmalar yapılmakta, deliller mahkeme
-              önünde tartışılmakta ve savunma sunulmaktadır. Yargılamanın
-              sonunda mahkeme; beraat, mahkûmiyet veya kanunda öngörülen diğer
-              kararlardan birini vermektedir.
-            </p>
-
-            <h3>4. Kanun Yolları</h3>
-            <p>
-              Verilen hükme karşı istinaf yoluna, istinaf incelemesinden geçen
-              kararlara karşı ise kanunda öngörülen hâllerde temyiz yoluna
-              başvurulabilmektedir. Kanun yolu başvuruları süreye tabi
-              olduğundan sürelerin takibi önem taşımaktadır.
-            </p>
-
-            <h2>Sık Kullanılan Kavramlar</h2>
+            <h2 id="kavramlar">Sık Kullanılan Kavramlar</h2>
 
             <h3>Hükmün Açıklanmasının Geri Bırakılması (HAGB)</h3>
             <p>
@@ -213,18 +263,19 @@ export default function CezaHukukuPage() {
               tedbiridir. Adli kontrol kararlarına karşı da itiraz yolu
               açıktır.
             </p>
+
+            <h2 id="sss">Sıkça Sorulan Sorular</h2>
+            <Reveal>
+              <FaqAccordion items={FAQ} idPrefix="ceza-sss" />
+            </Reveal>
+
+            {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
+            <p className="mt-12 border-t border-line-strong pt-6 text-[14px] italic text-muted">
+              {INFO_NOTE}
+            </p>
           </div>
 
-          {/* Sıkça Sorulan Sorular */}
-          <h2 className="mt-14 text-navy-800">Sıkça Sorulan Sorular</h2>
-          <div className="mt-6">
-            <FaqAccordion items={FAQ} idPrefix="ceza-sss" />
-          </div>
-
-          {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
-          <p className="mt-12 border-t border-line pt-6 text-[14px] italic text-muted">
-            {INFO_NOTE}
-          </p>
+          <TocRail items={TOC} />
         </div>
       </section>
 

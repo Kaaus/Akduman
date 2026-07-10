@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
-import ServiceCard from "@/components/ServiceCard";
+import ServiceRow from "@/components/ServiceRow";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { SERVICES } from "@/lib/site";
 
@@ -26,18 +26,19 @@ export default function FaaliyetAlanlariPage() {
       <section className="bg-white">
         <div className="container-site py-12 md:py-16">
           <Breadcrumb items={[{ label: "Faaliyet Alanlarımız" }]} />
-          <h1 className="mt-6 text-navy-800">Faaliyet Alanlarımız</h1>
+          <h1 className="mt-6">Faaliyet Alanlarımız</h1>
           <p className="mt-5 max-w-3xl">
             Büromuzun hizmet verdiği başlıca hukuk alanları aşağıda yer
             almaktadır.
           </p>
-          <Reveal>
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {SERVICES.map((service) => (
-                <ServiceCard key={service.slug} service={service} />
-              ))}
-            </div>
-          </Reveal>
+          {/* Hub: editoryal satır listesi — açıklama mobilde de görünür */}
+          <div className="mt-10 border-t border-line-strong">
+            {SERVICES.map((service, i) => (
+              <Reveal key={service.slug} delay={i * 70}>
+                <ServiceRow service={service} showDescriptionOnMobile />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

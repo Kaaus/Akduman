@@ -26,10 +26,10 @@ export default function HakkimizdaPage() {
       <section className="bg-white">
         <div className="container-site py-12 md:py-16">
           <Breadcrumb items={[{ label: "Hakkımızda" }]} />
-          <h1 className="mt-6 text-navy-800">Hakkımızda</h1>
+          <h1 className="mt-6">Hakkımızda</h1>
 
           {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
-          <div className="mt-8 max-w-3xl space-y-5">
+          <div className="mt-8 max-w-[70ch] space-y-5">
             <p>
               Akduman Hukuk Bürosu, Av. Samed Akduman tarafından Ankara&rsquo;da
               kurulmuştur. Büromuz; ceza hukuku, gayrimenkul hukuku, aile
@@ -52,7 +52,8 @@ export default function HakkimizdaPage() {
       <section className="border-t border-line bg-paper">
         <div className="container-site py-16">
           <Reveal>
-            <div className="grid max-w-4xl items-center gap-10 md:grid-cols-[280px_1fr]">
+            {/* Avukat kartı — v2 kart stili + duotone çerçeveli portre */}
+            <div className="card grid max-w-4xl items-center gap-10 p-6 md:grid-cols-[280px_1fr] md:p-10">
               <SiteImage
                 image={IMAGES.avukat}
                 aspectRatio="3/4"
@@ -61,10 +62,10 @@ export default function HakkimizdaPage() {
                 className="m-3"
               />
               <div>
-                <h2 className="text-navy-800">{SITE.lawyer}</h2>
+                <h2>{SITE.lawyer}</h2>
                 {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
                 {PLACEHOLDERS.BARO_SICIL_NO && (
-                  <p className="mt-2 text-[14px] font-semibold text-bronze-600">
+                  <p className="mt-2 text-[15px] font-semibold text-bronze-700">
                     Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
                   </p>
                 )}
