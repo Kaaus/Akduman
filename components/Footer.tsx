@@ -48,11 +48,14 @@ function FooterLogo() {
     );
   }
   return (
+    // Görsel satır kırılımı korunur; ekran okuyucu bitişik "AkdumanHukuk"
+    // okumasın diye görünür span'ler gizlenip tek doğru ad verilir.
     <span className="flex flex-col leading-none">
-      <span className="font-serif text-[26px] font-bold tracking-tight text-white">
+      <span className="sr-only">Akduman Hukuk Bürosu</span>
+      <span aria-hidden="true" className="font-serif text-[26px] font-bold tracking-tight text-white">
         Akduman
       </span>
-      <span className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-500">
+      <span aria-hidden="true" className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-500">
         Hukuk Bürosu
       </span>
     </span>

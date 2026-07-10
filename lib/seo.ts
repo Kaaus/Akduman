@@ -62,7 +62,10 @@ export function legalServiceSchema() {
       streetAddress: SITE.address.street,
       addressLocality: SITE.address.locality,
       addressRegion: SITE.address.region,
-      postalCode: SITE.address.postalCode,
+      // Posta kodu teyitsizken şemaya girmez (adres tek-kaynak kuralı).
+      ...(SITE.address.postalCode
+        ? { postalCode: SITE.address.postalCode }
+        : {}),
       addressCountry: SITE.address.country,
     },
     areaServed: "Ankara",
@@ -129,8 +132,10 @@ export function articleSchema(article: Article) {
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    datePublished: article.date,
-    dateModified: article.dateModified,
+    // Tarih politikası: placeholder/boş tarih şemaya HİÇ girmez;
+    // gerçek tarih girildiğinde otomatik basılır.
+    ...(article.date ? { datePublished: article.date } : {}),
+    ...(article.dateModified ? { dateModified: article.dateModified } : {}),
     mainEntityOfPage: `${SITE.url}/${article.slug}/`,
     ...(article.cover ? { image: `${SITE.url}${article.cover}` } : {}),
     author: {

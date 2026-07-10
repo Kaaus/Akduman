@@ -17,9 +17,14 @@ export type Article = {
   slug: string;
   title: string;
   description: string;
-  /** İlk yayın tarihi (ISO). TODO: eski sitedeki gerçek yayın tarihleriyle güncelle. */
+  /**
+   * İlk yayın tarihi (ISO). TARİH POLİTİKASI: boş ("") olduğu sürece
+   * arayüzde tarih rozeti ve JSON-LD datePublished/dateModified HİÇ
+   * basılmaz; gerçek tarih girildiğinde her şey otomatik görünür olur.
+   * TODO: gerçek tarih eski siteden girilecek.
+   */
   date: string;
-  /** Son güncelleme tarihi (ISO). TODO: gerçek tarihlerle güncelle. */
+  /** Son güncelleme tarihi (ISO). Aynı politika. TODO: gerçek tarih eski siteden girilecek. */
   dateModified: string;
   /** Faaliyet alanı etiketleri — hizmet sayfası ↔ makale eşleştirmesinde kullanılır. */
   alan: string[];
@@ -33,8 +38,8 @@ export const ARTICLES: Article[] = [
     title: "Miras Paylaşımı Nasıl Yapılır?",
     description:
       "Yasal mirasçılar arasında miras paylaşımının nasıl yapıldığı, paylaşma sözleşmesi ve paylaşma davası hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: eski sitedeki gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: eski sitedeki gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["miras"],
   },
   {
@@ -42,8 +47,8 @@ export const ARTICLES: Article[] = [
     title: "Reddi Miras Nedir?",
     description:
       "Mirasın reddi (reddi miras) kavramı, üç aylık ret süresi ve ret işleminin sonuçları hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["miras"],
   },
   {
@@ -51,8 +56,8 @@ export const ARTICLES: Article[] = [
     title: "Ortaklığın Giderilmesi Davası Nedir?",
     description:
       "Ortaklığın giderilmesi (izale-i şüyu) davasının konusu, tarafları ve aynen taksim ile satış yoluyla paylaştırma usulleri.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["miras", "gayrimenkul"],
   },
   {
@@ -60,8 +65,8 @@ export const ARTICLES: Article[] = [
     title: "Veraset İlamı Nedir?",
     description:
       "Veraset ilamının (mirasçılık belgesi) ne olduğu, nereden ve nasıl alındığı hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["miras"],
   },
   {
@@ -69,8 +74,8 @@ export const ARTICLES: Article[] = [
     title: "Sigorta Tahkim Komisyonu Başvurusu",
     description:
       "Sigorta uyuşmazlıklarında Sigorta Tahkim Komisyonu'na başvuru şartları ve sürecin işleyişi hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["sigorta"],
   },
   {
@@ -78,8 +83,8 @@ export const ARTICLES: Article[] = [
     title: "Kusur Oranına İtiraz",
     description:
       "Trafik kazalarında belirlenen kusur oranına itiraz yolları ve itiraz sürecinde izlenecek adımlar hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["sigorta"],
   },
   {
@@ -87,8 +92,8 @@ export const ARTICLES: Article[] = [
     title: "Kaza Tespit Tutanağı Nedir?",
     description:
       "Maddi hasarlı trafik kazalarında kaza tespit tutanağının düzenlenmesi ve tutanağa itiraz hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["sigorta"],
   },
   {
@@ -96,8 +101,8 @@ export const ARTICLES: Article[] = [
     title: "Araç Değer Kaybı Nedir? Nasıl Talep Edilir?",
     description:
       "Trafik kazası sonrası araç değer kaybı tazminatının şartları, hesaplanması ve başvuru süreci hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["sigorta"],
   },
   {
@@ -105,8 +110,8 @@ export const ARTICLES: Article[] = [
     title: "Kira Tespit Davası Nedir?",
     description:
       "Kira bedelinin tespiti davasının şartları, beş yıllık süre kuralı ve emsal kira bedeli değerlendirmesi hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["gayrimenkul"],
   },
   {
@@ -114,8 +119,8 @@ export const ARTICLES: Article[] = [
     title: "Yaralanmalı Trafik Kazası Tazminatı",
     description:
       "Yaralanmalı trafik kazalarında maddi ve manevi tazminat talepleri ile başvuru süreci hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["sigorta"],
   },
   {
@@ -123,15 +128,21 @@ export const ARTICLES: Article[] = [
     title: "İşe İade Davası Şartları Nelerdir?",
     description:
       "İşe iade davasının şartları, zorunlu arabuluculuk aşaması ve dava süreci hakkında bilgilendirme.",
-    date: "2025-01-01", // TODO: gerçek yayın tarihi
-    dateModified: "2025-01-01", // TODO: gerçek güncelleme tarihi
+    date: "", // TODO: gerçek yayın tarihi
+    dateModified: "", // TODO: gerçek güncelleme tarihi
     alan: ["is"],
   },
   // TODO: canlı arşivde burada olmayan bir makale varsa aynı şemayla ekle.
 ];
 
-/** Tarihe göre yeniden eskiye sıralı liste (arşiv sayfası için). */
+/**
+ * Arşiv/timeline listesi. Tüm makalelerde gerçek tarih varsa yeniden
+ * eskiye sıralanır; tarihler henüz girilmemişse ARTICLES dizi sırası
+ * aynen korunur (timeline sıralama kuralı).
+ */
 export function getAllArticles(): Article[] {
+  const allDated = ARTICLES.every((a) => a.date);
+  if (!allDated) return [...ARTICLES];
   return [...ARTICLES].sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
@@ -164,8 +175,9 @@ export function getArticleSource(
   return { content, frontmatter: data };
 }
 
-/** Tarihleri Türkçe biçimde gösterir: "12 Ocak 2025". */
+/** Tarihleri Türkçe biçimde gösterir: "12 Ocak 2025". Boş girişte boş döner. */
 export function formatDate(iso: string): string {
+  if (!iso) return "";
   return new Date(iso).toLocaleDateString("tr-TR", {
     day: "numeric",
     month: "long",

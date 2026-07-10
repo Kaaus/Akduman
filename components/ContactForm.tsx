@@ -140,8 +140,10 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Honeypot — botlara görünür, insanlara görünmez. Doluysa API sessizce yok sayar. */}
-      <div className="hidden" aria-hidden="true">
+      {/* Honeypot — botlara görünür, insanlara görünmez. Doluysa API sessizce
+          yok sayar. display:none (hidden attr + class) + tabIndex -1 +
+          aria-hidden + autocomplete=off: ekran okuyucu ve klavye tamamen dışında. */}
+      <div hidden className="hidden" aria-hidden="true">
         <label htmlFor="cf-website">Web sitesi</label>
         <input
           id="cf-website"

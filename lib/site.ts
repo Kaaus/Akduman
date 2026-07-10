@@ -24,12 +24,21 @@ export const SITE = {
    */
   whatsappNumber: "905340891070",
   whatsappHref: "https://wa.me/905340891070",
+  /**
+   * ADRES — TEK KAYNAK: footer, İletişim sayfası, KVKK metni ve
+   * LegalService JSON-LD yalnızca buradan okur.
+   * TODO: MÜŞTERİ TEYİDİ BEKLİYOR — eski kayıt: "Remzi Oğuz Arık,
+   * Bestekar Cd No:76/4, 06680 Çankaya/Ankara". Canlı sitede adres
+   * Meşrutiyet/Konur Sok olarak güncellenmiş göründüğünden yeni adres
+   * varsayılan yapıldı.
+   */
   address: {
-    full: "Remzi Oğuz Arık, Bestekar Cd No:76/4, 06680 Çankaya/Ankara",
-    street: "Remzi Oğuz Arık Mah. Bestekar Cd. No:76/4",
+    full: "Meşrutiyet Mah. Konur Sok. Özsoy İşhanı No:25/13 Çankaya/Ankara",
+    street: "Meşrutiyet Mah. Konur Sok. Özsoy İşhanı No:25/13",
     locality: "Çankaya",
     region: "Ankara",
-    postalCode: "06680",
+    /** Posta kodu teyitsiz — boş olduğu sürece JSON-LD'de postalCode BASILMAZ. */
+    postalCode: "", // TODO: müşteriden teyitli posta kodu alınacak
     country: "TR",
   },
 } as const;

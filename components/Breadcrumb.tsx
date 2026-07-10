@@ -13,7 +13,7 @@ export type Crumb = {
  */
 export default function Breadcrumb({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="Sayfa yolu" className="text-[13px] text-muted">
+    <nav aria-label="breadcrumb" className="text-[13px] text-muted">
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <li>
           <Link href="/" className="transition-colors hover:text-navy-800">

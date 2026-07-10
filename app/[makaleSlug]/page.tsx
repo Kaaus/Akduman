@@ -78,14 +78,25 @@ export default function MakalePage({
           {/* Başlık normal kapitalizasyonla basılır — ASLA tamamı büyük harf değil */}
           <h1 className="mt-6 text-navy-800">{article.title}</h1>
 
-          {/* Meta satırı */}
+          {/* Meta satırı — tarih politikası: tarih girilmedikçe yalnız yazar adı basılır */}
           <p className="mt-4 text-[14px] text-muted">
-            {SITE.lawyer} · Yayın:{" "}
-            <time dateTime={article.date}>{formatDate(article.date)}</time> ·
-            Güncelleme:{" "}
-            <time dateTime={article.dateModified}>
-              {formatDate(article.dateModified)}
-            </time>
+            {SITE.lawyer}
+            {article.date && (
+              <>
+                {" "}
+                · Yayın:{" "}
+                <time dateTime={article.date}>{formatDate(article.date)}</time>
+              </>
+            )}
+            {article.dateModified && (
+              <>
+                {" "}
+                · Güncelleme:{" "}
+                <time dateTime={article.dateModified}>
+                  {formatDate(article.dateModified)}
+                </time>
+              </>
+            )}
           </p>
 
           {/* Kapak görseli (varsa) — duotone kuralına tabi */}

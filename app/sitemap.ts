@@ -24,7 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const articleEntries: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
     url: `${SITE.url}/${a.slug}/`,
-    lastModified: new Date(a.dateModified),
+    // Tarih politikası: gerçek tarih girilmedikçe lastModified basılmaz.
+    ...(a.dateModified ? { lastModified: new Date(a.dateModified) } : {}),
     changeFrequency: "yearly",
     priority: 0.6,
   }));

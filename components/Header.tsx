@@ -224,9 +224,10 @@ export default function Header() {
 
           {/* Mobil: telefon ikonu + hamburger */}
           <div className="flex items-center gap-2 lg:hidden">
+            {/* İkon-only link: erişilebilir ad ASLA URL/numara değil, eylem adı */}
             <a
               href={SITE.telHref}
-              aria-label={`Telefon: ${SITE.phoneDisplay}`}
+              aria-label="Telefonla arayın"
               className="flex h-10 w-10 items-center justify-center rounded-[2px] border border-line text-navy-800"
             >
               <Phone size={18} strokeWidth={1.5} aria-hidden="true" />

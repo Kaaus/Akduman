@@ -28,9 +28,12 @@ export default function ArticleCard({ article }: { article: Article }) {
           <span className="absolute inset-0 bg-navy-900/55 mix-blend-multiply" />
         </Link>
       )}
-      <p className="text-[12px] font-semibold uppercase tracking-kicker text-muted">
-        <time dateTime={article.date}>{formatDate(article.date)}</time>
-      </p>
+      {/* Tarih politikası: gerçek tarih girilmedikçe tarih satırı basılmaz */}
+      {article.date && (
+        <p className="text-[12px] font-semibold uppercase tracking-kicker text-muted">
+          <time dateTime={article.date}>{formatDate(article.date)}</time>
+        </p>
+      )}
       <h3 className="mt-3 font-serif text-[22px] font-semibold leading-snug text-navy-800">
         <Link
           href={`/${article.slug}/`}
