@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Taban ─────────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* Başlıklar: Cormorant Garamond, hafif sıkı harf aralığı */
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  /* Görünür klavye odağı — tüm etkileşimli öğelerde 2px bronz dış çizgi */
+  :focus-visible {
+    outline: 2px solid #b08d57;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: #d9c29a;
+    color: #081420;
+  }
+}
+
+/* ─── Bileşen yardımcıları ──────────────────────────────────────────────── */
+
+@layer components {
+  /* Kicker: bölüm etiketi (ör. "FAALİYET ALANLARIMIZ") */
+  .kicker {
+    @apply font-sans font-semibold uppercase text-bronze-600;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+
+  /* Sayfa içeriği için ortak yatay kapsayıcı */
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Butonlar: dikdörtgen, radius 2px, gölgesiz */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[2px] px-6 py-3 font-sans text-[15px] font-semibold transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply btn bg-bronze-500 text-navy-950 hover:bg-bronze-600;
+  }
+
+  .btn-secondary {
+    @apply btn border border-bronze-500 text-navy-800 hover:bg-paper;
+  }
+
+  /* Koyu zemin üzerindeki secondary buton: beyaz çerçeve + beyaz metin */
+  .btn-secondary-dark {
+    @apply btn border border-white/70 text-white hover:border-white hover:bg-white/10;
+  }
+
+  /* Makale gövdesi (MDX çıktısı) tipografisi */
+  .article-body {
+    @apply text-ink;
+  }
+  .article-body h2 {
+    @apply mb-4 mt-10 text-navy-800;
+    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+  }
+  .article-body h3 {
+    @apply mb-3 mt-8 font-semibold text-navy-800;
+    font-size: 1.25rem;
+  }
+  .article-body p {
+    @apply mb-5;
+  }
+  .article-body ul,
+  .article-body ol {
+    @apply mb-5 space-y-2 pl-6;
+  }
+  .article-body ul {
+    @apply list-disc;
+  }
+  .article-body ol {
+    @apply list-decimal;
+  }
+  .article-body li::marker {
+    color: #b08d57;
+  }
+  .article-body a {
+    @apply font-semibold text-bronze-600 underline decoration-bronze-300 underline-offset-4 hover:text-navy-800;
+  }
+  .article-body blockquote {
+    @apply my-6 border-l-2 border-bronze-500 bg-paper px-5 py-4 text-muted;
+  }
+  .article-body strong {
+    @apply font-semibold text-navy-800;
+  }
+}
+
+/* ─── Motion: scroll-in fade + 8px yukarı kayma, 180ms ease-out ─────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hareket azaltma tercihi olan kullanıcılar için animasyon kapatılır */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

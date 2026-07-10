@@ -1,0 +1,194 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
+import {
+  DISCLAIMER,
+  FOOTER_TAGLINE,
+  IMAGES,
+  PLACEHOLDERS,
+  SERVICES,
+  SITE,
+} from "@/lib/site";
+
+/** Footer sütun başlığı — kicker stili, koyu zeminde bronz. */
+function ColumnTitle({ children }: { children: string }) {
+  return (
+    <p className="mb-5 text-[12px] font-semibold uppercase tracking-kicker text-bronze-500">
+      {children}
+    </p>
+  );
+}
+
+/** Koyu zeminde logo: {{LOGO_BEYAZ}} doluysa o, değilse logo invert, o da yoksa yazı markası. */
+function FooterLogo() {
+  if (PLACEHOLDERS.LOGO_BEYAZ) {
+    return (
+      <span className="relative block h-11 w-44">
+        <Image
+          src={PLACEHOLDERS.LOGO_BEYAZ}
+          alt={IMAGES.logo.alt}
+          fill
+          sizes="176px"
+          className="object-contain object-left"
+        />
+      </span>
+    );
+  }
+  if (IMAGES.logo.ready) {
+    return (
+      <span className="relative block h-11 w-44">
+        <Image
+          src={IMAGES.logo.src}
+          alt={IMAGES.logo.alt}
+          fill
+          sizes="176px"
+          className="object-contain object-left brightness-0 invert"
+        />
+      </span>
+    );
+  }
+  return (
+    <span className="flex flex-col leading-none">
+      <span className="font-serif text-[26px] font-bold tracking-tight text-white">
+        Akduman
+      </span>
+      <span className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-500">
+        Hukuk Bürosu
+      </span>
+    </span>
+  );
+}
+
+export default function Footer() {
+  const socials = [
+    { url: PLACEHOLDERS.SOSYAL_FACEBOOK_URL, label: "Facebook", Icon: Facebook },
+    { url: PLACEHOLDERS.SOSYAL_INSTAGRAM_URL, label: "Instagram", Icon: Instagram },
+    { url: PLACEHOLDERS.SOSYAL_YOUTUBE_URL, label: "YouTube", Icon: Youtube },
+  ].filter((s) => s.url); // boş {{SOSYAL_*}} → ikon HİÇ render edilmez
+
+  return (
+    <footer className="bg-navy-950 text-[15px] text-white/70">
+      <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
+        {/* 1 — Logo + büro tanımı */}
+        <div>
+          <FooterLogo />
+          <p className="mt-5 leading-relaxed">{FOOTER_TAGLINE}</p>
+          {socials.length > 0 && (
+            <div className="mt-5 flex gap-3">
+              {socials.map(({ url, label, Icon }) => (
+                <a
+                  key={label}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center border border-white/20 text-white/70 transition-colors hover:border-bronze-500 hover:text-bronze-300"
+                >
+                  <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* 2 — Hizmetlerimiz */}
+        <nav aria-label="Hizmetlerimiz">
+          <ColumnTitle>Hizmetlerimiz</ColumnTitle>
+          <ul className="space-y-2.5">
+            {SERVICES.map((s) => (
+              <li key={s.slug}>
+                <Link
+                  href={`/${s.slug}/`}
+                  className="transition-colors hover:text-bronze-300"
+                >
+                  {s.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* 3 — Kurumsal */}
+        <nav aria-label="Kurumsal">
+          <ColumnTitle>Kurumsal</ColumnTitle>
+          <ul className="space-y-2.5">
+            <li>
+              <Link href="/hakkimizda/" className="transition-colors hover:text-bronze-300">
+                Hakkımızda
+              </Link>
+            </li>
+            <li>
+              <Link href="/hukuki-makaleler/" className="transition-colors hover:text-bronze-300">
+                Hukuki Makaleler
+              </Link>
+            </li>
+            <li>
+              <Link href="/iletisim/" className="transition-colors hover:text-bronze-300">
+                İletişim
+              </Link>
+            </li>
+            <li>
+              <Link href="/kvkk-aydinlatma-metni/" className="transition-colors hover:text-bronze-300">
+                KVKK Aydınlatma Metni
+              </Link>
+            </li>
+            <li>
+              <Link href="/cerez-politikasi/" className="transition-colors hover:text-bronze-300">
+                Çerez Politikası
+              </Link>
+            </li>
+            <li>
+              <Link href="/yasal-uyari/" className="transition-colors hover:text-bronze-300">
+                Yasal Uyarı
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* 4 — İletişim */}
+        <div>
+          <ColumnTitle>İletişim</ColumnTitle>
+          <ul className="space-y-3.5">
+            <li className="flex gap-2.5">
+              <MapPin size={16} strokeWidth={1.5} className="mt-1 shrink-0 text-bronze-500" aria-hidden="true" />
+              <span>{SITE.address.full}</span>
+            </li>
+            <li>
+              <a href={SITE.telHref} className="flex items-center gap-2.5 transition-colors hover:text-bronze-300">
+                <Phone size={16} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
+                {SITE.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a href={SITE.mailHref} className="flex items-center gap-2.5 transition-colors hover:text-bronze-300">
+                <Mail size={16} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
+                {SITE.email}
+              </a>
+            </li>
+            {/* Çalışma saatleri yalnızca {{CALISMA_SAATLERI}} doluysa basılır */}
+            {PLACEHOLDERS.CALISMA_SAATLERI && (
+              <li className="flex items-center gap-2.5">
+                <Clock size={16} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
+                {PLACEHOLDERS.CALISMA_SAATLERI}
+              </li>
+            )}
+          </ul>
+          {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
+          {PLACEHOLDERS.BARO_SICIL_NO && (
+            <p className="mt-5 text-[13px] text-white/50">
+              {SITE.lawyer} — Ankara Barosu, Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Alt şerit */}
+      <div className="border-t border-white/10">
+        <div className="container-site space-y-2 py-6 text-center text-[13px] text-white/50">
+          <p>© 2026 Akduman Hukuk Bürosu — Tüm hakları saklıdır.</p>
+          <p className="mx-auto max-w-4xl">{DISCLAIMER}</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
