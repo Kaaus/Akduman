@@ -2,17 +2,16 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 type Status = "idle" | "sending" | "success" | "error" | "unavailable";
 
-// Not: outline kaldırılmaz — klavye odağında globals.css'teki bronz
-// :focus-visible halkası görünür kalır (WCAG 2.4.7).
-const inputClass =
-  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[15px] text-ink placeholder:text-muted/60 focus:border-bronze-500";
+// v2 form stilleri globals.css'te: .input-field (odakta navy çerçeve +
+// 3px halka — WCAG 2.4.7 göstergesi), .label-field (14px/600/ink-strong).
+const inputClass = "input-field";
 
-const labelClass = "mb-1.5 block text-[14px] font-semibold text-navy-800";
+const labelClass = "label-field";
 
 /**
  * İletişim formu — anasayfa ve /iletisim/ sayfasında aynı komponent.
@@ -161,13 +160,13 @@ export default function ContactForm() {
           type="checkbox"
           required
           value="evet"
-          className="mt-1.5 h-4 w-4 shrink-0 accent-bronze-500"
+          className="mt-1 h-[18px] w-[18px] shrink-0 accent-navy-900"
         />
         <label htmlFor="cf-kvkk" className="text-[14px] leading-relaxed text-muted">
           Kişisel verilerimin,{" "}
           <Link
             href="/kvkk-aydinlatma-metni/"
-            className="font-semibold text-bronze-600 underline underline-offset-4 hover:text-navy-800"
+            className="font-semibold text-bronze-700 underline decoration-2 underline-offset-4 transition-colors hover:text-navy-800"
           >
             KVKK Aydınlatma Metni
           </Link>{" "}
@@ -176,27 +175,24 @@ export default function ContactForm() {
       </div>
 
       {status === "unavailable" && (
-        <p role="alert" className="mt-5 border border-line bg-paper px-4 py-3 text-[14px] text-ink">
+        <p role="alert" className="mt-5 border-l-[3px] border-[#A33A2E] bg-paper px-4 py-3 text-[14px] text-ink">
           Form şu anda kullanılamıyor — bize telefonla veya{" "}
-          <a href={SITE.mailHref} className="font-semibold text-bronze-600 underline underline-offset-4">
+          <a href={SITE.mailHref} className="font-semibold text-bronze-700 underline decoration-2 underline-offset-4">
             {SITE.email}
           </a>{" "}
           adresinden ulaşabilirsiniz.
         </p>
       )}
       {status === "error" && (
-        <p role="alert" className="mt-5 border border-line bg-paper px-4 py-3 text-[14px] text-ink">
+        <p role="alert" className="error-text mt-5 border-l-[3px] border-[#A33A2E] bg-paper px-4 py-3 text-[14px]">
           Mesajınız gönderilemedi. Lütfen tekrar deneyin veya bize telefonla
           ulaşın.
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="btn-primary mt-7 disabled:cursor-not-allowed disabled:opacity-60"
-      >
+      <button type="submit" disabled={status === "sending"} className="btn-primary mt-7">
         {status === "sending" ? "Gönderiliyor…" : "Gönder"}
+        <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
       </button>
     </form>
   );

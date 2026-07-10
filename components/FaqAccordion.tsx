@@ -1,13 +1,14 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { FaqItem } from "@/lib/site";
 
 /**
- * SSS akordeonu: yalnızca alt 1px line çizgili satırlar (kart/kutu yok).
- * Soru: Source Sans 600, navy-800 · ikon: bronz artı/eksi · cevap: ink.
- * Erişilebilirlik: buton + aria-expanded + aria-controls.
+ * SSS akordeonu v2: yükseklik animasyonlu (grid-template-rows, 280ms),
+ * "+" ikonu açıkken 45° döner, satır hover'ında soru ink-strong olur.
+ * Erişilebilirlik: buton + aria-expanded + aria-controls; kapalı panel
+ * görünmez VE odaklanılamaz (visibility gecikmesi globals.css'te).
  */
 export default function FaqAccordion({
   items,
@@ -37,32 +38,37 @@ export default function FaqAccordion({
         const panelId = `${prefix}-panel-${i}`;
         const buttonId = `${prefix}-button-${i}`;
         return (
-          <div key={`${prefix}-${i}`} className="border-b border-line">
-            <h3>
+          <div key={`${prefix}-${i}`} className="border-b border-line-strong">
+            <h3 className="!m-0">
               <button
                 id={buttonId}
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left font-sans text-[17px] font-semibold text-navy-800 transition-colors hover:text-bronze-600"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left font-sans text-[17px] font-semibold text-ink transition-colors duration-200 hover:text-ink-strong"
               >
                 {item.question}
-                {isOpen ? (
-                  <Minus size={18} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
-                ) : (
-                  <Plus size={18} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
-                )}
+                <Plus
+                  size={20}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                  className={`shrink-0 text-navy-800 transition-transform duration-[280ms] ease-[cubic-bezier(.22,1,.36,1)] ${
+                    isOpen ? "rotate-45" : ""
+                  }`}
+                />
               </button>
             </h3>
             <div
               id={panelId}
               role="region"
               aria-labelledby={buttonId}
-              hidden={!isOpen}
-              className="pb-6 pr-8 text-ink"
+              className="acc-panel"
+              data-open={isOpen}
             >
-              {item.answer}
+              <div>
+                <p className="pb-6 pr-10 text-ink">{item.answer}</p>
+              </div>
             </div>
           </div>
         );

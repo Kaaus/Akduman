@@ -23,7 +23,7 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp ile yazın"
-      className="fixed bottom-5 right-5 z-40 flex h-[52px] w-[52px] items-center justify-center rounded-full bg-bronze-500 text-white transition-colors hover:bg-bronze-600"
+      className="float-in fixed bottom-5 right-5 z-40 flex h-[52px] w-[52px] items-center justify-center rounded-full bg-bronze-500 text-navy-950 transition-[transform,box-shadow,background-color] duration-200 hover:scale-[1.06] hover:bg-bronze-300 hover:shadow-card-hover"
     >
       <WhatsAppIcon />
     </a>

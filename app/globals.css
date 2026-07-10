@@ -416,7 +416,8 @@
   animation: node-pulse 400ms ease-out 1;
 }
 
-/* Accordion v2: yükseklik animasyonu (grid-template-rows 0fr→1fr) */
+/* Accordion v2: yükseklik animasyonu (grid-template-rows 0fr→1fr).
+   Kapalıyken içerik görünmez VE erişilemez (visibility gecikmeli kapanır). */
 .acc-panel {
   display: grid;
   grid-template-rows: 0fr;
@@ -427,6 +428,48 @@
 }
 .acc-panel > div {
   overflow: hidden;
+  visibility: visible;
+  transition: visibility 0s;
+}
+.acc-panel:not([data-open="true"]) > div {
+  visibility: hidden;
+  transition: visibility 0s 280ms;
+}
+
+/* Alt çizgi "slider" linkler (nav + footer): hover/focus'ta soldan dolar */
+.link-slide {
+  position: relative;
+  transition: color var(--dur-fast) var(--ease);
+}
+.link-slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: #b08d57;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 260ms var(--ease);
+}
+.link-slide:hover::after,
+.link-slide:focus-visible::after {
+  transform: scaleX(1);
+}
+/* Aktif sayfa: kalıcı dolu çizgi */
+.link-slide-active::after {
+  transform: scaleX(1);
+}
+
+/* Kart (group) hover'ında içindeki tertiary'nin çizgisi/oku da tetiklenir */
+.group:hover .btn-tertiary::after,
+.group:focus-within .btn-tertiary::after {
+  transform: scaleX(1);
+}
+.group:hover .btn-tertiary .btn-arrow,
+.group:focus-within .btn-tertiary .btn-arrow {
+  transform: translateX(4px);
 }
 
 /* ─── Hareket azaltma: TÜM animasyon/geçişler kapanır ───────────────────── */

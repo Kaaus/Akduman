@@ -14,8 +14,9 @@ function samePath(a: string, b: string) {
 }
 
 /**
- * Logo dosyası henüz yüklenmediyse (manifest ready:false) zarif bir
- * tipografik marka işareti basılır. Dosya gelince otomatik görsele döner.
+ * Logo dosyası henüz yüklenmediyse (manifest ready:false) tipografik marka
+ * işareti basılır. Görünür span'ler erişilebilir addan gizlenir; ad, sarmalayan
+ * linkin aria-label'ından gelir (bitişik "AkdumanHukuk" okunması engellenir).
  */
 function Logo({ light = false }: { light?: boolean }) {
   if (IMAGES.logo.ready) {
@@ -23,7 +24,7 @@ function Logo({ light = false }: { light?: boolean }) {
       <span className="relative block h-11 w-44">
         <Image
           src={IMAGES.logo.src}
-          alt={IMAGES.logo.alt}
+          alt=""
           fill
           sizes="176px"
           priority
@@ -33,15 +34,19 @@ function Logo({ light = false }: { light?: boolean }) {
     );
   }
   return (
-    <span className="flex flex-col leading-none">
+    <span aria-hidden="true" className="flex flex-col leading-none">
       <span
-        className={`font-serif text-[26px] font-bold tracking-tight ${
-          light ? "text-white" : "text-navy-900"
+        className={`font-serif text-[26px] font-semibold tracking-tight ${
+          light ? "text-white" : "text-ink-strong"
         }`}
       >
         Akduman
       </span>
-      <span className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-600">
+      <span
+        className={`mt-1 text-[10px] font-semibold uppercase tracking-kicker ${
+          light ? "text-bronze-300" : "text-navy-700"
+        }`}
+      >
         Hukuk Bürosu
       </span>
     </span>
@@ -52,6 +57,7 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownButtonRef = useRef<HTMLButtonElement>(null);
@@ -59,7 +65,15 @@ export default function Header() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const mobilePanelRef = useRef<HTMLDivElement>(null);
 
-  // Mobil menü: odak yönetimi + Escape + arka plan scroll kilidi + odak tuzağı
+  // 80px scroll sonrası bar küçülür + hairline + hafif gölge
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Mobil menü: odak yönetimi + Escape + scroll kilidi + odak tuzağı
   useEffect(() => {
     if (!mobileOpen) return;
     closeButtonRef.current?.focus();
@@ -71,7 +85,6 @@ export default function Header() {
         hamburgerRef.current?.focus();
         return;
       }
-      // Basit odak tuzağı: Tab, panelin içinde döner
       if (e.key === "Tab" && mobilePanelRef.current) {
         const focusables = mobilePanelRef.current.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled])'
@@ -95,7 +108,7 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  // Masaüstü alt menü: Escape ile kapat + dışarı tıklamayı yakala
+  // Masaüstü alt menü: Escape + dışarı tıklama
   useEffect(() => {
     if (!dropdownOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -121,9 +134,10 @@ export default function Header() {
     samePath(pathname, href) ||
     (children?.some((c) => samePath(pathname, c.href)) ?? false);
 
+  /** Nav linki: altında bronz "slider" çizgi; aktif sayfada kalıcı dolu. */
   const navLinkClass = (active: boolean) =>
-    `py-2 text-[15px] font-semibold text-navy-800 transition-colors hover:text-bronze-600 ${
-      active ? "underline decoration-bronze-500 decoration-2 underline-offset-[6px]" : ""
+    `link-slide ${active ? "link-slide-active" : ""} py-2 text-[15px] font-semibold ${
+      active ? "text-ink-strong" : "text-ink hover:text-ink-strong"
     }`;
 
   return (
@@ -148,9 +162,17 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Ana bar — beyaz, sticky, altta 1px line */}
-      <div className="sticky top-0 z-50 border-b border-line bg-white">
-        <div className="container-site flex items-center justify-between gap-6 py-3.5">
+      {/* Ana bar — beyaz, sticky; scroll'da küçülür */}
+      <div
+        className={`sticky top-0 z-50 border-b bg-white transition-[box-shadow,border-color] duration-200 ${
+          scrolled ? "border-line-strong shadow-card" : "border-line"
+        }`}
+      >
+        <div
+          className={`container-site flex items-center justify-between gap-6 transition-[padding] duration-200 ${
+            scrolled ? "py-2" : "py-3.5"
+          }`}
+        >
           <Link href="/" aria-label="Akduman Hukuk Bürosu — Ana Sayfa">
             <Logo />
           </Link>
@@ -176,18 +198,18 @@ export default function Header() {
                       aria-controls="faaliyet-alt-menu"
                       aria-label="Faaliyet alanları alt menüsünü aç"
                       onClick={() => setDropdownOpen((v) => !v)}
-                      className="p-1 text-bronze-500 hover:text-bronze-600"
+                      className="p-1 text-navy-800 transition-colors hover:text-bronze-600"
                     >
                       <ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" />
                     </button>
                   </div>
-                  {/* Alt menü: buton durumu, hover veya klavye odağıyla açılır */}
+                  {/* Alt menü: 8px aşağıdan fade+rise (220ms) */}
                   <div
                     id="faaliyet-alt-menu"
-                    className={`absolute left-0 top-full z-50 min-w-[240px] border border-line bg-white py-2 transition-opacity duration-150 ${
+                    className={`absolute left-0 top-full z-50 min-w-[250px] border border-line-strong bg-white py-2 shadow-card transition-[opacity,transform] duration-[220ms] ease-[cubic-bezier(.22,1,.36,1)] ${
                       dropdownOpen
-                        ? "pointer-events-auto opacity-100"
-                        : "pointer-events-none opacity-0 focus-within:pointer-events-auto focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100"
+                        ? "pointer-events-auto translate-y-0 opacity-100"
+                        : "pointer-events-none translate-y-2 opacity-0 focus-within:pointer-events-auto focus-within:translate-y-0 focus-within:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100"
                     }`}
                   >
                     {item.children.map((child) => (
@@ -195,10 +217,10 @@ export default function Header() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setDropdownOpen(false)}
-                        className={`block px-5 py-2 text-[14px] font-medium transition-colors hover:bg-paper hover:text-bronze-600 ${
+                        className={`relative block px-5 py-2 text-[14px] font-medium transition-colors duration-200 before:absolute before:left-0 before:top-1/2 before:h-[60%] before:w-[2px] before:-translate-y-1/2 before:bg-bronze-500 before:opacity-0 before:transition-opacity before:duration-200 hover:bg-paper hover:before:opacity-100 ${
                           samePath(pathname, child.href)
-                            ? "text-bronze-600"
-                            : "text-navy-800"
+                            ? "text-ink-strong before:opacity-100"
+                            : "text-ink hover:text-ink-strong"
                         }`}
                       >
                         {child.label}
@@ -228,7 +250,7 @@ export default function Header() {
             <a
               href={SITE.telHref}
               aria-label="Telefonla arayın"
-              className="flex h-10 w-10 items-center justify-center rounded-[2px] border border-line text-navy-800"
+              className="flex h-10 w-10 items-center justify-center rounded-[2px] border border-line-strong text-navy-800"
             >
               <Phone size={18} strokeWidth={1.5} aria-hidden="true" />
             </a>
@@ -239,7 +261,7 @@ export default function Header() {
               aria-expanded={mobileOpen}
               aria-controls="mobil-menu"
               onClick={() => setMobileOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-[2px] border border-line text-navy-800"
+              className="flex h-10 w-10 items-center justify-center rounded-[2px] border border-line-strong text-navy-800"
             >
               <Menu size={20} strokeWidth={1.5} aria-hidden="true" />
             </button>
@@ -247,7 +269,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobil menü: tam ekran navy-950 panel (modal) */}
+      {/* Mobil menü: tam ekran navy-950 panel (modal); öğeler 60ms kademeli */}
       {mobileOpen && (
         <div
           ref={mobilePanelRef}
@@ -273,15 +295,24 @@ export default function Header() {
                 setMobileOpen(false);
                 hamburgerRef.current?.focus();
               }}
-              className="flex h-10 w-10 items-center justify-center rounded-[2px] border border-white/20 text-white"
+              className="group flex h-10 w-10 items-center justify-center rounded-[2px] border border-white/20 text-white"
             >
-              <X size={20} strokeWidth={1.5} aria-hidden="true" />
+              <X
+                size={20}
+                strokeWidth={1.5}
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:rotate-90"
+              />
             </button>
           </div>
           <nav aria-label="Mobil menü" className="container-site pb-10 pt-4">
             <ul className="space-y-1">
-              {NAV.map((item) => (
-                <li key={item.href}>
+              {NAV.map((item, i) => (
+                <li
+                  key={item.href}
+                  className="hero-line"
+                  style={{ animationDelay: `${i * 60}ms` }}
+                >
                   <Link
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
@@ -303,7 +334,7 @@ export default function Header() {
                             className={`block py-1.5 text-[15px] font-medium ${
                               samePath(pathname, child.href)
                                 ? "text-bronze-300"
-                                : "text-white/75"
+                                : "text-white/80"
                             }`}
                           >
                             {child.label}
@@ -315,7 +346,11 @@ export default function Header() {
                 </li>
               ))}
             </ul>
-            <a href={SITE.telHref} className="btn-primary mt-8 w-full">
+            <a
+              href={SITE.telHref}
+              className="btn-primary-dark hero-line mt-8 w-full"
+              style={{ animationDelay: `${NAV.length * 60}ms` }}
+            >
               <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
               Hemen Ara
             </a>

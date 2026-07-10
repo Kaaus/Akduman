@@ -10,13 +10,9 @@ import {
   SITE,
 } from "@/lib/site";
 
-/** Footer sütun başlığı — kicker stili, koyu zeminde bronz. */
+/** Footer sütun başlığı — koyu zeminde bronze-300 kicker. */
 function ColumnTitle({ children }: { children: string }) {
-  return (
-    <p className="mb-5 text-[12px] font-semibold uppercase tracking-kicker text-bronze-500">
-      {children}
-    </p>
-  );
+  return <p className="kicker-dark mb-5">{children}</p>;
 }
 
 /** Koyu zeminde logo: {{LOGO_BEYAZ}} doluysa o, değilse logo invert, o da yoksa yazı markası. */
@@ -55,7 +51,7 @@ function FooterLogo() {
       <span aria-hidden="true" className="font-serif text-[26px] font-bold tracking-tight text-white">
         Akduman
       </span>
-      <span aria-hidden="true" className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-500">
+      <span aria-hidden="true" className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-300">
         Hukuk Bürosu
       </span>
     </span>
@@ -102,7 +98,7 @@ export default function Footer() {
               <li key={s.slug}>
                 <Link
                   href={`/${s.slug}/`}
-                  className="transition-colors hover:text-bronze-300"
+                  className="link-slide text-[#C7D2DE] hover:text-white"
                 >
                   {s.title}
                 </Link>
@@ -116,32 +112,32 @@ export default function Footer() {
           <ColumnTitle>Kurumsal</ColumnTitle>
           <ul className="space-y-2.5">
             <li>
-              <Link href="/hakkimizda/" className="transition-colors hover:text-bronze-300">
+              <Link href="/hakkimizda/" className="link-slide text-[#C7D2DE] hover:text-white">
                 Hakkımızda
               </Link>
             </li>
             <li>
-              <Link href="/hukuki-makaleler/" className="transition-colors hover:text-bronze-300">
+              <Link href="/hukuki-makaleler/" className="link-slide text-[#C7D2DE] hover:text-white">
                 Hukuki Makaleler
               </Link>
             </li>
             <li>
-              <Link href="/iletisim/" className="transition-colors hover:text-bronze-300">
+              <Link href="/iletisim/" className="link-slide text-[#C7D2DE] hover:text-white">
                 İletişim
               </Link>
             </li>
             <li>
-              <Link href="/kvkk-aydinlatma-metni/" className="transition-colors hover:text-bronze-300">
+              <Link href="/kvkk-aydinlatma-metni/" className="link-slide text-[#C7D2DE] hover:text-white">
                 KVKK Aydınlatma Metni
               </Link>
             </li>
             <li>
-              <Link href="/cerez-politikasi/" className="transition-colors hover:text-bronze-300">
+              <Link href="/cerez-politikasi/" className="link-slide text-[#C7D2DE] hover:text-white">
                 Çerez Politikası
               </Link>
             </li>
             <li>
-              <Link href="/yasal-uyari/" className="transition-colors hover:text-bronze-300">
+              <Link href="/yasal-uyari/" className="link-slide text-[#C7D2DE] hover:text-white">
                 Yasal Uyarı
               </Link>
             </li>
@@ -157,13 +153,13 @@ export default function Footer() {
               <span>{SITE.address.full}</span>
             </li>
             <li>
-              <a href={SITE.telHref} className="flex items-center gap-2.5 transition-colors hover:text-bronze-300">
+              <a href={SITE.telHref} className="group flex items-center gap-2.5 text-[#C7D2DE] transition-colors hover:text-white">
                 <Phone size={16} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
                 {SITE.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={SITE.mailHref} className="flex items-center gap-2.5 transition-colors hover:text-bronze-300">
+              <a href={SITE.mailHref} className="group flex items-center gap-2.5 text-[#C7D2DE] transition-colors hover:text-white">
                 <Mail size={16} strokeWidth={1.5} className="shrink-0 text-bronze-500" aria-hidden="true" />
                 {SITE.email}
               </a>
@@ -185,8 +181,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Alt şerit */}
-      <div className="border-t border-white/10">
+      {/* Alt şerit — üst 1px ayraç */}
+      <div className="border-t border-white/[0.14]">
         <div className="container-site space-y-2 py-6 text-center text-[13px] text-white/50">
           <p>© 2026 Akduman Hukuk Bürosu — Tüm hakları saklıdır.</p>
           <p className="mx-auto max-w-4xl">{DISCLAIMER}</p>

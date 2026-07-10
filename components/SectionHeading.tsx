@@ -1,6 +1,6 @@
 /**
- * Bölüm başlığı: üstte kicker (bronz, uppercase, 0.14em) + altında H2.
- * Koyu zeminlerde light varyantı kullanılır.
+ * Bölüm başlığı: üstte kicker + altında H2.
+ * Açık zeminde kicker navy (bronz doktrini), koyu zeminde bronze-300.
  */
 export default function SectionHeading({
   kicker,
@@ -10,13 +10,16 @@ export default function SectionHeading({
 }: {
   kicker?: string;
   title: string;
+  /** Koyu zemin (navy) üzerinde kullanım. */
   light?: boolean;
   className?: string;
 }) {
   return (
     <div className={className}>
-      {kicker && <p className="kicker mb-3">{kicker}</p>}
-      <h2 className={light ? "text-white" : "text-navy-800"}>{title}</h2>
+      {kicker && (
+        <p className={`${light ? "kicker-dark" : "kicker"} mb-3`}>{kicker}</p>
+      )}
+      <h2 className={light ? "!text-[#F4F1EA]" : ""}>{title}</h2>
     </div>
   );
 }
