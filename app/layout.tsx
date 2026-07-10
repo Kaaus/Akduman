@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -9,21 +9,21 @@ import { legalServiceSchema } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
 /**
- * Tipografi: Cormorant Garamond (başlıklar) + Source Sans 3 (gövde/UI).
- * latin-ext alt kümesi Türkçe karakterlerin (ğ, ş, İ, ı, ö, ü, ç)
- * kusursuz render edilmesi için zorunludur.
+ * Tipografi v2: Fraunces (display, variable — tek dosya; SOFT/WONK 0
+ * "ciddi mod" ayarı globals.css'te) + Hanken Grotesk (gövde/UI, variable).
+ * latin-ext alt kümesi Türkçe karakterlerin (İĞŞÇÖÜ ığşçöü) kusursuz
+ * render edilmesi için zorunludur.
  */
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin-ext", "latin"],
-  weight: ["600", "700"],
-  variable: "--font-cormorant",
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  axes: ["opsz", "SOFT", "WONK"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
-  subsets: ["latin-ext", "latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-source-sans",
+const hanken = Hanken_Grotesk({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-hanken",
   display: "swap",
 });
 
@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${cormorant.variable} ${sourceSans.variable}`}>
+    <html lang="tr" className={`${fraunces.variable} ${hanken.variable}`}>
       <body className="font-sans">
         {/* Global yapılandırılmış veri: LegalService (tüm sayfalarda) */}
         <JsonLd data={legalServiceSchema()} />

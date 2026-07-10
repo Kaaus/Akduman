@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Motion tokenları ──────────────────────────────────────────────────── */
+
+:root {
+  --dur-fast: 200ms;
+  --dur-med: 320ms;
+  --dur-slow: 480ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* ─── Taban ─────────────────────────────────────────────────────────────── */
 
 @layer base {
@@ -15,34 +24,57 @@
     line-height: 1.75;
   }
 
-  /* Başlıklar: Cormorant Garamond, hafif sıkı harf aralığı */
+  @media (max-width: 640px) {
+    body {
+      font-size: 16.5px;
+    }
+  }
+
+  /* Başlıklar: Fraunces, "ciddi mod" (SOFT 0, WONK 0), ink-strong.
+     H2 ile gövde arasında boyut + aile + renk farkı garanti edilir. */
   h1,
   h2,
   h3 {
-    @apply font-serif;
-    letter-spacing: -0.01em;
+    @apply font-serif text-ink-strong;
+    font-variation-settings: "SOFT" 0, "WONK" 0;
   }
 
   h1 {
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    line-height: 1.15;
-    font-weight: 700;
-  }
-
-  h2 {
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-    line-height: 1.2;
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
     font-weight: 600;
   }
 
-  /* Görünür klavye odağı — tüm etkileşimli öğelerde 2px bronz dış çizgi */
+  h2 {
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 560;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    font-weight: 560;
+  }
+
+  /* Sayfa içi anchor hedefleri sticky header'ın altında kalmasın */
+  h1,
+  h2,
+  h3,
+  h4 {
+    scroll-margin-top: 110px;
+  }
+
+  /* Görünür klavye odağı — focus token rengi */
   :focus-visible {
-    outline: 2px solid #b08d57;
+    outline: 2px solid #8a6d3b;
     outline-offset: 2px;
   }
 
   ::selection {
-    background-color: #d9c29a;
+    background: #b08d57;
     color: #081420;
   }
 }
@@ -50,49 +82,213 @@
 /* ─── Bileşen yardımcıları ──────────────────────────────────────────────── */
 
 @layer components {
-  /* Kicker: bölüm etiketi (ör. "FAALİYET ALANLARIMIZ") */
+  /* Kicker — açık zeminde navy (bronz doktrini: açık zeminde <18px bronz
+     metin yasak); koyu zeminde bronz için .kicker-dark kullanılır */
   .kicker {
-    @apply font-sans font-semibold uppercase text-bronze-600;
-    font-size: 12px;
-    letter-spacing: 0.14em;
+    @apply font-sans font-semibold uppercase text-navy-700;
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
   }
 
-  /* Sayfa içeriği için ortak yatay kapsayıcı */
+  .kicker-dark {
+    @apply font-sans font-semibold uppercase text-bronze-300;
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+  }
+
   .container-site {
     @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
 
-  /* Butonlar: dikdörtgen, radius 2px, gölgesiz */
+  /* ── Buton sistemi (3 seviye + koyu zemin varyantları) ─────────────── */
+
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-[2px] px-6 py-3 font-sans text-[15px] font-semibold transition-colors duration-150;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-[2px] font-sans text-[15px] font-semibold;
+    padding: 14px 26px;
+    transition:
+      background-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease);
   }
 
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* İçindeki ok ikonu hover'da 4px sağa kayar (.btn-arrow sarmalı) */
+  .btn .btn-arrow {
+    transition: transform var(--dur-fast) var(--ease);
+  }
+  .btn:hover .btn-arrow,
+  .btn:focus-visible .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Primary: navy zemin / beyaz metin */
   .btn-primary {
-    @apply btn bg-bronze-500 text-navy-950 hover:bg-bronze-600;
+    @apply btn bg-navy-900 text-white;
+  }
+  .btn-primary:hover {
+    @apply bg-navy-800 shadow-card-hover;
+  }
+  .btn-primary:active {
+    @apply bg-navy-950;
   }
 
+  /* Secondary: çerçeveli; hover'da zemin soldan navy'ye dolar (sweep).
+     isolation + negatif z-index: sweep katmanı düz metin çocuklarının
+     ALTINDA kalır (metin düğümlerine z-index verilemez). */
   .btn-secondary {
-    @apply btn border border-bronze-500 text-navy-800 hover:bg-paper;
+    @apply btn overflow-hidden text-ink;
+    border: 1.5px solid #14304d;
+    isolation: isolate;
+  }
+  .btn-secondary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #0e2033;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 250ms var(--ease);
+  }
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    color: #ffffff;
+  }
+  .btn-secondary:hover::before,
+  .btn-secondary:focus-visible::before {
+    transform: scaleX(1);
   }
 
-  /* Koyu zemin üzerindeki secondary buton: beyaz çerçeve + beyaz metin */
+  /* Tertiary (link-buton): bronz metin + soldan dolan 2px alt çizgi */
+  .btn-tertiary {
+    @apply relative inline-flex items-center gap-1.5 font-sans text-[15px] font-semibold text-bronze-700;
+    padding-bottom: 3px;
+  }
+  .btn-tertiary::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-fast) var(--ease);
+  }
+  .btn-tertiary:hover::after,
+  .btn-tertiary:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .btn-tertiary .btn-arrow {
+    transition: transform var(--dur-fast) var(--ease);
+  }
+  .btn-tertiary:hover .btn-arrow,
+  .btn-tertiary:focus-visible .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Koyu zemin varyantları */
+  .btn-primary-dark {
+    @apply btn bg-bronze-500 text-navy-950;
+  }
+  .btn-primary-dark:hover {
+    @apply bg-bronze-300 shadow-card-hover;
+  }
   .btn-secondary-dark {
-    @apply btn border border-white/70 text-white hover:border-white hover:bg-white/10;
+    @apply btn border text-white;
+    border: 1.5px solid rgb(255 255 255 / 0.75);
+  }
+  .btn-secondary-dark:hover,
+  .btn-secondary-dark:focus-visible {
+    border-color: #ffffff;
+    background: rgb(255 255 255 / 0.1);
+  }
+  /* Koyu zeminde tertiary: bronz açık ton */
+  .btn-tertiary-dark {
+    @apply btn-tertiary !text-bronze-300;
   }
 
-  /* Makale gövdesi (MDX çıktısı) tipografisi */
+  /* ── Form öğeleri ───────────────────────────────────────────────────── */
+
+  .input-field {
+    @apply w-full rounded-[2px] font-sans text-ink;
+    background: #fbfaf6;
+    border: 1.5px solid #c9bfa9; /* line-strong */
+    padding: 13px 15px;
+    font-size: 15px;
+    transition:
+      border-color var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease);
+  }
+  .input-field::placeholder {
+    @apply text-muted;
+  }
+  .input-field:focus {
+    outline: none;
+    border-color: #14304d; /* navy-800 */
+    box-shadow: 0 0 0 3px rgb(20 48 77 / 0.14);
+  }
+  .input-field[aria-invalid="true"] {
+    border-color: #a33a2e;
+  }
+
+  .label-field {
+    @apply mb-1.5 block font-sans font-semibold text-ink-strong;
+    font-size: 14px;
+  }
+
+  .error-text {
+    color: #a33a2e;
+  }
+
+  /* ── Kart ───────────────────────────────────────────────────────────── */
+
+  .card {
+    @apply rounded-[2px] border border-line-strong bg-white shadow-card;
+    transition:
+      box-shadow var(--dur-fast) var(--ease),
+      transform var(--dur-fast) var(--ease);
+  }
+  .card-lift:hover {
+    @apply shadow-card-hover;
+    transform: translateY(-3px);
+  }
+
+  /* ── Makale/uzun içerik tipografisi ─────────────────────────────────── */
+
   .article-body {
     @apply text-ink;
-    /* Uzun kesintisiz dizeler (ör. taşıma bloklarındaki URL'ler) dar
-       ekranlarda yatay taşma yaratmasın */
     overflow-wrap: anywhere;
   }
+  /* H2: önünde 28×3px bronz çizgi (açık zeminde ≥2px dekor çizgisi serbest),
+     bölümler arası 72px nefes payı */
   .article-body h2 {
-    @apply mb-4 mt-10 text-navy-800;
-    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+    @apply text-ink-strong;
+    font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+    margin-top: 72px;
+    margin-bottom: 18px;
+  }
+  .article-body h2::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 3px;
+    background: #b08d57;
+    margin-right: 14px;
+    vertical-align: 0.35em;
+  }
+  .article-body > h2:first-child,
+  .article-body > *:first-child + h2 {
+    margin-top: 40px;
   }
   .article-body h3 {
-    @apply mb-3 mt-8 font-semibold text-navy-800;
+    @apply mb-3 mt-10 text-ink-strong;
     font-size: 1.25rem;
   }
   .article-body p {
@@ -109,42 +305,148 @@
     @apply list-decimal;
   }
   .article-body li::marker {
-    color: #b08d57;
+    color: #7e6234; /* bronze-700 — işaretler küçük ama dekoratif */
   }
   .article-body a {
-    @apply font-semibold text-bronze-600 underline decoration-bronze-300 underline-offset-4 hover:text-navy-800;
+    @apply font-semibold text-bronze-700 underline decoration-2 underline-offset-4;
+    transition: color var(--dur-fast) var(--ease);
+  }
+  .article-body a:hover {
+    @apply text-navy-800;
   }
   .article-body blockquote {
     @apply my-6 border-l-2 border-bronze-500 bg-paper px-5 py-4 text-muted;
   }
   .article-body strong {
-    @apply font-semibold text-navy-800;
+    @apply font-semibold text-ink-strong;
+  }
+
+  /* İlk paragraf "lead" stili */
+  .lead {
+    font-size: 19px;
+    line-height: 1.7;
   }
 }
 
-/* ─── Motion: scroll-in fade + 8px yukarı kayma, 180ms ease-out ─────────── */
+/* ─── Motion ────────────────────────────────────────────────────────────── */
 
+/* Reveal: opacity + 14px rise; kademelenme Reveal komponentinin delay
+   prop'uyla (inline transition-delay) verilir */
 .reveal {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(14px);
   transition:
-    opacity 180ms ease-out,
-    transform 180ms ease-out;
+    opacity var(--dur-med) var(--ease),
+    transform var(--dur-med) var(--ease);
 }
-
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
-/* Hareket azaltma tercihi olan kullanıcılar için animasyon kapatılır */
+/* Hero H1 satırları — yalnız ilk yüklemede kademeli rise */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-line {
+  opacity: 0;
+  animation: rise-in var(--dur-med) var(--ease) forwards;
+}
+
+/* Bronz keyline çerçeve: yüklendiğinde 500ms'de "çizilerek" gelir */
+@keyframes frame-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+.keyline-draw {
+  animation: frame-in 500ms var(--ease) 250ms both;
+}
+
+/* Scroll ipucu oku: 2 yumuşak nabız, sonra durur */
+@keyframes pulse-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+.scroll-hint {
+  animation: pulse-down 1.4s ease-in-out 0.8s 2;
+}
+
+/* WhatsAppFloat: 300ms gecikmeli scale-in girişi */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.float-in {
+  animation: scale-in var(--dur-med) var(--ease) 300ms both;
+}
+
+/* Timeline düğümü: hover'da tek sefer dış halka nabzı */
+@keyframes node-pulse {
+  from {
+    box-shadow: 0 0 0 0 rgb(176 141 87 / 0.55);
+  }
+  to {
+    box-shadow: 0 0 0 12px rgb(176 141 87 / 0);
+  }
+}
+.timeline-node:hover .node-dot,
+.timeline-node:focus-within .node-dot {
+  animation: node-pulse 400ms ease-out 1;
+}
+
+/* Accordion v2: yükseklik animasyonu (grid-template-rows 0fr→1fr) */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 280ms var(--ease);
+}
+.acc-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.acc-panel > div {
+  overflow: hidden;
+}
+
+/* ─── Hareket azaltma: TÜM animasyon/geçişler kapanır ───────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .reveal,
+  .hero-line {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .keyline-draw {
+    clip-path: none !important;
   }
 }
