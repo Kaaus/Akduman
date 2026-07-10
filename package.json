@@ -23,9 +23,14 @@
     "@types/react-dom": "18.3.1",
     "autoprefixer": "10.4.20",
     "eslint-config-next": "^14.2.35",
-    "postcss": "8.4.49",
+    "postcss": "8.5.16",
     "satori": "^0.12.2",
     "tailwindcss": "3.4.15",
     "typescript": "5.6.3"
+  },
+  "overrides": {
+    "@next/eslint-plugin-next": {
+      "glob": "^10.5.0"
+    }
   }
 }

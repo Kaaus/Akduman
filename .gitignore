@@ -14,3 +14,6 @@
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code yerel ayarları (makineye özel)
+.claude/settings.local.json
