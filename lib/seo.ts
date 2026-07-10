@@ -10,12 +10,21 @@ import type { Article } from "@/lib/articles";
 
 // ─── Metadata API ────────────────────────────────────────────────────────────
 
+/** Varsayılan paylaşım görseli — scripts/generate-og.mjs ile üretilir. */
+const OG_DEFAULT = {
+  url: "/og-default.png",
+  width: 1200,
+  height: 630,
+  alt: "Akduman Hukuk Bürosu — Ankara • Avukatlık & Hukuki Danışmanlık",
+};
+
 export function buildMetadata(opts: {
   title: string;
   description: string;
   /** Trailing slash'li yol, örn. "/ceza-hukuku/" — anasayfa için "/". */
   path: string;
   ogType?: "website" | "article";
+  /** Sayfa özel görseli (örn. makale kapağı); yoksa varsayılan kullanılır. */
   ogImage?: string;
 }): Metadata {
   const { title, description, path, ogType = "website", ogImage } = opts;
@@ -30,7 +39,7 @@ export function buildMetadata(opts: {
       siteName: SITE.name,
       locale: "tr_TR",
       type: ogType,
-      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+      images: [ogImage ? { url: ogImage } : OG_DEFAULT],
     },
   };
 }

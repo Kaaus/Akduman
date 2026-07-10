@@ -33,6 +33,21 @@ export const metadata: Metadata = {
   title: { absolute: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman" },
   description:
     "Ankara'da ceza, aile, miras, iş, sigorta, gayrimenkul, idare ve yabancılar hukuku alanlarında avukatlık ve hukuki danışmanlık. ☎ +90 534 089 10 70",
+  // Kendi metadata'sını tanımlamayan sayfalar (örn. 404) için varsayılan
+  // paylaşım görseli; buildMetadata kullanan sayfalar kendi og set'ini kurar.
+  openGraph: {
+    siteName: SITE.name,
+    locale: "tr_TR",
+    type: "website",
+    images: [
+      {
+        url: "/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Akduman Hukuk Bürosu — Ankara • Avukatlık & Hukuki Danışmanlık",
+      },
+    ],
+  },
   twitter: { card: "summary_large_image" },
 };
 

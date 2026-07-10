@@ -13,9 +13,10 @@ npm run dev        # http://localhost:3000
 npm run build      # üretim build'i (yayın öncesi kontrol için)
 ```
 
-> Not: `app/opengraph-image.tsx` build sırasında Google Fonts'a erişerek
-> paylaşım görselini üretir. Ağ erişimi yoksa build yine tamamlanır;
-> görsel sistem fontuyla üretilir.
+> Not: Varsayılan paylaşım görseli statiktir (`public/og-default.png`) ve
+> repoda hazır durur. Tasarımı değiştirmek gerekirse
+> `node scripts/generate-og.mjs` ile yeniden üretilir (Google Fonts'a ağ
+> erişimi gerektirir).
 
 ## Vercel'e Bağlama
 
