@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import type { FaqItem } from "@/lib/site";
 
@@ -11,12 +11,15 @@ import type { FaqItem } from "@/lib/site";
  */
 export default function FaqAccordion({
   items,
-  idPrefix = "faq",
+  idPrefix,
 }: {
   items: FaqItem[];
   idPrefix?: string;
 }) {
   const [open, setOpen] = useState<Set<number>>(new Set());
+  // idPrefix verilmezse React useId ile çakışmasız benzersiz önek üretilir.
+  const autoId = useId();
+  const prefix = idPrefix ?? `faq${autoId}`;
 
   function toggle(index: number) {
     setOpen((prev) => {
@@ -31,10 +34,10 @@ export default function FaqAccordion({
     <div>
       {items.map((item, i) => {
         const isOpen = open.has(i);
-        const panelId = `${idPrefix}-panel-${i}`;
-        const buttonId = `${idPrefix}-button-${i}`;
+        const panelId = `${prefix}-panel-${i}`;
+        const buttonId = `${prefix}-button-${i}`;
         return (
-          <div key={item.question} className="border-b border-line">
+          <div key={`${prefix}-${i}`} className="border-b border-line">
             <h3>
               <button
                 id={buttonId}

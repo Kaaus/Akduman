@@ -170,5 +170,8 @@ export function formatDate(iso: string): string {
     day: "numeric",
     month: "long",
     year: "numeric",
+    // ISO tarih UTC gece yarısı olarak ayrıştırılır; build makinesinin
+    // saat dilimine göre bir gün kaymasın diye UTC'de biçimlendirilir.
+    timeZone: "UTC",
   });
 }

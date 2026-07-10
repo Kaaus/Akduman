@@ -83,6 +83,9 @@
   /* Makale gövdesi (MDX çıktısı) tipografisi */
   .article-body {
     @apply text-ink;
+    /* Uzun kesintisiz dizeler (ör. taşıma bloklarındaki URL'ler) dar
+       ekranlarda yatay taşma yaratmasın */
+    overflow-wrap: anywhere;
   }
   .article-body h2 {
     @apply mb-4 mt-10 text-navy-800;

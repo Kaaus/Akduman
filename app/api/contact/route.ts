@@ -19,7 +19,40 @@ type ContactPayload = {
   website?: string; // honeypot
 };
 
+/** Alan başına makul üst sınırlar (istemcideki maxLength ile uyumlu). */
+const MAX_LEN = { adSoyad: 150, eposta: 200, telefon: 40, konu: 200, mesaj: 5000 };
+
+/**
+ * Basit istek sınırlayıcı — IP başına 10 dakikada en fazla 5 gönderim.
+ * Not: serverless ortamda örnek (instance) başına çalışır; tam koruma değil,
+ * kaba spam'e karşı en-iyi-çaba savunmasıdır.
+ */
+const rateWindow = new Map<string, number[]>();
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (rateWindow.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (hits.length >= RATE_LIMIT) {
+    rateWindow.set(ip, hits);
+    return true;
+  }
+  hits.push(now);
+  rateWindow.set(ip, hits);
+  return false;
+}
+
 export async function POST(request: Request) {
+  // Kaba spam savunması: IP başına pencere sınırı
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Çok fazla istek. Lütfen daha sonra tekrar deneyin." },
+      { status: 429 }
+    );
+  }
+
   let body: ContactPayload;
   try {
     body = (await request.json()) as ContactPayload;
@@ -38,6 +71,20 @@ export async function POST(request: Request) {
   if (!adSoyad?.trim() || !eposta?.trim() || !mesaj?.trim() || !kvkkOnay) {
     return NextResponse.json(
       { error: "Lütfen zorunlu alanları doldurun." },
+      { status: 400 }
+    );
+  }
+
+  // Uzunluk sınırları
+  if (
+    adSoyad.length > MAX_LEN.adSoyad ||
+    eposta.length > MAX_LEN.eposta ||
+    (telefon?.length ?? 0) > MAX_LEN.telefon ||
+    (konu?.length ?? 0) > MAX_LEN.konu ||
+    mesaj.length > MAX_LEN.mesaj
+  ) {
+    return NextResponse.json(
+      { error: "Alan uzunluğu sınırı aşıldı." },
       { status: 400 }
     );
   }
@@ -87,8 +134,9 @@ export async function POST(request: Request) {
         from,
         to: [to],
         reply_to: eposta.trim(),
+        // Konu tek satıra indirgenir (başlık alanına satır sonu sızmasın)
         subject: konu?.trim()
-          ? `İletişim formu: ${konu.trim()}`
+          ? `İletişim formu: ${konu.trim().replace(/[\r\n]+/g, " ").slice(0, 150)}`
           : "İletişim formu mesajı",
         text,
       }),

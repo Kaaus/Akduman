@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 type Status = "idle" | "sending" | "success" | "error" | "unavailable";
 
+// Not: outline kaldırılmaz — klavye odağında globals.css'teki bronz
+// :focus-visible halkası görünür kalır (WCAG 2.4.7).
 const inputClass =
-  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[15px] text-ink placeholder:text-muted/60 focus:border-bronze-500 focus:outline-none";
+  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[15px] text-ink placeholder:text-muted/60 focus:border-bronze-500";
 
 const labelClass = "mb-1.5 block text-[14px] font-semibold text-navy-800";
 
@@ -20,6 +22,12 @@ const labelClass = "mb-1.5 block text-[14px] font-semibold text-navy-800";
  */
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Başarıda form DOM'dan kalktığı için odak teşekkür kutusuna taşınır.
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,6 +57,8 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div
+        ref={successRef}
+        tabIndex={-1}
         role="status"
         className="flex flex-col items-center gap-4 rounded-[2px] border border-line bg-paper px-8 py-14 text-center"
       >
@@ -76,6 +86,7 @@ export default function ContactForm() {
             name="adSoyad"
             type="text"
             required
+            maxLength={150}
             autoComplete="name"
             className={inputClass}
           />
@@ -89,6 +100,7 @@ export default function ContactForm() {
             name="eposta"
             type="email"
             required
+            maxLength={200}
             autoComplete="email"
             className={inputClass}
           />
@@ -101,6 +113,7 @@ export default function ContactForm() {
             id="cf-telefon"
             name="telefon"
             type="tel"
+            maxLength={40}
             autoComplete="tel"
             className={inputClass}
           />
@@ -109,7 +122,7 @@ export default function ContactForm() {
           <label htmlFor="cf-konu" className={labelClass}>
             Konu
           </label>
-          <input id="cf-konu" name="konu" type="text" className={inputClass} />
+          <input id="cf-konu" name="konu" type="text" maxLength={200} className={inputClass} />
         </div>
       </div>
 
@@ -122,6 +135,7 @@ export default function ContactForm() {
           name="mesaj"
           rows={6}
           required
+          maxLength={5000}
           className={inputClass}
         />
       </div>
@@ -145,7 +159,7 @@ export default function ContactForm() {
           type="checkbox"
           required
           value="evet"
-          className="mt-1.5 h-4 w-4 shrink-0 accent-[#B08D57]"
+          className="mt-1.5 h-4 w-4 shrink-0 accent-bronze-500"
         />
         <label htmlFor="cf-kvkk" className="text-[14px] leading-relaxed text-muted">
           Kişisel verilerimin,{" "}
