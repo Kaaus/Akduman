@@ -294,15 +294,15 @@
   .article-body p {
     @apply mb-5;
   }
-  .article-body ul,
-  .article-body ol {
-    @apply mb-5 space-y-2 pl-6;
-  }
   .article-body ul {
-    @apply list-disc;
+    @apply mb-5 list-disc space-y-2 pl-6;
   }
-  .article-body ol {
-    @apply list-decimal;
+  /* :not(.process-steps-list) izolasyonu: ProcessSteps kendi ol/li
+     düzenini (rozet + flex satır) kullanır; bu kural olmadan
+     list-decimal + boşluk değerleri bileşene sızıp rozet numarasının
+     yanında tarayıcının kendi liste numarasını da gösterir. */
+  .article-body ol:not(.process-steps-list) {
+    @apply mb-5 list-decimal space-y-2 pl-6;
   }
   .article-body li::marker {
     color: #7e6234; /* bronze-700 — işaretler küçük ama dekoratif */
