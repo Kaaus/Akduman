@@ -18,8 +18,10 @@ export default function Hero() {
             Ankara • Avukatlık &amp; Hukuki Danışmanlık
           </p>
           <h1 className="mt-5 !text-[#F4F1EA]">
+            {/* Satırlar arasında DOM'da boşluk kalmalı — ekran okuyucu
+                "AkdumanHukuk" diye bitişik okumasın */}
             <span className="hero-line block" style={{ animationDelay: "90ms" }}>
-              Akduman
+              Akduman{" "}
             </span>
             <span className="hero-line block" style={{ animationDelay: "180ms" }}>
               Hukuk Bürosu
