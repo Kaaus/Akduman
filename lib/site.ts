@@ -5,6 +5,15 @@
  * bu dosyadan beslenir; sabit değer başka yerde TEKRAR TANIMLANMAZ.
  */
 
+// ─── Özellik anahtarları (kill-switch) ───────────────────────────────────────
+
+/**
+ * Anasayfa açılış perdesi (components/IntroSplash.tsx).
+ * false yapıldığında app/page.tsx bileşeni hiç mount etmez — DOM'da,
+ * build çıktısında ve Hero'nun normal davranışında sıfır iz kalır.
+ */
+export const INTRO_SPLASH = true;
+
 // ─── Kimlik & İletişim ───────────────────────────────────────────────────────
 
 export const SITE = {

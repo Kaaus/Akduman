@@ -360,6 +360,17 @@
   animation: rise-in var(--dur-med) var(--ease) forwards;
 }
 
+/* IntroSplash senkronu: perde açıkken (bkz. components/IntroSplash.tsx)
+   Hero'nun kademeli giriş animasyonu bastırılır; data-intro-pending
+   kaldırıldığında bu kural devre dışı kalır, üstteki .hero-line kuralı
+   yeniden geçerli olur ve animasyon o anda sıfırdan başlar. Attribute hiç
+   set edilmezse (perde oynamadıysa) bu kural asla eşleşmez — Hero'nun
+   varsayılan davranışı değişmez. */
+html[data-intro-pending] .hero-line {
+  animation: none;
+  opacity: 0;
+}
+
 /* Bronz keyline çerçeve: yüklendiğinde 500ms'de "çizilerek" gelir */
 @keyframes frame-in {
   from {
@@ -385,6 +396,33 @@
 }
 .scroll-hint {
   animation: pulse-down 1.4s ease-in-out 0.8s 2;
+}
+
+/* IntroSplash: SVG terazi çizgileri pathLength=1 ile normalize edilmiş
+   dash — her path 80ms kademeyle "çizilerek" belirir; pivot noktası ve
+   kicker ayrı bir fade-in ile kapanışı tamamlar. */
+@keyframes intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.intro-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: intro-draw 380ms var(--ease) forwards;
+}
+@keyframes intro-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+.intro-pivot {
+  opacity: 0;
+  animation: intro-fade-in 250ms var(--ease) 560ms forwards;
+}
+.intro-kicker {
+  opacity: 0;
+  animation: intro-fade-in 400ms var(--ease) 600ms forwards;
 }
 
 /* WhatsAppFloat: 300ms gecikmeli scale-in girişi */

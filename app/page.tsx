@@ -4,12 +4,13 @@ import ContactForm from "@/components/ContactForm";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import Hero from "@/components/Hero";
+import IntroSplash from "@/components/IntroSplash";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceRow from "@/components/ServiceRow";
 import { buildMetadata, faqSchema } from "@/lib/seo";
-import { HOME_FAQ, SERVICES } from "@/lib/site";
+import { HOME_FAQ, INTRO_SPLASH, SERVICES } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman",
@@ -23,6 +24,9 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={faqSchema(HOME_FAQ)} />
+
+      {/* Açılış perdesi — INTRO_SPLASH=false iken bu satır hiç render edilmez */}
+      {INTRO_SPLASH && <IntroSplash />}
 
       {/* (a) Hero v2 */}
       <Hero />
