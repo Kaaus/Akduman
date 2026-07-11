@@ -1,10 +1,15 @@
+import { ArrowRight, Phone } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
+import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
+import ProcessSteps from "@/components/ProcessSteps";
 import RelatedArticles from "@/components/RelatedArticles";
+import Reveal from "@/components/Reveal";
+import TocRail from "@/components/TocRail";
 import { breadcrumbSchema, buildMetadata, faqSchema, serviceSchema } from "@/lib/seo";
-import { getService, INFO_NOTE, type FaqItem } from "@/lib/site";
+import { getService, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
 
 /*
  * ═══════════════════════════════════════════════════════════════════
@@ -21,6 +26,12 @@ export const metadata = buildMetadata({
   description: service.metaDescription,
   path: `/${service.slug}/`,
 });
+
+const TOC = [
+  { id: "hizmetler", label: "Verdiğimiz Hizmetler" },
+  { id: "surec", label: "Süreç Nasıl İşler?" },
+  { id: "sss", label: "Sıkça Sorulan Sorular" },
+];
 
 const FAQ: FaqItem[] = [
   {
@@ -53,35 +64,49 @@ export default function AileHukukuPage() {
         ])}
       />
 
-      <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+      {/* Dar koyu şerit-hero */}
+      <section className="bg-navy-950">
+        <div className="container-site py-10 md:py-14">
           <Breadcrumb
+            variant="dark"
             items={[
               { label: "Faaliyet Alanlarımız", href: "/faaliyet-alanlarimiz/" },
               { label: service.title },
             ]}
           />
-          <p className="kicker mt-8">Faaliyet Alanlarımız</p>
-          <h1 className="mt-3 text-navy-800">{service.h1}</h1>
+          <h1 className="mt-6 !text-[#F4F1EA]">{service.h1}</h1>
+          {/* Lead: mevcut giriş metninin ilk cümlesi */}
+          <p className="mt-5 max-w-3xl text-[20px] leading-relaxed text-[#F4F1EA]/85">
+            Aile hukuku; evlilik, boşanma, velayet, nafaka ve eşler arasındaki
+            mal rejimi gibi aile ilişkilerinden doğan hak ve yükümlülükleri
+            düzenleyen hukuk dalıdır.
+          </p>
+          <a href={SITE.telHref} className="btn-tertiary-dark mt-6">
+            <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
+            Hemen Ara
+            <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
+          </a>
+        </div>
+      </section>
 
-          <div className="article-body mt-8">
-            {/* Giriş */}
-            <p>
-              Aile hukuku; evlilik, boşanma, velayet, nafaka ve eşler
-              arasındaki mal rejimi gibi aile ilişkilerinden doğan hak ve
-              yükümlülükleri düzenleyen hukuk dalıdır. Akduman Hukuk Bürosu,
-              aile hukukundan kaynaklanan uyuşmazlıklarda dava takibi ve
-              hukuki danışmanlık hizmeti sunmaktadır. Bu alandaki
-              uyuşmazlıklar; tarafların özel hayatını, çocukların geleceğini
-              ve ekonomik dengeleri doğrudan etkileyen sonuçlar
-              doğurabilmektedir. Bu nedenle sürecin en başından itibaren
-              deneyimli bir avukatla ve özenle yürütülmesi, hak kayıplarının
-              önlenmesi bakımından önem taşımaktadır.
+      {/* Gövde: 70ch + sağda TocRail */}
+      <section className="bg-white">
+        <div className="container-site flex gap-14 py-12 md:py-16">
+          <div className="article-body min-w-0 max-w-[70ch]">
+            {/* Giriş (kalan cümleler) — lead stili */}
+            <p className="lead">
+              Akduman Hukuk Bürosu, aile hukukundan kaynaklanan
+              uyuşmazlıklarda dava takibi ve hukuki danışmanlık hizmeti
+              sunmaktadır. Bu alandaki uyuşmazlıklar; tarafların özel
+              hayatını, çocukların geleceğini ve ekonomik dengeleri doğrudan
+              etkileyen sonuçlar doğurabilmektedir. Bu nedenle sürecin en
+              başından itibaren deneyimli bir avukatla ve özenle yürütülmesi,
+              hak kayıplarının önlenmesi bakımından önem taşımaktadır.
             </p>
 
             {/* ESKİ METİN BURAYA: kullanıcı canlı siteden yapıştıracak — gelince girişle harmanla */}
 
-            <h2>Aile Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
+            <h2 id="hizmetler">Aile Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
             <p>
               Büromuz; boşanma davalarından velayet ve nafaka
               uyuşmazlıklarına, mal rejiminin tasfiyesinden aile içi şiddete
@@ -132,13 +157,19 @@ export default function AileHukukuPage() {
                 <strong>Aile içi şiddette koruma tedbirleri:</strong> 6284
                 sayılı Kanun kapsamında; şiddete maruz kalan veya şiddet
                 tehlikesi altında bulunan kişiler lehine koruyucu ve önleyici
-                tedbir kararları talep edilebilmektedir. Bu başvurular ivedi
-                nitelikte olduğundan sürecin gecikmeksizin başlatılması önem
-                taşımaktadır.
+                tedbir kararları talep edilebilmektedir.
               </li>
             </ul>
 
-            <h2>Boşanma Süreci Nasıl İşler?</h2>
+            {/* İvedilik cümlesi mevcut metinden (6284 maddesi) Callout'a taşındı */}
+            <Callout variant="uyari">
+              <p>
+                Bu başvurular ivedi nitelikte olduğundan sürecin gecikmeksizin
+                başlatılması önem taşımaktadır.
+              </p>
+            </Callout>
+
+            <h2 id="surec">Boşanma Süreci Nasıl İşler?</h2>
             <p>
               Boşanma davaları, anlaşmalı veya çekişmeli olarak
               yürütülebilmektedir. Anlaşmalı boşanmada taraflar sonuçlar
@@ -148,61 +179,85 @@ export default function AileHukukuPage() {
               delillerin kapsamına, tanık sayısına ve mahkemenin iş yüküne
               göre değişebilmektedir.
             </p>
+            <ProcessSteps
+              steps={[
+                {
+                  title: "Dava Öncesi Değerlendirme ve Dava Dilekçesi",
+                  body: (
+                    <p>
+                      Süreç, somut olayın hukuki açıdan değerlendirilmesiyle
+                      başlamaktadır. Bu aşamada boşanma sebebi, deliller ile
+                      velayet, nafaka ve tazminat talepleri belirlenmekte;
+                      talepleri ve dayanaklarını içeren dava dilekçesi
+                      hazırlanarak aile mahkemesine sunulmaktadır. Anlaşmalı
+                      boşanmada ise taraflarca imzalanan protokol, dava
+                      dilekçesiyle birlikte mahkemeye sunulmaktadır.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Dilekçeler Aşaması",
+                  body: (
+                    <p>
+                      Dava dilekçesinin davalı tarafa tebliğiyle dilekçeler
+                      aşaması başlamaktadır. Bu aşamada cevap, cevaba cevap ve
+                      ikinci cevap dilekçeleri sunulmakta; tarafların iddia ve
+                      savunmaları büyük ölçüde bu aşamada şekillenmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Ön İnceleme ve Tahkikat",
+                  body: (
+                    <p>
+                      Ön inceleme duruşmasında mahkeme, taraflar arasındaki
+                      uyuşmazlık konularını belirlemekte ve tarafları sulhe
+                      teşvik edebilmektedir. Tahkikat aşamasında tanıklar
+                      dinlenmekte, deliller toplanmakta ve gerekli görülürse
+                      sosyal inceleme raporu alınmaktadır. Dava süresince
+                      velayet, nafaka ve ortak konutun kullanımı gibi
+                      konularda geçici tedbir kararları verilebilmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Karar ve Kanun Yolları",
+                  body: (
+                    <p>
+                      Tahkikatın tamamlanmasının ardından sözlü yargılama
+                      yapılmakta ve mahkeme kararını açıklamaktadır. Verilen
+                      karara karşı süresi içinde istinaf yoluna, istinaf
+                      incelemesinden geçen kararlara karşı ise kanunda
+                      öngörülen hâllerde temyiz yoluna başvurulabilmektedir.
+                      Boşanma hükmü kesinleştikten sonra nüfus kaydına
+                      işlenmekte; mal rejiminin tasfiyesi ise ayrı bir davanın
+                      konusunu oluşturmaktadır.
+                    </p>
+                  ),
+                },
+              ]}
+            />
 
-            <h3>1. Dava Öncesi Değerlendirme ve Dava Dilekçesi</h3>
-            <p>
-              Süreç, somut olayın hukuki açıdan değerlendirilmesiyle
-              başlamaktadır. Bu aşamada boşanma sebebi, deliller ile velayet,
-              nafaka ve tazminat talepleri belirlenmekte; talepleri ve
-              dayanaklarını içeren dava dilekçesi hazırlanarak aile
-              mahkemesine sunulmaktadır. Anlaşmalı boşanmada ise taraflarca
-              imzalanan protokol, dava dilekçesiyle birlikte mahkemeye
-              sunulmaktadır.
-            </p>
+            {/* Süre/hak-kaybı cümlesi mevcut metinden (Dilekçeler Aşaması) Callout'a taşındı */}
+            <Callout variant="uyari">
+              <p>
+                Dilekçelerin süresi içinde ve eksiksiz sunulması, ilerleyen
+                aşamalarda hak kaybı yaşanmaması bakımından önemlidir.
+              </p>
+            </Callout>
 
-            <h3>2. Dilekçeler Aşaması</h3>
-            <p>
-              Dava dilekçesinin davalı tarafa tebliğiyle dilekçeler aşaması
-              başlamaktadır. Bu aşamada cevap, cevaba cevap ve ikinci cevap
-              dilekçeleri sunulmakta; tarafların iddia ve savunmaları büyük
-              ölçüde bu aşamada şekillenmektedir. Dilekçelerin süresi içinde
-              ve eksiksiz sunulması, ilerleyen aşamalarda hak kaybı
-              yaşanmaması bakımından önemlidir.
-            </p>
+            <h2 id="sss">Sıkça Sorulan Sorular</h2>
+            <Reveal>
+              <FaqAccordion items={FAQ} idPrefix="aile-sss" />
+            </Reveal>
 
-            <h3>3. Ön İnceleme ve Tahkikat</h3>
-            <p>
-              Ön inceleme duruşmasında mahkeme, taraflar arasındaki
-              uyuşmazlık konularını belirlemekte ve tarafları sulhe teşvik
-              edebilmektedir. Tahkikat aşamasında tanıklar dinlenmekte,
-              deliller toplanmakta ve gerekli görülürse sosyal inceleme
-              raporu alınmaktadır. Dava süresince velayet, nafaka ve ortak
-              konutun kullanımı gibi konularda geçici tedbir kararları
-              verilebilmektedir.
-            </p>
-
-            <h3>4. Karar ve Kanun Yolları</h3>
-            <p>
-              Tahkikatın tamamlanmasının ardından sözlü yargılama yapılmakta
-              ve mahkeme kararını açıklamaktadır. Verilen karara karşı süresi
-              içinde istinaf yoluna, istinaf incelemesinden geçen kararlara
-              karşı ise kanunda öngörülen hâllerde temyiz yoluna
-              başvurulabilmektedir. Boşanma hükmü kesinleştikten sonra nüfus
-              kaydına işlenmekte; mal rejiminin tasfiyesi ise ayrı bir
-              davanın konusunu oluşturmaktadır.
+            {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
+            <p className="mt-12 border-t border-line-strong pt-6 text-[14px] italic text-muted">
+              {INFO_NOTE}
             </p>
           </div>
 
-          {/* Sıkça Sorulan Sorular */}
-          <h2 className="mt-14 text-navy-800">Sıkça Sorulan Sorular</h2>
-          <div className="mt-6">
-            <FaqAccordion items={FAQ} idPrefix="aile-sss" />
-          </div>
-
-          {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
-          <p className="mt-12 border-t border-line pt-6 text-[14px] italic text-muted">
-            {INFO_NOTE}
-          </p>
+          <TocRail items={TOC} />
         </div>
       </section>
 

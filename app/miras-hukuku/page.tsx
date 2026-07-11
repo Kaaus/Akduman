@@ -1,11 +1,16 @@
 import Link from "next/link";
+import { ArrowRight, Phone } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
+import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
+import ProcessSteps from "@/components/ProcessSteps";
 import RelatedArticles from "@/components/RelatedArticles";
+import Reveal from "@/components/Reveal";
+import TocRail from "@/components/TocRail";
 import { breadcrumbSchema, buildMetadata, faqSchema, serviceSchema } from "@/lib/seo";
-import { getService, INFO_NOTE, type FaqItem } from "@/lib/site";
+import { getService, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
 
 /*
  * ═══════════════════════════════════════════════════════════════════
@@ -22,6 +27,12 @@ export const metadata = buildMetadata({
   description: service.metaDescription,
   path: `/${service.slug}/`,
 });
+
+const TOC = [
+  { id: "hizmetler", label: "Verdiğimiz Hizmetler" },
+  { id: "surec", label: "Süreç Nasıl İşler?" },
+  { id: "sss", label: "Sıkça Sorulan Sorular" },
+];
 
 const FAQ: FaqItem[] = [
   {
@@ -54,37 +65,51 @@ export default function MirasHukukuPage() {
         ])}
       />
 
-      <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+      {/* Dar koyu şerit-hero */}
+      <section className="bg-navy-950">
+        <div className="container-site py-10 md:py-14">
           <Breadcrumb
+            variant="dark"
             items={[
               { label: "Faaliyet Alanlarımız", href: "/faaliyet-alanlarimiz/" },
               { label: service.title },
             ]}
           />
-          <p className="kicker mt-8">Faaliyet Alanlarımız</p>
-          <h1 className="mt-3 text-navy-800">{service.h1}</h1>
+          <h1 className="mt-6 !text-[#F4F1EA]">{service.h1}</h1>
+          {/* Lead: mevcut giriş metninin ilk cümlesi */}
+          <p className="mt-5 max-w-3xl text-[20px] leading-relaxed text-[#F4F1EA]/85">
+            Miras hukuku; bir kimsenin ölümü hâlinde malvarlığının kimlere,
+            hangi oranlarda ve hangi usulle geçeceğini düzenleyen hukuk
+            dalıdır.
+          </p>
+          <a href={SITE.telHref} className="btn-tertiary-dark mt-6">
+            <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
+            Hemen Ara
+            <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
+          </a>
+        </div>
+      </section>
 
-          <div className="article-body mt-8">
-            {/* Giriş */}
-            <p>
-              Miras hukuku; bir kimsenin ölümü hâlinde malvarlığının kimlere,
-              hangi oranlarda ve hangi usulle geçeceğini düzenleyen hukuk
-              dalıdır. Türk Medeni Kanunu'nda düzenlenen bu alan; mirasçılık
-              sıfatının belirlenmesinden terekenin paylaşılmasına kadar uzanan
-              geniş bir süreci kapsamaktadır. Akduman Hukuk Bürosu; mirasçılık
-              belgesinin alınmasından miras paylaşımına, reddi mirastan tenkis
-              ve muris muvazaası davalarına kadar miras hukukundan doğan
-              uyuşmazlıklarda müvekkillerine hukuki destek sağlamaktadır. Miras
-              süreçleri hem aile ilişkilerini hem de malvarlığı haklarını
-              doğrudan etkilediğinden, sürecin deneyimli bir avukatla
-              yürütülmesi hak kayıplarının önlenmesi bakımından önem
-              taşımaktadır.
+      {/* Gövde: 70ch + sağda TocRail */}
+      <section className="bg-white">
+        <div className="container-site flex gap-14 py-12 md:py-16">
+          <div className="article-body min-w-0 max-w-[70ch]">
+            {/* Giriş (kalan cümleler) — lead stili */}
+            <p className="lead">
+              Türk Medeni Kanunu'nda düzenlenen bu alan; mirasçılık sıfatının
+              belirlenmesinden terekenin paylaşılmasına kadar uzanan geniş bir
+              süreci kapsamaktadır. Akduman Hukuk Bürosu; mirasçılık belgesinin
+              alınmasından miras paylaşımına, reddi mirastan tenkis ve muris
+              muvazaası davalarına kadar miras hukukundan doğan uyuşmazlıklarda
+              müvekkillerine hukuki destek sağlamaktadır. Miras süreçleri hem
+              aile ilişkilerini hem de malvarlığı haklarını doğrudan
+              etkilediğinden, sürecin deneyimli bir avukatla yürütülmesi hak
+              kayıplarının önlenmesi bakımından önem taşımaktadır.
             </p>
 
             {/* ESKİ METİN BURAYA: kullanıcı canlı siteden yapıştıracak — gelince girişle harmanla */}
 
-            <h2>Miras Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
+            <h2 id="hizmetler">Miras Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
             <p>
               Büromuz; miras hukukunun çekişmesiz işlemlerinden çekişmeli dava
               süreçlerine kadar tüm aşamalarda müvekkillerine hukuki destek
@@ -145,54 +170,81 @@ export default function MirasHukukuPage() {
               </li>
             </ul>
 
-            <h2>Miras Davaları Süreci Nasıl İşler?</h2>
+            <h2 id="surec">Miras Davaları Süreci Nasıl İşler?</h2>
             <p>
               Miras süreçleri; terekenin kapsamına, mirasçı sayısına ve
               taraflar arasında anlaşma bulunup bulunmadığına göre farklı
               şekillerde ilerleyebilmektedir. Bununla birlikte uygulamada
               süreç, genel hatlarıyla aşağıdaki aşamalardan geçmektedir.
             </p>
+            <ProcessSteps
+              steps={[
+                {
+                  title: "Mirasçılık Belgesinin Alınması",
+                  body: (
+                    <p>
+                      Miras sürecinin ilk adımı, mirasçılık sıfatını ve miras
+                      paylarını gösteren veraset ilamının alınmasıdır. Bu
+                      belge; uyuşmazlık bulunmayan hâllerde noterden, gerekli
+                      durumlarda ise sulh hukuk mahkemesinden
+                      alınabilmektedir. Tapu, banka ve vergi dairesi gibi
+                      kurumlar nezdindeki işlemlerin tamamı bu belgeye
+                      dayanılarak yürütülmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Terekenin Tespiti",
+                  body: (
+                    <p>
+                      İkinci aşamada; miras bırakanın taşınmazları, banka
+                      hesapları, araçları, alacakları ve borçları
+                      belirlenmektedir. Terekenin kapsamının doğru tespit
+                      edilmesi, hem paylaşımın sağlıklı yürütülmesi hem de
+                      borca batık terekelerde reddi miras kararının zamanında
+                      verilebilmesi bakımından önem taşımaktadır. Gerektiğinde
+                      mahkeme aracılığıyla tereke tespiti talep
+                      edilebilmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Paylaşım: Anlaşma veya Dava",
+                  body: (
+                    <p>
+                      Mirasçılar, tereke üzerinde anlaşarak miras paylaşım
+                      sözleşmesi yapabilmektedir. Anlaşma sağlanamazsa
+                      paylaşım; miras taksim davası veya ortaklığın
+                      giderilmesi davası yoluyla mahkeme eliyle
+                      gerçekleştirilmektedir. Bu aşamada saklı pay ihlali veya
+                      mal kaçırma iddiası varsa tenkis ve muris muvazaasına
+                      dayalı davalar da gündeme gelebilmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Karar ve Kanun Yolları",
+                  body: (
+                    <p>
+                      Yargılamanın sonunda mahkeme, paylaşıma veya ileri
+                      sürülen taleplere ilişkin kararını vermektedir. Karara
+                      karşı istinaf yoluna, kanunda öngörülen hâllerde ise
+                      temyiz yoluna başvurulabilmektedir. Kesinleşen kararın
+                      ardından tapu devri, hesapların paylaştırılması gibi
+                      infaz işlemleri gerçekleştirilmektedir.
+                    </p>
+                  ),
+                },
+              ]}
+            />
 
-            <h3>1. Mirasçılık Belgesinin Alınması</h3>
-            <p>
-              Miras sürecinin ilk adımı, mirasçılık sıfatını ve miras paylarını
-              gösteren veraset ilamının alınmasıdır. Bu belge; uyuşmazlık
-              bulunmayan hâllerde noterden, gerekli durumlarda ise sulh hukuk
-              mahkemesinden alınabilmektedir. Tapu, banka ve vergi dairesi gibi
-              kurumlar nezdindeki işlemlerin tamamı bu belgeye dayanılarak
-              yürütülmektedir.
-            </p>
-
-            <h3>2. Terekenin Tespiti</h3>
-            <p>
-              İkinci aşamada; miras bırakanın taşınmazları, banka hesapları,
-              araçları, alacakları ve borçları belirlenmektedir. Terekenin
-              kapsamının doğru tespit edilmesi, hem paylaşımın sağlıklı
-              yürütülmesi hem de borca batık terekelerde reddi miras kararının
-              zamanında verilebilmesi bakımından önem taşımaktadır. Gerektiğinde
-              mahkeme aracılığıyla tereke tespiti talep edilebilmektedir.
-            </p>
-
-            <h3>3. Paylaşım: Anlaşma veya Dava</h3>
-            <p>
-              Mirasçılar, tereke üzerinde anlaşarak miras paylaşım sözleşmesi
-              yapabilmektedir. Anlaşma sağlanamazsa paylaşım; miras taksim
-              davası veya ortaklığın giderilmesi davası yoluyla mahkeme
-              eliyle gerçekleştirilmektedir. Bu aşamada saklı pay ihlali veya
-              mal kaçırma iddiası varsa tenkis ve muris muvazaasına dayalı
-              davalar da gündeme gelebilmektedir.
-            </p>
-
-            <h3>4. Karar ve Kanun Yolları</h3>
-            <p>
-              Yargılamanın sonunda mahkeme, paylaşıma veya ileri sürülen
-              taleplere ilişkin kararını vermektedir. Karara karşı istinaf
-              yoluna, kanunda öngörülen hâllerde ise temyiz yoluna
-              başvurulabilmektedir. Kanun yolu başvuruları süreye tabi
-              olduğundan sürelerin takibi önem taşımaktadır. Kesinleşen
-              kararın ardından tapu devri, hesapların paylaştırılması gibi
-              infaz işlemleri gerçekleştirilmektedir.
-            </p>
+            {/* Süre/hak-kaybı cümlesi mevcut metinden Callout'a taşındı */}
+            <Callout variant="uyari">
+              <p>
+                Kanun yolu başvuruları süreye tabi olduğundan sürelerin takibi
+                önem taşımaktadır.
+              </p>
+            </Callout>
 
             <p>
               Miras uyuşmazlıkları çoğu zaman aile bireyleri arasında
@@ -202,18 +254,19 @@ export default function MirasHukukuPage() {
               durumlarda ise dava sürecini titizlikle yürüten bir yaklaşım
               benimsemektedir.
             </p>
+
+            <h2 id="sss">Sıkça Sorulan Sorular</h2>
+            <Reveal>
+              <FaqAccordion items={FAQ} idPrefix="miras-sss" />
+            </Reveal>
+
+            {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
+            <p className="mt-12 border-t border-line-strong pt-6 text-[14px] italic text-muted">
+              {INFO_NOTE}
+            </p>
           </div>
 
-          {/* Sıkça Sorulan Sorular */}
-          <h2 className="mt-14 text-navy-800">Sıkça Sorulan Sorular</h2>
-          <div className="mt-6">
-            <FaqAccordion items={FAQ} idPrefix="miras-sss" />
-          </div>
-
-          {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
-          <p className="mt-12 border-t border-line pt-6 text-[14px] italic text-muted">
-            {INFO_NOTE}
-          </p>
+          <TocRail items={TOC} />
         </div>
       </section>
 

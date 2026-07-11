@@ -28,7 +28,7 @@ export default function CerezPolitikasiPage() {
       <section className="bg-white">
         <div className="container-site max-w-4xl py-12 md:py-16">
           <Breadcrumb items={[{ label: "Çerez Politikası" }]} />
-          <h1 className="mt-6 text-navy-800">Çerez Politikası</h1>
+          <h1 className="mt-6">Çerez Politikası</h1>
 
           <div className="article-body mt-8">
             <h2>Çerez Nedir?</h2>

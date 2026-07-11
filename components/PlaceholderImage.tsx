@@ -24,7 +24,7 @@ export default function PlaceholderImage({
       style={{ aspectRatio }}
       className={`flex w-full flex-col items-center justify-center gap-2 border border-line bg-paper ${className}`}
     >
-      <Scale size={20} strokeWidth={1.5} className="text-bronze-500" aria-hidden="true" />
+      <Scale size={24} strokeWidth={1.5} className="text-bronze-600" aria-hidden="true" />
       <span className="text-[11px] text-muted">Görsel eklenecek</span>
     </div>
   );

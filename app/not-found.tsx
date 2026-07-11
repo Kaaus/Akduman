@@ -7,7 +7,7 @@ export default function NotFound() {
     <section className="bg-white">
       <div className="container-site py-24 text-center">
         <p className="kicker mb-4">404</p>
-        <h1 className="mx-auto max-w-2xl text-navy-800">
+        <h1 className="mx-auto max-w-2xl">
           Aradığınız sayfa bulunamadı.
         </h1>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
@@ -27,7 +27,7 @@ export default function NotFound() {
               <li key={s.slug}>
                 <Link
                   href={`/${s.slug}/`}
-                  className="text-[15px] font-semibold text-navy-800 transition-colors hover:text-bronze-600"
+                  className="text-[15px] font-semibold text-navy-800 transition-colors hover:text-bronze-700"
                 >
                   {s.title}
                 </Link>

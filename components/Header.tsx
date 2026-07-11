@@ -198,7 +198,7 @@ export default function Header() {
                       aria-controls="faaliyet-alt-menu"
                       aria-label="Faaliyet alanları alt menüsünü aç"
                       onClick={() => setDropdownOpen((v) => !v)}
-                      className="p-1 text-navy-800 transition-colors hover:text-bronze-600"
+                      className="p-1 text-navy-800 transition-colors hover:text-ink-strong"
                     >
                       <ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" />
                     </button>

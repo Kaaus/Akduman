@@ -1,10 +1,15 @@
+import { ArrowRight, Phone } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
+import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
+import ProcessSteps from "@/components/ProcessSteps";
 import RelatedArticles from "@/components/RelatedArticles";
+import Reveal from "@/components/Reveal";
+import TocRail from "@/components/TocRail";
 import { breadcrumbSchema, buildMetadata, faqSchema, serviceSchema } from "@/lib/seo";
-import { getService, INFO_NOTE, type FaqItem } from "@/lib/site";
+import { getService, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
 
 /*
  * ═══════════════════════════════════════════════════════════════════
@@ -21,6 +26,12 @@ export const metadata = buildMetadata({
   description: service.metaDescription,
   path: `/${service.slug}/`,
 });
+
+const TOC = [
+  { id: "hizmetler", label: "Verdiğimiz Hizmetler" },
+  { id: "surec", label: "Süreç Nasıl İşler?" },
+  { id: "sss", label: "Sıkça Sorulan Sorular" },
+];
 
 const FAQ: FaqItem[] = [
   {
@@ -53,37 +64,51 @@ export default function IdareHukukuPage() {
         ])}
       />
 
-      <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+      {/* Dar koyu şerit-hero */}
+      <section className="bg-navy-950">
+        <div className="container-site py-10 md:py-14">
           <Breadcrumb
+            variant="dark"
             items={[
               { label: "Faaliyet Alanlarımız", href: "/faaliyet-alanlarimiz/" },
               { label: service.title },
             ]}
           />
-          <p className="kicker mt-8">Faaliyet Alanlarımız</p>
-          <h1 className="mt-3 text-navy-800">{service.h1}</h1>
+          <h1 className="mt-6 !text-[#F4F1EA]">{service.h1}</h1>
+          {/* Lead: mevcut giriş metninin ilk cümlesi */}
+          <p className="mt-5 max-w-3xl text-[20px] leading-relaxed text-[#F4F1EA]/85">
+            İdare hukuku; devletin ve diğer kamu tüzel kişilerinin işleyişini
+            düzenleyen, idarenin tesis ettiği işlem ve eylemlere karşı
+            bireylerin korunmasını sağlayan hukuk dalıdır.
+          </p>
+          <a href={SITE.telHref} className="btn-tertiary-dark mt-6">
+            <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
+            Hemen Ara
+            <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
+          </a>
+        </div>
+      </section>
 
-          <div className="article-body mt-8">
-            {/* Giriş */}
-            <p>
-              İdare hukuku; devletin ve diğer kamu tüzel kişilerinin işleyişini
-              düzenleyen, idarenin tesis ettiği işlem ve eylemlere karşı
-              bireylerin korunmasını sağlayan hukuk dalıdır. Kamu gücü
-              kullanılarak tesis edilen bir işlem; kişilerin çalışma hayatını,
-              mülkiyetini ve gündelik yaşamını doğrudan etkileyebilmektedir.
-              Akduman Hukuk Bürosu; iptal ve tam yargı davaları, idari
-              başvurular, disiplin süreçleri ve kamulaştırma uyuşmazlıkları
-              başta olmak üzere idare hukuku alanında müvekkillerine hukuki
-              destek sağlamaktadır. İdari yargıda sürelerin hak düşürücü
-              nitelik taşıması nedeniyle sürecin en başından itibaren
-              deneyimli bir avukatla yürütülmesi hak kayıplarının önlenmesi
-              bakımından önem taşımaktadır.
+      {/* Gövde: 70ch + sağda TocRail */}
+      <section className="bg-white">
+        <div className="container-site flex gap-14 py-12 md:py-16">
+          <div className="article-body min-w-0 max-w-[70ch]">
+            {/* Giriş (kalan cümleler) — lead stili */}
+            <p className="lead">
+              Kamu gücü kullanılarak tesis edilen bir işlem; kişilerin çalışma
+              hayatını, mülkiyetini ve gündelik yaşamını doğrudan
+              etkileyebilmektedir. Akduman Hukuk Bürosu; iptal ve tam yargı
+              davaları, idari başvurular, disiplin süreçleri ve kamulaştırma
+              uyuşmazlıkları başta olmak üzere idare hukuku alanında
+              müvekkillerine hukuki destek sağlamaktadır. İdari yargıda
+              sürelerin hak düşürücü nitelik taşıması nedeniyle sürecin en
+              başından itibaren deneyimli bir avukatla yürütülmesi hak
+              kayıplarının önlenmesi bakımından önem taşımaktadır.
             </p>
 
             {/* ESKİ METİN BURAYA: kullanıcı canlı siteden yapıştıracak — gelince girişle harmanla */}
 
-            <h2>İdare Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
+            <h2 id="hizmetler">İdare Hukuku Kapsamında Verdiğimiz Hizmetler</h2>
             <p>
               Büromuz, idari işlemin tebliğinden kanun yolu aşamasına kadar
               idari uyuşmazlıkların tüm evrelerinde müvekkillerine hukuki
@@ -125,66 +150,98 @@ export default function IdareHukukuPage() {
               </li>
             </ul>
 
-            <h2>İdari Dava Süreci Nasıl İşler?</h2>
+            <h2 id="surec">İdari Dava Süreci Nasıl İşler?</h2>
             <p>
               İdari yargılama; büyük ölçüde yazılı usule dayanan, dilekçeler
               ve dosya üzerinden yürüyen bir süreçtir. Sürecin başlıca
               aşamaları şu şekilde özetlenebilir:
             </p>
 
-            <h3>1. İdari İşlemin Tebliği ve Süre Takibi</h3>
-            <p>
-              Süreç, çoğu zaman idari işlemin ilgilisine tebliğ edilmesiyle
-              başlamaktadır. Tebliğ tarihi, dava açma süresinin başlangıcını
-              belirlediğinden bu tarihin doğru tespit edilmesi ve
-              belgelenmesi büyük önem taşımaktadır. İdari yargıdaki süreler
-              hak düşürücü nitelikte olduğundan, sürenin geçirilmesi dava
-              hakkının yitirilmesine yol açabilmektedir.
-            </p>
+            {/* Hak-düşürücü süre cümlesi 1. adımın paragrafından Callout'a taşındı */}
+            <Callout variant="uyari">
+              <p>
+                İdari yargıdaki süreler hak düşürücü nitelikte olduğundan,
+                sürenin geçirilmesi dava hakkının yitirilmesine yol
+                açabilmektedir.
+              </p>
+            </Callout>
 
-            <h3>2. İdareye Başvuru</h3>
-            <p>
-              Bazı uyuşmazlıklarda dava açılmadan önce idareye başvuru
-              yapılması gerekmekte, bazı hâllerde ise bu yol ilgilinin
-              tercihine bırakılmaktadır. Başvurunun içeriği, muhatabı ve
-              zamanlaması; dava açma süresinin işleyişini
-              etkileyebilmektedir. Bu nedenle başvuru aşamasının hukuki
-              destekle planlanması yerinde olmaktadır.
-            </p>
+            <ProcessSteps
+              steps={[
+                {
+                  title: "İdari İşlemin Tebliği ve Süre Takibi",
+                  body: (
+                    <p>
+                      Süreç, çoğu zaman idari işlemin ilgilisine tebliğ
+                      edilmesiyle başlamaktadır. Tebliğ tarihi, dava açma
+                      süresinin başlangıcını belirlediğinden bu tarihin doğru
+                      tespit edilmesi ve belgelenmesi büyük önem taşımaktadır.
+                    </p>
+                  ),
+                },
+                {
+                  title: "İdareye Başvuru",
+                  body: (
+                    <p>
+                      Bazı uyuşmazlıklarda dava açılmadan önce idareye başvuru
+                      yapılması gerekmekte, bazı hâllerde ise bu yol ilgilinin
+                      tercihine bırakılmaktadır. Başvurunun içeriği, muhatabı
+                      ve zamanlaması; dava açma süresinin işleyişini
+                      etkileyebilmektedir. Bu nedenle başvuru aşamasının
+                      hukuki destekle planlanması yerinde olmaktadır.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Dava Açılması ve Yürütmenin Durdurulması Talebi",
+                  body: (
+                    <p>
+                      Dava, kanunda öngörülen süre içinde görevli ve yetkili
+                      idari yargı merciinde açılmaktadır. İşlemin uygulanması
+                      hâlinde telafisi güç veya imkânsız zararların doğması ve
+                      işlemin açıkça hukuka aykırı olması koşullarının
+                      birlikte değerlendirilmesi suretiyle yürütmenin
+                      durdurulması talep edilebilmektedir. Yürütmenin
+                      durdurulması kararı, dava sonuçlanıncaya kadar işlemin
+                      etkilerini askıya alabilmektedir.
+                    </p>
+                  ),
+                },
+                {
+                  title: "Karar ve Kanun Yolları",
+                  body: (
+                    <p>
+                      Mahkeme; dosyadaki bilgi ve belgeleri değerlendirerek
+                      iptal, ret veya tazminata ilişkin kararını vermektedir.
+                      Verilen karara karşı kanunda öngörülen hâllerde istinaf,
+                      istinaf incelemesinden geçen kararlara karşı ise belirli
+                      koşullarla temyiz yoluna başvurulabilmektedir.
+                    </p>
+                  ),
+                },
+              ]}
+            />
 
-            <h3>3. Dava Açılması ve Yürütmenin Durdurulması Talebi</h3>
-            <p>
-              Dava, kanunda öngörülen süre içinde görevli ve yetkili idari
-              yargı merciinde açılmaktadır. İşlemin uygulanması hâlinde
-              telafisi güç veya imkânsız zararların doğması ve işlemin açıkça
-              hukuka aykırı olması koşullarının birlikte değerlendirilmesi
-              suretiyle yürütmenin durdurulması talep edilebilmektedir.
-              Yürütmenin durdurulması kararı, dava sonuçlanıncaya kadar
-              işlemin etkilerini askıya alabilmektedir.
-            </p>
+            {/* Kanun yolu süre cümlesi 4. adımın paragrafından Callout'a taşındı */}
+            <Callout variant="uyari">
+              <p>
+                Kanun yolu başvuruları da süreye tabi olduğundan kararın
+                tebliğinden itibaren sürelerin takibi önem taşımaktadır.
+              </p>
+            </Callout>
 
-            <h3>4. Karar ve Kanun Yolları</h3>
-            <p>
-              Mahkeme; dosyadaki bilgi ve belgeleri değerlendirerek iptal,
-              ret veya tazminata ilişkin kararını vermektedir. Verilen karara
-              karşı kanunda öngörülen hâllerde istinaf, istinaf incelemesinden
-              geçen kararlara karşı ise belirli koşullarla temyiz yoluna
-              başvurulabilmektedir. Kanun yolu başvuruları da süreye tabi
-              olduğundan kararın tebliğinden itibaren sürelerin takibi önem
-              taşımaktadır.
+            <h2 id="sss">Sıkça Sorulan Sorular</h2>
+            <Reveal>
+              <FaqAccordion items={FAQ} idPrefix="idare-sss" />
+            </Reveal>
+
+            {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
+            <p className="mt-12 border-t border-line-strong pt-6 text-[14px] italic text-muted">
+              {INFO_NOTE}
             </p>
           </div>
 
-          {/* Sıkça Sorulan Sorular */}
-          <h2 className="mt-14 text-navy-800">Sıkça Sorulan Sorular</h2>
-          <div className="mt-6">
-            <FaqAccordion items={FAQ} idPrefix="idare-sss" />
-          </div>
-
-          {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
-          <p className="mt-12 border-t border-line pt-6 text-[14px] italic text-muted">
-            {INFO_NOTE}
-          </p>
+          <TocRail items={TOC} />
         </div>
       </section>
 
