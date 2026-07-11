@@ -64,6 +64,39 @@ export default function Header() {
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const mobilePanelRef = useRef<HTMLDivElement>(null);
+  const dropdownCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function clearDropdownCloseTimeout() {
+    if (dropdownCloseTimeout.current) {
+      clearTimeout(dropdownCloseTimeout.current);
+      dropdownCloseTimeout.current = null;
+    }
+  }
+
+  /** Hover ile açma — bekleyen gecikmeli kapatmayı iptal eder. */
+  function openDropdown() {
+    clearDropdownCloseTimeout();
+    setDropdownOpen(true);
+  }
+
+  /** Mouse ayrılınca ~180ms gecikmeli kapatma — tekrar girilirse iptal olur, titreme önlenir. */
+  function scheduleDropdownClose() {
+    clearDropdownCloseTimeout();
+    dropdownCloseTimeout.current = setTimeout(() => {
+      setDropdownOpen(false);
+      dropdownCloseTimeout.current = null;
+    }, 180);
+  }
+
+  useEffect(() => clearDropdownCloseTimeout, []);
+
+  // Rota değişiminde dropdown ve mobil menü kapanır (link tıklamaları zaten
+  // kapatıyor; bu, tarayıcı geri/ileri veya programatik gezinmeyi de kapsar).
+  useEffect(() => {
+    setDropdownOpen(false);
+    setMobileOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   // 80px scroll sonrası bar küçülür + hairline + hafif gölge
   useEffect(() => {
@@ -181,7 +214,13 @@ export default function Header() {
           <nav aria-label="Ana menü" className="hidden items-center gap-7 lg:flex">
             {NAV.map((item) =>
               item.children ? (
-                <div key={item.href} ref={dropdownRef} className="group relative">
+                <div
+                  key={item.href}
+                  ref={dropdownRef}
+                  className="relative"
+                  onMouseEnter={openDropdown}
+                  onMouseLeave={scheduleDropdownClose}
+                >
                   <div className="flex items-center gap-0.5">
                     <Link
                       href={item.href}
@@ -193,23 +232,29 @@ export default function Header() {
                     <button
                       ref={dropdownButtonRef}
                       type="button"
-                      aria-haspopup="true"
+                      aria-haspopup="menu"
                       aria-expanded={dropdownOpen}
                       aria-controls="faaliyet-alt-menu"
                       aria-label="Faaliyet alanları alt menüsünü aç"
-                      onClick={() => setDropdownOpen((v) => !v)}
+                      onClick={() => {
+                        clearDropdownCloseTimeout();
+                        setDropdownOpen((v) => !v);
+                      }}
                       className="p-1 text-navy-800 transition-colors hover:text-ink-strong"
                     >
                       <ChevronDown size={14} strokeWidth={1.5} aria-hidden="true" />
                     </button>
                   </div>
-                  {/* Alt menü: 8px aşağıdan fade+rise (220ms) */}
+                  {/* Alt menü: 8px aşağıdan fade+rise (220ms). Görünürlük tek
+                      kaynaktan (dropdownOpen state) yönetilir; focus-within
+                      yalnızca klavyeyle doğrudan panele Tab'lanan kullanıcı
+                      için ek bir görünürlük yoludur (state'i etkilemez). */}
                   <div
                     id="faaliyet-alt-menu"
                     className={`absolute left-0 top-full z-50 min-w-[250px] border border-line-strong bg-white py-2 shadow-card transition-[opacity,transform] duration-[220ms] ease-[cubic-bezier(.22,1,.36,1)] ${
                       dropdownOpen
                         ? "pointer-events-auto translate-y-0 opacity-100"
-                        : "pointer-events-none translate-y-2 opacity-0 focus-within:pointer-events-auto focus-within:translate-y-0 focus-within:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100"
+                        : "pointer-events-none translate-y-2 opacity-0 focus-within:pointer-events-auto focus-within:translate-y-0 focus-within:opacity-100"
                     }`}
                   >
                     {item.children.map((child) => (
