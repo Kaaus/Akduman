@@ -4,8 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
-import { IMAGES, NAV, SITE } from "@/lib/site";
+import {
+  ChevronDown,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Menu,
+  Phone,
+  X,
+} from "lucide-react";
+import { HEADER_SOCIAL, IMAGES, NAV, SITE } from "@/lib/site";
+
+/** Üst şerit + mobil menüde paylaşılan sosyal ikon üçlüsü. */
+const SOCIAL_LINKS = [
+  { href: HEADER_SOCIAL.instagram, label: "Instagram sayfamız", Icon: Instagram },
+  { href: HEADER_SOCIAL.facebook, label: "Facebook sayfamız", Icon: Facebook },
+  { href: HEADER_SOCIAL.linkedin, label: "LinkedIn sayfamız", Icon: Linkedin },
+];
 
 /** Trailing slash farklarını yok sayarak yol karşılaştırır. */
 function samePath(a: string, b: string) {
@@ -177,21 +193,38 @@ export default function Header() {
     <header>
       {/* Üst ince şerit — mobilde gizli */}
       <div className="hidden bg-navy-950 text-[13px] text-white/80 md:block">
-        <div className="container-site flex items-center gap-6 py-1.5">
-          <a
-            href={SITE.telHref}
-            className="flex items-center gap-1.5 transition-colors hover:text-white"
-          >
-            <Phone size={13} strokeWidth={1.5} aria-hidden="true" />
-            {SITE.phoneDisplay}
-          </a>
-          <a
-            href={SITE.mailHref}
-            className="flex items-center gap-1.5 transition-colors hover:text-white"
-          >
-            <Mail size={13} strokeWidth={1.5} aria-hidden="true" />
-            {SITE.email}
-          </a>
+        <div className="container-site flex items-center justify-between gap-6 py-1.5">
+          <div className="flex items-center gap-6">
+            <a
+              href={SITE.telHref}
+              className="flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              <Phone size={13} strokeWidth={1.5} aria-hidden="true" />
+              {SITE.phoneDisplay}
+            </a>
+            <a
+              href={SITE.mailHref}
+              className="flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              <Mail size={13} strokeWidth={1.5} aria-hidden="true" />
+              {SITE.email}
+            </a>
+          </div>
+          {/* Sosyal ikonlar — daima görünür (bkz. lib/site.ts HEADER_SOCIAL) */}
+          <div className="flex items-center gap-4">
+            {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-[#F4F1EA]/75 transition-colors duration-150 hover:text-bronze-300"
+              >
+                <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -399,6 +432,24 @@ export default function Header() {
               <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
               Hemen Ara
             </a>
+            {/* Sosyal ikonlar — üst şeritle aynı üçlü, mobilde şerit gizli olduğu için burada tekrar edilir */}
+            <div
+              className="hero-line mt-8 flex items-center gap-5"
+              style={{ animationDelay: `${(NAV.length + 1) * 60}ms` }}
+            >
+              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-[#F4F1EA]/75 transition-colors duration-150 hover:text-bronze-300"
+                >
+                  <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
           </nav>
         </div>
       )}

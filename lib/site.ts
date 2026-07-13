@@ -70,6 +70,21 @@ export const PLACEHOLDERS = {
   HARITA_EMBED_URL: "", // TODO: müşteriden alınacak
 } as const;
 
+/**
+ * Header üst şeridindeki sosyal ikonlar (+ mobil menü altı).
+ * PLACEHOLDERS'tan BİLEREK ayrı tutulur: Footer'daki SOSYAL_* sabitleri
+ * "boşsa gizle" kuralına tabidir (bkz. PLACEHOLDERS yorumu) ve bu kurala
+ * Footer.tsx'te dokunulmaması gerekiyor — aynı sabitleri paylaşmak,
+ * değerleri dolduran an Footer'da da istenmeyen şekilde ikon belirmesine
+ * yol açardı. Buradaki üç ikon ise kuraldan MUAF: değer ne olursa olsun
+ * (şimdilik "#") Header'da HER ZAMAN render edilir.
+ */
+export const HEADER_SOCIAL = {
+  instagram: "#", // TODO: hesaplar açılınca gerçek URL girilecek
+  facebook: "#", // TODO: hesaplar açılınca gerçek URL girilecek
+  linkedin: "#", // TODO: hesaplar açılınca gerçek URL girilecek
+} as const;
+
 // ─── Görsel Manifesti ────────────────────────────────────────────────────────
 // ready:false olan her görsel arayüzde PlaceholderImage olarak render edilir.
 // Kullanıcı dosyayı public/images/ altına koyup ready:true yaptığında gerçek
