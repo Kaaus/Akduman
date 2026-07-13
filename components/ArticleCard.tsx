@@ -34,17 +34,21 @@ export default function ArticleCard({ article }: { article: Article }) {
         </Link>
       )}
 
-      {/* Kategori etiketi (alan etiketinden) */}
-      {category && (
-        <p className="text-[12px] font-semibold uppercase tracking-kicker text-bronze-700">
-          {category}
-        </p>
-      )}
-
-      {/* Tarih politikası: gerçek tarih girilmedikçe tarih satırı basılmaz */}
-      {article.date && (
-        <p className="mt-1 text-[13px] text-muted">
-          <time dateTime={article.date}>{formatDate(article.date)}</time>
+      {/* Kategori + tarih — tek satır: "MİRAS HUKUKU · 18 Mayıs 2026".
+          Tarih politikası: gerçek tarih girilmedikçe tarih basılmaz. */}
+      {(category || article.date) && (
+        <p className="flex flex-wrap items-baseline gap-x-1.5 text-[13px]">
+          {category && (
+            <span className="text-[12px] font-semibold uppercase tracking-kicker text-bronze-700">
+              {category}
+            </span>
+          )}
+          {category && article.date && <span className="text-muted">·</span>}
+          {article.date && (
+            <time dateTime={article.date} className="text-muted">
+              {formatDate(article.date)}
+            </time>
+          )}
         </p>
       )}
 

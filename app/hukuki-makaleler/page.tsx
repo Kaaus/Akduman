@@ -3,7 +3,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
-import { formatDate, getAllArticles } from "@/lib/articles";
+import { getAllArticles } from "@/lib/articles";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -66,19 +66,13 @@ export default function MakalelerPage() {
                     key={article.slug}
                     className="timeline-node relative pl-12 md:grid md:grid-cols-2 md:gap-x-16 md:pl-0"
                   >
-                    {/* Düğüm — hover'da tek sefer bronz halka nabzı */}
+                    {/* Düğüm — hover'da tek sefer bronz halka nabzı.
+                        Tarih artık yalnız kartın içinde (kategori satırında)
+                        basılır; çizgi üzerinde rozet tekrarı yok. */}
                     <span
                       aria-hidden="true"
                       className="node-dot absolute left-[18px] top-8 h-[10px] w-[10px] -translate-x-1/2 rounded-full bg-bronze-500 md:left-1/2"
                     />
-                    {/* Tarih rozeti — yalnız gerçek tarih varsa */}
-                    {article.date && (
-                      <span className="absolute left-8 top-[22px] rounded-[2px] bg-navy-900 px-2 py-0.5 text-[12px] font-semibold text-white md:left-[calc(50%+16px)]">
-                        <time dateTime={article.date}>
-                          {formatDate(article.date)}
-                        </time>
-                      </span>
-                    )}
                     <div
                       className={
                         right
