@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import ArticleCard from "@/components/ArticleCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaBand from "@/components/CtaBand";
@@ -58,10 +59,16 @@ function flattenText(node: ReactNode): string {
   return "";
 }
 
-/** MDX H2'lerine TocRail ile aynı algoritmayla id verilir. */
+/** MDX H2'lerine TocRail ile aynı algoritmayla id verilir; tablolar dar
+ * ekranda yatay taşma yapmasın diye kaydırılabilir bir sarmalayıcıya alınır. */
 const mdxComponents = {
   h2: ({ children }: { children?: ReactNode }) => (
     <h2 id={slugifyHeading(flattenText(children))}>{children}</h2>
+  ),
+  table: ({ children }: { children?: ReactNode }) => (
+    <div className="table-scroll">
+      <table>{children}</table>
+    </div>
   ),
 };
 
@@ -152,7 +159,11 @@ export default function MakalePage({
             {/* MDX gövde */}
             <div className="article-body mt-10">
               {source ? (
-                <MDXRemote source={source.content} components={mdxComponents} />
+                <MDXRemote
+                  source={source.content}
+                  components={mdxComponents}
+                  options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+                />
               ) : (
                 <p className="border border-line bg-paper px-5 py-4 text-muted">
                   Bu makalenin içeriği hazırlanmaktadır.
