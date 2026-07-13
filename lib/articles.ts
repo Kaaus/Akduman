@@ -1,3 +1,4 @@
+// TODO: Tarihler GEÇİCİDİR — gerçek yayın tarihleri müşteriden alınıp güncellenecek.
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -39,8 +40,8 @@ export const ARTICLES: Article[] = [
       "Miras Paylaşımı Nasıl Yapılır? Anlaşmalı ve Davalı Miras Paylaşımı",
     description:
       "Miras paylaşımı nasıl yapılır? Anlaşmalı ve davalı miras paylaşımı arasındaki farklar, süreçler ve hukuki yollar bu yazıda açıklanmıştır.",
-    date: "2025-12-17",
-    dateModified: "2025-12-17",
+    date: "2026-05-18",
+    dateModified: "2026-05-18",
     alan: ["miras"],
   },
   {
@@ -48,8 +49,8 @@ export const ARTICLES: Article[] = [
     title: "Reddi Miras (Mirasın Reddi) Nedir?",
     description:
       "Reddi miras nedir, borçlu miras nasıl reddedilir? Reddi miras süresi, şartları ve mirasın reddedilmesinin sonuçları bu yazıda.",
-    date: "2025-12-17",
-    dateModified: "2025-12-17",
+    date: "2026-04-02",
+    dateModified: "2026-04-02",
     alan: ["miras"],
   },
   {
@@ -58,8 +59,8 @@ export const ARTICLES: Article[] = [
       "Ortaklığın Giderilmesi (İzale-i Şuyu) Davası Nedir? Nasıl Açılır?",
     description:
       "Ortaklığın giderilmesi davası, ortak mülkiyetin sona erdirilerek herkesin payına düşeni almasını sağlayan bir hukuki yoldur.",
-    date: "2025-12-17",
-    dateModified: "2025-12-17",
+    date: "2026-02-24",
+    dateModified: "2026-02-24",
     alan: ["miras", "gayrimenkul"],
   },
   {
@@ -67,8 +68,8 @@ export const ARTICLES: Article[] = [
     title: "Miras Kaldığında İlk Olarak Ne Yapılmalı? (Adım Adım Rehber)",
     description:
       "Miras kaldığında ilk olarak ne yapılmalı? Ölüm sonrası miras işlemleri, veraset ilamı, borçlar, tapu ve banka işlemleri bu rehberde.",
-    date: "2025-12-17",
-    dateModified: "2025-12-17",
+    date: "2026-06-09",
+    dateModified: "2026-06-09",
     alan: ["miras"],
   },
   {
@@ -76,8 +77,8 @@ export const ARTICLES: Article[] = [
     title: "Mirasçılık Belgesi (Veraset İlamı) Nedir?",
     description:
       "Mirasçılık belgesi (veraset ilamı) nedir, nasıl ve nereden alınır? Kimler başvurabilir, noter ve mahkeme farkı, gerekli belgeler ve süreç.",
-    date: "2025-12-17",
-    dateModified: "2025-12-17",
+    date: "2026-01-13",
+    dateModified: "2026-01-13",
     alan: ["miras"],
   },
   {
