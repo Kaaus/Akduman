@@ -6,9 +6,10 @@ import { SERVICES } from "@/lib/site";
 
 /**
  * Makale kartı v2: white kart + line-strong çerçeve + yumuşak gölge,
- * hover'da lift. Kategori etiketi alan etiketinden türetilir; başlık
- * DAİMA makalenin KENDİ slug'ına linklenir; "Oku →" tertiary çizgisi
- * kart hover'ında dolar.
+ * hover'da lift. Kategori etiketi alan etiketinden türetilir; başlık ve
+ * "Oku →" İKİSİ DE makalenin KENDİ slug'ına linklenir (Oku artık gerçek
+ * bir link — eskiden dekoratif, tıklanamayan bir span'dı); tertiary
+ * çizgisi kart hover'ında (group) senkron dolar.
  */
 export default function ArticleCard({ article }: { article: Article }) {
   const category = SERVICES.find((s) => article.alan.includes(s.alan))?.title;
@@ -65,11 +66,16 @@ export default function ArticleCard({ article }: { article: Article }) {
         {article.description}
       </p>
 
-      {/* Görsel "Oku" ipucu — kartın linki başlıktadır, hover kartla tetiklenir */}
-      <span aria-hidden="true" className="btn-tertiary pointer-events-none mt-4 self-start text-[14px]">
+      {/* "Oku" — gerçek link (önceden tıklanamayan dekoratif span'dı);
+          hover ipucu kartın tamamıyla (group) senkron kalır. */}
+      <Link
+        href={`/${article.slug}/`}
+        aria-label={`${article.title} — devamını oku`}
+        className="btn-tertiary mt-4 self-start text-[14px]"
+      >
         Oku
         <ArrowRight size={15} strokeWidth={1.5} className="btn-arrow" />
-      </span>
+      </Link>
     </article>
   );
 }
