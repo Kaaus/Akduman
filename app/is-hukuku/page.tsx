@@ -158,9 +158,7 @@ export default function IsHukukuPage() {
             <p>
               İşe iade talebinin koşulları ve süreleri hakkında ayrıntılı
               bilgiye{" "}
-              <Link href="/ise-iade-davasi-sartlari-nelerdir/">
-                İşe İade Davası Şartları Nelerdir?
-              </Link>{" "}
+              <Link href="/ise-iade-davasi-nedir/">İşe İade Davası Nedir?</Link>{" "}
               başlıklı makalemizden ulaşabilirsiniz.
             </p>
 

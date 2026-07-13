@@ -131,7 +131,8 @@ export default function GayrimenkulHukukuPage() {
                 paylaştırma veya satış yoluyla sona erdirilmesine ilişkin
                 davalardır. Konunun ayrıntıları için{" "}
                 <Link href="/ortakligin-giderilmesi-davasi-nedir/">
-                  Ortaklığın Giderilmesi Davası Nedir?
+                  Ortaklığın Giderilmesi (İzale-i Şuyu) Davası Nedir? Nasıl
+                  Açılır?
                 </Link>{" "}
                 başlıklı makalemizi inceleyebilirsiniz.
               </li>
@@ -149,8 +150,8 @@ export default function GayrimenkulHukukuPage() {
                 belirlenmesi ve uyarlanması, kira alacağının tahsili ve kira
                 sözleşmesinden doğan diğer ihtilaflara ilişkin dosyalardır. Kira
                 bedelinin mahkemece belirlenmesine ilişkin süreç hakkında{" "}
-                <Link href="/kira-tespit-davasi-nedir/">
-                  Kira Tespit Davası Nedir?
+                <Link href="/kira-tespit-davasi-nasil-acilir/">
+                  Kira Tespit Davası Nasıl Açılır?
                 </Link>{" "}
                 başlıklı makalemizde bilgi verilmektedir.
               </li>

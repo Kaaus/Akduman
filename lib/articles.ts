@@ -34,105 +34,125 @@ export type Article = {
 
 export const ARTICLES: Article[] = [
   {
-    slug: "miras-paylasimi-nasil-yapilir",
-    title: "Miras Paylaşımı Nasıl Yapılır?",
+    slug: "miras-paylasimi-nedir",
+    title:
+      "Miras Paylaşımı Nasıl Yapılır? Anlaşmalı ve Davalı Miras Paylaşımı",
     description:
-      "Yasal mirasçılar arasında miras paylaşımının nasıl yapıldığı, paylaşma sözleşmesi ve paylaşma davası hakkında bilgilendirme.",
-    date: "", // TODO: eski sitedeki gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Miras paylaşımı nasıl yapılır? Anlaşmalı ve davalı miras paylaşımı arasındaki farklar, süreçler ve hukuki yollar bu yazıda açıklanmıştır.",
+    date: "2025-12-17",
+    dateModified: "2025-12-17",
     alan: ["miras"],
   },
   {
     slug: "reddi-miras-nedir",
-    title: "Reddi Miras Nedir?",
+    title: "Reddi Miras (Mirasın Reddi) Nedir?",
     description:
-      "Mirasın reddi (reddi miras) kavramı, üç aylık ret süresi ve ret işleminin sonuçları hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Reddi miras nedir, borçlu miras nasıl reddedilir? Reddi miras süresi, şartları ve mirasın reddedilmesinin sonuçları bu yazıda.",
+    date: "2025-12-17",
+    dateModified: "2025-12-17",
     alan: ["miras"],
   },
   {
     slug: "ortakligin-giderilmesi-davasi-nedir",
-    title: "Ortaklığın Giderilmesi Davası Nedir?",
+    title:
+      "Ortaklığın Giderilmesi (İzale-i Şuyu) Davası Nedir? Nasıl Açılır?",
     description:
-      "Ortaklığın giderilmesi (izale-i şüyu) davasının konusu, tarafları ve aynen taksim ile satış yoluyla paylaştırma usulleri.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Ortaklığın giderilmesi davası, ortak mülkiyetin sona erdirilerek herkesin payına düşeni almasını sağlayan bir hukuki yoldur.",
+    date: "2025-12-17",
+    dateModified: "2025-12-17",
     alan: ["miras", "gayrimenkul"],
   },
   {
-    slug: "veraset-ilami-nedir",
-    title: "Veraset İlamı Nedir?",
+    slug: "miras-kaldiginda-ilk-olarak-ne-yapilmali",
+    title: "Miras Kaldığında İlk Olarak Ne Yapılmalı? (Adım Adım Rehber)",
     description:
-      "Veraset ilamının (mirasçılık belgesi) ne olduğu, nereden ve nasıl alındığı hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Miras kaldığında ilk olarak ne yapılmalı? Ölüm sonrası miras işlemleri, veraset ilamı, borçlar, tapu ve banka işlemleri bu rehberde.",
+    date: "2025-12-17",
+    dateModified: "2025-12-17",
     alan: ["miras"],
   },
   {
-    slug: "sigorta-tahkim-komisyonu-basvurusu",
-    title: "Sigorta Tahkim Komisyonu Başvurusu",
+    slug: "mirascilik-belgesi-nedir",
+    title: "Mirasçılık Belgesi (Veraset İlamı) Nedir?",
     description:
-      "Sigorta uyuşmazlıklarında Sigorta Tahkim Komisyonu'na başvuru şartları ve sürecin işleyişi hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Mirasçılık belgesi (veraset ilamı) nedir, nasıl ve nereden alınır? Kimler başvurabilir, noter ve mahkeme farkı, gerekli belgeler ve süreç.",
+    date: "2025-12-17",
+    dateModified: "2025-12-17",
+    alan: ["miras"],
+  },
+  {
+    slug: "sigorta-tahkim-komisyonu-nedir",
+    title: "Sigorta Tahkim Komisyonu Nedir? Ne Zaman ve Nasıl Başvuru Yapılır?",
+    description:
+      "Sigorta Tahkim Komisyonu nedir, hangi uyuşmazlıklarda devreye girer? Başvuru şartları, gerekli belgeler ve süreç adımları bu rehberde.",
+    date: "2025-12-02",
+    dateModified: "2025-12-02",
     alan: ["sigorta"],
   },
   {
-    slug: "kusur-oranina-itiraz",
-    title: "Kusur Oranına İtiraz",
+    slug: "trafik-kazalarinda-kusur-orani-nasil-belirlenir",
+    title:
+      "Trafik Kazalarında Kusur Oranı Nasıl Belirlenir? Hangi Kusur Ne Anlama Gelir?",
     description:
-      "Trafik kazalarında belirlenen kusur oranına itiraz yolları ve itiraz sürecinde izlenecek adımlar hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Trafik kazalarında kusur oranı nasıl belirlenir? Kusur türleri, değerlendirme kriterleri ve sürücülerin haklarını etkileyen süreçler.",
+    date: "2025-11-28",
+    dateModified: "2025-11-28",
     alan: ["sigorta"],
   },
   {
     slug: "kaza-tespit-tutanagi-nedir",
     title: "Kaza Tespit Tutanağı Nedir?",
     description:
-      "Maddi hasarlı trafik kazalarında kaza tespit tutanağının düzenlenmesi ve tutanağa itiraz hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Kaza tespit tutanağı, trafik kazasına karışan araç sürücülerinin kolluk kuvvetleri gelmeden kendi aralarında düzenlediği resmi belgedir.",
+    date: "2025-11-28",
+    dateModified: "2025-11-28",
     alan: ["sigorta"],
   },
   {
     slug: "arac-deger-kaybi-nedir",
     title: "Araç Değer Kaybı Nedir? Nasıl Talep Edilir?",
     description:
-      "Trafik kazası sonrası araç değer kaybı tazminatının şartları, hesaplanması ve başvuru süreci hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Araç değer kaybı, bir aracın kaza geçirmesi sonucunda tamir edilse bile ikinci el piyasasında oluşan değer düşüşüdür.",
+    date: "2025-11-28",
+    dateModified: "2025-11-28",
     alan: ["sigorta"],
   },
   {
-    slug: "kira-tespit-davasi-nedir",
-    title: "Kira Tespit Davası Nedir?",
+    slug: "trafik-kazasi-sonrasi-yapilmasi-gerekenler",
+    title: "Trafik Kazası Sonrası Yapılması Gerekenler",
     description:
-      "Kira bedelinin tespiti davasının şartları, beş yıllık süre kuralı ve emsal kira bedeli değerlendirmesi hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Trafik kazası sonrası yapılması gerekenler: kaza tespit tutanağı, sigorta bildirimleri, ekspertiz ve değer kaybı süreçleri bu rehberde.",
+    date: "2025-11-26",
+    dateModified: "2025-11-26",
+    alan: ["sigorta"],
+  },
+  {
+    slug: "kira-tespit-davasi-nasil-acilir",
+    title: "Kira Tespit Davası Nasıl Açılır?",
+    description:
+      "Kira tespit davası açma süreci ve koşulları hakkında güncel bilgiler. Kira artışı ve tespit davalarında izlenmesi gereken adımlar bu rehberde.",
+    date: "2025-07-28",
+    dateModified: "2025-07-28",
     alan: ["gayrimenkul"],
   },
   {
-    slug: "yaralanmali-trafik-kazasi-tazminati",
-    title: "Yaralanmalı Trafik Kazası Tazminatı",
+    slug: "yaralanmali-trafik-kazasi-sonrasi-sigorta-tahkimi-basvurusu",
+    title: "Yaralanmalı Trafik Kazası Sonrası Sigorta Tahkimi Başvurusu",
     description:
-      "Yaralanmalı trafik kazalarında maddi ve manevi tazminat talepleri ile başvuru süreci hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Yaralanmalı trafik kazası sonrası sigortadan tazminat: Sigorta Tahkim Komisyonu başvuru şartları, belgeler, ücretler ve süreler.",
+    date: "2025-07-28",
+    dateModified: "2025-07-28",
     alan: ["sigorta"],
   },
   {
-    slug: "ise-iade-davasi-sartlari-nelerdir",
-    title: "İşe İade Davası Şartları Nelerdir?",
+    slug: "ise-iade-davasi-nedir",
+    title: "İşe İade Davası Nedir?",
     description:
-      "İşe iade davasının şartları, zorunlu arabuluculuk aşaması ve dava süreci hakkında bilgilendirme.",
-    date: "", // TODO: gerçek yayın tarihi
-    dateModified: "", // TODO: gerçek güncelleme tarihi
+      "Haksız ya da geçersiz nedenle işten çıkarılan işçilerin işe iade davası şartları, süreleri ve arabuluculuk zorunluluğu bu yazıda.",
+    date: "2025-07-04",
+    dateModified: "2025-07-04",
     alan: ["is"],
   },
-  // TODO: canlı arşivde burada olmayan bir makale varsa aynı şemayla ekle.
 ];
 
 /**

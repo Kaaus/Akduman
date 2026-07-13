@@ -124,8 +124,8 @@ export default function SigortaHukukuPage() {
                 hâlinde gündeme gelen tedavi giderleri ve çalışma gücü kaybına
                 ilişkin taleplerin takibidir. Yaralanmalı kazalarda talep
                 edilebilecek kalemler{" "}
-                <Link href="/yaralanmali-trafik-kazasi-tazminati/">
-                  Yaralanmalı Trafik Kazası Tazminatı
+                <Link href="/yaralanmali-trafik-kazasi-sonrasi-sigorta-tahkimi-basvurusu/">
+                  Yaralanmalı Trafik Kazası Sonrası Sigorta Tahkimi Başvurusu
                 </Link>{" "}
                 başlıklı yazımızda ayrıntılı olarak ele alınmaktadır.
               </li>
@@ -143,8 +143,8 @@ export default function SigortaHukukuPage() {
                 şirketinin başvuruyu reddetmesi ya da eksik ödeme yapması
                 hâlinde Komisyon nezdinde uyuşmazlığın çözümü için başvuru
                 hazırlanması ve sürecin takibidir; usul{" "}
-                <Link href="/sigorta-tahkim-komisyonu-basvurusu/">
-                  Sigorta Tahkim Komisyonu Başvurusu
+                <Link href="/sigorta-tahkim-komisyonu-nedir/">
+                  Sigorta Tahkim Komisyonu Nedir?
                 </Link>{" "}
                 başlıklı yazımızda anlatılmaktadır.
               </li>
@@ -153,7 +153,9 @@ export default function SigortaHukukuPage() {
                 şirketinin değerlendirmesinde belirlenen kusur dağılımının
                 somut olaya uygun olmadığı hâllerde itiraz süreçlerinin
                 yürütülmesidir; ayrıntılar için{" "}
-                <Link href="/kusur-oranina-itiraz/">Kusur Oranına İtiraz</Link>{" "}
+                <Link href="/trafik-kazalarinda-kusur-orani-nasil-belirlenir/">
+                  Trafik Kazalarında Kusur Oranı Nasıl Belirlenir?
+                </Link>{" "}
                 başlıklı yazımıza bakılabilir.
               </li>
               <li>

@@ -125,8 +125,9 @@ export default function MirasHukukuPage() {
                 <strong>Miras paylaşımı:</strong> Terekenin mirasçılar arasında
                 anlaşma yoluyla veya dava yoluyla paylaştırılmasına ilişkin
                 süreçlerin yürütülmesidir. Konunun ayrıntıları için{" "}
-                <Link href="/miras-paylasimi-nasil-yapilir/">
-                  Miras Paylaşımı Nasıl Yapılır?
+                <Link href="/miras-paylasimi-nedir/">
+                  Miras Paylaşımı Nasıl Yapılır? Anlaşmalı ve Davalı Miras
+                  Paylaşımı
                 </Link>{" "}
                 başlıklı yazımızı inceleyebilirsiniz.
               </li>
@@ -134,14 +135,18 @@ export default function MirasHukukuPage() {
                 <strong>Reddi miras:</strong> Özellikle borca batık terekelerde,
                 mirasın kanunda öngörülen süre içinde reddedilmesine ilişkin
                 başvuruların hazırlanması ve takibidir. Ayrıntılı bilgi için{" "}
-                <Link href="/reddi-miras-nedir/">Reddi Miras Nedir?</Link>{" "}
+                <Link href="/reddi-miras-nedir/">
+                  Reddi Miras (Mirasın Reddi) Nedir?
+                </Link>{" "}
                 başlıklı yazımıza göz atabilirsiniz.
               </li>
               <li>
                 <strong>Veraset ilamı (mirasçılık belgesi):</strong> Mirasçılık
                 sıfatını ve payları gösteren belgenin noterden veya sulh hukuk
                 mahkemesinden alınması sürecinin yürütülmesidir. Konuyu{" "}
-                <Link href="/veraset-ilami-nedir/">Veraset İlamı Nedir?</Link>{" "}
+                <Link href="/mirascilik-belgesi-nedir/">
+                  Mirasçılık Belgesi (Veraset İlamı) Nedir?
+                </Link>{" "}
                 başlıklı yazımızda ayrıntılı olarak ele aldık.
               </li>
               <li>
@@ -164,7 +169,8 @@ export default function MirasHukukuPage() {
                 taksim veya satış yoluyla sona erdirilmesine ilişkin dava
                 sürecidir. Ayrıntılar için{" "}
                 <Link href="/ortakligin-giderilmesi-davasi-nedir/">
-                  Ortaklığın Giderilmesi Davası Nedir?
+                  Ortaklığın Giderilmesi (İzale-i Şuyu) Davası Nedir? Nasıl
+                  Açılır?
                 </Link>{" "}
                 başlıklı yazımızı okuyabilirsiniz.
               </li>
