@@ -15,32 +15,33 @@ function ColumnTitle({ children }: { children: string }) {
   return <p className="kicker-dark mb-5">{children}</p>;
 }
 
-/** Koyu zeminde logo: {{LOGO_BEYAZ}} doluysa o, değilse logo invert, o da yoksa yazı markası. */
+/**
+ * Koyu zeminde logo: LOGO_BEYAZ doluysa gerçek beyaz logo (44px), değilse
+ * normal logo invert edilir, o da yoksa yazı markasına düşer. Genişlik
+ * intrinsic 1472:832 oranından otomatik türetilir (sabit kutuya sıkıştırma
+ * yok).
+ */
 function FooterLogo() {
   if (PLACEHOLDERS.LOGO_BEYAZ) {
     return (
-      <span className="relative block h-11 w-44">
-        <Image
-          src={PLACEHOLDERS.LOGO_BEYAZ}
-          alt={IMAGES.logo.alt}
-          fill
-          sizes="176px"
-          className="object-contain object-left"
-        />
-      </span>
+      <Image
+        src={PLACEHOLDERS.LOGO_BEYAZ}
+        alt={IMAGES.logo.alt}
+        width={1472}
+        height={832}
+        className="h-11 w-auto object-contain object-left"
+      />
     );
   }
   if (IMAGES.logo.ready) {
     return (
-      <span className="relative block h-11 w-44">
-        <Image
-          src={IMAGES.logo.src}
-          alt={IMAGES.logo.alt}
-          fill
-          sizes="176px"
-          className="object-contain object-left brightness-0 invert"
-        />
-      </span>
+      <Image
+        src={IMAGES.logo.src}
+        alt={IMAGES.logo.alt}
+        width={1472}
+        height={832}
+        className="h-11 w-auto object-contain object-left brightness-0 invert"
+      />
     );
   }
   return (

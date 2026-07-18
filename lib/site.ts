@@ -65,7 +65,7 @@ export const PLACEHOLDERS = {
   SOSYAL_INSTAGRAM_URL: "", // TODO: müşteriden alınacak
   SOSYAL_YOUTUBE_URL: "", // TODO: müşteriden alınacak
   /** Beyaz logo dosya yolu (örn. "/images/logo-beyaz.png"). */
-  LOGO_BEYAZ: "", // TODO: beyaz logo dosyası gelirse yolu yaz
+  LOGO_BEYAZ: "/images/logo-beyaz.png",
   /** Google Maps embed linki (iframe src). */
   HARITA_EMBED_URL: "", // TODO: müşteriden alınacak
 } as const;
@@ -100,7 +100,7 @@ export const IMAGES: Record<string, ImageEntry> = {
   logo: {
     src: "/images/logo.png",
     alt: "Akduman Hukuk Bürosu logosu",
-    ready: false, // TODO: eski sitedeki logo dosyası public/images/logo.png olarak eklenince true yap
+    ready: true,
   },
   hero: {
     src: "/images/hero.webp",

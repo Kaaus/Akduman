@@ -14,7 +14,7 @@ import {
   Phone,
   X,
 } from "lucide-react";
-import { HEADER_SOCIAL, IMAGES, NAV, SITE } from "@/lib/site";
+import { HEADER_SOCIAL, IMAGES, NAV, PLACEHOLDERS, SITE } from "@/lib/site";
 
 /** Üst şerit + mobil menüde paylaşılan sosyal ikon üçlüsü. */
 const SOCIAL_LINKS = [
@@ -31,22 +31,34 @@ function samePath(a: string, b: string) {
 
 /**
  * Logo dosyası henüz yüklenmediyse (manifest ready:false) tipografik marka
- * işareti basılır. Görünür span'ler erişilebilir addan gizlenir; ad, sarmalayan
- * linkin aria-label'ından gelir (bitişik "AkdumanHukuk" okunması engellenir).
+ * işareti basılır (fallback korunur — build'i asla kırmaz). Dosya varken:
+ * koyu zeminde (light) LOGO_BEYAZ doluysa gerçek beyaz logo kullanılır;
+ * boşsa eski invert hack'ine düşer. heightClass çağıran yerin ihtiyacına
+ * göre verilir (ana bar / mobil menü farklı yükseklikler kullanır);
+ * genişlik intrinsic width/height oranından (1472:832) otomatik türetilir.
  */
-function Logo({ light = false }: { light?: boolean }) {
+function Logo({
+  light = false,
+  heightClass,
+}: {
+  light?: boolean;
+  heightClass: string;
+}) {
   if (IMAGES.logo.ready) {
+    const useWhiteFile = light && PLACEHOLDERS.LOGO_BEYAZ;
+    const src = useWhiteFile ? PLACEHOLDERS.LOGO_BEYAZ : IMAGES.logo.src;
+    const needsInvertFallback = light && !PLACEHOLDERS.LOGO_BEYAZ;
     return (
-      <span className="relative block h-11 w-44">
-        <Image
-          src={IMAGES.logo.src}
-          alt=""
-          fill
-          sizes="176px"
-          priority
-          className={`object-contain object-left ${light ? "brightness-0 invert" : ""}`}
-        />
-      </span>
+      <Image
+        src={src}
+        alt="Akduman Hukuk Bürosu logosu"
+        width={1472}
+        height={832}
+        priority
+        className={`w-auto object-contain object-left ${heightClass} ${
+          needsInvertFallback ? "brightness-0 invert" : ""
+        }`}
+      />
     );
   }
   return (
@@ -240,7 +252,8 @@ export default function Header() {
           }`}
         >
           <Link href="/" aria-label="Akduman Hukuk Bürosu — Ana Sayfa">
-            <Logo />
+            {/* Yükseklik: masaüstü 46px (scroll'da 38px'e küçülür), mobil her zaman 38px */}
+            <Logo heightClass={scrolled ? "h-[38px]" : "h-[38px] lg:h-[46px]"} />
           </Link>
 
           {/* Masaüstü menü */}
@@ -363,7 +376,7 @@ export default function Header() {
               aria-label="Akduman Hukuk Bürosu — Ana Sayfa"
               onClick={() => setMobileOpen(false)}
             >
-              <Logo light />
+              <Logo light heightClass="h-[34px]" />
             </Link>
             <button
               ref={closeButtonRef}
