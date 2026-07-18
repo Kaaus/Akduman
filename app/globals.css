@@ -443,6 +443,20 @@ html[data-intro-pending] .hero-line {
   animation: intro-fade-in 400ms var(--ease) 600ms forwards;
 }
 
+/* PhotoSurface hero arka planı: çok yavaş, yalnız transform kullanan zoom
+   (repaint yok). prefers-reduced-motion'da genel kural (aşağıda) kapatır. */
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+.ph-ken-burns {
+  animation: ken-burns 28s linear infinite alternate;
+}
+
 /* WhatsAppFloat: 300ms gecikmeli scale-in girişi */
 @keyframes scale-in {
   from {

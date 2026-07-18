@@ -112,6 +112,41 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Av. Samed Akduman",
     ready: false, // TODO: portre fotoğrafı eklenince true yap
   },
+  heroKitaplar: {
+    src: "/images/hero-kitaplar.jpg",
+    alt: "Hukuk kitaplığı",
+    ready: true,
+  },
+  kutuphaneDikey: {
+    src: "/images/kutuphane-dikey.jpg",
+    alt: "Millet Kütüphanesi okuma salonu",
+    ready: true,
+  },
+  kutuphaneKubbe: {
+    src: "/images/kutuphane-kubbe.jpg",
+    alt: "Millet Kütüphanesi kubbesi",
+    ready: true,
+  },
+  anitkabir: {
+    src: "/images/anitkabir.jpg",
+    alt: "Anıtkabir sütunları",
+    ready: true,
+  },
+  adaletSarayi: {
+    src: "/images/adalet-sarayi.jpg",
+    alt: "Ankara Adalet Sarayı",
+    ready: true,
+  },
+  adaletBakanligi: {
+    src: "/images/adalet-bakanligi.jpg",
+    alt: "Adalet Bakanlığı binası",
+    ready: true,
+  },
+  cubbeDoku: {
+    src: "/images/cubbe-doku.jpg",
+    alt: "",
+    ready: true,
+  },
 };
 
 // ─── Menü ────────────────────────────────────────────────────────────────────
