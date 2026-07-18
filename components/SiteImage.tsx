@@ -7,8 +7,8 @@ import type { ImageEntry } from "@/lib/site";
  * ready:true → next/image + duotone v2:
  * navy-900 multiply %45 → hover'da %25'e iner ve görsel scale(1.04)
  * (600ms) — "monotondan renge uyanma", ağırbaşlı dozda.
- * keyline: görselin 12px dışında 1px bronz çerçeve (imza detayı);
- * animate ile çerçeve ilk yüklemede 500ms'de çizilerek gelir.
+ * keyline: görselin tam kenarında flush 2px bronz çerçeve (offset yok,
+ * taşma yok); animate ile çerçeve ilk yüklemede 500ms'de çizilerek gelir.
  */
 export default function SiteImage({
   image,
@@ -28,20 +28,13 @@ export default function SiteImage({
   sizes?: string;
   className?: string;
 }) {
-  const frame = keyline ? "relative" : "";
-  const keylineEl = keyline ? (
-    <span
-      aria-hidden="true"
-      className={`pointer-events-none absolute -inset-3 border border-bronze-500 ${
-        animateKeyline ? "keyline-draw" : ""
-      }`}
-    />
-  ) : null;
+  const frame = keyline
+    ? `border-2 border-bronze-500 ${animateKeyline ? "keyline-draw" : ""}`
+    : "";
 
   if (!image.ready) {
     return (
       <div className={`${frame} ${className}`}>
-        {keylineEl}
         <PlaceholderImage alt={image.alt} aspectRatio={aspectRatio} />
       </div>
     );
@@ -49,7 +42,6 @@ export default function SiteImage({
 
   return (
     <div className={`${frame} ${className}`}>
-      {keylineEl}
       <div
         className="group relative w-full overflow-hidden"
         style={{ aspectRatio }}
