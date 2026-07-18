@@ -74,8 +74,8 @@
   }
 
   ::selection {
-    background: #b08d57;
-    color: #081420;
+    background: #bfa05c;
+    color: #081b15;
   }
 }
 
@@ -142,7 +142,7 @@
      ALTINDA kalır (metin düğümlerine z-index verilemez). */
   .btn-secondary {
     @apply btn overflow-hidden text-ink;
-    border: 1.5px solid #14304d;
+    border: 1.5px solid #1c4536;
     isolation: isolate;
   }
   .btn-secondary::before {
@@ -150,7 +150,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: #0e2033;
+    background: #113026;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 250ms var(--ease);
@@ -219,7 +219,7 @@
   .input-field {
     @apply w-full rounded-[2px] font-sans text-ink;
     background: #fbfaf6;
-    border: 1.5px solid #c9bfa9; /* line-strong */
+    border: 1.5px solid #c4c6b2; /* line-strong */
     padding: 13px 15px;
     font-size: 15px;
     transition:
@@ -231,8 +231,8 @@
   }
   .input-field:focus {
     outline: none;
-    border-color: #14304d; /* navy-800 */
-    box-shadow: 0 0 0 3px rgb(20 48 77 / 0.14);
+    border-color: #1c4536; /* navy-800 */
+    box-shadow: 0 0 0 3px rgb(28 69 54 / 0.14);
   }
   .input-field[aria-invalid="true"] {
     border-color: #a33a2e;
@@ -279,7 +279,7 @@
     display: inline-block;
     width: 28px;
     height: 3px;
-    background: #b08d57;
+    background: #bfa05c;
     margin-right: 14px;
     vertical-align: 0.35em;
   }
@@ -305,7 +305,7 @@
     @apply mb-5 list-decimal space-y-2 pl-6;
   }
   .article-body li::marker {
-    color: #7e6234; /* bronze-700 — işaretler küçük ama dekoratif */
+    color: #8a6d3b; /* bronze-700 — işaretler küçük ama dekoratif */
   }
   .article-body a {
     @apply font-semibold text-bronze-700 underline decoration-2 underline-offset-4;
@@ -504,7 +504,7 @@ html[data-intro-pending] .hero-line {
   bottom: -2px;
   height: 2px;
   width: 100%;
-  background: #b08d57;
+  background: #bfa05c;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 260ms var(--ease);

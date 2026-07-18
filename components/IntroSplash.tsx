@@ -147,7 +147,7 @@ export default function IntroSplash() {
           viewBox="0 0 120 140"
           className="h-[110px] w-auto md:h-[160px]"
           fill="none"
-          stroke="#B08D57"
+          stroke="#BFA05C"
           strokeWidth={1.75}
           strokeLinecap="round"
         >
@@ -166,7 +166,7 @@ export default function IntroSplash() {
           {/* Sağ çanak yayı */}
           <path className="intro-draw" style={{ animationDelay: "480ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
           {/* Mil ekseni */}
-          <circle className="intro-pivot" cx="60" cy="22" r="2.5" fill="#B08D57" stroke="none" />
+          <circle className="intro-pivot" cx="60" cy="22" r="2.5" fill="#BFA05C" stroke="none" />
         </svg>
         <p className="intro-kicker kicker-dark">Akduman Hukuk Bürosu</p>
       </div>

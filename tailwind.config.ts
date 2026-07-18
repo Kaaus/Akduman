@@ -2,6 +2,8 @@ import type { Config } from "tailwindcss";
 
 /**
  * Tasarım sistemi v2: "Lacivert & Bronz — Sessiz Otorite"
+ * Palet: Orman Yeşili & Pirinç — isimler tarihsel (navy/bronze), değerler
+ * yeşil/pirinç paletine geçti; yeniden adlandırma yapılmadı (riskli).
  * - Yüzey ritmi: white → paper → navy-950 → white…
  * - Bronz doktrini: açık zeminde asla <18px metin veya 1px çizgi olarak
  *   kullanılmaz (yalnız ≥2px dekor çizgisi, ≥24px ikon veya bronze-700 ile
@@ -17,25 +19,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "ink-strong": "#0B1622",
-        ink: "#16212E",
-        muted: "#46586B",
+        "ink-strong": "#0D1713",
+        ink: "#17221D",
+        muted: "#55645C",
         navy: {
-          700: "#1E4066",
-          800: "#14304D",
-          900: "#0E2033",
-          950: "#081420",
+          700: "#275C48",
+          800: "#1C4536",
+          900: "#113026",
+          950: "#081B15",
         },
         bronze: {
-          300: "#D9C29A",
-          500: "#B08D57",
-          600: "#96773F",
-          700: "#7E6234",
+          300: "#DCC792",
+          500: "#BFA05C",
+          600: "#A0854A",
+          700: "#8A6D3B",
         },
-        paper: "#F7F4EE",
-        "paper-deep": "#EDE7DA",
-        line: "#E3DCCF",
-        "line-strong": "#C9BFA9",
+        paper: "#F4F3EB",
+        "paper-deep": "#EAE8DC",
+        line: "#DFE0D2",
+        "line-strong": "#C4C6B2",
         focus: "#8A6D3B",
       },
       fontFamily: {
