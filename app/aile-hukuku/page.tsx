@@ -4,12 +4,13 @@ import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
+import PhotoSurface from "@/components/PhotoSurface";
 import ProcessSteps from "@/components/ProcessSteps";
 import RelatedArticles from "@/components/RelatedArticles";
 import Reveal from "@/components/Reveal";
 import TocRail from "@/components/TocRail";
 import { breadcrumbSchema, buildMetadata, faqSchema, serviceSchema } from "@/lib/seo";
-import { getService, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
+import { getService, IMAGES, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
 
 /*
  * ═══════════════════════════════════════════════════════════════════
@@ -65,8 +66,15 @@ export default function AileHukukuPage() {
       />
 
       {/* Dar koyu şerit-hero */}
-      <section className="bg-navy-950">
-        <div className="container-site py-10 md:py-14">
+      <section className="relative overflow-hidden bg-navy-950">
+        <PhotoSurface
+          image={IMAGES.kutuphaneDikey}
+          variant="band"
+          fill
+          objectPosition="center 20%"
+          sizes="100vw"
+        />
+        <div className="container-site relative z-10 py-10 md:py-14">
           <Breadcrumb
             variant="dark"
             items={[

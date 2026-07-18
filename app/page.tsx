@@ -6,11 +6,12 @@ import FaqAccordion from "@/components/FaqAccordion";
 import Hero from "@/components/Hero";
 import IntroSplash from "@/components/IntroSplash";
 import JsonLd from "@/components/JsonLd";
+import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceRow from "@/components/ServiceRow";
 import { buildMetadata, faqSchema } from "@/lib/seo";
-import { HOME_FAQ, INTRO_SPLASH, SERVICES } from "@/lib/site";
+import { HOME_FAQ, IMAGES, INTRO_SPLASH, SERVICES } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman",
@@ -33,22 +34,33 @@ export default function HomePage() {
 
       {/* (b) Tanıtım bandı — white */}
       <section id="tanitim" className="bg-white">
-        <div className="container-site flex flex-col gap-8 py-16 md:py-24 lg:flex-row lg:items-end lg:justify-between">
-          <Reveal className="max-w-3xl">
-            <p className="kicker mb-3">Ankara</p>
-            <h2>Hukuki Danışmanlık &amp; Avukatlık Hizmetleri</h2>
-            <p className="mt-5">
-              Akduman Hukuk Bürosu; ceza, gayrimenkul, aile, iş, yabancılar,
-              miras, sigorta ve idare hukuku alanlarında müvekkillerine hukuki
-              destek sağlamaktadır. Büromuz, müvekkillerinin hak kayıplarının
-              önüne geçmek amacıyla süreçleri titizlikle yürütmektedir.
-            </p>
-          </Reveal>
-          <Reveal delay={140} className="shrink-0">
-            <Link href="/hakkimizda/" className="btn-secondary">
-              Hakkımızda
-              <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
-            </Link>
+        <div className="container-site grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <Reveal className="max-w-3xl">
+              <p className="kicker mb-3">Ankara</p>
+              <h2>Hukuki Danışmanlık &amp; Avukatlık Hizmetleri</h2>
+              <p className="mt-5">
+                Akduman Hukuk Bürosu; ceza, gayrimenkul, aile, iş, yabancılar,
+                miras, sigorta ve idare hukuku alanlarında müvekkillerine
+                hukuki destek sağlamaktadır. Büromuz, müvekkillerinin hak
+                kayıplarının önüne geçmek amacıyla süreçleri titizlikle
+                yürütmektedir.
+              </p>
+            </Reveal>
+            <Reveal delay={140} className="shrink-0">
+              <Link href="/hakkimizda/" className="btn-secondary">
+                Hakkımızda
+                <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
+              </Link>
+            </Reveal>
+          </div>
+          <Reveal delay={80}>
+            <PhotoSurface
+              image={IMAGES.kutuphaneKubbe}
+              variant="framed"
+              aspectRatio="16/9"
+              sizes="(max-width: 1024px) 100vw, 45vw"
+            />
           </Reveal>
         </div>
       </section>

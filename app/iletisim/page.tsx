@@ -2,11 +2,12 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import Breadcrumb from "@/components/Breadcrumb";
 import ContactForm from "@/components/ContactForm";
 import JsonLd from "@/components/JsonLd";
+import PhotoSurface from "@/components/PhotoSurface";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import Reveal from "@/components/Reveal";
 import { WhatsAppIcon } from "@/components/WhatsAppFloat";
 import { breadcrumbSchema, buildMetadata, contactPageSchema } from "@/lib/seo";
-import { PLACEHOLDERS, SITE } from "@/lib/site";
+import { IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "İletişim | Akduman Hukuk Bürosu – Çankaya, Ankara",
@@ -75,9 +76,10 @@ export default function IletisimPage() {
           {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı */}
           <Reveal className="mt-10">
             <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
-              {/* Sol panel — navy-950 */}
-              <div className="bg-navy-950 p-8 md:p-10">
-                <div className="space-y-7">
+              {/* Sol panel — cübbe dokusu arka planı (texture varyantı) */}
+              <div className="relative overflow-hidden bg-navy-950 p-8 md:p-10">
+                <PhotoSurface image={IMAGES.cubbeDoku} variant="texture" fill sizes="(max-width: 1024px) 100vw, 42vw" />
+                <div className="relative z-10 space-y-7">
                   <PanelRow
                     icon={<MapPin size={24} strokeWidth={1.5} />}
                     label="Adres"
@@ -113,7 +115,7 @@ export default function IletisimPage() {
                   href={SITE.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary-dark mt-10"
+                  className="btn-secondary-dark relative z-10 mt-10"
                 >
                   <WhatsAppIcon size={16} />
                   WhatsApp ile Yazın

@@ -1,6 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
+import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
 import SiteImage from "@/components/SiteImage";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
@@ -28,22 +29,32 @@ export default function HakkimizdaPage() {
           <Breadcrumb items={[{ label: "Hakkımızda" }]} />
           <h1 className="mt-6">Hakkımızda</h1>
 
-          {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
-          <div className="mt-8 max-w-[70ch] space-y-5">
-            <p>
-              Akduman Hukuk Bürosu, Av. Samed Akduman tarafından Ankara&rsquo;da
-              kurulmuştur. Büromuz; ceza hukuku, gayrimenkul hukuku, aile
-              hukuku, iş hukuku, yabancılar hukuku, miras hukuku, sigorta hukuku
-              ve idare hukuku alanlarında müvekkillerine özenli, hızlı ve çözüm
-              odaklı hizmet sunma amacı gütmektedir.
-            </p>
-            <p>
-              Büromuz, hukuk alanındaki bilgi ve deneyimi ile müvekkillerinin
-              hak kayıplarına uğramaması için dava ve danışmanlık süreçlerini
-              titizlikle yürütmektedir. Müvekkil memnuniyetini ve meslek
-              kurallarına bağlılığı esas alan büromuz, süreçlerin her aşamasında
-              müvekkillerini bilgilendirmektedir.
-            </p>
+          <div className="mt-8 grid gap-10 lg:grid-cols-[280px_1fr] lg:items-start">
+            <PhotoSurface
+              image={IMAGES.anitkabir}
+              variant="framed"
+              aspectRatio="3/4"
+              sizes="(max-width: 1024px) 100vw, 280px"
+            />
+            {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
+            <div className="max-w-[70ch] space-y-5">
+              <p>
+                Akduman Hukuk Bürosu, Av. Samed Akduman tarafından
+                Ankara&rsquo;da kurulmuştur. Büromuz; ceza hukuku, gayrimenkul
+                hukuku, aile hukuku, iş hukuku, yabancılar hukuku, miras
+                hukuku, sigorta hukuku ve idare hukuku alanlarında
+                müvekkillerine özenli, hızlı ve çözüm odaklı hizmet sunma
+                amacı gütmektedir.
+              </p>
+              <p>
+                Büromuz, hukuk alanındaki bilgi ve deneyimi ile
+                müvekkillerinin hak kayıplarına uğramaması için dava ve
+                danışmanlık süreçlerini titizlikle yürütmektedir. Müvekkil
+                memnuniyetini ve meslek kurallarına bağlılığı esas alan
+                büromuz, süreçlerin her aşamasında müvekkillerini
+                bilgilendirmektedir.
+              </p>
+            </div>
           </div>
         </div>
       </section>

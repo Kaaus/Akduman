@@ -1,18 +1,20 @@
 import { ArrowRight, ChevronDown, Phone } from "lucide-react";
 import Link from "next/link";
-import SiteImage from "@/components/SiteImage";
+import PhotoSurface from "@/components/PhotoSurface";
 import { IMAGES, SITE } from "@/lib/site";
 
 /**
- * Anasayfa hero v2 (navy-950): kicker → H1 satırları → paragraf → butonlar,
- * yalnız ilk yüklemede 90ms kademeli rise-in. Görselin bronz keyline
- * çerçevesi 500ms'de çizilerek gelir. Altta 2 nabızlık scroll ipucu.
+ * Anasayfa hero v2 (navy-950): tam genişlik fotoğraf arka planı (duotone +
+ * scrim + çok yavaş Ken Burns) üzerinde kicker → H1 satırları → paragraf →
+ * butonlar, yalnız ilk yüklemede 90ms kademeli rise-in. Sağdaki çerçeveli
+ * görsel flush 2px pirinç kenarlıkla. Altta 2 nabızlık scroll ipucu.
  * (Tüm hareketler prefers-reduced-motion'da kapalıdır.)
  */
 export default function Hero() {
   return (
-    <section className="relative bg-navy-950">
-      <div className="container-site grid items-center gap-14 pb-20 pt-16 md:py-24 lg:grid-cols-2">
+    <section className="relative overflow-hidden bg-navy-950">
+      <PhotoSurface image={IMAGES.heroKitaplar} variant="hero" fill priority kenBurns sizes="100vw" />
+      <div className="container-site relative z-10 grid items-center gap-14 pb-20 pt-16 md:py-24 lg:grid-cols-2">
         <div>
           <p className="kicker-dark hero-line">
             Ankara • Avukatlık &amp; Hukuki Danışmanlık
@@ -48,17 +50,12 @@ export default function Hero() {
             </Link>
           </div>
         </div>
-        {/* Keyline çerçevenin 12px taşması için kenar payı */}
-        <div className="m-3">
-          <SiteImage
-            image={IMAGES.hero}
-            aspectRatio="4/3"
-            keyline
-            animateKeyline
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        </div>
+        <PhotoSurface
+          image={IMAGES.kutuphaneDikey}
+          variant="framed"
+          aspectRatio="3/4"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
       </div>
 
       {/* Scroll ipucu — 2 yumuşak nabız, sonra durur */}
