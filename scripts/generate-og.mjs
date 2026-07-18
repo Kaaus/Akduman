@@ -51,7 +51,7 @@ const element = {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#081420", // navy-950
+      backgroundColor: "#081B15", // navy-950
       padding: 48,
     },
     children: {
@@ -64,7 +64,7 @@ const element = {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          border: "1px solid #B08D57", // bronz keyline
+          border: "1px solid #BFA05C", // bronz keyline
           gap: 28,
         },
         children: [
@@ -90,7 +90,7 @@ const element = {
                 fontFamily: "Source Sans 3",
                 fontSize: 26,
                 fontWeight: 600,
-                color: "#D9C29A", // bronze-300
+                color: "#DCC792", // bronze-300
                 letterSpacing: "0.14em",
               },
               children: SUBTITLE,

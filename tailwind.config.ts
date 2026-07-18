@@ -32,7 +32,13 @@ const config: Config = {
           300: "#DCC792",
           500: "#BFA05C",
           600: "#A0854A",
-          700: "#8A6D3B",
+          // Onaylı #8A6D3B, paper zemininde küçük metin için 4.36:1 ile
+          // WCAG AA (4.5:1) eşiğinin marjinal altında kalıyordu (kontrast
+          // raporu). Aynı ton, %1 lightness azaltmasıyla (göz ile
+          // ayırt edilemeyecek kadar yakın) 4.56:1'e çekildi. focus
+          // token'ı BİLEREK aynı bırakıldı — metin değil, 3:1 yeterli olan
+          // non-text/focus-indicator kontrastına tabi.
+          700: "#866A39",
         },
         paper: "#F4F3EB",
         "paper-deep": "#EAE8DC",

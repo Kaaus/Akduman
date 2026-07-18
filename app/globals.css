@@ -305,7 +305,7 @@
     @apply mb-5 list-decimal space-y-2 pl-6;
   }
   .article-body li::marker {
-    color: #8a6d3b; /* bronze-700 — işaretler küçük ama dekoratif */
+    color: #866a39; /* bronze-700 — işaretler küçük ama dekoratif */
   }
   .article-body a {
     @apply font-semibold text-bronze-700 underline decoration-2 underline-offset-4;
