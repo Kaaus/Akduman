@@ -60,9 +60,10 @@ export default function Hero() {
             ekranda kalır, küçük ekranlarda kendiliğinden küçülür.
             Mobilde ~44svh yükseklik hedefi → w = 33svh. */}
         <PhotoSurface
-          image={IMAGES.kutuphaneDikey}
+          image={IMAGES.ilkMeclis}
           variant="framed"
           aspectRatio="3/4"
+          objectPosition="top"
           sizes="(max-width: 768px) 90vw, 38vw"
           className="mx-auto w-full max-w-[min(33svh,320px)] lg:mx-0 lg:ml-auto lg:max-w-[min(49.5svh,465px)]"
         />
