@@ -13,7 +13,7 @@ import type { ImageEntry } from "@/lib/site";
  * otomatik kapanır.
  */
 
-type Variant = "hero" | "band" | "cta" | "framed" | "texture";
+type Variant = "hero" | "band" | "cta" | "framed" | "texture" | "map";
 
 const VARIANT: Record<Variant, { o: number; b: number; scrim: boolean }> = {
   hero: { o: 0.55, b: 0.75, scrim: true },
@@ -21,6 +21,8 @@ const VARIANT: Record<Variant, { o: number; b: number; scrim: boolean }> = {
   cta: { o: 0.8, b: 0.55, scrim: false },
   framed: { o: 0.35, b: 0.95, scrim: false },
   texture: { o: 0.62, b: 0.68, scrim: false },
+  /** Hafif duotone, çerçevesiz tam-genişlik bleed (örn. İletişim harita alanı). */
+  map: { o: 0.35, b: 0.9, scrim: false },
 };
 
 /**

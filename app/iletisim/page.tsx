@@ -3,7 +3,6 @@ import ContactForm from "@/components/ContactForm";
 import JsonLd from "@/components/JsonLd";
 import PageHeading from "@/components/PageHeading";
 import PhotoSurface from "@/components/PhotoSurface";
-import PlaceholderImage from "@/components/PlaceholderImage";
 import Reveal from "@/components/Reveal";
 import { WhatsAppIcon } from "@/components/WhatsAppFloat";
 import { breadcrumbSchema, buildMetadata, contactPageSchema } from "@/lib/seo";
@@ -76,18 +75,9 @@ export default function IletisimPage() {
               Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
           <Reveal>
             <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
-              {/* Sol panel — TBMM Genel Kurul Salonu arka planı (texture
-                  varyantı); dekoratif kullanım, alt bilerek boş
-                  (bkz. lib/site.ts IMAGES.meclis). objectPosition üst
-                  bölgeyi (duvar yazısı + avizeler) odakta tutar. */}
+              {/* Sol panel — düz navy-950 zemin (görsel arka plan YOK,
+                  bkz. GÖREV 1: meclis.jpg harita alanına taşındı). */}
               <div className="relative overflow-hidden bg-navy-950 p-8 md:p-10">
-                <PhotoSurface
-                  image={IMAGES.meclis}
-                  variant="texture"
-                  fill
-                  objectPosition="center 20%"
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                />
                 <h2 className="relative z-10 mb-8 font-serif text-[26px] font-semibold text-[#F4F1EA]">
                   İletişim Bilgileri
                 </h2>
@@ -143,7 +133,9 @@ export default function IletisimPage() {
         </div>
       </section>
 
-      {/* Tam genişlik harita — {{HARITA_EMBED_URL}} boşsa placeholder */}
+      {/* Tam genişlik harita — {{HARITA_EMBED_URL}} boşken meclis.jpg
+          (hafif duotone, çerçevesiz bleed) gösterilir; url doldurulunca
+          görsel yerini iframe haritaya bırakır. */}
       <section aria-label="Konum" className="border-t border-line">
         {PLACEHOLDERS.HARITA_EMBED_URL ? (
           <iframe
@@ -154,10 +146,12 @@ export default function IletisimPage() {
             className="block h-[420px] w-full border-0"
           />
         ) : (
-          <PlaceholderImage
-            alt="Akduman Hukuk Bürosu konum haritası"
+          <PhotoSurface
+            image={IMAGES.meclis}
+            variant="map"
             aspectRatio="16/6"
-            className="border-0"
+            objectPosition="center 20%"
+            sizes="100vw"
           />
         )}
       </section>
