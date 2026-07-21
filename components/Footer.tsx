@@ -18,8 +18,8 @@ function ColumnTitle({ children }: { children: string }) {
 /**
  * Koyu zeminde logo: LOGO_BEYAZ doluysa gerçek beyaz logo (60px), değilse
  * normal logo invert edilir, o da yoksa yazı markasına düşer. Genişlik
- * intrinsic 1472:832 oranından otomatik türetilir (sabit kutuya sıkıştırma
- * yok).
+ * intrinsic 1244:338 oranından (yeni şeffaf logo dosyalarının gerçek piksel
+ * oranı) otomatik türetilir (sabit kutuya sıkıştırma yok).
  */
 function FooterLogo() {
   if (PLACEHOLDERS.LOGO_BEYAZ) {
@@ -27,9 +27,9 @@ function FooterLogo() {
       <Image
         src={PLACEHOLDERS.LOGO_BEYAZ}
         alt={IMAGES.logo.alt}
-        width={1472}
-        height={832}
-        sizes="106px"
+        width={1244}
+        height={338}
+        sizes="221px"
         className="h-[60px] w-auto object-contain object-left"
       />
     );
@@ -39,9 +39,9 @@ function FooterLogo() {
       <Image
         src={IMAGES.logo.src}
         alt={IMAGES.logo.alt}
-        width={1472}
-        height={832}
-        sizes="106px"
+        width={1244}
+        height={338}
+        sizes="221px"
         className="h-[60px] w-auto object-contain object-left brightness-0 invert"
       />
     );

@@ -35,7 +35,10 @@ function samePath(a: string, b: string) {
  * koyu zeminde (light) LOGO_BEYAZ doluysa gerçek beyaz logo kullanılır;
  * boşsa eski invert hack'ine düşer. heightClass çağıran yerin ihtiyacına
  * göre verilir (ana bar / mobil menü farklı yükseklikler kullanır);
- * genişlik intrinsic width/height oranından (1472:832) otomatik türetilir.
+ * genişlik intrinsic width/height oranından (1244:338 — yeni şeffaf logo
+ * dosyalarının gerçek piksel oranı) otomatik türetilir. Bu değerler dosyanın
+ * GERÇEK boyutlarıyla eşleşmelidir; next/image object-contain kullandığından
+ * yanlış oran görseli GERMEZ ama kutunun içinde küçülüp boşluk bırakır.
  */
 function Logo({
   light = false,
@@ -52,13 +55,13 @@ function Logo({
       <Image
         src={src}
         alt="Akduman Hukuk Bürosu logosu"
-        width={1472}
-        height={832}
+        width={1244}
+        height={338}
         priority
-        // Logo hiçbir kırılımda ~114px'i aşmaz (mobil 56px / masaüstü 64px
-        // yükseklikten 1.77:1 oranla türetilir); sizes verilmezse next/image
+        // Logo hiçbir kırılımda ~236px'i aşmaz (mobil 56px / masaüstü 64px
+        // yükseklikten 3.68:1 oranla türetilir); sizes verilmezse next/image
         // gereğinden büyük srcset adayları istiyordu.
-        sizes="(max-width: 768px) 100px, 114px"
+        sizes="(max-width: 768px) 206px, 236px"
         className={`w-auto object-contain object-left ${heightClass} ${
           needsInvertFallback ? "brightness-0 invert" : ""
         }`}
