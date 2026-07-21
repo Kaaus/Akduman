@@ -36,10 +36,10 @@ export const SITE = {
   /**
    * ADRES — TEK KAYNAK: footer, İletişim sayfası, KVKK metni ve
    * LegalService JSON-LD yalnızca buradan okur.
-   * TODO: MÜŞTERİ TEYİDİ BEKLİYOR — eski kayıt: "Remzi Oğuz Arık,
-   * Bestekar Cd No:76/4, 06680 Çankaya/Ankara". Canlı sitede adres
-   * Meşrutiyet/Konur Sok olarak güncellenmiş göründüğünden yeni adres
-   * varsayılan yapıldı.
+   * TODO: MÜŞTERİ TEYİDİ BEKLİYOR — canlı sitede adres Meşrutiyet/Konur
+   * Sok olarak güncellenmiş göründüğünden yeni adres varsayılan yapıldı.
+   * (Eski Çankaya kaydı bilinçli olarak bu dosyadan tamamen kaldırıldı;
+   * yanlışlıkla geri kopyalanmaması için yeniden yazılmayacaktır.)
    */
   address: {
     full: "Meşrutiyet Mah. Konur Sok. Özsoy İşhanı No:25/13 Çankaya/Ankara",

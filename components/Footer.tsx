@@ -29,6 +29,7 @@ function FooterLogo() {
         alt={IMAGES.logo.alt}
         width={1472}
         height={832}
+        sizes="(max-width: 768px) 150px, 200px"
         className="h-11 w-auto object-contain object-left"
       />
     );
@@ -40,6 +41,7 @@ function FooterLogo() {
         alt={IMAGES.logo.alt}
         width={1472}
         height={832}
+        sizes="(max-width: 768px) 150px, 200px"
         className="h-11 w-auto object-contain object-left brightness-0 invert"
       />
     );
