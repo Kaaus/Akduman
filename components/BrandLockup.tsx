@@ -81,7 +81,11 @@ export default function BrandLockup({
           PRESET[size].hideTiny ? "hidden min-[360px]:flex" : "flex"
         } flex-col justify-center leading-none`}
       >
-        <span className={`font-serif font-semibold leading-tight ${preset.text1} ${text1Class}`}>
+        {/* "AKDUMAN" — kaynak metin "Akduman" kalır, büyük harf yalnız
+            CSS'te (uppercase); ekran okuyucu harf-harf hecelemesin diye. */}
+        <span
+          className={`font-serif font-semibold uppercase leading-tight tracking-[0.04em] ${preset.text1} ${text1Class}`}
+        >
           Akduman
         </span>
         <span
