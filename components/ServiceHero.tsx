@@ -36,7 +36,10 @@ export default function ServiceHero({
         objectPosition={objectPosition}
         sizes="100vw"
       />
-      <div className="container-site relative z-10 py-10 md:py-14">
+      {/* Dikey py simetrik tutulur (top=bottom) → bant yüksekliği ne olursa
+          olsun başlık bloğu kendiliğinden dikey ortalanır. Değer PageHeading
+          diyetiyle aynı oranda ~%15 kısaltıldı (40/56px → 32/48px). */}
+      <div className="container-site relative z-10 py-8 md:py-12">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <Breadcrumb
             variant="dark"
@@ -45,12 +48,12 @@ export default function ServiceHero({
               { label: service.title },
             ]}
           />
-          <h1 className="mt-6 !text-[#F4F1EA]">{service.h1}</h1>
+          <h1 className="mt-5 !text-[#F4F1EA]">{service.h1}</h1>
           {/* Lead: mevcut giriş metninin ilk cümlesi */}
-          <p className="mt-5 text-[20px] leading-relaxed text-[#F4F1EA]/85">
+          <p className="mt-4 text-[20px] leading-relaxed text-[#F4F1EA]/85">
             {children}
           </p>
-          <a href={SITE.telHref} className="btn-tertiary-dark mt-6">
+          <a href={SITE.telHref} className="btn-tertiary-dark mt-5">
             <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
             Hemen Ara
             <ArrowRight

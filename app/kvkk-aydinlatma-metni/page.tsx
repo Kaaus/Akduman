@@ -26,13 +26,14 @@ export default function KvkkAydinlatmaMetniPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+        <div className="container-site max-w-4xl pt-10 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "KVKK Aydınlatma Metni" }]}
             title="KVKK Aydınlatma Metni"
           />
 
-          <div className="article-body mt-8">
+          {/* Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <div className="article-body">
             <p>
               Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması
               Kanunu (&ldquo;KVKK&rdquo;) uyarınca, {SITE.name} internet sitesi

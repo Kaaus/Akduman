@@ -35,14 +35,14 @@ export default function MakalelerPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site py-12 md:py-16">
+        <div className="container-site pt-10 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "Hukuki Makaleler" }]}
             title="Hukuki Makaleler"
           />
 
-          {/* Giriş bandı */}
-          <Reveal className="mt-8 max-w-[70ch]">
+          {/* Giriş bandı — üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <Reveal className="max-w-[70ch]">
             <p className="kicker mb-3">Bilgi Merkezi</p>
             <p className="text-[17px] leading-relaxed text-ink md:text-[18px]">
               Miras, gayrimenkul, sigorta ve iş hukuku başta olmak üzere sık

@@ -265,6 +265,12 @@
   .article-body {
     @apply text-ink;
     overflow-wrap: anywhere;
+    /* flow-root: kendi block formatting context'i açar, ilk çocuğun
+       (h2:first-child gibi) kendi margin-top'unun bu kutunun ÜSTÜNDEN
+       taşıp PageHeading'in pb-12'siyle TOPLANMASINI (margin collapse)
+       engeller — H1→içerik boşluğu her sayfada (ilk çocuk h2 ya da p
+       fark etmeksizin) aynı ~48px kalır. */
+    display: flow-root;
   }
   /* H2: önünde 28×3px bronz çizgi (açık zeminde ≥2px dekor çizgisi serbest),
      bölümler arası 72px nefes payı */

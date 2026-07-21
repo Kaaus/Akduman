@@ -26,13 +26,14 @@ export default function CerezPolitikasiPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+        <div className="container-site max-w-4xl pt-10 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "Çerez Politikası" }]}
             title="Çerez Politikası"
           />
 
-          <div className="article-body mt-8">
+          {/* Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <div className="article-body">
             <h2>Çerez Nedir?</h2>
             <p>
               Çerezler, ziyaret ettiğiniz internet siteleri tarafından

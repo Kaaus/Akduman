@@ -69,11 +69,12 @@ export default function IletisimPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site py-12 md:py-16">
+        <div className="container-site pt-10 pb-12 md:pb-16">
           <PageHeading crumbs={[{ label: "İletişim" }]} title="İletişim" />
 
-          {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı */}
-          <Reveal className="mt-10">
+          {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı.
+              Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <Reveal>
             <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
               {/* Sol panel — TBMM Genel Kurul Salonu arka planı (texture
                   varyantı); dekoratif kullanım, alt bilerek boş

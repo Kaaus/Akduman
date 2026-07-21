@@ -25,13 +25,14 @@ export default function HakkimizdaPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site py-12 md:py-16">
+        <div className="container-site pt-10 pb-12 md:pb-16">
           <PageHeading crumbs={[{ label: "Hakkımızda" }]} title="Hakkımızda" />
 
           {/* Onaylı düzen: SOLDA çerçeveli anitkabir görseli (dikey ~1:1.1),
               SAĞDA kicker + serif başlık + mevcut iki paragraf + imza bloğu.
-              Mobilde görsel üstte, metin altta (grid akışı zaten böyle). */}
-          <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+              Mobilde görsel üstte, metin altta (grid akışı zaten böyle).
+              Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <PhotoSurface
               image={IMAGES.anitkabir}
               variant="framed"

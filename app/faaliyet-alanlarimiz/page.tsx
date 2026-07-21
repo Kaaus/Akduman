@@ -24,7 +24,7 @@ export default function FaaliyetAlanlariPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site py-12 md:py-16">
+        <div className="container-site pt-10 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "Faaliyet Alanlarımız" }]}
             title="Faaliyet Alanlarımız"
@@ -32,8 +32,9 @@ export default function FaaliyetAlanlariPage() {
             Büromuzun hizmet verdiği başlıca hukuk alanları aşağıda yer
             almaktadır.
           </PageHeading>
-          {/* Hub: editoryal satır listesi — açıklama mobilde de görünür */}
-          <div className="mt-10 border-t border-line-strong">
+          {/* Hub: editoryal satır listesi — açıklama mobilde de görünür.
+              Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <div className="border-t border-line-strong">
             {SERVICES.map((service, i) => (
               <Reveal key={service.slug} delay={i * 70}>
                 <ServiceRow service={service} showDescriptionOnMobile />

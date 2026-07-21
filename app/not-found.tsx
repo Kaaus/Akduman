@@ -5,12 +5,15 @@ import { SERVICES } from "@/lib/site";
 export default function NotFound() {
   return (
     <section className="bg-white">
-      <div className="container-site py-24 text-center">
+      {/* Boşluk sistemi PageHeading ile aynı orantıda sıkılaştırıldı — bu
+          sayfa breadcrumb kullanmadığından (404'te "yol" yok) PageHeading
+          bileşenini paylaşmaz, aynı hedef değerler elle uygulanır. */}
+      <div className="container-site pt-10 pb-16 text-center md:pb-20">
         <p className="kicker mb-4">404</p>
         <h1 className="mx-auto max-w-2xl">
           Aradığınız sayfa bulunamadı.
         </h1>
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Link href="/" className="btn-primary">
             Ana Sayfa
           </Link>

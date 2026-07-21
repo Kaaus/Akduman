@@ -25,13 +25,14 @@ export default function YasalUyariPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site max-w-4xl py-12 md:py-16">
+        <div className="container-site max-w-4xl pt-10 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "Yasal Uyarı" }]}
             title="Yasal Uyarı"
           />
 
-          <div className="article-body mt-8">
+          {/* Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
+          <div className="article-body">
             <p>
               Bu internet sitesinde yer alan tüm içerikler yalnızca genel
               bilgilendirme amacı taşımaktadır. Site içerikleri, Türkiye
