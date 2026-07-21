@@ -55,6 +55,10 @@ function Logo({
         width={1472}
         height={832}
         priority
+        // Logo hiçbir kırılımda ~200px'i aşmaz; sizes verilmezse next/image
+        // 1472w'lik intrinsic genişlikten 3840w'ye kadar gereksiz srcset
+        // adayları istiyordu.
+        sizes="(max-width: 768px) 150px, 200px"
         className={`w-auto object-contain object-left ${heightClass} ${
           needsInvertFallback ? "brightness-0 invert" : ""
         }`}
@@ -251,9 +255,19 @@ export default function Header() {
             scrolled ? "py-2" : "py-3.5"
           }`}
         >
-          <Link href="/" aria-label="Akduman Hukuk Bürosu — Ana Sayfa">
-            {/* Yükseklik: masaüstü 46px (scroll'da 38px'e küçülür), mobil her zaman 38px */}
-            <Logo heightClass={scrolled ? "h-[38px]" : "h-[38px] lg:h-[46px]"} />
+          <Link
+            href="/"
+            aria-label="Akduman Hukuk Bürosu — Ana Sayfa"
+            className="flex shrink-0 items-center"
+          >
+            {/* Yükseklik — mobil 48px / masaüstü 46px; scroll'da 40px / 38px.
+                Mobilde üst şerit zaten gizli olduğundan büyütülen logo taşma
+                yapmaz, buna karşılık dokunma hedefi belirgin şekilde büyür. */}
+            <Logo
+              heightClass={
+                scrolled ? "h-[40px] lg:h-[38px]" : "h-[48px] lg:h-[46px]"
+              }
+            />
           </Link>
 
           {/* Masaüstü menü */}

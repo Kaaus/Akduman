@@ -59,7 +59,7 @@ export default function HomePage() {
               image={IMAGES.kutuphaneKubbe}
               variant="framed"
               aspectRatio="16/9"
-              sizes="(max-width: 1024px) 100vw, 45vw"
+              sizes="(max-width: 768px) 90vw, 38vw"
             />
           </Reveal>
         </div>

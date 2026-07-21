@@ -12,9 +12,13 @@ import { IMAGES, SITE } from "@/lib/site";
  */
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy-950">
+    // Yükseklik: header düşülerek ilk ekrana tam oturur. 110px değeri
+    // tarayıcıda ÖLÇÜLMÜŞTÜR (üst şerit 34.75px + ana bar 75px = 109.75px,
+    // yukarı yuvarlandı); iki sütun dikeyde ortalanır ve üst padding
+    // küçültülür ki 1366×768'de butonlar dahil her şey fold üstünde kalsın.
+    <section className="relative overflow-hidden bg-navy-950 lg:flex lg:min-h-[calc(100svh-110px)] lg:items-center">
       <PhotoSurface image={IMAGES.heroKitaplar} variant="hero" fill priority kenBurns sizes="100vw" />
-      <div className="container-site relative z-10 grid items-center gap-14 pb-20 pt-16 md:py-24 lg:grid-cols-2">
+      <div className="container-site relative z-10 grid w-full items-center gap-10 pb-14 pt-10 md:gap-14 md:pb-16 md:pt-12 lg:grid-cols-2 lg:py-8">
         <div>
           <p className="kicker-dark hero-line">
             Ankara • Avukatlık &amp; Hukuki Danışmanlık
@@ -50,11 +54,17 @@ export default function Hero() {
             </Link>
           </div>
         </div>
+        {/* Çerçeveli görsel 3/4 oranında; YÜKSEKLİĞİ sınırlamak için genişliğe
+            oranın tersi uygulanır: h = min(66svh, 620px) → w = h × 0.75, yani
+            min(49.5svh, 465px). Böylece görselin çerçevesiyle TAMAMI ilk
+            ekranda kalır, küçük ekranlarda kendiliğinden küçülür.
+            Mobilde ~44svh yükseklik hedefi → w = 33svh. */}
         <PhotoSurface
           image={IMAGES.kutuphaneDikey}
           variant="framed"
           aspectRatio="3/4"
-          sizes="(max-width: 1024px) 100vw, 50vw"
+          sizes="(max-width: 768px) 90vw, 38vw"
+          className="mx-auto w-full max-w-[min(33svh,320px)] lg:mx-0 lg:ml-auto lg:max-w-[min(49.5svh,465px)]"
         />
       </div>
 
