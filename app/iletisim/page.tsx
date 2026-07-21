@@ -68,7 +68,7 @@ export default function IletisimPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site pt-10 pb-12 md:pb-16">
+        <div className="container-site pt-8 pb-12 md:pb-16">
           <PageHeading crumbs={[{ label: "İletişim" }]} title="İletişim" />
 
           {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı.

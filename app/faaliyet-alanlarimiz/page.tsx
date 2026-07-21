@@ -24,7 +24,7 @@ export default function FaaliyetAlanlariPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site pt-10 pb-12 md:pb-16">
+        <div className="container-site pt-8 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "Faaliyet Alanlarımız" }]}
             title="Faaliyet Alanlarımız"

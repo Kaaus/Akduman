@@ -8,7 +8,7 @@ export default function NotFound() {
       {/* Boşluk sistemi PageHeading ile aynı orantıda sıkılaştırıldı — bu
           sayfa breadcrumb kullanmadığından (404'te "yol" yok) PageHeading
           bileşenini paylaşmaz, aynı hedef değerler elle uygulanır. */}
-      <div className="container-site pt-10 pb-16 text-center md:pb-20">
+      <div className="container-site pt-8 pb-16 text-center md:pb-20">
         <p className="kicker mb-4">404</p>
         <h1 className="mx-auto max-w-2xl">
           Aradığınız sayfa bulunamadı.

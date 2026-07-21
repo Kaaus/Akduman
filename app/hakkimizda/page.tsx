@@ -25,25 +25,35 @@ export default function HakkimizdaPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site pt-10 pb-12 md:pb-16">
+        <div className="container-site pt-8 pb-12 md:pb-16">
           <PageHeading crumbs={[{ label: "Hakkımızda" }]} title="Hakkımızda" />
 
           {/* Onaylı düzen: SOLDA çerçeveli anitkabir görseli (dikey ~1:1.1),
               SAĞDA kicker + serif başlık + mevcut iki paragraf + imza bloğu.
               Mobilde görsel üstte, metin altta (grid akışı zaten böyle).
               Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* items-start (items-center DEĞİL): fotoğraf artık sabit
+              yükseklikte (vh'ye bağlı), metin sütunu içerikle değişken —
+              üstten hizalamak, ortalamanın eklediği "gevşek" boşluğu
+              kaldırıp fold garantisini güvenilir kılıyor. */}
+          <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Yükseklik ekrana bağlanır (min(52vh,440px)) — dar viewport'ta
+                (1366×768 gibi) görselin TAMAMI çerçevesiyle fold üstünde
+                kalır; genişlik 1:1.1 orandan hesaplanır (aspectRatio prop'u
+                iç katmanda hâlâ aynı oranı korur, çelişki yok). */}
             <PhotoSurface
               image={IMAGES.anitkabir}
               variant="framed"
               aspectRatio="1/1.1"
+              objectPosition="center top"
               sizes="(max-width: 768px) 90vw, 38vw"
+              className="mx-auto h-[min(52vh,440px)] w-[calc(min(52vh,440px)/1.1)] lg:mx-0"
             />
             {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
             <div>
               <p className="kicker">Hakkımızda</p>
-              <h2 className="mt-3">Akduman Hukuk Bürosu</h2>
-              <div className="mt-6 max-w-[70ch] space-y-5">
+              <h2 className="mt-2">Akduman Hukuk Bürosu</h2>
+              <div className="mt-3 max-w-[70ch] space-y-2">
                 <p>
                   <strong>Akduman Hukuk Bürosu</strong>, Ankara&rsquo;da
                   faaliyet gösteren, hukukun temel ilkelerine bağlı ve
@@ -64,7 +74,7 @@ export default function HakkimizdaPage() {
               </div>
 
               {/* İmza bloğu — sol 3px bronz çizgi */}
-              <div className="mt-8 border-l-[3px] border-bronze-500 pl-5">
+              <div className="mt-3 border-l-[3px] border-bronze-500 pl-5">
                 <p className="font-serif text-[20px] font-semibold text-ink-strong">
                   {SITE.lawyer}
                 </p>

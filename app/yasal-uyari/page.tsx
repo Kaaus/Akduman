@@ -25,7 +25,7 @@ export default function YasalUyariPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site max-w-4xl pt-10 pb-12 md:pb-16">
+        <div className="container-site max-w-4xl pt-8 pb-12 md:pb-16">
           <PageHeading
             crumbs={[{ label: "Yasal Uyarı" }]}
             title="Yasal Uyarı"
