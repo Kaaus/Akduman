@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -14,7 +13,8 @@ import {
   Phone,
   X,
 } from "lucide-react";
-import { HEADER_SOCIAL, IMAGES, NAV, PLACEHOLDERS, SITE } from "@/lib/site";
+import BrandLockup from "@/components/BrandLockup";
+import { HEADER_SOCIAL, NAV, SITE } from "@/lib/site";
 
 /** Üst şerit + mobil menüde paylaşılan sosyal ikon üçlüsü. */
 const SOCIAL_LINKS = [
@@ -27,65 +27,6 @@ const SOCIAL_LINKS = [
 function samePath(a: string, b: string) {
   const norm = (p: string) => (p === "/" ? "/" : p.replace(/\/+$/, ""));
   return norm(a) === norm(b);
-}
-
-/**
- * Logo dosyası henüz yüklenmediyse (manifest ready:false) tipografik marka
- * işareti basılır (fallback korunur — build'i asla kırmaz). Dosya varken:
- * koyu zeminde (light) LOGO_BEYAZ doluysa gerçek beyaz logo kullanılır;
- * boşsa eski invert hack'ine düşer. heightClass çağıran yerin ihtiyacına
- * göre verilir (ana bar / mobil menü farklı yükseklikler kullanır);
- * genişlik intrinsic width/height oranından (1244:338 — yeni şeffaf logo
- * dosyalarının gerçek piksel oranı) otomatik türetilir. Bu değerler dosyanın
- * GERÇEK boyutlarıyla eşleşmelidir; next/image object-contain kullandığından
- * yanlış oran görseli GERMEZ ama kutunun içinde küçülüp boşluk bırakır.
- */
-function Logo({
-  light = false,
-  heightClass,
-}: {
-  light?: boolean;
-  heightClass: string;
-}) {
-  if (IMAGES.logo.ready) {
-    const useWhiteFile = light && PLACEHOLDERS.LOGO_BEYAZ;
-    const src = useWhiteFile ? PLACEHOLDERS.LOGO_BEYAZ : IMAGES.logo.src;
-    const needsInvertFallback = light && !PLACEHOLDERS.LOGO_BEYAZ;
-    return (
-      <Image
-        src={src}
-        alt="Akduman Hukuk Bürosu logosu"
-        width={1244}
-        height={338}
-        priority
-        // Logo hiçbir kırılımda ~236px'i aşmaz (mobil 56px / masaüstü 64px
-        // yükseklikten 3.68:1 oranla türetilir); sizes verilmezse next/image
-        // gereğinden büyük srcset adayları istiyordu.
-        sizes="(max-width: 768px) 206px, 236px"
-        className={`w-auto object-contain object-left ${heightClass} ${
-          needsInvertFallback ? "brightness-0 invert" : ""
-        }`}
-      />
-    );
-  }
-  return (
-    <span aria-hidden="true" className="flex flex-col leading-none">
-      <span
-        className={`font-serif text-[26px] font-semibold tracking-tight ${
-          light ? "text-white" : "text-ink-strong"
-        }`}
-      >
-        Akduman
-      </span>
-      <span
-        className={`mt-1 text-[10px] font-semibold uppercase tracking-kicker ${
-          light ? "text-bronze-300" : "text-navy-700"
-        }`}
-      >
-        Hukuk Bürosu
-      </span>
-    </span>
-  );
 }
 
 export default function Header() {
@@ -258,18 +199,11 @@ export default function Header() {
             scrolled ? "py-2" : "py-3.5"
           }`}
         >
-          <Link
-            href="/"
-            aria-label="Akduman Hukuk Bürosu — Ana Sayfa"
-            className="flex shrink-0 items-center"
-          >
-            {/* Yükseklik — mobil 56px / masaüstü 64px; scroll'da (her iki
-                kırılımda da) 52px'e küçülür. Mobilde üst şerit zaten gizli
-                olduğundan büyütülen logo taşma yapmaz. */}
-            <Logo
-              heightClass={scrolled ? "h-[52px]" : "h-[56px] lg:h-[64px]"}
-            />
-          </Link>
+          {/* Yükseklik — mobil 56px / masaüstü 64px; scroll'da (her iki
+              kırılımda da) 52px'e küçülür (compact). Mobilde üst şerit
+              zaten gizli olduğundan büyütülen logo taşma yapmaz. 360px
+              altı ekranlarda metin gizlenir, yalnız monogram kalır. */}
+          <BrandLockup compact={scrolled} />
 
           {/* Masaüstü menü */}
           <nav aria-label="Ana menü" className="hidden items-center gap-7 lg:flex">
@@ -386,13 +320,11 @@ export default function Header() {
           className="fixed inset-0 z-[60] overflow-y-auto bg-navy-950 lg:hidden"
         >
           <div className="container-site flex items-center justify-between py-4">
-            <Link
-              href="/"
-              aria-label="Akduman Hukuk Bürosu — Ana Sayfa"
+            <BrandLockup
+              variant="dark"
+              size="sm"
               onClick={() => setMobileOpen(false)}
-            >
-              <Logo light heightClass="h-[48px]" />
-            </Link>
+            />
             <button
               ref={closeButtonRef}
               type="button"

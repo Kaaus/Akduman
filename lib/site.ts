@@ -64,8 +64,6 @@ export const PLACEHOLDERS = {
   SOSYAL_FACEBOOK_URL: "", // TODO: müşteriden alınacak
   SOSYAL_INSTAGRAM_URL: "", // TODO: müşteriden alınacak
   SOSYAL_YOUTUBE_URL: "", // TODO: müşteriden alınacak
-  /** Beyaz logo dosya yolu (örn. "/images/logo-beyaz.png"). */
-  LOGO_BEYAZ: "/images/logo-beyaz.png",
   /** Google Maps embed linki (iframe src). */
   HARITA_EMBED_URL: "", // TODO: müşteriden alınacak
 } as const;
@@ -97,8 +95,14 @@ export type ImageEntry = {
 };
 
 export const IMAGES: Record<string, ImageEntry> = {
-  logo: {
-    src: "/images/logo.png",
+  /**
+   * Kare monogram — hem açık hem koyu zeminde AYNI dosya (altın+koyu yeşil
+   * tonları her iki zeminde de okunur). Açık/koyu zemin için ayrı dosya
+   * kullanan eski ikili logo sistemi tamamen emekli edildi; bkz.
+   * components/BrandLockup.tsx.
+   */
+  logoMonogram: {
+    src: "/images/logo-monogram.png",
     alt: "Akduman Hukuk Bürosu logosu",
     ready: true,
   },

@@ -1,64 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
-import {
-  DISCLAIMER,
-  FOOTER_TAGLINE,
-  IMAGES,
-  PLACEHOLDERS,
-  SERVICES,
-  SITE,
-} from "@/lib/site";
+import BrandLockup from "@/components/BrandLockup";
+import { DISCLAIMER, FOOTER_TAGLINE, PLACEHOLDERS, SERVICES, SITE } from "@/lib/site";
 
 /** Footer sütun başlığı — koyu zeminde bronze-300 kicker. */
 function ColumnTitle({ children }: { children: string }) {
   return <p className="kicker-dark mb-5">{children}</p>;
-}
-
-/**
- * Koyu zeminde logo: LOGO_BEYAZ doluysa gerçek beyaz logo (60px), değilse
- * normal logo invert edilir, o da yoksa yazı markasına düşer. Genişlik
- * intrinsic 1244:338 oranından (yeni şeffaf logo dosyalarının gerçek piksel
- * oranı) otomatik türetilir (sabit kutuya sıkıştırma yok).
- */
-function FooterLogo() {
-  if (PLACEHOLDERS.LOGO_BEYAZ) {
-    return (
-      <Image
-        src={PLACEHOLDERS.LOGO_BEYAZ}
-        alt={IMAGES.logo.alt}
-        width={1244}
-        height={338}
-        sizes="221px"
-        className="h-[60px] w-auto object-contain object-left"
-      />
-    );
-  }
-  if (IMAGES.logo.ready) {
-    return (
-      <Image
-        src={IMAGES.logo.src}
-        alt={IMAGES.logo.alt}
-        width={1244}
-        height={338}
-        sizes="221px"
-        className="h-[60px] w-auto object-contain object-left brightness-0 invert"
-      />
-    );
-  }
-  return (
-    // Görsel satır kırılımı korunur; ekran okuyucu bitişik "AkdumanHukuk"
-    // okumasın diye görünür span'ler gizlenip tek doğru ad verilir.
-    <span className="flex flex-col leading-none">
-      <span className="sr-only">Akduman Hukuk Bürosu</span>
-      <span aria-hidden="true" className="font-serif text-[26px] font-bold tracking-tight text-white">
-        Akduman
-      </span>
-      <span aria-hidden="true" className="mt-1 text-[10px] font-semibold uppercase tracking-kicker text-bronze-300">
-        Hukuk Bürosu
-      </span>
-    </span>
-  );
 }
 
 export default function Footer() {
@@ -73,7 +20,7 @@ export default function Footer() {
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         {/* 1 — Logo + büro tanımı */}
         <div>
-          <FooterLogo />
+          <BrandLockup variant="dark" size="md" />
           <p className="mt-5 leading-relaxed">{FOOTER_TAGLINE}</p>
           {socials.length > 0 && (
             <div className="mt-5 flex gap-3">
