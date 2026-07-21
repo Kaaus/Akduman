@@ -55,10 +55,10 @@ function Logo({
         width={1472}
         height={832}
         priority
-        // Logo hiçbir kırılımda ~200px'i aşmaz; sizes verilmezse next/image
-        // 1472w'lik intrinsic genişlikten 3840w'ye kadar gereksiz srcset
-        // adayları istiyordu.
-        sizes="(max-width: 768px) 150px, 200px"
+        // Logo hiçbir kırılımda ~114px'i aşmaz (mobil 56px / masaüstü 64px
+        // yükseklikten 1.77:1 oranla türetilir); sizes verilmezse next/image
+        // gereğinden büyük srcset adayları istiyordu.
+        sizes="(max-width: 768px) 100px, 114px"
         className={`w-auto object-contain object-left ${heightClass} ${
           needsInvertFallback ? "brightness-0 invert" : ""
         }`}
@@ -260,13 +260,11 @@ export default function Header() {
             aria-label="Akduman Hukuk Bürosu — Ana Sayfa"
             className="flex shrink-0 items-center"
           >
-            {/* Yükseklik — mobil 48px / masaüstü 46px; scroll'da 40px / 38px.
-                Mobilde üst şerit zaten gizli olduğundan büyütülen logo taşma
-                yapmaz, buna karşılık dokunma hedefi belirgin şekilde büyür. */}
+            {/* Yükseklik — mobil 56px / masaüstü 64px; scroll'da (her iki
+                kırılımda da) 52px'e küçülür. Mobilde üst şerit zaten gizli
+                olduğundan büyütülen logo taşma yapmaz. */}
             <Logo
-              heightClass={
-                scrolled ? "h-[40px] lg:h-[38px]" : "h-[48px] lg:h-[46px]"
-              }
+              heightClass={scrolled ? "h-[52px]" : "h-[56px] lg:h-[64px]"}
             />
           </Link>
 
@@ -390,7 +388,7 @@ export default function Header() {
               aria-label="Akduman Hukuk Bürosu — Ana Sayfa"
               onClick={() => setMobileOpen(false)}
             >
-              <Logo light heightClass="h-[34px]" />
+              <Logo light heightClass="h-[48px]" />
             </Link>
             <button
               ref={closeButtonRef}

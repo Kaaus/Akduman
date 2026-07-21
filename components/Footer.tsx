@@ -16,7 +16,7 @@ function ColumnTitle({ children }: { children: string }) {
 }
 
 /**
- * Koyu zeminde logo: LOGO_BEYAZ doluysa gerçek beyaz logo (44px), değilse
+ * Koyu zeminde logo: LOGO_BEYAZ doluysa gerçek beyaz logo (60px), değilse
  * normal logo invert edilir, o da yoksa yazı markasına düşer. Genişlik
  * intrinsic 1472:832 oranından otomatik türetilir (sabit kutuya sıkıştırma
  * yok).
@@ -29,8 +29,8 @@ function FooterLogo() {
         alt={IMAGES.logo.alt}
         width={1472}
         height={832}
-        sizes="(max-width: 768px) 150px, 200px"
-        className="h-11 w-auto object-contain object-left"
+        sizes="106px"
+        className="h-[60px] w-auto object-contain object-left"
       />
     );
   }
@@ -41,8 +41,8 @@ function FooterLogo() {
         alt={IMAGES.logo.alt}
         width={1472}
         height={832}
-        sizes="(max-width: 768px) 150px, 200px"
-        className="h-11 w-auto object-contain object-left brightness-0 invert"
+        sizes="106px"
+        className="h-[60px] w-auto object-contain object-left brightness-0 invert"
       />
     );
   }
