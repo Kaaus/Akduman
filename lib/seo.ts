@@ -54,7 +54,7 @@ export function legalServiceSchema() {
     "@id": `${SITE.url}/#legalservice`,
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/images/logo.png`,
+    logo: `${SITE.url}/images/logo-monogram.png`,
     telephone: SITE.phoneE164,
     email: SITE.email,
     address: {
@@ -148,7 +148,7 @@ export function articleSchema(article: Article) {
       name: SITE.name,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE.url}/images/logo.png`,
+        url: `${SITE.url}/images/logo-monogram.png`,
       },
     },
   };

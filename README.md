@@ -55,7 +55,7 @@ Dosyalar `public/images/` altına konur — ayrıntılı liste için
 
 | Dosya | Kaynak |
 |---|---|
-| `public/images/logo.png` | Eski sitedeki logo (aynı logo korunuyor) |
+| `public/images/logo-monogram.png` | Kare monogram — hem açık hem koyu zeminde aynı dosya |
 | `public/images/hero.webp` | Eski sitedeki `Slider-1.webp` |
 | `public/images/av-samed-akduman.jpg` | Portre fotoğrafı |
 
@@ -75,7 +75,6 @@ doldurulduğu anda otomatik devreye girer.
 | `BARO_SICIL_NO` | Müşteriden gelince | Footer sicil satırı + Hakkımızda avukat kartı |
 | `CALISMA_SAATLERI` | örn. `"Hafta içi 09.00–18.00"` | Footer + İletişim + LegalService şeması |
 | `SOSYAL_FACEBOOK_URL` / `SOSYAL_INSTAGRAM_URL` / `SOSYAL_YOUTUBE_URL` | Hesap linkleri gelince | Footer sosyal ikonları |
-| `LOGO_BEYAZ` | Beyaz logo dosyası gelirse (örn. `/images/logo-beyaz.png`) | Footer (yoksa normal logo CSS ile beyazlatılır) |
 | `HARITA_EMBED_URL` | Google Maps → Paylaş → Harita yerleştir → iframe `src` değeri | İletişim sayfası haritası |
 
 ## Makale Gövdeleri

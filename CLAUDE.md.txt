@@ -35,7 +35,8 @@ Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geç
 - Tüm foto işlemleri `PhotoSurface` bileşeniyle (variant: hero/band/cta/framed/texture);
   duotone/scrim CSS'te, dosyalar orijinal renkte.
 - **Makale kartlarına ve makale detaylarına foto konmaz** (kesin karar).
-- Logo: `logo.png` (açık zemin) / `logo-beyaz.png` (koyu zemin), `public/images/`.
+- Logo: `logo-monogram.png` (`public/images/`) — kare monogram, HEM açık HEM
+  koyu zeminde AYNI dosya. `components/BrandLockup.tsx` ile render edilir.
 
 ## BİLEŞEN KONVANSİYONLARI
 Reveal (IO tabanlı giriş animasyonu) · ServiceRow (numarasız editoryal satır) ·
