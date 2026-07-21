@@ -44,20 +44,21 @@ export default function HakkimizdaPage() {
               <h2 className="mt-3">Akduman Hukuk Bürosu</h2>
               <div className="mt-6 max-w-[70ch] space-y-5">
                 <p>
-                  Akduman Hukuk Bürosu, Av. Samed Akduman tarafından
-                  Ankara&rsquo;da kurulmuştur. Büromuz; ceza hukuku, gayrimenkul
-                  hukuku, aile hukuku, iş hukuku, yabancılar hukuku, miras
-                  hukuku, sigorta hukuku ve idare hukuku alanlarında
-                  müvekkillerine özenli, hızlı ve çözüm odaklı hizmet sunma
-                  amacı gütmektedir.
+                  <strong>Akduman Hukuk Bürosu</strong>, Ankara&rsquo;da
+                  faaliyet gösteren, hukukun temel ilkelerine bağlı ve
+                  müvekkil odaklı yaklaşımı benimseyen bir hukuk bürosudur.
+                  Bireysel ve kurumsal müvekkillerimize, dava takibi, hukuki
+                  danışmanlık ve sözleşme yönetimi gibi birçok alanda
+                  titizlikle hizmet vermekteyiz. Amacımız, her
+                  müvekkilimizin ihtiyacına özel, şeffaf ve güvenilir bir
+                  hukuk hizmeti sunarak haklarını en güçlü şekilde
+                  savunmaktır.
                 </p>
                 <p>
-                  Büromuz, hukuk alanındaki bilgi ve deneyimi ile
-                  müvekkillerinin hak kayıplarına uğramaması için dava ve
-                  danışmanlık süreçlerini titizlikle yürütmektedir. Müvekkil
-                  memnuniyetini ve meslek kurallarına bağlılığı esas alan
-                  büromuz, süreçlerin her aşamasında müvekkillerini
-                  bilgilendirmektedir.
+                  Akduman Hukuk Bürosunun kurucusu olan{" "}
+                  <strong>Av. Samed Akduman</strong> öncülüğünde
+                  müvekkillerine özenli, hızlı ve çözüm odaklı hizmet sunma
+                  amacı ile faaliyetlerini sürdürmektedir.
                 </p>
               </div>
 
