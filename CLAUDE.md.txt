@@ -1,0 +1,53 @@
+# CLAUDE.md — Akduman Hukuk Bürosu Sitesi
+
+Ankara'daki Akduman Hukuk Bürosu'nun (Av. Samed Akduman) kurumsal sitesi.
+Stack: Next.js 14 App Router · TypeScript · Tailwind · MDX makaleler · Vercel.
+Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geçişi bekliyor.
+
+## DEĞİŞMEZLER (her görevde geçerli, ihlal edilemez)
+1. **Metinler korunur.** Sayfa metinleri ve `content/makaleler/*.mdx` birebir sabittir.
+   Yeni pazarlama cümlesi, istatistik, müvekkil yorumu, başarı iddiası ÜRETME —
+   avukatlık reklam yasağı gereği hukuka aykırıdır. "En iyi", "uzman" gibi övücü
+   ifadeler yasak; öz-atıfta "deneyimli" kullanılır.
+2. **URL'ler/slug'lar sabittir** (SEO). Makale slug'ları eski WordPress siteyle birebir
+   eşleşir; değiştirme, yenisini türetme. `trailingSlash: true` korunur.
+3. **SEO metadata onaylıdır** (title/description/canonical/JSON-LD/sitemap) —
+   açık talimat olmadan değiştirilmez.
+4. Her görev sonunda `npm run build` yeşil olmalı; `content/` diff'i istenmedikçe boş.
+5. Kararsız kaldığında bu dosya esastır; bir istek buradaki kurallarla çelişiyorsa
+   uygulamadan önce uyar.
+
+## TASARIM SİSTEMİ (özet — tek kaynak: tailwind.config)
+- Palet: "Orman Yeşili & Pirinç". Token adları tarihseldir (navy-*/bronze-*), değerler
+  yeşil/pirinçtir: navy-900 #113026 · bronze-500 #BFA05C · paper #F4F3EB.
+  Renkler YALNIZ config'ten; hardcode hex ekleme.
+- Fontlar: Fraunces (başlıklar, SOFT:0 WONK:0) + Hanken Grotesk (gövde/UI), latin-ext.
+- Bronz doktrini: açık zeminde <18px bronz metin YASAK; küçük vurgu metni bronze-700.
+- Çerçeveli görseller: 2px bronze-500 kenarlık FOTOĞRAFIN TAM KENARINDA — offset/keyline
+  kaydırması YASAK.
+- Kontrast WCAG AA zorunlu. `prefers-reduced-motion`'da tüm animasyonlar kapanır.
+- YASAK: dekoratif gradyan (foto üstü scrim hariç), glassmorphism, emoji ikon,
+  Inter/Poppins, tokmak-terazi klişe stok görsel, sahte placeholder metin.
+
+## GÖRSEL SİSTEMİ
+- Fotoğraflar `public/images/`: hero-kitaplar, kutuphane-dikey, kutuphane-kubbe,
+  anitkabir, adalet-sarayi, adalet-bakanligi, cubbe-doku (.jpg).
+- Tüm foto işlemleri `PhotoSurface` bileşeniyle (variant: hero/band/cta/framed/texture);
+  duotone/scrim CSS'te, dosyalar orijinal renkte.
+- **Makale kartlarına ve makale detaylarına foto konmaz** (kesin karar).
+- Logo: `logo.png` (açık zemin) / `logo-beyaz.png` (koyu zemin), `public/images/`.
+
+## BİLEŞEN KONVANSİYONLARI
+Reveal (IO tabanlı giriş animasyonu) · ServiceRow (numarasız editoryal satır) ·
+Accordion v2 · TocRail (scroll-spy) · Callout (uyari/bilgi) · ProcessSteps
+(`list-none`, çift numara yasak) · Timeline: tarih placeholder ise rozet + JSON-LD
+tarih alanları gizlenir. IntroSplash `lib/site.ts` → `INTRO_SPLASH` ile açılıp kapanır.
+
+## BEKLEYEN TODO'LAR (dokunma, sadece bil)
+- Adres: site.ts `ADRES` = Meşrutiyet Mah. Konur Sok. (müşteri teyidi bekliyor;
+  eski kayıt: Bestekar Cd.)
+- Makale tarihleri GEÇİCİDİR — müşteri gerçeklerini verecek.
+- Boş tokenlar: BARO_SICIL_NO, CALISMA_SAATLERI, HARITA_EMBED_URL, sosyal URL'ler
+  (boşken ilgili blok render edilmez; sosyal üst-bar ikonları istisna, "#" ile durur).
+- İletişim formu: Resend env (`RESEND_API_KEY`, `CONTACT_TO`) tanımlanana kadar
+  zarif fallback gösterir.
