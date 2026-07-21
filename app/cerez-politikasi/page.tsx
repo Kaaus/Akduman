@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Breadcrumb from "@/components/Breadcrumb";
+import PageHeading from "@/components/PageHeading";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
@@ -27,8 +27,10 @@ export default function CerezPolitikasiPage() {
 
       <section className="bg-white">
         <div className="container-site max-w-4xl py-12 md:py-16">
-          <Breadcrumb items={[{ label: "Çerez Politikası" }]} />
-          <h1 className="mt-6">Çerez Politikası</h1>
+          <PageHeading
+            crumbs={[{ label: "Çerez Politikası" }]}
+            title="Çerez Politikası"
+          />
 
           <div className="article-body mt-8">
             <h2>Çerez Nedir?</h2>

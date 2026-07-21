@@ -1,16 +1,14 @@
-import { ArrowRight, Phone } from "lucide-react";
-import Breadcrumb from "@/components/Breadcrumb";
 import Callout from "@/components/Callout";
 import CtaBand from "@/components/CtaBand";
 import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
-import PhotoSurface from "@/components/PhotoSurface";
 import ProcessSteps from "@/components/ProcessSteps";
 import RelatedArticles from "@/components/RelatedArticles";
 import Reveal from "@/components/Reveal";
+import ServiceHero from "@/components/ServiceHero";
 import TocRail from "@/components/TocRail";
 import { breadcrumbSchema, buildMetadata, faqSchema, serviceSchema } from "@/lib/seo";
-import { getService, IMAGES, INFO_NOTE, SITE, type FaqItem } from "@/lib/site";
+import { getService, IMAGES, INFO_NOTE, type FaqItem } from "@/lib/site";
 
 /*
  * ═══════════════════════════════════════════════════════════════════
@@ -65,37 +63,15 @@ export default function AileHukukuPage() {
         ])}
       />
 
-      {/* Dar koyu şerit-hero */}
-      <section className="relative overflow-hidden bg-navy-950">
-        <PhotoSurface
-          image={IMAGES.kutuphaneDikey}
-          variant="band"
-          fill
-          objectPosition="center 20%"
-          sizes="100vw"
-        />
-        <div className="container-site relative z-10 py-10 md:py-14">
-          <Breadcrumb
-            variant="dark"
-            items={[
-              { label: "Faaliyet Alanlarımız", href: "/faaliyet-alanlarimiz/" },
-              { label: service.title },
-            ]}
-          />
-          <h1 className="mt-6 !text-[#F4F1EA]">{service.h1}</h1>
-          {/* Lead: mevcut giriş metninin ilk cümlesi */}
-          <p className="mt-5 max-w-3xl text-[20px] leading-relaxed text-[#F4F1EA]/85">
-            Aile hukuku; evlilik, boşanma, velayet, nafaka ve eşler arasındaki
-            mal rejimi gibi aile ilişkilerinden doğan hak ve yükümlülükleri
-            düzenleyen hukuk dalıdır.
-          </p>
-          <a href={SITE.telHref} className="btn-tertiary-dark mt-6">
-            <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
-            Hemen Ara
-            <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
-          </a>
-        </div>
-      </section>
+      <ServiceHero
+        service={service}
+        image={IMAGES.kutuphaneDikey}
+        objectPosition="center 20%"
+      >
+        Aile hukuku; evlilik, boşanma, velayet, nafaka ve eşler arasındaki
+        mal rejimi gibi aile ilişkilerinden doğan hak ve yükümlülükleri
+        düzenleyen hukuk dalıdır.
+      </ServiceHero>
 
       {/* Gövde: 70ch + sağda TocRail */}
       <section className="bg-white">

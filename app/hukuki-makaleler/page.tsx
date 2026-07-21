@@ -1,5 +1,5 @@
 import ArticleCard from "@/components/ArticleCard";
-import Breadcrumb from "@/components/Breadcrumb";
+import PageHeading from "@/components/PageHeading";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
@@ -36,8 +36,10 @@ export default function MakalelerPage() {
 
       <section className="bg-white">
         <div className="container-site py-12 md:py-16">
-          <Breadcrumb items={[{ label: "Hukuki Makaleler" }]} />
-          <h1 className="mt-6">Hukuki Makaleler</h1>
+          <PageHeading
+            crumbs={[{ label: "Hukuki Makaleler" }]}
+            title="Hukuki Makaleler"
+          />
 
           {/* Giriş bandı */}
           <Reveal className="mt-8 max-w-[70ch]">

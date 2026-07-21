@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/Breadcrumb";
+import PageHeading from "@/components/PageHeading";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
@@ -26,8 +26,10 @@ export default function YasalUyariPage() {
 
       <section className="bg-white">
         <div className="container-site max-w-4xl py-12 md:py-16">
-          <Breadcrumb items={[{ label: "Yasal Uyarı" }]} />
-          <h1 className="mt-6">Yasal Uyarı</h1>
+          <PageHeading
+            crumbs={[{ label: "Yasal Uyarı" }]}
+            title="Yasal Uyarı"
+          />
 
           <div className="article-body mt-8">
             <p>

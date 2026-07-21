@@ -1,7 +1,7 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import Breadcrumb from "@/components/Breadcrumb";
 import ContactForm from "@/components/ContactForm";
 import JsonLd from "@/components/JsonLd";
+import PageHeading from "@/components/PageHeading";
 import PhotoSurface from "@/components/PhotoSurface";
 import PlaceholderImage from "@/components/PlaceholderImage";
 import Reveal from "@/components/Reveal";
@@ -70,8 +70,7 @@ export default function IletisimPage() {
 
       <section className="bg-white">
         <div className="container-site py-12 md:py-16">
-          <Breadcrumb items={[{ label: "İletişim" }]} />
-          <h1 className="mt-6">İletişim</h1>
+          <PageHeading crumbs={[{ label: "İletişim" }]} title="İletişim" />
 
           {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı */}
           <Reveal className="mt-10">
@@ -79,6 +78,9 @@ export default function IletisimPage() {
               {/* Sol panel — cübbe dokusu arka planı (texture varyantı) */}
               <div className="relative overflow-hidden bg-navy-950 p-8 md:p-10">
                 <PhotoSurface image={IMAGES.cubbeDoku} variant="texture" fill sizes="(max-width: 1024px) 100vw, 42vw" />
+                <h2 className="relative z-10 mb-8 font-serif text-[26px] font-semibold text-[#F4F1EA]">
+                  İletişim Bilgileri
+                </h2>
                 <div className="relative z-10 space-y-7">
                   <PanelRow
                     icon={<MapPin size={24} strokeWidth={1.5} />}

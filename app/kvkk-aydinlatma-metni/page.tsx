@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/Breadcrumb";
+import PageHeading from "@/components/PageHeading";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
@@ -27,8 +27,10 @@ export default function KvkkAydinlatmaMetniPage() {
 
       <section className="bg-white">
         <div className="container-site max-w-4xl py-12 md:py-16">
-          <Breadcrumb items={[{ label: "KVKK Aydınlatma Metni" }]} />
-          <h1 className="mt-6">KVKK Aydınlatma Metni</h1>
+          <PageHeading
+            crumbs={[{ label: "KVKK Aydınlatma Metni" }]}
+            title="KVKK Aydınlatma Metni"
+          />
 
           <div className="article-body mt-8">
             <p>

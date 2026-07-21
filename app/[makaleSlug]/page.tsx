@@ -107,36 +107,42 @@ export default function MakalePage({
       <article className="bg-white">
         <div className="container-site flex gap-14 py-12 md:py-16">
           <div className="min-w-0 max-w-[70ch]">
-            <Breadcrumb
-              items={[
-                { label: "Hukuki Makaleler", href: "/hukuki-makaleler/" },
-                { label: article.title },
-              ]}
-            />
+            {/* Başlık bloğu ORTALI (site geneli kural); aşağıdaki gövde
+                metni ve TocRail düzeni değişmeden sola hizalı kalır. */}
+            <div className="flex flex-col items-center text-center">
+              <Breadcrumb
+                items={[
+                  { label: "Hukuki Makaleler", href: "/hukuki-makaleler/" },
+                  { label: article.title },
+                ]}
+              />
 
-            {/* Başlık normal kapitalizasyonla basılır — ASLA tamamı büyük harf değil */}
-            <h1 className="mt-6">{article.title}</h1>
+              {/* Başlık normal kapitalizasyonla basılır — ASLA tamamı büyük harf değil */}
+              <h1 className="mt-6">{article.title}</h1>
 
-            {/* Meta satırı — tarih politikası: tarih girilmedikçe yalnız yazar adı basılır */}
-            <p className="mt-4 text-[14px] text-muted">
-              {SITE.lawyer}
-              {article.date && (
-                <>
-                  {" "}
-                  · Yayın:{" "}
-                  <time dateTime={article.date}>{formatDate(article.date)}</time>
-                </>
-              )}
-              {article.dateModified && (
-                <>
-                  {" "}
-                  · Güncelleme:{" "}
-                  <time dateTime={article.dateModified}>
-                    {formatDate(article.dateModified)}
-                  </time>
-                </>
-              )}
-            </p>
+              {/* Meta satırı — tarih politikası: tarih girilmedikçe yalnız yazar adı basılır */}
+              <p className="mt-4 text-[14px] text-muted">
+                {SITE.lawyer}
+                {article.date && (
+                  <>
+                    {" "}
+                    · Yayın:{" "}
+                    <time dateTime={article.date}>
+                      {formatDate(article.date)}
+                    </time>
+                  </>
+                )}
+                {article.dateModified && (
+                  <>
+                    {" "}
+                    · Güncelleme:{" "}
+                    <time dateTime={article.dateModified}>
+                      {formatDate(article.dateModified)}
+                    </time>
+                  </>
+                )}
+              </p>
+            </div>
 
             {/* Kapak görseli (varsa) — duotone v2 */}
             {article.cover && (

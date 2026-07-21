@@ -23,8 +23,16 @@ const VARIANT: Record<Variant, { o: number; b: number; scrim: boolean }> = {
   texture: { o: 0.62, b: 0.68, scrim: false },
 };
 
-const SCRIM_GRADIENT =
-  "linear-gradient(90deg, rgb(8 27 21 / .96) 0%, rgb(8 27 21 / .75) 38%, transparent 72%)";
+/**
+ * Scrim (metin okunabilirliği katmanı) varyanta göre değişir:
+ * - hero: metin blok SOLDA olduğu için soldan-sağa açılan asimetrik scrim.
+ * - band: hizmet sayfalarının başlık bloğu ORTALANDIĞINDAN scrim de
+ *   simetriktir; iki kenar şeffaf, orta bant eşit koyulukta kalır.
+ */
+const SCRIM_GRADIENT: Record<"hero" | "band", string> = {
+  hero: "linear-gradient(90deg, rgb(8 27 21 / .96) 0%, rgb(8 27 21 / .75) 38%, transparent 72%)",
+  band: "linear-gradient(90deg, transparent 0%, rgb(8 27 21 / .88) 25%, rgb(8 27 21 / .88) 75%, transparent 100%)",
+};
 
 export default function PhotoSurface({
   image,
@@ -104,7 +112,9 @@ export default function PhotoSurface({
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
-            style={{ background: SCRIM_GRADIENT }}
+            style={{
+              background: SCRIM_GRADIENT[variant === "band" ? "band" : "hero"],
+            }}
           />
         )}
       </div>

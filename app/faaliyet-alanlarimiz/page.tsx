@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/Breadcrumb";
+import PageHeading from "@/components/PageHeading";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
@@ -25,12 +25,13 @@ export default function FaaliyetAlanlariPage() {
 
       <section className="bg-white">
         <div className="container-site py-12 md:py-16">
-          <Breadcrumb items={[{ label: "Faaliyet Alanlarımız" }]} />
-          <h1 className="mt-6">Faaliyet Alanlarımız</h1>
-          <p className="mt-5 max-w-3xl">
+          <PageHeading
+            crumbs={[{ label: "Faaliyet Alanlarımız" }]}
+            title="Faaliyet Alanlarımız"
+          >
             Büromuzun hizmet verdiği başlıca hukuk alanları aşağıda yer
             almaktadır.
-          </p>
+          </PageHeading>
           {/* Hub: editoryal satır listesi — açıklama mobilde de görünür */}
           <div className="mt-10 border-t border-line-strong">
             {SERVICES.map((service, i) => (
