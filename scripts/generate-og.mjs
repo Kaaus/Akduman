@@ -3,11 +3,15 @@
  *
  *   node scripts/generate-og.mjs
  *
- * Tasarım: 1200×630 · navy-950 zemin · bronz keyline çerçeve · ortada beyaz
- * serif "Akduman Hukuk Bürosu" + alt satır "Ankara • Avukatlık & Hukuki
- * Danışmanlık". Fontlar Google Fonts'tan indirilir (yalnızca gereken
- * karakterler, text= parametresiyle) ve satori metni glif yollarına
- * çevirdiği için çıktı, sistem fontlarından bağımsızdır.
+ * Tasarım v2: 1200×630 · navy-950 zemin · bronz keyline çerçeve · ortada
+ * monogram (public/images/logo-monogram.png, ~280px) · altında beyaz
+ * Fraunces "Akduman Hukuk Bürosu" + bronze-300 "Ankara • Avukatlık &
+ * Hukuki Danışmanlık". Fontlar sitenin GERÇEK tipografisiyle (Fraunces +
+ * Hanken Grotesk) eşleşir — önceki sürüm yanlışlıkla Cormorant
+ * Garamond/Source Sans 3 kullanıyordu (sitede hiç yer almayan fontlar).
+ * Fontlar Google Fonts'tan indirilir (yalnızca gereken karakterler,
+ * text= parametresiyle) ve satori metni glif yollarına çevirdiği için
+ * çıktı, sistem fontlarından bağımsızdır.
  *
  * Not: app/opengraph-image.tsx (next/og) kaldırıldı çünkü @vercel/og'un
  * Node derlemesi, Türkçe karakter içeren Windows yollarında (ör. "Masaüstü")
@@ -23,6 +27,13 @@ import { Resvg } from "@resvg/resvg-js";
 const TITLE = "Akduman Hukuk Bürosu";
 const SUBTITLE = "ANKARA • AVUKATLIK & HUKUKİ DANIŞMANLIK";
 
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+const monogramB64 = fs
+  .readFileSync(path.join(ROOT, "public", "images", "logo-monogram.png"))
+  .toString("base64");
+const monogramSrc = `data:image/png;base64,${monogramB64}`;
+const MONOGRAM_RATIO = 654 / 660; // kaynağın gerçek piksel oranı
+
 /** Google Fonts'tan yalnızca gereken karakterleri kapsayan TTF indirir. */
 async function loadGoogleFont(family, weight, text) {
   const cssUrl =
@@ -37,9 +48,9 @@ async function loadGoogleFont(family, weight, text) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-const [cormorant, sourceSans] = await Promise.all([
-  loadGoogleFont("Cormorant Garamond", 700, TITLE),
-  loadGoogleFont("Source Sans 3", 600, SUBTITLE),
+const [fraunces, hanken] = await Promise.all([
+  loadGoogleFont("Fraunces", 600, TITLE),
+  loadGoogleFont("Hanken Grotesk", 600, SUBTITLE),
 ]);
 
 const element = {
@@ -69,13 +80,21 @@ const element = {
         },
         children: [
           {
+            type: "img",
+            props: {
+              src: monogramSrc,
+              width: 280,
+              height: Math.round(280 / MONOGRAM_RATIO),
+            },
+          },
+          {
             type: "div",
             props: {
               style: {
                 display: "flex",
-                fontFamily: "Cormorant Garamond",
-                fontSize: 84,
-                fontWeight: 700,
+                fontFamily: "Fraunces",
+                fontSize: 68,
+                fontWeight: 600,
                 color: "#FFFFFF",
                 letterSpacing: "-0.01em",
               },
@@ -87,8 +106,8 @@ const element = {
             props: {
               style: {
                 display: "flex",
-                fontFamily: "Source Sans 3",
-                fontSize: 26,
+                fontFamily: "Hanken Grotesk",
+                fontSize: 24,
                 fontWeight: 600,
                 color: "#DCC792", // bronze-300
                 letterSpacing: "0.14em",
@@ -106,8 +125,8 @@ const svg = await satori(element, {
   width: 1200,
   height: 630,
   fonts: [
-    { name: "Cormorant Garamond", data: cormorant, weight: 700, style: "normal" },
-    { name: "Source Sans 3", data: sourceSans, weight: 600, style: "normal" },
+    { name: "Fraunces", data: fraunces, weight: 600, style: "normal" },
+    { name: "Hanken Grotesk", data: hanken, weight: 600, style: "normal" },
   ],
 });
 
