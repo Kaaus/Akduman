@@ -4,8 +4,10 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { isValidEmail, isValidTrPhone } from "@/lib/validation";
 
 type Status = "idle" | "sending" | "success" | "error" | "unavailable";
+type FieldErrors = { telefon?: string; eposta?: string };
 
 // v2 form stilleri globals.css'te: .input-field (odakta navy çerçeve +
 // 3px halka — WCAG 2.4.7 göstergesi), .label-field (14px/600/ink-strong).
@@ -21,6 +23,7 @@ const labelClass = "label-field";
  */
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const successRef = useRef<HTMLDivElement>(null);
 
   // Başarıda form DOM'dan kalktığı için odak teşekkür kutusuna taşınır.
@@ -31,7 +34,23 @@ export default function ContactForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+
+    // İstemci doğrulaması: telefon ZORUNLU + TR biçimi; e-posta opsiyonel,
+    // doluysa biçim denetlenir. Sunucu (route.ts) AYNI kuralı tekrar
+    // uygular (istemci JS'siz/atlatılmış istekler için).
+    const nextErrors: FieldErrors = {};
+    if (!isValidTrPhone(data.telefon ?? "")) {
+      nextErrors.telefon = "Lütfen geçerli bir telefon numarası girin.";
+    }
+    if (data.eposta?.trim() && !isValidEmail(data.eposta)) {
+      nextErrors.eposta = "Lütfen geçerli bir e-posta adresi girin.";
+    }
+    if (Object.keys(nextErrors).length > 0) {
+      setFieldErrors(nextErrors);
+      return;
+    }
+    setFieldErrors({});
 
     setStatus("sending");
     try {
@@ -92,21 +111,37 @@ export default function ContactForm() {
         </div>
         <div>
           <label htmlFor="cf-eposta" className={labelClass}>
-            E-posta <span aria-hidden="true">*</span>
+            E-posta
           </label>
           <input
             id="cf-eposta"
             name="eposta"
-            type="email"
-            required
+            // type="text" + inputMode="email" KASITLI: type="email" tarayıcı
+            // yerel biçim doğrulamasını tetikler (boş olmasa da) ve
+            // handleSubmit hiç çalışmadan kendi (Türkçe olmayan) balonunu
+            // gösterir — "alan altında Türkçe mesaj" isteğini bozar.
+            // inputMode mobil klavyede @ tuşunu yine de gösterir.
+            type="text"
+            inputMode="email"
             maxLength={200}
             autoComplete="email"
+            aria-invalid={!!fieldErrors.eposta}
+            aria-describedby={fieldErrors.eposta ? "cf-eposta-error" : undefined}
+            onChange={() =>
+              fieldErrors.eposta &&
+              setFieldErrors((prev) => ({ ...prev, eposta: undefined }))
+            }
             className={inputClass}
           />
+          {fieldErrors.eposta && (
+            <p id="cf-eposta-error" role="alert" className="error-text mt-1.5 text-[13px]">
+              {fieldErrors.eposta}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="cf-telefon" className={labelClass}>
-            Telefon
+            Telefon <span aria-hidden="true">*</span>
           </label>
           <input
             id="cf-telefon"
@@ -114,8 +149,26 @@ export default function ContactForm() {
             type="tel"
             maxLength={40}
             autoComplete="tel"
+            // native `required` KASITLI kullanılmadı: tarayıcı yerel
+            // doğrulaması JS submit handler'ını hiç çalıştırmadan kendi
+            // (İngilizce/lokale bağlı) balonunu gösterirdi — "alan altında
+            // Türkçe mesaj" isteği bunu engeller. aria-required ekran
+            // okuyucu için zorunluluğu korur; gerçek doğrulama aşağıdaki
+            // handleSubmit'te (boş DAHİL) yapılır.
+            aria-required="true"
+            aria-invalid={!!fieldErrors.telefon}
+            aria-describedby={fieldErrors.telefon ? "cf-telefon-error" : undefined}
+            onChange={() =>
+              fieldErrors.telefon &&
+              setFieldErrors((prev) => ({ ...prev, telefon: undefined }))
+            }
             className={inputClass}
           />
+          {fieldErrors.telefon && (
+            <p id="cf-telefon-error" role="alert" className="error-text mt-1.5 text-[13px]">
+              {fieldErrors.telefon}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="cf-konu" className={labelClass}>

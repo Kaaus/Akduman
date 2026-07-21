@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
+import { isValidEmail, isValidTrPhone } from "@/lib/validation";
 
 /**
  * İletişim formu API'si.
- * - Zorunlu alan doğrulaması: ad soyad, e-posta, mesaj, KVKK onayı
+ * - Zorunlu alan doğrulaması: ad soyad, TELEFON (e-posta DEĞİL), mesaj,
+ *   KVKK onayı — istemcideki (ContactForm.tsx) kuralla AYNI kaynaktan
+ *   (lib/validation.ts) geldiği için üç katman (etiket/required, istemci,
+ *   sunucu) birbirinden sapamaz.
  * - Honeypot: "website" alanı doluysa bot kabul edilir, 200 dönülür ama
  *   e-posta GÖNDERİLMEZ (bota başarısız olduğunu belli etmemek için).
  * - RESEND_API_KEY tanımlı değilse 503 döner; istemci zarif bir
@@ -67,8 +71,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  // Zorunlu alanlar
-  if (!adSoyad?.trim() || !eposta?.trim() || !mesaj?.trim() || !kvkkOnay) {
+  // Zorunlu alanlar — telefon zorunlu, e-posta OPSİYONEL
+  if (!adSoyad?.trim() || !telefon?.trim() || !mesaj?.trim() || !kvkkOnay) {
     return NextResponse.json(
       { error: "Lütfen zorunlu alanları doldurun." },
       { status: 400 }
@@ -78,8 +82,8 @@ export async function POST(request: Request) {
   // Uzunluk sınırları
   if (
     adSoyad.length > MAX_LEN.adSoyad ||
-    eposta.length > MAX_LEN.eposta ||
-    (telefon?.length ?? 0) > MAX_LEN.telefon ||
+    (eposta?.length ?? 0) > MAX_LEN.eposta ||
+    telefon.length > MAX_LEN.telefon ||
     (konu?.length ?? 0) > MAX_LEN.konu ||
     mesaj.length > MAX_LEN.mesaj
   ) {
@@ -89,10 +93,18 @@ export async function POST(request: Request) {
     );
   }
 
-  // Basit e-posta biçim kontrolü
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(eposta)) {
+  // Telefon biçim kontrolü (zorunlu)
+  if (!isValidTrPhone(telefon)) {
     return NextResponse.json(
-      { error: "Geçerli bir e-posta adresi girin." },
+      { error: "Lütfen geçerli bir telefon numarası girin." },
+      { status: 400 }
+    );
+  }
+
+  // E-posta opsiyonel — doluysa biçim kontrolü
+  if (eposta?.trim() && !isValidEmail(eposta)) {
+    return NextResponse.json(
+      { error: "Lütfen geçerli bir e-posta adresi girin." },
       { status: 400 }
     );
   }
@@ -111,8 +123,9 @@ export async function POST(request: Request) {
 
   const text = [
     `Ad Soyad: ${adSoyad.trim()}`,
-    `E-posta: ${eposta.trim()}`,
-    telefon?.trim() ? `Telefon: ${telefon.trim()}` : null,
+    `Telefon: ${telefon.trim()}`,
+    // E-posta opsiyonel — doldurulmadıysa satır hiç eklenmez.
+    eposta?.trim() ? `E-posta: ${eposta.trim()}` : null,
     konu?.trim() ? `Konu: ${konu.trim()}` : null,
     "",
     "Mesaj:",
@@ -133,7 +146,9 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         from,
         to: [to],
-        reply_to: eposta.trim(),
+        // reply_to yalnızca e-posta doldurulduysa gönderilir; boşsa Resend
+        // varsayılan olarak `from` adresini kullanır.
+        ...(eposta?.trim() ? { reply_to: eposta.trim() } : {}),
         // Konu tek satıra indirgenir (başlık alanına satır sonu sızmasın)
         subject: konu?.trim()
           ? `İletişim formu: ${konu.trim().replace(/[\r\n]+/g, " ").slice(0, 150)}`
