@@ -74,12 +74,6 @@ export default function HakkimizdaPage() {
                   {PLACEHOLDERS.BARO_SICIL_NO &&
                     ` — Sicil No: ${PLACEHOLDERS.BARO_SICIL_NO}`}
                 </p>
-                <p className="mt-3 text-ink">
-                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
-                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
-                  Hukuku ve diğer tüm hukuki alanlarda hukuki danışmanlık ve
-                  avukatlık hizmeti vermektedir.
-                </p>
               </div>
             </div>
           </div>
@@ -108,8 +102,10 @@ export default function HakkimizdaPage() {
                   </p>
                 )}
                 <p className="mt-4 text-muted">
-                  Ankara&rsquo;da avukatlık ve hukuki danışmanlık hizmeti
-                  vermektedir.
+                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
+                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
+                  Hukuku ve diğer tüm hukuki alanlarda hukuki danışmanlık ve
+                  avukatlık hizmeti vermektedir.
                 </p>
               </div>
             </div>
