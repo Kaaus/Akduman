@@ -62,6 +62,13 @@ export default function YasalUyariPage() {
               bilgilere dayanılarak yapılan işlemlerden doğabilecek
               sonuçlardan sorumluluk kabul edilmemektedir.
             </p>
+
+            <p className="text-[13px] text-muted">
+              Görsel kaynakları: TBMM Genel Kurul Salonu fotoğrafı —
+              Wikimedia Commons.
+            </p>
+            {/* TODO: Wikimedia dosya sayfasındaki yazar adı ve lisans (CC BY-SA vb.)
+                teyit edilip bu satıra eklenecek */}
           </div>
         </div>
       </section>

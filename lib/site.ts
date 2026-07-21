@@ -146,8 +146,14 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Adalet Bakanlığı binası",
     ready: true,
   },
-  cubbeDoku: {
-    src: "/images/cubbe-doku.jpg",
+  mahkemeSalonu: {
+    src: "/images/mahkeme-salonu.jpg",
+    alt: "Duruşma salonu",
+    ready: true,
+  },
+  /** Dekoratif kullanım (İletişim sol panel arka planı) — alt bilerek boş. */
+  meclis: {
+    src: "/images/meclis.jpg",
     alt: "",
     ready: true,
   },

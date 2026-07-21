@@ -75,9 +75,18 @@ export default function IletisimPage() {
           {/* Kompozisyon: sol %42 navy panel + sağ %58 beyaz form kartı */}
           <Reveal className="mt-10">
             <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
-              {/* Sol panel — cübbe dokusu arka planı (texture varyantı) */}
+              {/* Sol panel — TBMM Genel Kurul Salonu arka planı (texture
+                  varyantı); dekoratif kullanım, alt bilerek boş
+                  (bkz. lib/site.ts IMAGES.meclis). objectPosition üst
+                  bölgeyi (duvar yazısı + avizeler) odakta tutar. */}
               <div className="relative overflow-hidden bg-navy-950 p-8 md:p-10">
-                <PhotoSurface image={IMAGES.cubbeDoku} variant="texture" fill sizes="(max-width: 1024px) 100vw, 42vw" />
+                <PhotoSurface
+                  image={IMAGES.meclis}
+                  variant="texture"
+                  fill
+                  objectPosition="center 20%"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                />
                 <h2 className="relative z-10 mb-8 font-serif text-[26px] font-semibold text-[#F4F1EA]">
                   İletişim Bilgileri
                 </h2>

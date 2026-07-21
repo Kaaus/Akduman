@@ -56,11 +56,15 @@ export default function HomePage() {
           </div>
           <Reveal delay={80}>
             <PhotoSurface
-              image={IMAGES.kutuphaneKubbe}
+              image={IMAGES.mahkemeSalonu}
               variant="framed"
               aspectRatio="16/9"
+              objectPosition="center 25%"
               sizes="(max-width: 768px) 90vw, 38vw"
             />
+            <p className="mt-3 text-center text-[13px] text-muted">
+              Duruşma salonu — Adalet Mülkün Temelidir
+            </p>
           </Reveal>
         </div>
       </section>
