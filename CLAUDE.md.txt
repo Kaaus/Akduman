@@ -30,10 +30,22 @@ Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geç
   Inter/Poppins, tokmak-terazi klişe stok görsel (istisna: adalet-heykeli.jpg —
   kullanıcı onaylı, bkz. Hero.tsx), sahte placeholder metin.
 
+## KAPSAM
+- Toplam 31 sayfa (teknik rotalar hariç: robots.txt, sitemap.xml, api/contact,
+  favicon/icon dosyaları bu sayıya dahil değildir) — 1 anasayfa + 13 makale +
+  10 hizmet sayfası + 7 kurumsal/yasal sayfa (Hakkımızda, İletişim, Hukuki
+  Makaleler, Faaliyet Alanlarımız hub, KVKK, Çerez Politikası, Yasal Uyarı) +
+  404.
+- Faaliyet alanı: 10 — ceza-hukuku, gayrimenkul-hukuku, aile-hukuku,
+  is-hukuku, yabancilar-hukuku, miras-hukuku, sigorta-hukuku, idare-hukuku,
+  ticaret-ve-sirketler-hukuku, rekabet-hukuku. Tek kaynak: `lib/site.ts` →
+  `SERVICES` (+ `Alan` union tipi) — header/mobil menü, anasayfa, hub,
+  footer ve sitemap buradan otomatik türer.
+
 ## GÖRSEL SİSTEMİ
 - Fotoğraflar `public/images/`: hero-kitaplar, kutuphane-dikey, kutuphane-kubbe,
   adalet-heykeli, adalet-sarayi, adalet-bakanligi, mahkeme-salonu, kitaplik,
-  resmi-gazete (.jpg).
+  resmi-gazete, av-samed-akduman (.jpg).
 - Tüm foto işlemleri `PhotoSurface` bileşeniyle (variant: hero/band/cta/framed/
   texture/map); duotone/scrim CSS'te, dosyalar orijinal renkte. "framed" diğer
   varyantlardan BİLEREK daha canlı (hafif filtre — doğal renk öne çıkar).
