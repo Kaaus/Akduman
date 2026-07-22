@@ -3,7 +3,6 @@ import JsonLd from "@/components/JsonLd";
 import PageHeading from "@/components/PageHeading";
 import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
-import SiteImage from "@/components/SiteImage";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
@@ -25,22 +24,62 @@ export default function HakkimizdaPage() {
       />
 
       <section className="bg-white">
-        <div className="container-site pt-8 pb-12 md:pb-16">
+        <div className="container-site pt-8">
           <PageHeading crumbs={[{ label: "Hakkımızda" }]} title="Hakkımızda" />
+        </div>
+      </section>
 
+      {/* Avukat kartı — sıralamada YUKARI taşındı (H1'in hemen ardından) */}
+      <section className="border-t border-line bg-paper">
+        <div className="container-site py-12">
+          <Reveal>
+            {/* Avukat kartı — v2 kart stili + canlı (framed) çerçeveli portre.
+                Kaynak fotoğrafın gerçek oranı (1402×1122 ≈ 5:4) birebir
+                kullanılır — kırpım yok. Görsel sütunu ~%45 pay alır, 560px'te
+                sınırlanır (md:max-w-[560px]); kartın kendisi de genişledi
+                (max-w-4xl → max-w-5xl). */}
+            <div className="card grid items-center gap-10 p-6 md:grid-cols-[45fr_55fr] md:p-10 md:max-w-5xl">
+              <PhotoSurface
+                image={IMAGES.avukat}
+                variant="framed"
+                aspectRatio="5/4"
+                sizes="(max-width: 768px) 100vw, 560px"
+                className="md:max-w-[560px]"
+              />
+              <div>
+                <h2>{SITE.lawyer}</h2>
+                {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
+                {PLACEHOLDERS.BARO_SICIL_NO && (
+                  <p className="mt-2 text-[15px] font-semibold text-bronze-700">
+                    Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
+                  </p>
+                )}
+                <p className="mt-4 text-muted">
+                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
+                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
+                  Hukuku, Ticaret ve Şirketler Hukuku, Rekabet Hukuku ve diğer
+                  tüm hukuki alanlarda hukuki danışmanlık ve avukatlık
+                  hizmeti vermektedir.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Büro tanıtımı — sıralamada AŞAĞI taşındı (avukat kartından sonra) */}
+      <section className="border-t border-line bg-white">
+        <div className="container-site py-12">
           {/* Onaylı düzen: SOLDA çerçeveli resmi-gazete görseli (yatay 3:2),
               SAĞDA kicker + serif başlık + mevcut iki paragraf + imza bloğu.
-              Mobilde görsel üstte, metin altta (grid akışı zaten böyle).
-              Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
-          {/* items-start (items-center DEĞİL): fotoğraf artık sabit
-              yükseklikte (vh'ye bağlı), metin sütunu içerikle değişken —
-              üstten hizalamak, ortalamanın eklediği "gevşek" boşluğu
-              kaldırıp fold garantisini güvenilir kılıyor. */}
+              Mobilde görsel üstte, metin altta (grid akışı zaten böyle). */}
+          {/* items-start (items-center DEĞİL): fotoğraf sabit yükseklikte,
+              metin sütunu içerikle değişken — üstten hizalamak, ortalamanın
+              eklediği "gevşek" boşluğu kaldırır. */}
           <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
             {/* Kaynak düşük çözünürlüklü (548×364) — genişlik max ~480px'e
                 sınırlanır (upscale/bulanıklık minimize), yükseklik 3:2
-                orandan türetilir (~320px, eski dikey kutudan çok daha kısa
-                — fold garantisine ekstra pay katıyor). */}
+                orandan türetilir (~320px). */}
             <PhotoSurface
               image={IMAGES.resmiGazete}
               variant="framed"
@@ -87,39 +126,6 @@ export default function HakkimizdaPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Avukat kartı */}
-      <section className="border-t border-line bg-paper">
-        <div className="container-site py-16">
-          <Reveal>
-            {/* Avukat kartı — v2 kart stili + duotone çerçeveli portre */}
-            <div className="card grid max-w-4xl items-center gap-10 p-6 md:grid-cols-[280px_1fr] md:p-10">
-              <SiteImage
-                image={IMAGES.avukat}
-                aspectRatio="3/4"
-                keyline
-                sizes="(max-width: 768px) 100vw, 280px"
-                className="m-3"
-              />
-              <div>
-                <h2>{SITE.lawyer}</h2>
-                {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
-                {PLACEHOLDERS.BARO_SICIL_NO && (
-                  <p className="mt-2 text-[15px] font-semibold text-bronze-700">
-                    Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
-                  </p>
-                )}
-                <p className="mt-4 text-muted">
-                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
-                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
-                  Hukuku ve diğer tüm hukuki alanlarda hukuki danışmanlık ve
-                  avukatlık hizmeti vermektedir.
-                </p>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
