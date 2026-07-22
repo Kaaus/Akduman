@@ -126,9 +126,9 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Millet Kütüphanesi okuma salonu",
     ready: true,
   },
-  ilkMeclis: {
-    src: "/images/ilk-meclis.jpg",
-    alt: "İlk Meclis — Hakimiyet Milletindir salonu",
+  adaletHeykeli: {
+    src: "/images/adalet-heykeli.jpg",
+    alt: "Adalet heykeli — Themis",
     ready: true,
   },
   kutuphaneKubbe: {

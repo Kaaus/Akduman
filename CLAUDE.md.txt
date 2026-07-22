@@ -27,7 +27,8 @@ Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geç
   kaydırması YASAK.
 - Kontrast WCAG AA zorunlu. `prefers-reduced-motion`'da tüm animasyonlar kapanır.
 - YASAK: dekoratif gradyan (foto üstü scrim hariç), glassmorphism, emoji ikon,
-  Inter/Poppins, tokmak-terazi klişe stok görsel, sahte placeholder metin.
+  Inter/Poppins, tokmak-terazi klişe stok görsel (istisna: adalet-heykeli.jpg —
+  kullanıcı onaylı, bkz. Hero.tsx), sahte placeholder metin.
 
 ## GÖRSEL SİSTEMİ
 - Fotoğraflar `public/images/`: hero-kitaplar, kutuphane-dikey, kutuphane-kubbe,
