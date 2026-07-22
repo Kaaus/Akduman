@@ -175,10 +175,10 @@ export type NavItem = {
   children?: { label: string; href: string }[];
 };
 
-// ─── Hizmet Envanteri (8 faaliyet alanı) ─────────────────────────────────────
+// ─── Hizmet Envanteri (10 faaliyet alanı) ────────────────────────────────────
 
 export type Service = {
-  /** Kart sıra numarası: "01"–"08" */
+  /** Kart sıra numarası: "01"–"10" */
   num: string;
   slug: string;
   /** Kart/menü başlığı */
@@ -294,6 +294,17 @@ export const SERVICES: Service[] = [
     metaDescription:
       "Şirket kuruluşu, ortaklar arası uyuşmazlıklar, ticari sözleşmeler ve ticari davalarda Ankara'da hukuki destek.",
     alan: "ticaret",
+  },
+  {
+    num: "10",
+    slug: "rekabet-hukuku",
+    title: "Rekabet Hukuku",
+    oneLiner: "Rekabet Kurumu süreçleri ve rekabet ihlali uyuşmazlıkları.",
+    h1: "Ankara Rekabet Hukuku Avukatı — Rekabet Hukuku",
+    metaTitle: "Ankara Rekabet Hukuku Avukatı | Akduman Hukuk Bürosu",
+    metaDescription:
+      "Rekabet Kurumu soruşturmaları, birleşme-devralma bildirimleri ve rekabet ihlallerinden doğan uyuşmazlıklarda hukuki destek.",
+    alan: "rekabet",
   },
 ];
 

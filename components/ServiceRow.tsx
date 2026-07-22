@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  BarChart3,
   Briefcase,
   Building2,
   Globe,
@@ -25,6 +26,7 @@ const ICONS: Record<string, LucideIcon> = {
   sigorta: ShieldCheck,
   idare: Landmark,
   ticaret: Handshake,
+  rekabet: BarChart3,
 };
 
 /**
