@@ -7,19 +7,25 @@ import type { ImageEntry } from "@/lib/site";
  * (grayscale + navy-900 multiply) + opsiyonel scrim (metin okunabilirliği)
  * + "framed" varyantında flush pirinç çerçeve/hover.
  *
- * Varyant preset'leri --ph-o (duotone opaklığı) ve --ph-b (parlaklık) CSS
- * custom property'lerini besler; tüm hareketler prefers-reduced-motion'da
- * globals.css'teki genel kural (`* { animation/transition: none }`) ile
- * otomatik kapanır.
+ * Varyant preset'leri --ph-o (duotone opaklığı), --ph-b (parlaklık) ve
+ * --ph-g (grayscale miktarı) CSS custom property'lerini besler. "framed"
+ * BİLEREK diğerlerinden farklı — hafif filtre (g:.15, o:.15) doğal rengin
+ * görünmesini sağlar; diğer varyantlar koyu-duotone kimliğini korur (g
+ * varsayılan .6). Tüm hareketler prefers-reduced-motion'da globals.css'teki
+ * genel kural (`* { animation/transition: none }`) ile otomatik kapanır.
  */
 
 type Variant = "hero" | "band" | "cta" | "framed" | "texture" | "map";
 
-const VARIANT: Record<Variant, { o: number; b: number; scrim: boolean }> = {
+/** g = grayscale miktarı (0-1). Belirtilmezse .6 (mevcut site-geneli varsayılan). */
+const VARIANT: Record<Variant, { o: number; b: number; g?: number; scrim: boolean }> = {
   hero: { o: 0.55, b: 0.75, scrim: true },
   band: { o: 0.68, b: 0.6, scrim: true },
   cta: { o: 0.8, b: 0.55, scrim: false },
-  framed: { o: 0.35, b: 0.95, scrim: false },
+  // Canlı renk: diğer varyantlardan BİLEREK farklı — çerçeveli görseller
+  // kart/thumbnail gibi öne çıkan, doğal renginin görünmesi gereken
+  // yerlerde kullanılır (diğer varyantların koyu-duotone kimliğine dokunma).
+  framed: { o: 0.15, b: 0.97, g: 0.15, scrim: false },
   texture: { o: 0.62, b: 0.68, scrim: false },
   /** Hafif duotone, çerçevesiz tam-genişlik bleed (örn. İletişim harita alanı). */
   map: { o: 0.35, b: 0.9, scrim: false },
@@ -82,6 +88,7 @@ export default function PhotoSurface({
             aspectRatio: fill ? undefined : aspectRatio,
             "--ph-o": preset.o,
             "--ph-b": preset.b,
+            "--ph-g": preset.g ?? 0.6,
           } as React.CSSProperties
         }
       >
@@ -93,7 +100,7 @@ export default function PhotoSurface({
           priority={priority}
           style={objectPosition ? { objectPosition } : undefined}
           className={[
-            "object-cover [filter:grayscale(.6)_brightness(var(--ph-b,1))]",
+            "object-cover [filter:grayscale(var(--ph-g,.6))_brightness(var(--ph-b,1))]",
             "transition-transform duration-[600ms] ease-[cubic-bezier(.22,1,.36,1)]",
             kenBurns ? "ph-ken-burns" : "",
             framed ? "group-hover:scale-[1.04]" : "",
@@ -105,7 +112,7 @@ export default function PhotoSurface({
           aria-hidden="true"
           className={[
             "pointer-events-none absolute inset-0 bg-navy-900 mix-blend-multiply opacity-[var(--ph-o)]",
-            framed ? "transition-opacity duration-[600ms] group-hover:opacity-[.18]" : "",
+            framed ? "transition-opacity duration-[600ms] group-hover:opacity-0" : "",
           ]
             .filter(Boolean)
             .join(" ")}
