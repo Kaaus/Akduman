@@ -136,9 +136,11 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Millet Kütüphanesi kubbesi",
     ready: true,
   },
-  anitkabir: {
-    src: "/images/anitkabir.jpg",
-    alt: "Anıtkabir sütunları",
+  /** Kaynak düşük çözünürlüklü (548×364) — bkz. Hakkımızda sayfasındaki
+   *  sizes/max-width sınırlaması (upscale/bulanıklığı azaltır). */
+  resmiGazete: {
+    src: "/images/resmi-gazete.jpg",
+    alt: "Resmî Gazete ciltleri",
     ready: true,
   },
   adaletSarayi: {

@@ -28,7 +28,7 @@ export default function HakkimizdaPage() {
         <div className="container-site pt-8 pb-12 md:pb-16">
           <PageHeading crumbs={[{ label: "Hakkımızda" }]} title="Hakkımızda" />
 
-          {/* Onaylı düzen: SOLDA çerçeveli anitkabir görseli (dikey ~1:1.1),
+          {/* Onaylı düzen: SOLDA çerçeveli resmi-gazete görseli (yatay 3:2),
               SAĞDA kicker + serif başlık + mevcut iki paragraf + imza bloğu.
               Mobilde görsel üstte, metin altta (grid akışı zaten böyle).
               Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
@@ -37,17 +37,17 @@ export default function HakkimizdaPage() {
               üstten hizalamak, ortalamanın eklediği "gevşek" boşluğu
               kaldırıp fold garantisini güvenilir kılıyor. */}
           <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-            {/* Yükseklik ekrana bağlanır (min(52vh,440px)) — dar viewport'ta
-                (1366×768 gibi) görselin TAMAMI çerçevesiyle fold üstünde
-                kalır; genişlik 1:1.1 orandan hesaplanır (aspectRatio prop'u
-                iç katmanda hâlâ aynı oranı korur, çelişki yok). */}
+            {/* Kaynak düşük çözünürlüklü (548×364) — genişlik max ~480px'e
+                sınırlanır (upscale/bulanıklık minimize), yükseklik 3:2
+                orandan türetilir (~320px, eski dikey kutudan çok daha kısa
+                — fold garantisine ekstra pay katıyor). */}
             <PhotoSurface
-              image={IMAGES.anitkabir}
+              image={IMAGES.resmiGazete}
               variant="framed"
-              aspectRatio="1/1.1"
-              objectPosition="center top"
-              sizes="(max-width: 768px) 90vw, 38vw"
-              className="mx-auto h-[min(52vh,440px)] w-[calc(min(52vh,440px)/1.1)] lg:mx-0"
+              aspectRatio="3/2"
+              objectPosition="center"
+              sizes="(max-width: 768px) 90vw, 480px"
+              className="mx-auto w-full max-w-[480px] lg:mx-0"
             />
             {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
             <div>

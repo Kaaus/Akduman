@@ -32,9 +32,11 @@ Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geç
 
 ## GÖRSEL SİSTEMİ
 - Fotoğraflar `public/images/`: hero-kitaplar, kutuphane-dikey, kutuphane-kubbe,
-  anitkabir, adalet-sarayi, adalet-bakanligi, cubbe-doku (.jpg).
-- Tüm foto işlemleri `PhotoSurface` bileşeniyle (variant: hero/band/cta/framed/texture);
-  duotone/scrim CSS'te, dosyalar orijinal renkte.
+  adalet-heykeli, adalet-sarayi, adalet-bakanligi, mahkeme-salonu, kitaplik,
+  resmi-gazete (.jpg).
+- Tüm foto işlemleri `PhotoSurface` bileşeniyle (variant: hero/band/cta/framed/
+  texture/map); duotone/scrim CSS'te, dosyalar orijinal renkte. "framed" diğer
+  varyantlardan BİLEREK daha canlı (hafif filtre — doğal renk öne çıkar).
 - **Makale kartlarına ve makale detaylarına foto konmaz** (kesin karar).
 - Logo: `logo-monogram.png` (`public/images/`) — kare monogram, HEM açık HEM
   koyu zeminde AYNI dosya. `components/BrandLockup.tsx` ile render edilir.
