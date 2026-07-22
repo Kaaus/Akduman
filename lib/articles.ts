@@ -2,6 +2,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { Alan } from "@/lib/site";
 
 /**
  * lib/articles.ts — Makale kayıt defteri.
@@ -28,7 +29,7 @@ export type Article = {
   /** Son güncelleme tarihi (ISO). Aynı politika. TODO: gerçek tarih eski siteden girilecek. */
   dateModified: string;
   /** Faaliyet alanı etiketleri — hizmet sayfası ↔ makale eşleştirmesinde kullanılır. */
-  alan: string[];
+  alan: Alan[];
   /** Kapak görseli yolu; boşsa kart görselsiz basılır, og:image varsayılana düşer. */
   cover?: string;
 };
@@ -172,7 +173,7 @@ export function getArticle(slug: string): Article | undefined {
 }
 
 /** Bir faaliyet alanına etiketli makaleler (hizmet sayfası "İlgili yazılarımız" bloğu). */
-export function getArticlesByAlan(alan: string): Article[] {
+export function getArticlesByAlan(alan: Alan): Article[] {
   return ARTICLES.filter((a) => a.alan.includes(alan));
 }
 

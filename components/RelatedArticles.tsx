@@ -1,13 +1,14 @@
 import ArticleCard from "@/components/ArticleCard";
 import SectionHeading from "@/components/SectionHeading";
 import { getArticlesByAlan } from "@/lib/articles";
+import type { Alan } from "@/lib/site";
 
 /**
  * Hizmet sayfalarındaki "İlgili yazılarımız" bloğu.
  * Alan etiketine sahip makale yoksa blok HİÇ render edilmez.
  * Anchor metni daima makale başlığının kendisidir.
  */
-export default function RelatedArticles({ alan }: { alan: string }) {
+export default function RelatedArticles({ alan }: { alan: Alan }) {
   const articles = getArticlesByAlan(alan);
   if (articles.length === 0) return null;
 

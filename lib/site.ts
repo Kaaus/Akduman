@@ -177,6 +177,24 @@ export type NavItem = {
 
 // ─── Hizmet Envanteri (10 faaliyet alanı) ────────────────────────────────────
 
+/**
+ * Geçerli alan etiketleri — TEK KAYNAK. Hem Service.alan (aşağıda) hem de
+ * lib/articles.ts → Article.alan bu union'ı kullanır; yeni bir hizmet alanı
+ * eklendiğinde etiket burada bir kez tanımlanır, ikisi de derleme zamanında
+ * senkron kalır (yanlış yazılmış bir etiket artık derlemeyi kırar).
+ */
+export type Alan =
+  | "ceza"
+  | "gayrimenkul"
+  | "aile"
+  | "is"
+  | "yabancilar"
+  | "miras"
+  | "sigorta"
+  | "idare"
+  | "ticaret"
+  | "rekabet";
+
 export type Service = {
   /** Kart sıra numarası: "01"–"10" */
   num: string;
@@ -192,7 +210,7 @@ export type Service = {
   /** Meta description — SEO tablosuyla birebir */
   metaDescription: string;
   /** Makale eşleştirmede kullanılan alan etiketi */
-  alan: string;
+  alan: Alan;
 };
 
 export const SERVICES: Service[] = [
