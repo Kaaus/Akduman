@@ -339,7 +339,7 @@ export const HOME_FAQ: FaqItem[] = [
 
 /** Footer 1. sütun büro tanımı (birebir). */
 export const FOOTER_TAGLINE =
-  "Akduman Hukuk Bürosu, Ankara'da müvekkillerine avukatlık ve hukuki danışmanlık hizmeti sunmaktadır.";
+  "Akduman Hukuk Bürosu, Ankara'da siz değerli müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta Hukuku ve diğer tüm hukuki alanlarda hukuki danışmanlık ve avukatlık hizmeti vermektedir.";
 
 /** Footer alt şerit disclaimer'ı (zorunlu, birebir). */
 export const DISCLAIMER =
