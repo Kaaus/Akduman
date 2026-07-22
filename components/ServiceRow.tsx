@@ -4,6 +4,7 @@ import {
   Briefcase,
   Building2,
   Globe,
+  Handshake,
   Landmark,
   Scale,
   ScrollText,
@@ -23,6 +24,7 @@ const ICONS: Record<string, LucideIcon> = {
   miras: ScrollText,
   sigorta: ShieldCheck,
   idare: Landmark,
+  ticaret: Handshake,
 };
 
 /**

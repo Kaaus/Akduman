@@ -284,6 +284,17 @@ export const SERVICES: Service[] = [
       "İptal ve tam yargı davaları, idari başvurular ve disiplin cezalarına itiraz süreçlerinde hukuki destek.",
     alan: "idare",
   },
+  {
+    num: "09",
+    slug: "ticaret-ve-sirketler-hukuku",
+    title: "Ticaret ve Şirketler Hukuku",
+    oneLiner: "Şirket kuruluşu, ortaklık uyuşmazlıkları ve ticari sözleşmeler.",
+    h1: "Ankara Ticaret ve Şirketler Hukuku Avukatı",
+    metaTitle: "Ankara Ticaret ve Şirketler Hukuku Avukatı | Akduman Hukuk",
+    metaDescription:
+      "Şirket kuruluşu, ortaklar arası uyuşmazlıklar, ticari sözleşmeler ve ticari davalarda Ankara'da hukuki destek.",
+    alan: "ticaret",
+  },
 ];
 
 export function getService(slug: string): Service | undefined {
