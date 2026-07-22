@@ -156,9 +156,9 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Duruşma salonu",
     ready: true,
   },
-  /** Dekoratif kullanım (İletişim sol panel arka planı) — alt bilerek boş. */
-  meclis: {
-    src: "/images/meclis.jpg",
+  /** Dekoratif kullanım (İletişim harita alanı, HARITA_EMBED_URL boşken) — alt bilerek boş. */
+  kitaplik: {
+    src: "/images/kitaplik.jpg",
     alt: "",
     ready: true,
   },

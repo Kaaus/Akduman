@@ -75,8 +75,7 @@ export default function IletisimPage() {
               Üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
           <Reveal>
             <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
-              {/* Sol panel — düz navy-950 zemin (görsel arka plan YOK,
-                  bkz. GÖREV 1: meclis.jpg harita alanına taşındı). */}
+              {/* Sol panel — düz navy-950 zemin, görsel arka plan YOK. */}
               <div className="relative overflow-hidden bg-navy-950 p-8 md:p-10">
                 <h2 className="relative z-10 mb-8 font-serif text-[26px] font-semibold text-[#F4F1EA]">
                   İletişim Bilgileri
@@ -133,7 +132,7 @@ export default function IletisimPage() {
         </div>
       </section>
 
-      {/* Tam genişlik harita — {{HARITA_EMBED_URL}} boşken meclis.jpg
+      {/* Tam genişlik harita — {{HARITA_EMBED_URL}} boşken kitaplik.jpg
           (hafif duotone, çerçevesiz bleed) gösterilir; url doldurulunca
           görsel yerini iframe haritaya bırakır. */}
       <section aria-label="Konum" className="border-t border-line">
@@ -147,10 +146,10 @@ export default function IletisimPage() {
           />
         ) : (
           <PhotoSurface
-            image={IMAGES.meclis}
+            image={IMAGES.kitaplik}
             variant="map"
             aspectRatio="16/6"
-            objectPosition="center 20%"
+            objectPosition="center"
             sizes="100vw"
           />
         )}
