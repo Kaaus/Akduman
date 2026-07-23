@@ -147,11 +147,6 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Adalet Bakanlığı binası",
     ready: true,
   },
-  mahkemeSalonu: {
-    src: "/images/mahkeme-salonu.jpg",
-    alt: "Duruşma salonu",
-    ready: true,
-  },
   /** Dekoratif kullanım (İletişim harita alanı, HARITA_EMBED_URL boşken) — alt bilerek boş. */
   kitaplik: {
     src: "/images/kitaplik.jpg",

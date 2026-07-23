@@ -6,12 +6,11 @@ import FaqAccordion from "@/components/FaqAccordion";
 import Hero from "@/components/Hero";
 import IntroSplash from "@/components/IntroSplash";
 import JsonLd from "@/components/JsonLd";
-import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceRow from "@/components/ServiceRow";
 import { buildMetadata, faqSchema } from "@/lib/seo";
-import { HOME_FAQ, IMAGES, INTRO_SPLASH, SERVICES } from "@/lib/site";
+import { HOME_FAQ, INTRO_SPLASH, SERVICES } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman",
@@ -32,11 +31,13 @@ export default function HomePage() {
       {/* (a) Hero v2 */}
       <Hero />
 
-      {/* (b) Tanıtım bandı — white */}
+      {/* (b) Tanıtım bandı — white, fotosuz tek sütun (çerçeveli duruşma
+          salonu görseli kaldırıldı, yerine görsel gelmedi; bant yüksekliği
+          içeriğe göre doğal kısaldı). */}
       <section id="tanitim" className="bg-white">
-        <div className="container-site grid gap-10 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <Reveal className="max-w-3xl">
+        <div className="container-site py-16 md:py-24">
+          <div className="mx-auto max-w-3xl">
+            <Reveal>
               <p className="kicker mb-3">Ankara</p>
               <h2>Hukuki Danışmanlık &amp; Avukatlık Hizmetleri</h2>
               <p className="mt-5">
@@ -47,25 +48,13 @@ export default function HomePage() {
                 yürütmektedir.
               </p>
             </Reveal>
-            <Reveal delay={140} className="shrink-0">
+            <Reveal delay={140} className="mt-8">
               <Link href="/hakkimizda/" className="btn-secondary">
                 Hakkımızda
                 <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" className="btn-arrow" />
               </Link>
             </Reveal>
           </div>
-          <Reveal delay={80}>
-            <PhotoSurface
-              image={IMAGES.mahkemeSalonu}
-              variant="framed"
-              aspectRatio="16/9"
-              objectPosition="center 25%"
-              sizes="(max-width: 768px) 90vw, 38vw"
-            />
-            <p className="mt-3 text-center text-[13px] text-muted">
-              Duruşma salonu — Adalet Mülkün Temelidir
-            </p>
-          </Reveal>
         </div>
       </section>
 
