@@ -28,8 +28,8 @@ import { INTRO_SPLASH_MODE } from "@/lib/site";
  * çalışıp Hero'nun animasyonunu yeniden senkronlar.
  */
 
-const DRAW_AND_HOLD_MS = 1050; // çizim (~940ms) + nefes payı
-const SEPARATE_MS = 700; // paneller ayrılırken
+const DRAW_AND_HOLD_MS = 530; // çizim (~450ms) + nefes payı (~80ms)
+const SEPARATE_MS = 450; // paneller ayrılırken
 
 export default function IntroSplash() {
   const [visible, setVisible] = useState(false);
@@ -140,14 +140,14 @@ export default function IntroSplash() {
       {/* Sol panel */}
       <div
         aria-hidden="true"
-        className={`h-full w-1/2 bg-navy-950 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
+        className={`h-full w-1/2 bg-navy-950 transition-transform duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] ${
           separating ? "-translate-x-full" : "translate-x-0"
         }`}
       />
       {/* Sağ panel — aralarında görünür çizgi yok, kapalıyken tek parça algılanır */}
       <div
         aria-hidden="true"
-        className={`h-full w-1/2 bg-navy-950 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
+        className={`h-full w-1/2 bg-navy-950 transition-transform duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] ${
           separating ? "translate-x-full" : "translate-x-0"
         }`}
       />
@@ -170,17 +170,17 @@ export default function IntroSplash() {
           {/* Dikey mil */}
           <line className="intro-draw" style={{ animationDelay: "0ms" }} pathLength={1} x1="60" y1="24" x2="60" y2="122" />
           {/* Yatay denge kolu */}
-          <line className="intro-draw" style={{ animationDelay: "80ms" }} pathLength={1} x1="18" y1="22" x2="102" y2="22" />
+          <line className="intro-draw" style={{ animationDelay: "45ms" }} pathLength={1} x1="18" y1="22" x2="102" y2="22" />
           {/* Taban */}
-          <line className="intro-draw" style={{ animationDelay: "160ms" }} pathLength={1} x1="42" y1="122" x2="78" y2="122" />
+          <line className="intro-draw" style={{ animationDelay: "90ms" }} pathLength={1} x1="42" y1="122" x2="78" y2="122" />
           {/* Sol askı */}
-          <line className="intro-draw" style={{ animationDelay: "240ms" }} pathLength={1} x1="18" y1="22" x2="18" y2="50" />
+          <line className="intro-draw" style={{ animationDelay: "135ms" }} pathLength={1} x1="18" y1="22" x2="18" y2="50" />
           {/* Sağ askı */}
-          <line className="intro-draw" style={{ animationDelay: "320ms" }} pathLength={1} x1="102" y1="22" x2="102" y2="50" />
+          <line className="intro-draw" style={{ animationDelay: "180ms" }} pathLength={1} x1="102" y1="22" x2="102" y2="50" />
           {/* Sol çanak yayı */}
-          <path className="intro-draw" style={{ animationDelay: "400ms" }} pathLength={1} d="M4,50 Q18,66 32,50" />
+          <path className="intro-draw" style={{ animationDelay: "225ms" }} pathLength={1} d="M4,50 Q18,66 32,50" />
           {/* Sağ çanak yayı */}
-          <path className="intro-draw" style={{ animationDelay: "480ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
+          <path className="intro-draw" style={{ animationDelay: "270ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
           {/* Mil ekseni */}
           <circle className="intro-pivot" cx="60" cy="22" r="2.5" fill="#BFA05C" stroke="none" />
         </svg>
