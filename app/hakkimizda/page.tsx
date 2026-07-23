@@ -70,60 +70,45 @@ export default function HakkimizdaPage() {
       {/* Büro tanıtımı — sıralamada AŞAĞI taşındı (avukat kartından sonra) */}
       <section className="border-t border-line bg-white">
         <div className="container-site py-12">
-          {/* Onaylı düzen: SOLDA çerçeveli resmi-gazete görseli (yatay 3:2),
-              SAĞDA kicker + serif başlık + mevcut iki paragraf + imza bloğu.
-              Mobilde görsel üstte, metin altta (grid akışı zaten böyle). */}
-          {/* items-start (items-center DEĞİL): fotoğraf sabit yükseklikte,
-              metin sütunu içerikle değişken — üstten hizalamak, ortalamanın
-              eklediği "gevşek" boşluğu kaldırır. */}
-          <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-            {/* Kaynak düşük çözünürlüklü (548×364) — genişlik max ~480px'e
-                sınırlanır (upscale/bulanıklık minimize), yükseklik 3:2
-                orandan türetilir (~320px). */}
-            <PhotoSurface
-              image={IMAGES.resmiGazete}
-              variant="framed"
-              aspectRatio="3/2"
-              objectPosition="center"
-              sizes="(max-width: 768px) 90vw, 480px"
-              className="mx-auto w-full max-w-[480px] lg:mx-0"
-            />
+          {/* Fotosuz tek sütun düzeni: kicker+başlık+iki paragraf+imza bloğu
+              mx-auto max-w-3xl içinde ortalanmış bir blok olarak durur,
+              ama İÇERİK (metin) her zamanki gibi sola hizalıdır — yalnız
+              sayfanın üst BAŞLIK bloğu (PageHeading/H1) merkez hizalı kalır. */}
+          <div className="mx-auto max-w-3xl">
             {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
-            <div>
-              <p className="kicker">Hakkımızda</p>
-              <h2 className="mt-2">Akduman Hukuk Bürosu</h2>
-              <div className="mt-3 max-w-[70ch] space-y-2">
-                <p>
-                  <strong>Akduman Hukuk Bürosu</strong>, Ankara&rsquo;da
-                  faaliyet gösteren, hukukun temel ilkelerine bağlı ve
-                  müvekkil odaklı yaklaşımı benimseyen bir hukuk bürosudur.
-                  Bireysel ve kurumsal müvekkillerimize, dava takibi, hukuki
-                  danışmanlık ve sözleşme yönetimi gibi birçok alanda
-                  titizlikle hizmet vermekteyiz. Amacımız, her
-                  müvekkilimizin ihtiyacına özel, şeffaf ve güvenilir bir
-                  hukuk hizmeti sunarak haklarını en güçlü şekilde
-                  savunmaktır.
-                </p>
-                <p>
-                  Akduman Hukuk Bürosunun kurucusu olan{" "}
-                  <strong>Av. Samed Akduman</strong> öncülüğünde
-                  müvekkillerine özenli, hızlı ve çözüm odaklı hizmet sunma
-                  amacı ile faaliyetlerini sürdürmektedir.
-                </p>
-              </div>
+            <p className="kicker">Hakkımızda</p>
+            <h2 className="mt-2">Akduman Hukuk Bürosu</h2>
+            <div className="mt-3 space-y-2">
+              <p>
+                <strong>Akduman Hukuk Bürosu</strong>, Ankara&rsquo;da
+                faaliyet gösteren, hukukun temel ilkelerine bağlı ve
+                müvekkil odaklı yaklaşımı benimseyen bir hukuk bürosudur.
+                Bireysel ve kurumsal müvekkillerimize, dava takibi, hukuki
+                danışmanlık ve sözleşme yönetimi gibi birçok alanda
+                titizlikle hizmet vermekteyiz. Amacımız, her
+                müvekkilimizin ihtiyacına özel, şeffaf ve güvenilir bir
+                hukuk hizmeti sunarak haklarını en güçlü şekilde
+                savunmaktır.
+              </p>
+              <p>
+                Akduman Hukuk Bürosunun kurucusu olan{" "}
+                <strong>Av. Samed Akduman</strong> öncülüğünde
+                müvekkillerine özenli, hızlı ve çözüm odaklı hizmet sunma
+                amacı ile faaliyetlerini sürdürmektedir.
+              </p>
+            </div>
 
-              {/* İmza bloğu — sol 3px bronz çizgi */}
-              <div className="mt-3 border-l-[3px] border-bronze-500 pl-5">
-                <p className="font-serif text-[20px] font-semibold text-ink-strong">
-                  {SITE.lawyer}
-                </p>
-                <p className="mt-1 text-[15px] text-muted">
-                  Ankara Barosu
-                  {/* Sicil yalnızca {{BARO_SICIL_NO}} doluysa eklenir */}
-                  {PLACEHOLDERS.BARO_SICIL_NO &&
-                    ` — Sicil No: ${PLACEHOLDERS.BARO_SICIL_NO}`}
-                </p>
-              </div>
+            {/* İmza bloğu — sol 3px bronz çizgi */}
+            <div className="mt-3 border-l-[3px] border-bronze-500 pl-5">
+              <p className="font-serif text-[20px] font-semibold text-ink-strong">
+                {SITE.lawyer}
+              </p>
+              <p className="mt-1 text-[15px] text-muted">
+                Ankara Barosu
+                {/* Sicil yalnızca {{BARO_SICIL_NO}} doluysa eklenir */}
+                {PLACEHOLDERS.BARO_SICIL_NO &&
+                  ` — Sicil No: ${PLACEHOLDERS.BARO_SICIL_NO}`}
+              </p>
             </div>
           </div>
         </div>
