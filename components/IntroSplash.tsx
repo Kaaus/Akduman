@@ -4,22 +4,15 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { INTRO_SPLASH_MODE } from "@/lib/site";
 
 /**
- * Terazili perde — TEK animasyon, iki mod:
- * - "full": yalnız tarayıcıdan ilk geliş / yenileme, Ana Sayfa'da (bkz.
- *   components/PageTransition.tsx'in mod kararı). Tam koreografi, ~1.75sn.
- * - "compact": SİTE İÇİ HER rota geçişinde (Ana Sayfa'ya dönüş dahil) —
- *   hızlandırılmış çizim + kısaltılmış bekleme + daha hızlı panel açılışı,
- *   ~1.1sn. His her sayfada özdeş olsun diye mini-perde YERİNE bu kullanılır.
- *
- * Mounting: components/PageTransition.tsx tarafından, mod "off" değilken ve
- * (hard/ilk yüklemede yalnız Ana Sayfa için) render edilir. Bileşenin kendisi
- * yalnızca session/reduced-motion kararını verir — mod seçimi tamamen
- * çağıranın sorumluluğundadır (SSR-safe, pathname bağımlı karar
- * PageTransition'da veriliyor).
- *
- * İkisinde de: sessionStorage'a "always" modda hiç dokunulmaz (session
- * modda eski oturum-başına-bir-kez davranışı), prefers-reduced-motion'da
- * hiç oynamaz, tıklama/Esc/scroll anında atlar.
+ * Anasayfa açılış perdesi — yalnızca app/page.tsx'te, INTRO_SPLASH_MODE
+ * "off" değilken mount edilir.
+ * - "always": sessionStorage'a HİÇ dokunulmaz (ne okunur ne yazılır) —
+ *   perde her mount'ta (ilk yükleme VEYA site içinden Ana Sayfa'ya
+ *   dönüş) baştan sona oynar.
+ * - "session": sessionStorage'da "introSeen" yoksa oturumda bir kez oynar,
+ *   sonra unmount olur ve bir daha görünmez (eski davranış).
+ * İkisinde de prefers-reduced-motion'da hiç oynamaz; tıklama/Esc/scroll
+ * anında atlar.
  *
  * Hero senkronu: perde oynayacaksa, ilk (SSR ile eşleşen) render'dan hemen
  * sonra ama tarayıcı boyamadan ÖNCE (useLayoutEffect) <html> etiketine
@@ -28,71 +21,24 @@ import { INTRO_SPLASH_MODE } from "@/lib/site";
  * kuralı, Hero'nun kademeli giriş animasyonunu perde kapalıyken bastırır;
  * perde bittiğinde data-intro-pending kaldırılıp data-intro-done eklenir,
  * .hero-line'ın normal kuralı yeniden devreye girer ve animasyon o anda
- * sıfırdan başlar. Ana Sayfa'ya her dönüşte (compact modda) bu senkron
- * aynen çalışır — Hero yalnız Ana Sayfa'da bulunduğundan diğer sayfalarda
- * bu attribute'un varlığı zararsızdır (eşleşen bir seçici yoktur).
+ * sıfırdan başlar. Bu senkron "always" modda da AYNEN çalışır — Ana
+ * Sayfa'ya her dönüşte IntroSplash yeniden mount olur (template.tsx'in
+ * her rota değişiminde çocuklarını yeniden mount etme garantisi
+ * sayesinde), dolayısıyla useLayoutEffect de her seferinde sıfırdan
+ * çalışıp Hero'nun animasyonunu yeniden senkronlar.
  */
 
-type Mode = "full" | "compact";
+const DRAW_AND_HOLD_MS = 1050; // çizim (~940ms) + nefes payı
+const SEPARATE_MS = 700; // paneller ayrılırken
 
-const TIMING: Record<
-  Mode,
-  {
-    holdMs: number;
-    separateMs: number;
-    drawDuration: number;
-    drawStagger: number;
-    pivotDelay: number;
-    pivotDuration: number;
-    kickerDelay: number;
-    kickerDuration: number;
-    panelDuration: number;
-  }
-> = {
-  full: {
-    holdMs: 1050,
-    separateMs: 700,
-    drawDuration: 380,
-    drawStagger: 80,
-    pivotDelay: 560,
-    pivotDuration: 250,
-    kickerDelay: 600,
-    kickerDuration: 400,
-    panelDuration: 700,
-  },
-  compact: {
-    holdMs: 600,
-    separateMs: 500,
-    drawDuration: 220,
-    drawStagger: 40,
-    pivotDelay: 260,
-    pivotDuration: 150,
-    kickerDelay: 300,
-    kickerDuration: 250,
-    panelDuration: 500,
-  },
-};
-
-/** Terazi SVG'sindeki çizgiler/yaylar — sırayla `drawStagger` kademeyle çizilir. */
-const STROKES: Array<{ el: "line" | "path"; props: Record<string, string> }> = [
-  { el: "line", props: { x1: "60", y1: "24", x2: "60", y2: "122" } }, // dikey mil
-  { el: "line", props: { x1: "18", y1: "22", x2: "102", y2: "22" } }, // yatay denge kolu
-  { el: "line", props: { x1: "42", y1: "122", x2: "78", y2: "122" } }, // taban
-  { el: "line", props: { x1: "18", y1: "22", x2: "18", y2: "50" } }, // sol askı
-  { el: "line", props: { x1: "102", y1: "22", x2: "102", y2: "50" } }, // sağ askı
-  { el: "path", props: { d: "M4,50 Q18,66 32,50" } }, // sol çanak yayı
-  { el: "path", props: { d: "M88,50 Q102,66 116,50" } }, // sağ çanak yayı
-];
-
-export default function IntroSplash({ mode = "full" }: { mode?: Mode }) {
+export default function IntroSplash() {
   const [visible, setVisible] = useState(false);
   const [separating, setSeparating] = useState(false);
   const timers = useRef<number[]>([]);
   const skippedRef = useRef(false);
-  const t = TIMING[mode];
 
   function clearTimers() {
-    timers.current.forEach((tm) => window.clearTimeout(tm));
+    timers.current.forEach((t) => window.clearTimeout(t));
     timers.current = [];
   }
 
@@ -119,11 +65,13 @@ export default function IntroSplash({ mode = "full" }: { mode?: Mode }) {
     skippedRef.current = true;
     clearTimers();
     setSeparating(true);
-    timers.current.push(window.setTimeout(finish, t.separateMs));
+    timers.current.push(window.setTimeout(finish, SEPARATE_MS));
   }
 
   // Karar + Hero-gating: boyamadan önce senkron çalışır (flaş yok).
   useLayoutEffect(() => {
+    // "always" modda sessionStorage'a HİÇ bakılmaz (okunmaz bile) — karar
+    // yalnız reduced-motion'a bağlıdır, bu yüzden "seen" her zaman false'tur.
     let seen = false;
     if (INTRO_SPLASH_MODE === "session") {
       try {
@@ -143,8 +91,8 @@ export default function IntroSplash({ mode = "full" }: { mode?: Mode }) {
     timers.current.push(
       window.setTimeout(() => {
         setSeparating(true);
-        timers.current.push(window.setTimeout(finish, t.separateMs));
-      }, t.holdMs)
+        timers.current.push(window.setTimeout(finish, SEPARATE_MS));
+      }, DRAW_AND_HOLD_MS)
     );
 
     return () => {
@@ -192,16 +140,14 @@ export default function IntroSplash({ mode = "full" }: { mode?: Mode }) {
       {/* Sol panel */}
       <div
         aria-hidden="true"
-        style={{ transitionDuration: `${t.panelDuration}ms` }}
-        className={`h-full w-1/2 bg-navy-950 transition-transform ease-[cubic-bezier(.22,1,.36,1)] ${
+        className={`h-full w-1/2 bg-navy-950 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
           separating ? "-translate-x-full" : "translate-x-0"
         }`}
       />
       {/* Sağ panel — aralarında görünür çizgi yok, kapalıyken tek parça algılanır */}
       <div
         aria-hidden="true"
-        style={{ transitionDuration: `${t.panelDuration}ms` }}
-        className={`h-full w-1/2 bg-navy-950 transition-transform ease-[cubic-bezier(.22,1,.36,1)] ${
+        className={`h-full w-1/2 bg-navy-950 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
           separating ? "translate-x-full" : "translate-x-0"
         }`}
       />
@@ -221,34 +167,24 @@ export default function IntroSplash({ mode = "full" }: { mode?: Mode }) {
           strokeWidth={1.75}
           strokeLinecap="round"
         >
-          {STROKES.map((s, i) => {
-            const style = {
-              animationDelay: `${i * t.drawStagger}ms`,
-              animationDuration: `${t.drawDuration}ms`,
-            };
-            return s.el === "line" ? (
-              <line key={i} className="intro-draw" style={style} pathLength={1} {...s.props} />
-            ) : (
-              <path key={i} className="intro-draw" style={style} pathLength={1} {...s.props} />
-            );
-          })}
+          {/* Dikey mil */}
+          <line className="intro-draw" style={{ animationDelay: "0ms" }} pathLength={1} x1="60" y1="24" x2="60" y2="122" />
+          {/* Yatay denge kolu */}
+          <line className="intro-draw" style={{ animationDelay: "80ms" }} pathLength={1} x1="18" y1="22" x2="102" y2="22" />
+          {/* Taban */}
+          <line className="intro-draw" style={{ animationDelay: "160ms" }} pathLength={1} x1="42" y1="122" x2="78" y2="122" />
+          {/* Sol askı */}
+          <line className="intro-draw" style={{ animationDelay: "240ms" }} pathLength={1} x1="18" y1="22" x2="18" y2="50" />
+          {/* Sağ askı */}
+          <line className="intro-draw" style={{ animationDelay: "320ms" }} pathLength={1} x1="102" y1="22" x2="102" y2="50" />
+          {/* Sol çanak yayı */}
+          <path className="intro-draw" style={{ animationDelay: "400ms" }} pathLength={1} d="M4,50 Q18,66 32,50" />
+          {/* Sağ çanak yayı */}
+          <path className="intro-draw" style={{ animationDelay: "480ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
           {/* Mil ekseni */}
-          <circle
-            className="intro-pivot"
-            style={{ animationDelay: `${t.pivotDelay}ms`, animationDuration: `${t.pivotDuration}ms` }}
-            cx="60"
-            cy="22"
-            r="2.5"
-            fill="#BFA05C"
-            stroke="none"
-          />
+          <circle className="intro-pivot" cx="60" cy="22" r="2.5" fill="#BFA05C" stroke="none" />
         </svg>
-        <p
-          className="intro-kicker kicker-dark"
-          style={{ animationDelay: `${t.kickerDelay}ms`, animationDuration: `${t.kickerDuration}ms` }}
-        >
-          Akduman Hukuk Bürosu
-        </p>
+        <p className="intro-kicker kicker-dark">Akduman Hukuk Bürosu</p>
       </div>
     </div>
   );

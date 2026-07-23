@@ -2,33 +2,31 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import IntroSplash from "@/components/IntroSplash";
 import { INTRO_SPLASH_MODE } from "@/lib/site";
 
 /**
- * Rota geçiş animasyonu — app/template.tsx tarafından sarmalanır.
- * template.tsx, Next.js App Router'ın kendi garantisi gereği HER GERÇEK rota
- * değişiminde çocuklarını yeniden mount eder; sayfa içi anchor/hash kayması,
- * dropdown açılışı veya aynı rotaya tıklama bir "navigasyon" sayılmadığından
- * bu remount'u TETİKLEMEZ. Yani "yalnız gerçek rota değişimlerinde çalışır"
- * kuralı bu bileşende ekstra kod gerekmeden template.tsx'in doğasından gelir.
+ * Rota geçiş animasyonu ("mini perde") — app/template.tsx tarafından
+ * sarmalanır. template.tsx, Next.js App Router'ın kendi garantisi gereği
+ * HER GERÇEK rota değişiminde çocuklarını yeniden mount eder; sayfa içi
+ * anchor/hash kayması, dropdown açılışı veya aynı rotaya tıklama bir
+ * "navigasyon" sayılmadığından bu remount'u TETİKLEMEZ. Yani "yalnız
+ * gerçek rota değişimlerinde çalışır" kuralı bu bileşende ekstra kod
+ * gerekmeden template.tsx'in doğasından gelir.
  *
  * İçerik girişi: `.page-content-in` (globals.css) — opacity 0→1 +
  * translateY(12px)→0, 380ms, mount'ta otomatik oynayan bir CSS keyframe
- * (JS state gerekmez; `.hero-line` ile aynı desen). Bu süre HER İKİ modda da
- * (full 1050ms, compact 600ms bekleme) perdenin panelleri ayırmaya
- * başlamasından önce biter — yani içerik, perde tamamen kapalıyken görünmez
- * hâlde animasyonunu bitirir; kullanıcı içeriği YALNIZCA perde açılırken
- * görür ("içerik girişi perde açıldıktan sonra başlıyormuş" hissi budur).
+ * (JS state gerekmez; `.hero-line` ile aynı desen).
  *
- * Terazili perde (components/IntroSplash.tsx) — TEK animasyon, tüm site için:
- * - "full": yalnızca tarayıcıdan ilk geliş/yenilemede VE hedef Ana Sayfa ise.
- * - "compact": site içi HER GERÇEK rota değişiminde (Ana Sayfa'ya dönüş
- *   dahil) — his her sayfada özdeş olsun diye eski "mini perde" YERİNE bu
- *   kullanılır (bileşen artık DOM'da yok, tamamen emekli).
- * - Hiç perde yok: INTRO_SPLASH_MODE === "off" İKEN, veya sert/ilk yüklemede
- *   hedef Ana Sayfa DEĞİLSE (SSR'ın zaten boyadığı içeriğin üstüne sebepsiz
- *   bir perde çıkmasın), veya aynı rotaya tıklamada (gerçek navigasyon yok).
+ * Mini perde: navy-950 tam ekran panel, mount anında görünür, 60ms
+ * bekleyip `.page-curtain` keyframe'i ile yukarı kalkar (360ms). SADECE
+ * reduced-motion DEĞİLSE render edilir — IntroSplash'teki gibi
+ * useLayoutEffect ile boyamadan ÖNCE senkron karar verilir (flaş yok).
+ *
+ * Ana sayfaya dönüşte IntroSplash oynayacaksa (INTRO_SPLASH_MODE !== "off")
+ * mini perde TAMAMEN atlanır — çifte perde olmasın, IntroSplash
+ * önceliklidir. Bu karar SSR-safe'tir (yalnız pathname + sabit config'e
+ * bağlıdır, client-only bir API kullanmaz), bu yüzden hydration
+ * uyuşmazlığı riski yoktur.
  *
  * Aynı rotaya tıklama: Next.js, aynı URL'ye giden bir Link tıklamasında da
  * template.tsx'i yeniden mount edebiliyor (hard reload olmasa da). Bunu
@@ -36,10 +34,8 @@ import { INTRO_SPLASH_MODE } from "@/lib/site";
  * tutulur (React state DEĞİL — template her navigasyonda tamamen yeniden
  * mount olduğundan bileşen içi state bu karşılaştırma için kullanılamaz;
  * modül kapsamı SPA ömrü boyunca kalıcıdır, tam sayfa reload'da sıfırlanır).
- *
- * IntroSplash kendi içinde prefers-reduced-motion ve (varsa) session kararını
- * verir — burada mod SEÇİLİR, reduced-motion/atlama gibi görüntü kararları
- * IntroSplash'e bırakılır (tek sorumluluk, tek kaynak).
+ * İlk (sert) yüklemede de `lastPathname === null` olduğundan perde atlanır —
+ * SSR'ın zaten boyadığı içeriğin üstüne sebepsiz bir perde çıkmasın diye.
  */
 let lastPathname: string | null = null;
 
@@ -50,7 +46,8 @@ export default function PageTransition({
 }) {
   const pathname = usePathname();
   const mainRef = useRef<HTMLDivElement>(null);
-  const [curtainMode, setCurtainMode] = useState<"full" | "compact" | null>(null);
+  const skipForHome = pathname === "/" && INTRO_SPLASH_MODE !== "off";
+  const [showCurtain, setShowCurtain] = useState(false);
 
   useLayoutEffect(() => {
     // Rota değişiminde önce tepeye dönüş garanti edilir (html'deki
@@ -66,13 +63,11 @@ export default function PageTransition({
     const previousPathname = lastPathname;
     lastPathname = pathname;
 
-    if (INTRO_SPLASH_MODE === "off") return;
-    if (previousPathname === pathname) return; // aynı rotaya tıklama — gerçek nav yok
-    if (previousPathname === null) {
-      if (pathname === "/") setCurtainMode("full"); // sert/ilk yükleme, Ana Sayfa
-      return; // sert yüklemede diğer sayfalarda perde yok
-    }
-    setCurtainMode("compact"); // gerçek SPA rota değişimi (Ana Sayfa'ya dönüş dahil)
+    if (skipForHome) return;
+    if (previousPathname === null || previousPathname === pathname) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return; // panel hiç render edilmez
+    setShowCurtain(true);
     // Bu efekt yalnızca MOUNT'ta çalışır — template.tsx her rota
     // değişiminde bileşeni zaten yeniden mount ettiğinden pathname'i
     // bağımlılığa eklemeye gerek yok.
@@ -81,7 +76,15 @@ export default function PageTransition({
 
   return (
     <div ref={mainRef} tabIndex={-1} className="page-content-in outline-none">
-      {curtainMode && <IntroSplash mode={curtainMode} />}
+      {showCurtain && (
+        <div
+          aria-hidden="true"
+          className="page-curtain pointer-events-none fixed inset-0 z-[90] bg-navy-950"
+          onAnimationEnd={() => setShowCurtain(false)}
+        >
+          <span className="absolute inset-x-0 bottom-0 h-[2px] bg-bronze-500" />
+        </div>
+      )}
       {children}
     </div>
   );

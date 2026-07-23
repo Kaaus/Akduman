@@ -395,11 +395,10 @@ html[data-intro-pending] .hero-line {
   opacity: 0;
 }
 
-/* Rota geçişinde içerik girişi — bkz. components/PageTransition.tsx. Perde
-   (components/IntroSplash.tsx, "full"/"compact") artık ayrı bir DOM/CSS
-   paneli değil, PageTransition içine mount edilen tek bileşen. Statik bir
-   opacity:0 taban KASITLI olarak yok: reduced-motion kuralı (aşağıda)
-   yalnız animation:none uygular; animasyon iptal edildiğinde varsayılan
+/* Rota geçişi ("mini perde") — bkz. components/PageTransition.tsx.
+   Statik bir opacity:0 taban KASITLI olarak yok: reduced-motion kuralı
+   (aşağıda) yalnız animation:none uygular; .page-content-in hiç
+   render edilmediğinde veya animasyonu iptal edildiğinde varsayılan
    opacity:1 ile içerik anında görünür kalır. */
 @keyframes page-content-in {
   from {
@@ -413,6 +412,15 @@ html[data-intro-pending] .hero-line {
 }
 .page-content-in {
   animation: page-content-in 380ms var(--ease) both;
+}
+
+@keyframes page-curtain-lift {
+  to {
+    transform: translateY(-100%);
+  }
+}
+.page-curtain {
+  animation: page-curtain-lift 360ms var(--ease) 60ms both;
 }
 
 /* Bronz keyline çerçeve: yüklendiğinde 500ms'de "çizilerek" gelir */
