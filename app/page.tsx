@@ -15,7 +15,7 @@ import { HOME_FAQ, INTRO_SPLASH_MODE, SERVICES } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman",
   description:
-    "Ankara'da ceza, aile, miras, iş, sigorta, gayrimenkul, idare ve yabancılar hukuku alanlarında avukatlık ve hukuki danışmanlık. ☎ +90 534 089 10 70",
+    "Ankara'da ceza, gayrimenkul, aile, iş, miras, sigorta, idare, yabancılar, ticaret ve şirketler ile rekabet hukuku alanlarında avukatlık. ☎ +90 534 089 10 70",
   path: "/",
 });
 
@@ -42,10 +42,10 @@ export default function HomePage() {
               <h2>Hukuki Danışmanlık &amp; Avukatlık Hizmetleri</h2>
               <p className="mt-5">
                 Akduman Hukuk Bürosu; ceza, gayrimenkul, aile, iş, yabancılar,
-                miras, sigorta ve idare hukuku alanlarında müvekkillerine
-                hukuki destek sağlamaktadır. Büromuz, müvekkillerinin hak
-                kayıplarının önüne geçmek amacıyla süreçleri titizlikle
-                yürütmektedir.
+                miras, sigorta, idare, ticaret ve şirketler ile rekabet
+                hukuku alanlarında müvekkillerine hukuki destek
+                sağlamaktadır. Büromuz, müvekkillerinin hak kayıplarının
+                önüne geçmek amacıyla süreçleri titizlikle yürütmektedir.
               </p>
             </Reveal>
             <Reveal delay={140} className="mt-8">

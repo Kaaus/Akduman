@@ -320,7 +320,7 @@ export const SERVICES: Service[] = [
     slug: "rekabet-hukuku",
     title: "Rekabet Hukuku",
     oneLiner: "Rekabet Kurumu süreçleri ve rekabet ihlali uyuşmazlıkları.",
-    h1: "Ankara Rekabet Hukuku Avukatı — Rekabet Hukuku",
+    h1: "Ankara Rekabet Hukuku Avukatı",
     metaTitle: "Ankara Rekabet Hukuku Avukatı | Akduman Hukuk Bürosu",
     metaDescription:
       "Rekabet Kurumu soruşturmaları, birleşme-devralma bildirimleri ve rekabet ihlallerinden doğan uyuşmazlıklarda hukuki destek.",
