@@ -10,7 +10,7 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceRow from "@/components/ServiceRow";
 import { buildMetadata, faqSchema } from "@/lib/seo";
-import { HOME_FAQ, INTRO_SPLASH, SERVICES } from "@/lib/site";
+import { HOME_FAQ, INTRO_SPLASH_MODE, SERVICES } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman",
@@ -25,8 +25,8 @@ export default function HomePage() {
     <>
       <JsonLd data={faqSchema(HOME_FAQ)} />
 
-      {/* Açılış perdesi — INTRO_SPLASH=false iken bu satır hiç render edilmez */}
-      {INTRO_SPLASH && <IntroSplash />}
+      {/* Açılış perdesi — INTRO_SPLASH_MODE="off" iken bu satır hiç render edilmez */}
+      {INTRO_SPLASH_MODE !== "off" && <IntroSplash />}
 
       {/* (a) Hero v2 */}
       <Hero />

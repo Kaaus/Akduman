@@ -8,11 +8,17 @@
 // ─── Özellik anahtarları (kill-switch) ───────────────────────────────────────
 
 /**
- * Anasayfa açılış perdesi (components/IntroSplash.tsx).
- * false yapıldığında app/page.tsx bileşeni hiç mount etmez — DOM'da,
- * build çıktısında ve Hero'nun normal davranışında sıfır iz kalır.
+ * Anasayfa açılış perdesi (components/IntroSplash.tsx) modu:
+ * - "always": sessionStorage kontrolü DEVRE DIŞI — her ziyarette/dönüşte
+ *   perde+terazi animasyonu baştan sona oynar (hiçbir yere yazılmaz/okunmaz).
+ * - "session": eski davranış — sessionStorage'da "introSeen" yoksa oturumda
+ *   bir kez oynar.
+ * - "off": app/page.tsx bileşeni hiç mount etmez — DOM'da, build çıktısında
+ *   ve Hero'nun normal davranışında sıfır iz kalır.
+ * Atlama mekanizmaları (tıklama/Esc/scroll → anında geç) ve
+ * prefers-reduced-motion'da hiç oynamama HER MOD için aynen korunur.
  */
-export const INTRO_SPLASH = true;
+export const INTRO_SPLASH_MODE: "always" | "session" | "off" = "always";
 
 // ─── Kimlik & İletişim ───────────────────────────────────────────────────────
 

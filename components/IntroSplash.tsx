@@ -1,12 +1,18 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { INTRO_SPLASH_MODE } from "@/lib/site";
 
 /**
- * Anasayfa açılış perdesi — yalnızca app/page.tsx'te, INTRO_SPLASH bayrağı
- * doğruyken mount edilir. TAMAMEN İZOLE: sessionStorage'da "introSeen" yoksa
- * ve prefers-reduced-motion eşleşmiyorsa oturumda bir kez oynar, sonra
- * unmount olur ve bir daha görünmez.
+ * Anasayfa açılış perdesi — yalnızca app/page.tsx'te, INTRO_SPLASH_MODE
+ * "off" değilken mount edilir.
+ * - "always": sessionStorage'a HİÇ dokunulmaz (ne okunur ne yazılır) —
+ *   perde her mount'ta (ilk yükleme VEYA site içinden Ana Sayfa'ya
+ *   dönüş) baştan sona oynar.
+ * - "session": sessionStorage'da "introSeen" yoksa oturumda bir kez oynar,
+ *   sonra unmount olur ve bir daha görünmez (eski davranış).
+ * İkisinde de prefers-reduced-motion'da hiç oynamaz; tıklama/Esc/scroll
+ * anında atlar.
  *
  * Hero senkronu: perde oynayacaksa, ilk (SSR ile eşleşen) render'dan hemen
  * sonra ama tarayıcı boyamadan ÖNCE (useLayoutEffect) <html> etiketine
@@ -15,9 +21,11 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
  * kuralı, Hero'nun kademeli giriş animasyonunu perde kapalıyken bastırır;
  * perde bittiğinde data-intro-pending kaldırılıp data-intro-done eklenir,
  * .hero-line'ın normal kuralı yeniden devreye girer ve animasyon o anda
- * sıfırdan başlar. Perde hiç oynamayacaksa (oturumda görülmüş, reduced-
- * motion veya INTRO_SPLASH=false) hiçbir attribute set edilmez — Hero
- * bugünkü davranışını değiştirmeden sürdürür.
+ * sıfırdan başlar. Bu senkron "always" modda da AYNEN çalışır — Ana
+ * Sayfa'ya her dönüşte IntroSplash yeniden mount olur (template.tsx'in
+ * her rota değişiminde çocuklarını yeniden mount etme garantisi
+ * sayesinde), dolayısıyla useLayoutEffect de her seferinde sıfırdan
+ * çalışıp Hero'nun animasyonunu yeniden senkronlar.
  */
 
 const DRAW_AND_HOLD_MS = 1050; // çizim (~940ms) + nefes payı
@@ -39,10 +47,14 @@ export default function IntroSplash() {
     document.documentElement.removeAttribute("data-intro-pending");
     document.documentElement.setAttribute("data-intro-done", "");
     document.body.style.overflow = "";
-    try {
-      sessionStorage.setItem("introSeen", "1");
-    } catch {
-      // Gizlilik modu vb. — sorun değil, bir sonraki ziyarette tekrar oynar.
+    // "always" modda sessionStorage'a KESİNLİKLE dokunulmaz — bir sonraki
+    // ziyarette/dönüşte tekrar oynaması gereken şey zaten budur.
+    if (INTRO_SPLASH_MODE === "session") {
+      try {
+        sessionStorage.setItem("introSeen", "1");
+      } catch {
+        // Gizlilik modu vb. — sorun değil, bir sonraki ziyarette tekrar oynar.
+      }
     }
     setVisible(false);
   }
@@ -58,11 +70,15 @@ export default function IntroSplash() {
 
   // Karar + Hero-gating: boyamadan önce senkron çalışır (flaş yok).
   useLayoutEffect(() => {
+    // "always" modda sessionStorage'a HİÇ bakılmaz (okunmaz bile) — karar
+    // yalnız reduced-motion'a bağlıdır, bu yüzden "seen" her zaman false'tur.
     let seen = false;
-    try {
-      seen = sessionStorage.getItem("introSeen") === "1";
-    } catch {
-      seen = false;
+    if (INTRO_SPLASH_MODE === "session") {
+      try {
+        seen = sessionStorage.getItem("introSeen") === "1";
+      } catch {
+        seen = false;
+      }
     }
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
