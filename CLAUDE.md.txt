@@ -57,12 +57,14 @@ Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geç
 Reveal (IO tabanlı giriş animasyonu) · ServiceRow (numarasız editoryal satır) ·
 Accordion v2 · TocRail (scroll-spy) · Callout (uyari/bilgi) · ProcessSteps
 (`list-none`, çift numara yasak) · Timeline: tarih placeholder ise rozet + JSON-LD
-tarih alanları gizlenir. IntroSplash `lib/site.ts` → `INTRO_SPLASH_MODE`
-("always"/"session"/"off") ile yönetilir — "always"da sessionStorage'a hiç
-dokunulmaz, her ziyaret/dönüşte oynar. Rota geçiş animasyonu ("mini perde",
-`app/template.tsx` → `components/PageTransition.tsx`) `lib/site.ts` →
-`PAGE_TRANSITIONS` ile açılır/kapanır; yalnız gerçek rota değişimlerinde
-çalışır, Ana Sayfa'ya dönüşte IntroSplash oynayacaksa atlanır.
+tarih alanları gizlenir. Terazili perde (`components/IntroSplash.tsx`) TEK
+animasyon olarak `app/template.tsx` → `components/PageTransition.tsx`
+üzerinden TÜM rota geçişlerinde oynar — `lib/site.ts` → `INTRO_SPLASH_MODE`
+("always"/"session"/"off") ile yönetilir. "full" mod (tam koreografi,
+~1.75sn) yalnız tarayıcıdan ilk geliş/yenilemede ve hedef Ana Sayfa iken;
+"compact" mod (hızlandırılmış, ~1.1sn) site içi HER rota değişiminde (Ana
+Sayfa'ya dönüş dahil) — his her sayfada özdeş. Eski ayrı "mini perde"
+bileşeni emeklidir.
 
 ## BEKLEYEN TODO'LAR (dokunma, sadece bil)
 - Adres: site.ts `ADRES` = Meşrutiyet Mah. Konur Sok. (müşteri teyidi bekliyor;
