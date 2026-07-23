@@ -59,7 +59,10 @@ Accordion v2 · TocRail (scroll-spy) · Callout (uyari/bilgi) · ProcessSteps
 (`list-none`, çift numara yasak) · Timeline: tarih placeholder ise rozet + JSON-LD
 tarih alanları gizlenir. IntroSplash `lib/site.ts` → `INTRO_SPLASH_MODE`
 ("always"/"session"/"off") ile yönetilir — "always"da sessionStorage'a hiç
-dokunulmaz, her ziyaret/dönüşte oynar.
+dokunulmaz, her ziyaret/dönüşte oynar. Rota geçiş animasyonu ("mini perde",
+`app/template.tsx` → `components/PageTransition.tsx`) `lib/site.ts` →
+`PAGE_TRANSITIONS` ile açılır/kapanır; yalnız gerçek rota değişimlerinde
+çalışır, Ana Sayfa'ya dönüşte IntroSplash oynayacaksa atlanır.
 
 ## BEKLEYEN TODO'LAR (dokunma, sadece bil)
 - Adres: site.ts `ADRES` = Meşrutiyet Mah. Konur Sok. (müşteri teyidi bekliyor;

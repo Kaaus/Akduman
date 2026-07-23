@@ -20,6 +20,14 @@
  */
 export const INTRO_SPLASH_MODE: "always" | "session" | "off" = "always";
 
+/**
+ * Rota geçiş animasyonu ("mini perde", app/template.tsx →
+ * components/PageTransition.tsx). false yapıldığında PageTransition hiç
+ * mount edilmez — template.tsx `{children}`i doğrudan render eder, sıfır
+ * iz kalır.
+ */
+export const PAGE_TRANSITIONS = true;
+
 // ─── Kimlik & İletişim ───────────────────────────────────────────────────────
 
 export const SITE = {
