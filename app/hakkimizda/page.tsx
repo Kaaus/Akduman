@@ -29,47 +29,15 @@ export default function HakkimizdaPage() {
         </div>
       </section>
 
-      {/* Avukat kartı — sıralamada YUKARI taşındı (H1'in hemen ardından) */}
-      <section className="border-t border-line bg-paper">
-        <div className="container-site py-12">
-          <Reveal>
-            {/* Avukat kartı — v2 kart stili + canlı (framed) çerçeveli portre.
-                Kaynak fotoğrafın gerçek oranı (1402×1122 ≈ 5:4) birebir
-                kullanılır — kırpım yok. Görsel sütunu ~%45 pay alır, 560px'te
-                sınırlanır (md:max-w-[560px]); kartın kendisi de genişledi
-                (max-w-4xl → max-w-5xl). */}
-            <div className="card grid items-center gap-10 p-6 md:grid-cols-[45fr_55fr] md:p-10 md:max-w-5xl">
-              <PhotoSurface
-                image={IMAGES.avukat}
-                variant="framed"
-                aspectRatio="5/4"
-                sizes="(max-width: 768px) 100vw, 560px"
-                className="md:max-w-[560px]"
-              />
-              <div>
-                <h2>{SITE.lawyer}</h2>
-                {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
-                {PLACEHOLDERS.BARO_SICIL_NO && (
-                  <p className="mt-2 text-[15px] font-semibold text-bronze-700">
-                    Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
-                  </p>
-                )}
-                <p className="mt-4 text-muted">
-                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
-                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
-                  Hukuku, Ticaret ve Şirketler Hukuku, Rekabet Hukuku ve diğer
-                  tüm hukuki alanlarda hukuki danışmanlık ve avukatlık
-                  hizmeti vermektedir.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Büro tanıtımı — sıralamada AŞAĞI taşındı (avukat kartından sonra) */}
-      <section className="border-t border-line bg-white">
-        <div className="container-site py-12">
+      {/* Büro tanıtımı — sıralamada YUKARI taşındı (H1'in hemen ardından,
+          avukat kartından ÖNCE). PageHeading'le aynı zeminde (bg-white)
+          olduğundan aralarına border-t EKLENMEDİ (kod tabanındaki kural:
+          border-t yalnız zemin rengi değişiminde kullanılır). */}
+      <section className="bg-white">
+        {/* pt YOK: PageHeading kendi pb-9'uyla H1→içerik boşluğunu zaten
+            sağlıyor; iki ayrı üst boşluk üst üste binmesin diye yalnız
+            pb-12 kaldı. */}
+        <div className="container-site pb-12">
           {/* Fotosuz tek sütun düzeni: kicker+başlık+iki paragraf+imza bloğu
               mx-auto max-w-3xl içinde ortalanmış bir blok olarak durur,
               ama İÇERİK (metin) her zamanki gibi sola hizalıdır — yalnız
@@ -111,6 +79,45 @@ export default function HakkimizdaPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Avukat kartı — sıralamada AŞAĞI taşındı (en altta, tanıtımdan
+          sonra); scroll ile gelir, fold hedefine dahil değil. */}
+      <section className="border-t border-line bg-paper">
+        <div className="container-site py-12">
+          <Reveal>
+            {/* Avukat kartı — v2 kart stili + canlı (framed) çerçeveli portre.
+                Kaynak fotoğrafın gerçek oranı (1402×1122 ≈ 5:4) birebir
+                kullanılır — kırpım yok. Görsel sütunu ~%45 pay alır, 560px'te
+                sınırlanır (md:max-w-[560px]); kartın kendisi de genişledi
+                (max-w-4xl → max-w-5xl). */}
+            <div className="card grid items-center gap-10 p-6 md:grid-cols-[45fr_55fr] md:p-10 md:max-w-5xl">
+              <PhotoSurface
+                image={IMAGES.avukat}
+                variant="framed"
+                aspectRatio="5/4"
+                sizes="(max-width: 768px) 100vw, 560px"
+                className="md:max-w-[560px]"
+              />
+              <div>
+                <h2>{SITE.lawyer}</h2>
+                {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
+                {PLACEHOLDERS.BARO_SICIL_NO && (
+                  <p className="mt-2 text-[15px] font-semibold text-bronze-700">
+                    Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
+                  </p>
+                )}
+                <p className="mt-4 text-muted">
+                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
+                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
+                  Hukuku, Ticaret ve Şirketler Hukuku, Rekabet Hukuku ve diğer
+                  tüm hukuki alanlarda hukuki danışmanlık ve avukatlık
+                  hizmeti vermektedir.
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
