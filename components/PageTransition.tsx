@@ -50,9 +50,15 @@ export default function PageTransition({
   const [showCurtain, setShowCurtain] = useState(false);
 
   useLayoutEffect(() => {
-    // Rota değişiminde odak main içeriğe taşınır (klavye/ekran okuyucu
-    // kullanıcıları için — scroll pozisyonuna dokunulmaz).
-    mainRef.current?.focus();
+    // Rota değişiminde önce tepeye dönüş garanti edilir (html'deki
+    // scroll-behavior:smooth'un yavaşlatmaması için "instant"), SONRA odak
+    // main içeriğe taşınır — `preventScroll: true` olmadan focus() tarayıcıda
+    // kendi kaydırmasını tetikleyip bu garantiyi bozar. Hash'li URL'lerde
+    // (#bolum) scrollTo ATLANIR ki anchor hedefi normal çalışmaya devam etsin.
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+    mainRef.current?.focus({ preventScroll: true });
 
     const previousPathname = lastPathname;
     lastPathname = pathname;
