@@ -57,14 +57,14 @@ Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geç
 Reveal (IO tabanlı giriş animasyonu) · ServiceRow (numarasız editoryal satır) ·
 Accordion v2 · TocRail (scroll-spy) · Callout (uyari/bilgi) · ProcessSteps
 (`list-none`, çift numara yasak) · Timeline: tarih placeholder ise rozet + JSON-LD
-tarih alanları gizlenir. İki katmanlı geçiş animasyonu: Ana Sayfa'ya HER
-gelişte (ilk giriş/yenileme/SPA dönüş) terazili IntroSplash
-(`components/IntroSplash.tsx`, `lib/site.ts` → `INTRO_SPLASH_MODE`
-"always"/"session"/"off", çizim 45ms kademeli ~450ms + 80ms bekleme + 450ms
-açılış ≈1.0sn) — diğer TÜM rota geçişlerinde `components/PageTransition.tsx`
-(`app/template.tsx` üzerinden, `lib/site.ts` → `PAGE_TRANSITIONS`) mini
-perde oynar (navy-950 panel + 2px bronz alt çizgi, 60ms bekleme + 360ms
-açılış). Ana Sayfa hedefliyken mini perde atlanır (çifte perde yasak).
+tarih alanları gizlenir. Tek geçiş animasyonu: terazili IntroSplash
+(`components/IntroSplash.tsx`), `app/template.tsx` üzerinden layout
+düzeyinde mount edilir ve HER GERÇEK rota değişiminde (ilk giriş/yenileme +
+site içi TÜM navigasyon, hangi sayfa olursa olsun) baştan sona oynar —
+sessionStorage/oturum kontrolü YOK. Orijinal koreografi: çizim 80ms
+kademeli ~800ms + 250ms bekleme + panel açılışı 700ms ≈1.75sn. `lib/site.ts`
+→ `INTRO_SPLASH_MODE` ("global"/"home"/"off") ile yönetilir — "global"
+tüm rotalarda, "home" yalnız Ana Sayfa'da, "off" tamamen kapalı.
 
 ## BEKLEYEN TODO'LAR (dokunma, sadece bil)
 - Adres: site.ts `ADRES` = Meşrutiyet Mah. Konur Sok. (müşteri teyidi bekliyor;

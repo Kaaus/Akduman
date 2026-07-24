@@ -395,32 +395,6 @@ html[data-intro-pending] .hero-line {
   opacity: 0;
 }
 
-/* Rota geçişi ("mini perde") — bkz. components/PageTransition.tsx. GÖREV
-   2'de (chore: remove mini transition remnants) kaldırılacak, geçici
-   olarak burada duruyor. */
-@keyframes page-content-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.page-content-in {
-  animation: page-content-in 380ms var(--ease) both;
-}
-
-@keyframes page-curtain-lift {
-  to {
-    transform: translateY(-100%);
-  }
-}
-.page-curtain {
-  animation: page-curtain-lift 360ms var(--ease) 60ms both;
-}
-
 /* Bronz keyline çerçeve: yüklendiğinde 500ms'de "çizilerek" gelir */
 @keyframes frame-in {
   from {

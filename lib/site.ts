@@ -23,13 +23,6 @@
  */
 export const INTRO_SPLASH_MODE: "global" | "home" | "off" = "global";
 
-/**
- * Rota geçiş animasyonu ("mini perde", app/template.tsx →
- * components/PageTransition.tsx) — GÖREV 2'de (chore: remove mini
- * transition remnants) kaldırılacak, geçici olarak burada duruyor.
- */
-export const PAGE_TRANSITIONS = true;
-
 // ─── Kimlik & İletişim ───────────────────────────────────────────────────────
 
 export const SITE = {
