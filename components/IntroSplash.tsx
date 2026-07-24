@@ -1,18 +1,37 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { INTRO_SPLASH_MODE } from "@/lib/site";
 
 /**
- * Anasayfa açılış perdesi — yalnızca app/page.tsx'te, INTRO_SPLASH_MODE
- * "off" değilken mount edilir.
- * - "always": sessionStorage'a HİÇ dokunulmaz (ne okunur ne yazılır) —
- *   perde her mount'ta (ilk yükleme VEYA site içinden Ana Sayfa'ya
- *   dönüş) baştan sona oynar.
- * - "session": sessionStorage'da "introSeen" yoksa oturumda bir kez oynar,
- *   sonra unmount olur ve bir daha görünmez (eski davranış).
- * İkisinde de prefers-reduced-motion'da hiç oynamaz; tıklama/Esc/scroll
- * anında atlar.
+ * Terazili perde — app/template.tsx üzerinden layout düzeyinde mount edilir
+ * (INTRO_SPLASH_MODE "off" değilken). template.tsx, Next.js App Router'ın
+ * kendi garantisi gereği HER GERÇEK rota değişiminde çocuklarını yeniden
+ * mount eder; bu yüzden bileşen kendisi de her rota değişiminde sıfırdan
+ * tetiklenir — sessionStorage/oturum kontrolü YOK, her seferinde baştan
+ * sona oynar.
+ * - "global": TÜM rota geçişlerinde oynar (ilk giriş/yenileme dahil, hangi
+ *   sayfa olursa olsun).
+ * - "home": yalnız hedef Ana Sayfa iken oynar.
+ * prefers-reduced-motion'da HİÇ oynamaz (içerik doğrudan görünür); tıklama/
+ * Esc/scroll ile anında atlanır.
+ *
+ * Aynı rotaya tıklama: Next.js, aynı URL'ye giden bir Link tıklamasında da
+ * template.tsx'i yeniden mount edebiliyor (gerçek navigasyon olmasa da).
+ * Bunu tekrar oynatma sebebi SAYMAMAK için modül kapsamında `lastPathname`
+ * tutulur (React state DEĞİL — bileşen her navigasyonda tamamen yeniden
+ * mount olduğundan iç state bu karşılaştırma için kullanılamaz; modül
+ * kapsamı SPA ömrü boyunca kalıcıdır, tam sayfa reload'da sıfırlanır).
+ *
+ * Rota hazırlığı: perde oynasın ya da oynamasın, her GERÇEK rota
+ * değişiminde önce tepeye dönüş garanti edilir (`scrollTo(0,0,"instant")`,
+ * html'deki scroll-behavior:smooth'u atlar), SONRA odak `<main>`e taşınır
+ * (`focus({preventScroll:true})` — aksi hâlde tarayıcı kendi kaydırmasını
+ * tetikleyip bu garantiyi bozar). Hash'li URL'lerde (#bolum) scrollTo
+ * ATLANIR ki anchor hedefi normal çalışmaya devam etsin — hash kaymaları
+ * zaten bir "navigasyon" sayılmadığından bu bileşeni yeniden tetiklemez,
+ * yalnız hash'Lİ bir GERÇEK rota değişiminde bu istisna devreye girer.
  *
  * Hero senkronu: perde oynayacaksa, ilk (SSR ile eşleşen) render'dan hemen
  * sonra ama tarayıcı boyamadan ÖNCE (useLayoutEffect) <html> etiketine
@@ -21,17 +40,20 @@ import { INTRO_SPLASH_MODE } from "@/lib/site";
  * kuralı, Hero'nun kademeli giriş animasyonunu perde kapalıyken bastırır;
  * perde bittiğinde data-intro-pending kaldırılıp data-intro-done eklenir,
  * .hero-line'ın normal kuralı yeniden devreye girer ve animasyon o anda
- * sıfırdan başlar. Bu senkron "always" modda da AYNEN çalışır — Ana
- * Sayfa'ya her dönüşte IntroSplash yeniden mount olur (template.tsx'in
- * her rota değişiminde çocuklarını yeniden mount etme garantisi
- * sayesinde), dolayısıyla useLayoutEffect de her seferinde sıfırdan
- * çalışıp Hero'nun animasyonunu yeniden senkronlar.
+ * sıfırdan başlar. Hero yalnız Ana Sayfa'da bulunduğundan diğer sayfalarda
+ * bu attribute'un varlığı zararsızdır (eşleşen bir seçici yoktur).
  */
 
-const DRAW_AND_HOLD_MS = 530; // çizim (~450ms) + nefes payı (~80ms)
-const SEPARATE_MS = 450; // paneller ayrılırken
+const DRAW_AND_HOLD_MS = 1050; // çizim (~940ms) + nefes payı (~110ms)
+const SEPARATE_MS = 700; // paneller ayrılırken
+
+let lastPathname: string | null = null;
 
 export default function IntroSplash() {
+  const pathname = usePathname();
+  const mainWillPlay =
+    INTRO_SPLASH_MODE === "global" || (INTRO_SPLASH_MODE === "home" && pathname === "/");
+
   const [visible, setVisible] = useState(false);
   const [separating, setSeparating] = useState(false);
   const timers = useRef<number[]>([]);
@@ -47,15 +69,6 @@ export default function IntroSplash() {
     document.documentElement.removeAttribute("data-intro-pending");
     document.documentElement.setAttribute("data-intro-done", "");
     document.body.style.overflow = "";
-    // "always" modda sessionStorage'a KESİNLİKLE dokunulmaz — bir sonraki
-    // ziyarette/dönüşte tekrar oynaması gereken şey zaten budur.
-    if (INTRO_SPLASH_MODE === "session") {
-      try {
-        sessionStorage.setItem("introSeen", "1");
-      } catch {
-        // Gizlilik modu vb. — sorun değil, bir sonraki ziyarette tekrar oynar.
-      }
-    }
     setVisible(false);
   }
 
@@ -68,21 +81,20 @@ export default function IntroSplash() {
     timers.current.push(window.setTimeout(finish, SEPARATE_MS));
   }
 
-  // Karar + Hero-gating: boyamadan önce senkron çalışır (flaş yok).
+  // Rota hazırlığı + karar + Hero-gating: boyamadan önce senkron çalışır (flaş yok).
   useLayoutEffect(() => {
-    // "always" modda sessionStorage'a HİÇ bakılmaz (okunmaz bile) — karar
-    // yalnız reduced-motion'a bağlıdır, bu yüzden "seen" her zaman false'tur.
-    let seen = false;
-    if (INTRO_SPLASH_MODE === "session") {
-      try {
-        seen = sessionStorage.getItem("introSeen") === "1";
-      } catch {
-        seen = false;
-      }
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelector<HTMLElement>("main")?.focus({ preventScroll: true });
 
-    if (seen || reduced) return; // oynamayacak — hiçbir iz bırakılmaz
+    const previousPathname = lastPathname;
+    lastPathname = pathname;
+
+    if (!mainWillPlay) return;
+    if (previousPathname === pathname) return; // aynı rotaya tıklama — gerçek nav yok
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return; // oynamayacak — hiçbir iz bırakılmaz
 
     document.documentElement.setAttribute("data-intro-pending", "");
     document.body.style.overflow = "hidden";
@@ -140,14 +152,14 @@ export default function IntroSplash() {
       {/* Sol panel */}
       <div
         aria-hidden="true"
-        className={`h-full w-1/2 bg-navy-950 transition-transform duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] ${
+        className={`h-full w-1/2 bg-navy-950 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
           separating ? "-translate-x-full" : "translate-x-0"
         }`}
       />
       {/* Sağ panel — aralarında görünür çizgi yok, kapalıyken tek parça algılanır */}
       <div
         aria-hidden="true"
-        className={`h-full w-1/2 bg-navy-950 transition-transform duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] ${
+        className={`h-full w-1/2 bg-navy-950 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
           separating ? "translate-x-full" : "translate-x-0"
         }`}
       />
@@ -170,17 +182,17 @@ export default function IntroSplash() {
           {/* Dikey mil */}
           <line className="intro-draw" style={{ animationDelay: "0ms" }} pathLength={1} x1="60" y1="24" x2="60" y2="122" />
           {/* Yatay denge kolu */}
-          <line className="intro-draw" style={{ animationDelay: "45ms" }} pathLength={1} x1="18" y1="22" x2="102" y2="22" />
+          <line className="intro-draw" style={{ animationDelay: "80ms" }} pathLength={1} x1="18" y1="22" x2="102" y2="22" />
           {/* Taban */}
-          <line className="intro-draw" style={{ animationDelay: "90ms" }} pathLength={1} x1="42" y1="122" x2="78" y2="122" />
+          <line className="intro-draw" style={{ animationDelay: "160ms" }} pathLength={1} x1="42" y1="122" x2="78" y2="122" />
           {/* Sol askı */}
-          <line className="intro-draw" style={{ animationDelay: "135ms" }} pathLength={1} x1="18" y1="22" x2="18" y2="50" />
+          <line className="intro-draw" style={{ animationDelay: "240ms" }} pathLength={1} x1="18" y1="22" x2="18" y2="50" />
           {/* Sağ askı */}
-          <line className="intro-draw" style={{ animationDelay: "180ms" }} pathLength={1} x1="102" y1="22" x2="102" y2="50" />
+          <line className="intro-draw" style={{ animationDelay: "320ms" }} pathLength={1} x1="102" y1="22" x2="102" y2="50" />
           {/* Sol çanak yayı */}
-          <path className="intro-draw" style={{ animationDelay: "225ms" }} pathLength={1} d="M4,50 Q18,66 32,50" />
+          <path className="intro-draw" style={{ animationDelay: "400ms" }} pathLength={1} d="M4,50 Q18,66 32,50" />
           {/* Sağ çanak yayı */}
-          <path className="intro-draw" style={{ animationDelay: "270ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
+          <path className="intro-draw" style={{ animationDelay: "480ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
           {/* Mil ekseni */}
           <circle className="intro-pivot" cx="60" cy="22" r="2.5" fill="#BFA05C" stroke="none" />
         </svg>

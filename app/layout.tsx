@@ -62,7 +62,12 @@ export default function RootLayout({
         {/* Global yapılandırılmış veri: LegalService (tüm sayfalarda) */}
         <JsonLd data={legalServiceSchema()} />
         <Header />
-        <main>{children}</main>
+        {/* tabIndex={-1}: rota değişiminde IntroSplash odağı buraya taşır
+            (components/IntroSplash.tsx) — programatik focus, klavye tab
+            sırasına girmez. outline-none: bu odak görünür halka bırakmaz. */}
+        <main tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <Footer />
         <WhatsAppFloat />
       </body>

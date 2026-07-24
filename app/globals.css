@@ -395,11 +395,9 @@ html[data-intro-pending] .hero-line {
   opacity: 0;
 }
 
-/* Rota geçişi ("mini perde") — bkz. components/PageTransition.tsx.
-   Statik bir opacity:0 taban KASITLI olarak yok: reduced-motion kuralı
-   (aşağıda) yalnız animation:none uygular; .page-content-in hiç
-   render edilmediğinde veya animasyonu iptal edildiğinde varsayılan
-   opacity:1 ile içerik anında görünür kalır. */
+/* Rota geçişi ("mini perde") — bkz. components/PageTransition.tsx. GÖREV
+   2'de (chore: remove mini transition remnants) kaldırılacak, geçici
+   olarak burada duruyor. */
 @keyframes page-content-in {
   from {
     opacity: 0;
@@ -451,7 +449,7 @@ html[data-intro-pending] .hero-line {
 }
 
 /* IntroSplash: SVG terazi çizgileri pathLength=1 ile normalize edilmiş
-   dash — her path 45ms kademeyle "çizilerek" belirir; pivot noktası ve
+   dash — her path 80ms kademeyle "çizilerek" belirir; pivot noktası ve
    kicker ayrı bir fade-in ile kapanışı tamamlar. */
 @keyframes intro-draw {
   to {
@@ -461,7 +459,7 @@ html[data-intro-pending] .hero-line {
 .intro-draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: intro-draw 213ms var(--ease) forwards;
+  animation: intro-draw 380ms var(--ease) forwards;
 }
 @keyframes intro-fade-in {
   to {
@@ -470,11 +468,11 @@ html[data-intro-pending] .hero-line {
 }
 .intro-pivot {
   opacity: 0;
-  animation: intro-fade-in 140ms var(--ease) 314ms forwards;
+  animation: intro-fade-in 250ms var(--ease) 560ms forwards;
 }
 .intro-kicker {
   opacity: 0;
-  animation: intro-fade-in 224ms var(--ease) 336ms forwards;
+  animation: intro-fade-in 400ms var(--ease) 600ms forwards;
 }
 
 /* PhotoSurface hero arka planı: çok yavaş, yalnız transform kullanan zoom

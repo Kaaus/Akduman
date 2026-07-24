@@ -8,23 +8,25 @@
 // ─── Özellik anahtarları (kill-switch) ───────────────────────────────────────
 
 /**
- * Anasayfa açılış perdesi (components/IntroSplash.tsx) modu:
- * - "always": sessionStorage kontrolü DEVRE DIŞI — her ziyarette/dönüşte
- *   perde+terazi animasyonu baştan sona oynar (hiçbir yere yazılmaz/okunmaz).
- * - "session": eski davranış — sessionStorage'da "introSeen" yoksa oturumda
- *   bir kez oynar.
- * - "off": app/page.tsx bileşeni hiç mount etmez — DOM'da, build çıktısında
- *   ve Hero'nun normal davranışında sıfır iz kalır.
- * Atlama mekanizmaları (tıklama/Esc/scroll → anında geç) ve
+ * Terazili perde (components/IntroSplash.tsx) modu — app/template.tsx
+ * üzerinden layout düzeyinde mount edilir, HER GERÇEK rota değişiminde
+ * yeniden tetiklenir (sessionStorage/oturum kontrolü YOK, her seferinde
+ * baştan sona oynar):
+ * - "global": TÜM rota geçişlerinde oynar (siteye ilk giriş/yenileme +
+ *   site içi HER navigasyon, hangi sayfa olursa olsun).
+ * - "home": yalnız Ana Sayfa hedefli geçişlerde oynar (gelecekte ihtiyaç
+ *   olursa diye hazır tutulan mod).
+ * - "off": app/template.tsx bileşeni hiç mount etmez — DOM'da, build
+ *   çıktısında ve Hero'nun normal davranışında sıfır iz kalır.
+ * Atlama mekanizmaları (tıklama/Esc/scroll → anında aç) ve
  * prefers-reduced-motion'da hiç oynamama HER MOD için aynen korunur.
  */
-export const INTRO_SPLASH_MODE: "always" | "session" | "off" = "always";
+export const INTRO_SPLASH_MODE: "global" | "home" | "off" = "global";
 
 /**
  * Rota geçiş animasyonu ("mini perde", app/template.tsx →
- * components/PageTransition.tsx). false yapıldığında PageTransition hiç
- * mount edilmez — template.tsx `{children}`i doğrudan render eder, sıfır
- * iz kalır.
+ * components/PageTransition.tsx) — GÖREV 2'de (chore: remove mini
+ * transition remnants) kaldırılacak, geçici olarak burada duruyor.
  */
 export const PAGE_TRANSITIONS = true;
 
