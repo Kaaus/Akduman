@@ -1,12 +1,13 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import FaqSlider from "@/components/FaqSlider";
 import JsonLd from "@/components/JsonLd";
 import PageHeading from "@/components/PageHeading";
 import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
 import { WhatsAppIcon } from "@/components/WhatsAppFloat";
 import { breadcrumbSchema, buildMetadata, contactPageSchema } from "@/lib/seo";
-import { IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
+import { HOME_FAQ, IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "İletişim | Akduman Hukuk Bürosu – Çankaya, Ankara",
@@ -132,27 +133,36 @@ export default function IletisimPage() {
         </div>
       </section>
 
-      {/* Tam genişlik harita — {{HARITA_EMBED_URL}} boşken kitaplik.jpg
-          (hafif duotone, çerçevesiz bleed) gösterilir; url doldurulunca
-          görsel yerini iframe haritaya bırakır. */}
-      <section aria-label="Konum" className="border-t border-line">
-        {PLACEHOLDERS.HARITA_EMBED_URL ? (
+      {/* Kompakt harita — yalnız {{HARITA_EMBED_URL}} doluysa SSS bölümünün
+          ÜSTÜNDE render edilir; boşken bu blok hiç basılmaz, SSS bölümü
+          kalıcı olarak altında durur. */}
+      {PLACEHOLDERS.HARITA_EMBED_URL && (
+        <section aria-label="Konum" className="border-t border-line">
           <iframe
             src={PLACEHOLDERS.HARITA_EMBED_URL}
             title="Akduman Hukuk Bürosu konumu"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="block h-[420px] w-full border-0"
+            className="block h-[380px] w-full border-0"
           />
-        ) : (
-          <PhotoSurface
-            image={IMAGES.kitaplik}
-            variant="map"
-            aspectRatio="16/6"
-            objectPosition="center"
-            sizes="100vw"
-          />
-        )}
+        </section>
+      )}
+
+      {/* SSS — kitaplik.jpg artık bölüm arka planı (cta varyantı: navy-900
+          multiply + düz koyu, gradient scrim yok), "dev fotoğraf" görünümü
+          bitti, yükseklik içerikten geliyor. Anasayfadaki 5 SSS birebir;
+          FAQPage şeması burada TEKRAR basılmaz (anasayfada zaten var). */}
+      <section
+        aria-label="Sıkça sorulan sorular"
+        className="relative overflow-hidden border-t border-line bg-navy-950 py-14 md:py-16"
+      >
+        <PhotoSurface image={IMAGES.kitaplik} variant="cta" fill sizes="100vw" />
+        <div className="container-site relative z-10">
+          <Reveal>
+            <p className="kicker-dark mb-6">Sıkça Sorulan Sorular</p>
+            <FaqSlider items={HOME_FAQ} />
+          </Reveal>
+        </div>
       </section>
     </>
   );

@@ -573,4 +573,9 @@ html[data-intro-pending] .hero-line {
   .keyline-draw {
     clip-path: none !important;
   }
+  /* FaqSlider: snap yumuşatması (scroll-behavior:smooth) kapanır — ok/nokta
+     tıklamaları ve klavye ile anında atlar, kaydırma snap'i kalır. */
+  .faq-slider-track {
+    scroll-behavior: auto !important;
+  }
 }
