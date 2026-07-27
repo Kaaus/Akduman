@@ -83,6 +83,36 @@ export default function HakkimizdaPage() {
         </div>
       </section>
 
+      {/* Vizyon & Misyon — intro/imza bloğunun ALTINDA, avukat kartının
+          ÜSTÜNDE. Aynı zeminde (bg-white) olduğundan üstteki bölümle
+          arasına border-t eklenmedi; avukat kartı bölümü zemin
+          değiştirdiğinden (paper) kendi border-t'sini korur. */}
+      <section className="bg-white">
+        <div className="container-site pb-16">
+          <Reveal>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="border border-line-strong border-l-[3px] border-l-bronze-500 bg-paper p-6 md:p-8">
+                <p className="kicker text-bronze-700">VİZYON</p>
+                <p className="mt-3 text-ink">
+                  Hukuki bilgi ve deneyimi güven, şeffaflık ve etik değerlerle
+                  birleştirerek ulusal ölçekte tercih edilen, saygın ve çözüm
+                  odaklı bir hukuk bürosu olmak.
+                </p>
+              </div>
+              <div className="border border-line-strong border-l-[3px] border-l-bronze-500 bg-paper p-6 md:p-8">
+                <p className="kicker text-bronze-700">MİSYON</p>
+                <p className="mt-3 text-ink">
+                  Müvekkillerimizin hukuki ihtiyaçlarını doğru analiz ederek
+                  etkin, sürdürülebilir ve sonuç odaklı çözümler üretmek;
+                  hukukun üstünlüğü ve meslek etiği çerçevesinde yüksek
+                  standartlarda avukatlık hizmeti sunmak.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Avukat kartı — sıralamada AŞAĞI taşındı (en altta, tanıtımdan
           sonra); scroll ile gelir, fold hedefine dahil değil. */}
       <section className="border-t border-line bg-paper">
