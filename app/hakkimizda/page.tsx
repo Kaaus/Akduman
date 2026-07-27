@@ -39,10 +39,11 @@ export default function HakkimizdaPage() {
             pb-12 kaldı. */}
         <div className="container-site pb-12">
           {/* Fotosuz tek sütun düzeni: kicker+başlık+iki paragraf+imza bloğu
-              mx-auto max-w-3xl içinde ortalanmış bir blok olarak durur,
-              ama İÇERİK (metin) her zamanki gibi sola hizalıdır — yalnız
-              sayfanın üst BAŞLIK bloğu (PageHeading/H1) merkez hizalı kalır. */}
-          <div className="mx-auto max-w-3xl">
+              sola yaslıdır — container-site'ın sol hizasından başlar (Vizyon
+              & Misyon ve avukat kartı konteynerleriyle AYNI hiza); yalnız
+              sayfanın üst BAŞLIK bloğu (PageHeading/H1) merkez hizalı kalır.
+              Okunabilirlik için max-w-3xl korunur. */}
+          <div className="max-w-3xl">
             {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
             <p className="kicker">Hakkımızda</p>
             <h2 className="mt-2">Akduman Hukuk Bürosu</h2>

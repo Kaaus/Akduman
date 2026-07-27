@@ -32,10 +32,12 @@ export default function HomePage() {
 
       {/* (b) Tanıtım bandı — white, fotosuz tek sütun (çerçeveli duruşma
           salonu görseli kaldırıldı, yerine görsel gelmedi; bant yüksekliği
-          içeriğe göre doğal kısaldı). */}
+          içeriğe göre doğal kısaldı). Sola yaslı: mx-auto ortalaması
+          kaldırıldı, hero ve Hizmetlerimiz'le AYNI container-site sol
+          hizasından başlar; okunabilirlik için max-w-3xl korunur. */}
       <section id="tanitim" className="bg-white">
         <div className="container-site py-16 md:py-24">
-          <div className="mx-auto max-w-3xl">
+          <div className="max-w-3xl">
             <Reveal>
               <p className="kicker mb-3">Ankara</p>
               <h2>Hukuki Danışmanlık &amp; Avukatlık Hizmetleri</h2>
