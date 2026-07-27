@@ -1,6 +1,6 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import FaqSlider from "@/components/FaqSlider";
+import FaqAccordionDark from "@/components/FaqAccordionDark";
 import JsonLd from "@/components/JsonLd";
 import PageHeading from "@/components/PageHeading";
 import PhotoSurface from "@/components/PhotoSurface";
@@ -148,19 +148,39 @@ export default function IletisimPage() {
         </section>
       )}
 
-      {/* SSS — kitaplik.jpg artık bölüm arka planı (cta varyantı: navy-900
-          multiply + düz koyu, gradient scrim yok), "dev fotoğraf" görünümü
-          bitti, yükseklik içerikten geliyor. Anasayfadaki 5 SSS birebir;
-          FAQPage şeması burada TEKRAR basılmaz (anasayfada zaten var). */}
+      {/* SSS — split akordeon (Konsept A): kitaplik.jpg bölüm arka planı
+          (cta varyantı: navy-900 multiply + düz koyu ~%80, gradient scrim
+          yok), yükseklik içerikten geliyor. Sol %38 başlık bloğu, sağ %56
+          koyu-zemin akordeon (tek soru açık, ilk soru varsayılan açık).
+          Anasayfadaki 5 SSS birebir; FAQPage şeması burada TEKRAR
+          basılmaz (anasayfada zaten var). */}
       <section
         aria-label="Sıkça sorulan sorular"
-        className="relative overflow-hidden border-t border-line bg-navy-950 py-14 md:py-16"
+        className="relative overflow-hidden border-t border-line bg-navy-950 py-14 md:py-20"
       >
-        <PhotoSurface image={IMAGES.kitaplik} variant="cta" fill sizes="100vw" />
+        <PhotoSurface
+          image={IMAGES.kitaplik}
+          variant="cta"
+          fill
+          objectPosition="center"
+          sizes="100vw"
+        />
         <div className="container-site relative z-10">
           <Reveal>
-            <p className="kicker-dark mb-6">Sıkça Sorulan Sorular</p>
-            <FaqSlider items={HOME_FAQ} />
+            <div className="grid gap-10 md:grid-cols-[38fr_56fr] md:gap-16">
+              <div>
+                <p className="kicker-dark mb-4">Sıkça Sorulan Sorular</p>
+                <h2 className="font-serif text-[clamp(30px,4vw,38px)] font-semibold leading-tight text-[#F4F1EA]">
+                  Aramadan Önce
+                  <br />
+                  Merak Edilenler
+                </h2>
+                <div className="mt-6 h-[3px] w-16 bg-bronze-500" />
+              </div>
+              <div>
+                <FaqAccordionDark items={HOME_FAQ} idPrefix="iletisim-sss" />
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
