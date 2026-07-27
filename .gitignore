@@ -15,5 +15,9 @@
 *.tsbuildinfo
 next-env.d.ts
 
+# Playwright test çıktıları
+/test-results
+/playwright-report
+
 # Claude Code yerel ayarları (makineye özel)
 .claude/settings.local.json
