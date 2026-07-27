@@ -15,15 +15,15 @@ type Variant = "light" | "dark";
 const PRESET: Record<Size, { mono: string; text1: string; text2: string; hideTiny?: boolean }> = {
   lg: {
     mono: "h-[56px] lg:h-[64px]",
-    text1: "text-[20px] lg:text-[24px]",
-    text2: "text-[10px] lg:text-[11px]",
+    text1: "text-[1.25rem] lg:text-[1.5rem]",
+    text2: "text-[0.625rem] lg:text-[0.6875rem]",
     hideTiny: true,
   },
-  md: { mono: "h-[60px]", text1: "text-[22px]", text2: "text-[11px]" },
-  sm: { mono: "h-[48px]", text1: "text-[18px]", text2: "text-[10px]" },
+  md: { mono: "h-[60px]", text1: "text-[1.375rem]", text2: "text-[0.6875rem]" },
+  sm: { mono: "h-[48px]", text1: "text-[1.125rem]", text2: "text-[0.625rem]" },
 };
 
-const COMPACT = { mono: "h-[52px]", text1: "text-[20px]", text2: "text-[10px]" };
+const COMPACT = { mono: "h-[52px]", text1: "text-[1.25rem]", text2: "text-[0.625rem]" };
 
 const SIZES: Record<Size, string> = {
   lg: "(max-width: 1024px) 56px, 64px",

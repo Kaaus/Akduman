@@ -44,7 +44,7 @@ export default function TocRail({ items }: { items: TocItem[] }) {
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className={`-ml-[2px] block border-l-2 py-1.5 pl-4 text-[14px] leading-snug transition-colors duration-200 ${
+              className={`-ml-[2px] block border-l-2 py-1.5 pl-4 text-[0.875rem] leading-snug transition-colors duration-200 ${
                 active === item.id
                   ? "border-bronze-500 font-semibold text-ink-strong"
                   : "border-transparent text-muted hover:text-ink-strong"

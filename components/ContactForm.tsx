@@ -134,7 +134,7 @@ export default function ContactForm() {
             className={inputClass}
           />
           {fieldErrors.eposta && (
-            <p id="cf-eposta-error" role="alert" className="error-text mt-1.5 text-[13px]">
+            <p id="cf-eposta-error" role="alert" className="error-text mt-1.5 text-[0.8125rem]">
               {fieldErrors.eposta}
             </p>
           )}
@@ -165,7 +165,7 @@ export default function ContactForm() {
             className={inputClass}
           />
           {fieldErrors.telefon && (
-            <p id="cf-telefon-error" role="alert" className="error-text mt-1.5 text-[13px]">
+            <p id="cf-telefon-error" role="alert" className="error-text mt-1.5 text-[0.8125rem]">
               {fieldErrors.telefon}
             </p>
           )}
@@ -215,7 +215,7 @@ export default function ContactForm() {
           value="evet"
           className="mt-1 h-[18px] w-[18px] shrink-0 accent-navy-900"
         />
-        <label htmlFor="cf-kvkk" className="text-[14px] leading-relaxed text-muted">
+        <label htmlFor="cf-kvkk" className="text-[0.875rem] leading-relaxed text-muted">
           Kişisel verilerimin,{" "}
           <Link
             href="/kvkk-aydinlatma-metni/"
@@ -228,7 +228,7 @@ export default function ContactForm() {
       </div>
 
       {status === "unavailable" && (
-        <p role="alert" className="mt-5 border-l-[3px] border-[#A33A2E] bg-paper px-4 py-3 text-[14px] text-ink">
+        <p role="alert" className="mt-5 border-l-[3px] border-[#A33A2E] bg-paper px-4 py-3 text-[0.875rem] text-ink">
           Form şu anda kullanılamıyor — bize telefonla veya{" "}
           <a href={SITE.mailHref} className="font-semibold text-bronze-700 underline decoration-2 underline-offset-4">
             {SITE.email}
@@ -237,7 +237,7 @@ export default function ContactForm() {
         </p>
       )}
       {status === "error" && (
-        <p role="alert" className="error-text mt-5 border-l-[3px] border-[#A33A2E] bg-paper px-4 py-3 text-[14px]">
+        <p role="alert" className="error-text mt-5 border-l-[3px] border-[#A33A2E] bg-paper px-4 py-3 text-[0.875rem]">
           Mesajınız gönderilemedi. Lütfen tekrar deneyin veya bize telefonla
           ulaşın.
         </p>

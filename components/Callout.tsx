@@ -28,7 +28,7 @@ export default function Callout({
         aria-hidden="true"
         className="mt-1 shrink-0 text-navy-800"
       />
-      <div className="text-[15.5px] leading-relaxed text-ink [&>p]:mb-0">
+      <div className="text-[0.96875rem] leading-relaxed text-ink [&>p]:mb-0">
         {children}
       </div>
     </div>

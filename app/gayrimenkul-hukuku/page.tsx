@@ -236,7 +236,7 @@ export default function GayrimenkulHukukuPage() {
             </Reveal>
 
             {/* Bilgilendirme notu — tüm hizmet sayfalarında aynı */}
-            <p className="mt-12 border-t border-line-strong pt-6 text-[14px] italic text-muted">
+            <p className="mt-12 border-t border-line-strong pt-6 text-[0.875rem] italic text-muted">
               {INFO_NOTE}
             </p>
           </div>

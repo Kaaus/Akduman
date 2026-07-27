@@ -16,7 +16,7 @@ export default function Footer() {
   ].filter((s) => s.url); // boş {{SOSYAL_*}} → ikon HİÇ render edilmez
 
   return (
-    <footer className="bg-navy-950 text-[15px] text-white/70">
+    <footer className="bg-navy-950 text-[0.9375rem] text-white/70">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         {/* 1 — Logo + büro tanımı */}
         <div>
@@ -124,7 +124,7 @@ export default function Footer() {
           </ul>
           {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
           {PLACEHOLDERS.BARO_SICIL_NO && (
-            <p className="mt-5 text-[13px] text-white/50">
+            <p className="mt-5 text-[0.8125rem] text-white/50">
               {SITE.lawyer} — Ankara Barosu, Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
             </p>
           )}
@@ -133,7 +133,7 @@ export default function Footer() {
 
       {/* Alt şerit — üst 1px ayraç */}
       <div className="border-t border-white/[0.14]">
-        <div className="container-site space-y-2 py-6 text-center text-[13px] text-white/50">
+        <div className="container-site space-y-2 py-6 text-center text-[0.8125rem] text-white/50">
           <p>© 2026 Akduman Hukuk Bürosu — Tüm hakları saklıdır.</p>
           <p className="mx-auto max-w-4xl">{DISCLAIMER}</p>
         </div>

@@ -121,7 +121,7 @@ export default function MakalePage({
               <h1 className="mt-6">{article.title}</h1>
 
               {/* Meta satırı — tarih politikası: tarih girilmedikçe yalnız yazar adı basılır */}
-              <p className="mt-4 text-[14px] text-muted">
+              <p className="mt-4 text-[0.875rem] text-muted">
                 {SITE.lawyer}
                 {article.date && (
                   <>
@@ -183,17 +183,17 @@ export default function MakalePage({
                 <SiteImage image={IMAGES.avukat} aspectRatio="1/1" sizes="80px" />
               </div>
               <div>
-                <p className="font-serif text-[20px] font-semibold text-ink-strong">
+                <p className="font-serif text-[1.25rem] font-semibold text-ink-strong">
                   {SITE.lawyer}
                 </p>
-                <p className="mt-1 text-[14px] text-muted">
+                <p className="mt-1 text-[0.875rem] text-muted">
                   Akduman Hukuk Bürosu, Ankara
                 </p>
               </div>
             </aside>
 
             {/* Bilgilendirme notu */}
-            <p className="mt-10 border-t border-line-strong pt-6 text-[14px] italic text-muted">
+            <p className="mt-10 border-t border-line-strong pt-6 text-[0.875rem] italic text-muted">
               {INFO_NOTE}
             </p>
           </div>

@@ -47,7 +47,7 @@ export default function FaqAccordionDark({
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left font-serif text-[20px] font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze-300"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left font-serif text-[1.25rem] font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze-300"
                 style={{ color: isOpen ? "#F4F1EA" : "rgb(226 230 223)" }}
               >
                 {item.question}
@@ -70,7 +70,7 @@ export default function FaqAccordionDark({
             >
               <div>
                 <p
-                  className="ml-0.5 border-l-[3px] border-bronze-500 py-0.5 pb-6 pl-4 pr-10 text-[15px] leading-relaxed"
+                  className="ml-0.5 border-l-[3px] border-bronze-500 py-0.5 pb-6 pl-4 pr-10 text-[0.9375rem] leading-relaxed"
                   style={{ color: "rgb(226 230 223 / .9)" }}
                 >
                   {item.answer}

@@ -29,7 +29,7 @@ export default function Breadcrumb({
   return (
     <nav
       aria-label="breadcrumb"
-      className={`text-[13px] ${dark ? "text-white/70" : "text-muted"}`}
+      className={`text-[0.8125rem] ${dark ? "text-white/70" : "text-muted"}`}
     >
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <li>

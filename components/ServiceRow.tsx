@@ -66,7 +66,7 @@ export default function ServiceRow({
       <span
         className={`${
           showDescriptionOnMobile ? "block" : "hidden"
-        } col-start-2 col-end-4 row-start-2 mt-1 text-[15px] leading-relaxed text-ink md:col-start-3 md:col-end-4 md:row-start-1 md:mt-0 md:block md:max-w-sm md:text-right`}
+        } col-start-2 col-end-4 row-start-2 mt-1 text-[0.9375rem] leading-relaxed text-ink md:col-start-3 md:col-end-4 md:row-start-1 md:mt-0 md:block md:max-w-sm md:text-right`}
       >
         {service.oneLiner}
       </span>

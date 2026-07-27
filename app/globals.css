@@ -18,15 +18,26 @@
     scroll-behavior: smooth;
   }
 
+  /* Masaüstü görsel ölçek %110 (müşteri onaylı — Chrome %110 zoom'daki
+     görünüm varsayılan). Tailwind rem-tabanlı olduğundan tipografi,
+     boşluklar ve konteynerler (container-site max-w-6xl vb.) birlikte
+     büyür — tarayıcı zoom'uyla aynı etki. <1024px (mobil/tablet) AYNEN
+     kalır. Değer tek satırda: ileride 108%/112.5% ayarı tek dokunuş. */
+  @media (min-width: 1024px) {
+    html {
+      font-size: 110%;
+    }
+  }
+
   body {
     @apply bg-white font-sans text-ink;
-    font-size: 17px;
+    font-size: 1.0625rem;
     line-height: 1.75;
   }
 
   @media (max-width: 640px) {
     body {
-      font-size: 16.5px;
+      font-size: 1.03125rem;
     }
   }
 
@@ -86,13 +97,13 @@
      metin yasak); koyu zeminde bronz için .kicker-dark kullanılır */
   .kicker {
     @apply font-sans font-semibold uppercase text-navy-700;
-    font-size: 12.5px;
+    font-size: 0.78125rem;
     letter-spacing: 0.16em;
   }
 
   .kicker-dark {
     @apply font-sans font-semibold uppercase text-bronze-300;
-    font-size: 12.5px;
+    font-size: 0.78125rem;
     letter-spacing: 0.16em;
   }
 
@@ -103,7 +114,7 @@
   /* ── Buton sistemi (3 seviye + koyu zemin varyantları) ─────────────── */
 
   .btn {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-[2px] font-sans text-[15px] font-semibold;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-[2px] font-sans text-[0.9375rem] font-semibold;
     padding: 14px 26px;
     transition:
       background-color var(--dur-fast) var(--ease),
@@ -166,7 +177,7 @@
 
   /* Tertiary (link-buton): bronz metin + soldan dolan 2px alt çizgi */
   .btn-tertiary {
-    @apply relative inline-flex items-center gap-1.5 font-sans text-[15px] font-semibold text-bronze-700;
+    @apply relative inline-flex items-center gap-1.5 font-sans text-[0.9375rem] font-semibold text-bronze-700;
     padding-bottom: 3px;
   }
   .btn-tertiary::after {
@@ -221,7 +232,7 @@
     background: #fbfaf6;
     border: 1.5px solid #c4c6b2; /* line-strong */
     padding: 13px 15px;
-    font-size: 15px;
+    font-size: 0.9375rem;
     transition:
       border-color var(--dur-fast) var(--ease),
       box-shadow var(--dur-fast) var(--ease);
@@ -240,7 +251,7 @@
 
   .label-field {
     @apply mb-1.5 block font-sans font-semibold text-ink-strong;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   .error-text {
@@ -332,7 +343,7 @@
     @apply my-6 overflow-x-auto border border-line-strong;
   }
   .article-body table {
-    @apply w-full border-collapse text-[15px];
+    @apply w-full border-collapse text-[0.9375rem];
   }
   .article-body th,
   .article-body td {
@@ -347,7 +358,7 @@
 
   /* İlk paragraf "lead" stili */
   .lead {
-    font-size: 19px;
+    font-size: 1.1875rem;
     line-height: 1.7;
   }
 }

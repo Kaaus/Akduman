@@ -37,8 +37,8 @@ function PanelRow({
         {icon}
       </span>
       <span>
-        <span className="block text-[14px] font-semibold text-white">{label}</span>
-        <span className="mt-1 block text-[15px] leading-relaxed text-[#F4F1EA]/[.88]">
+        <span className="block text-[0.875rem] font-semibold text-white">{label}</span>
+        <span className="mt-1 block text-[0.9375rem] leading-relaxed text-[#F4F1EA]/[.88]">
           {children}
         </span>
       </span>
@@ -78,7 +78,7 @@ export default function IletisimPage() {
             <div className="overflow-hidden rounded-[2px] border border-line-strong shadow-card lg:grid lg:grid-cols-[42fr_58fr]">
               {/* Sol panel — düz navy-950 zemin, görsel arka plan YOK. */}
               <div className="relative overflow-hidden bg-navy-950 p-8 md:p-10">
-                <h2 className="relative z-10 mb-8 font-serif text-[26px] font-semibold text-[#F4F1EA]">
+                <h2 className="relative z-10 mb-8 font-serif text-[1.625rem] font-semibold text-[#F4F1EA]">
                   İletişim Bilgileri
                 </h2>
                 <div className="relative z-10 space-y-7">
@@ -170,7 +170,7 @@ export default function IletisimPage() {
             <div className="grid gap-10 md:grid-cols-[38fr_56fr] md:gap-16">
               <div>
                 <p className="kicker-dark mb-4">Sıkça Sorulan Sorular</p>
-                <h2 className="font-serif text-[clamp(30px,4vw,38px)] font-semibold leading-tight text-[#F4F1EA]">
+                <h2 className="font-serif text-[clamp(1.875rem,4vw,2.375rem)] font-semibold leading-tight text-[#F4F1EA]">
                   Aramadan Önce
                   <br />
                   Merak Edilenler

@@ -44,7 +44,7 @@ export default function MakalelerPage() {
           {/* Giriş bandı — üst boşluk PageHeading'in kendi pb-12'sinden gelir. */}
           <Reveal className="max-w-[70ch]">
             <p className="kicker mb-3">Bilgi Merkezi</p>
-            <p className="text-[17px] leading-relaxed text-ink md:text-[18px]">
+            <p className="text-[1.0625rem] leading-relaxed text-ink md:text-[1.125rem]">
               Miras, gayrimenkul, sigorta ve iş hukuku başta olmak üzere sık
               karşılaşılan hukuki konulara ilişkin bilgilendirme yazılarımızı
               aşağıda bulabilirsiniz. Yazılar genel bilgilendirme amaçlıdır;

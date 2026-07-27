@@ -31,7 +31,7 @@ export default function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
         <li key={step.title} className="group relative flex items-start gap-5">
           <span
             aria-hidden="true"
-            className="relative z-10 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-900 font-serif text-[15px] font-semibold text-white transition-shadow duration-[260ms] group-hover:ring-4 group-hover:ring-bronze-300"
+            className="relative z-10 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-900 font-serif text-[0.9375rem] font-semibold text-white transition-shadow duration-[260ms] group-hover:ring-4 group-hover:ring-bronze-300"
           >
             {i + 1}
           </span>

@@ -145,14 +145,14 @@ export default function Header() {
 
   /** Nav linki: altında bronz "slider" çizgi; aktif sayfada kalıcı dolu. */
   const navLinkClass = (active: boolean) =>
-    `link-slide ${active ? "link-slide-active" : ""} py-2 text-[15px] font-semibold ${
+    `link-slide ${active ? "link-slide-active" : ""} py-2 text-[0.9375rem] font-semibold ${
       active ? "text-ink-strong" : "text-ink hover:text-ink-strong"
     }`;
 
   return (
     <header>
       {/* Üst ince şerit — mobilde gizli */}
-      <div className="hidden bg-navy-950 text-[13px] text-white/80 md:block">
+      <div className="hidden bg-navy-950 text-[0.8125rem] text-white/80 md:block">
         <div className="container-site flex items-center justify-between gap-6 py-1.5">
           <div className="flex items-center gap-6">
             <a
@@ -257,7 +257,7 @@ export default function Header() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setDropdownOpen(false)}
-                        className={`relative block px-5 py-2 text-[14px] font-medium transition-colors duration-200 before:absolute before:left-0 before:top-1/2 before:h-[60%] before:w-[2px] before:-translate-y-1/2 before:bg-bronze-500 before:opacity-0 before:transition-opacity before:duration-200 hover:bg-paper hover:before:opacity-100 ${
+                        className={`relative block px-5 py-2 text-[0.875rem] font-medium transition-colors duration-200 before:absolute before:left-0 before:top-1/2 before:h-[60%] before:w-[2px] before:-translate-y-1/2 before:bg-bronze-500 before:opacity-0 before:transition-opacity before:duration-200 hover:bg-paper hover:before:opacity-100 ${
                           samePath(pathname, child.href)
                             ? "text-ink-strong before:opacity-100"
                             : "text-ink hover:text-ink-strong"
@@ -278,7 +278,7 @@ export default function Header() {
                 </Link>
               )
             )}
-            <a href={SITE.telHref} className="btn-primary !px-5 !py-2.5 text-[14px]">
+            <a href={SITE.telHref} className="btn-primary !px-5 !py-2.5 text-[0.875rem]">
               <Phone size={15} strokeWidth={1.5} aria-hidden="true" />
               Hemen Ara
             </a>
@@ -354,7 +354,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block py-3 font-serif text-[24px] font-semibold ${
+                    className={`block py-3 font-serif text-[1.5rem] font-semibold ${
                       isActive(item.href, item.children)
                         ? "text-bronze-300"
                         : "text-white"
@@ -369,7 +369,7 @@ export default function Header() {
                           <Link
                             href={child.href}
                             onClick={() => setMobileOpen(false)}
-                            className={`block py-1.5 text-[15px] font-medium ${
+                            className={`block py-1.5 text-[0.9375rem] font-medium ${
                               samePath(pathname, child.href)
                                 ? "text-bronze-300"
                                 : "text-white/80"

@@ -12,11 +12,15 @@ import { IMAGES, SITE } from "@/lib/site";
  */
 export default function Hero() {
   return (
-    // Yükseklik: header düşülerek ilk ekrana tam oturur. 110px değeri
-    // tarayıcıda ÖLÇÜLMÜŞTÜR (üst şerit 34.75px + ana bar 75px = 109.75px,
-    // yukarı yuvarlandı); iki sütun dikeyde ortalanır ve üst padding
+    // Yükseklik: header düşülerek ilk ekrana tam oturur. 7.75rem değeri
+    // ≥1024px genişlikte (lg, %110 masaüstü ölçeğiyle AYNI kırılım noktası)
+    // tarayıcıda ÖLÇÜLMÜŞTÜR (header toplam yüksekliği 134px ≈ 7.6rem @
+    // html font-size:110% — birkaç piksel güvenlik payıyla 7.75rem'e
+    // yuvarlandı). rem kullanımı BİLEREK: ölçek oranı ileride değişirse
+    // (108%/112.5%) bu değer header'la birlikte otomatik kayar, yeniden
+    // ölçmeye gerek kalmaz. İki sütun dikeyde ortalanır ve üst padding
     // küçültülür ki 1366×768'de butonlar dahil her şey fold üstünde kalsın.
-    <section className="relative overflow-hidden bg-navy-950 lg:flex lg:min-h-[calc(100svh-110px)] lg:items-center">
+    <section className="relative overflow-hidden bg-navy-950 lg:flex lg:min-h-[calc(100svh-7.75rem)] lg:items-center">
       <PhotoSurface image={IMAGES.heroKitaplar} variant="hero" fill priority kenBurns sizes="100vw" />
       <div className="container-site relative z-10 grid w-full items-center gap-10 pb-14 pt-10 md:gap-14 md:pb-16 md:pt-12 lg:grid-cols-2 lg:py-8">
         <div>

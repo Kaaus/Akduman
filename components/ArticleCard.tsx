@@ -38,9 +38,9 @@ export default function ArticleCard({ article }: { article: Article }) {
       {/* Kategori + tarih — tek satır: "MİRAS HUKUKU · 18 Mayıs 2026".
           Tarih politikası: gerçek tarih girilmedikçe tarih basılmaz. */}
       {(category || article.date) && (
-        <p className="flex flex-wrap items-baseline gap-x-1.5 text-[13px]">
+        <p className="flex flex-wrap items-baseline gap-x-1.5 text-[0.8125rem]">
           {category && (
-            <span className="text-[12px] font-semibold uppercase tracking-kicker text-bronze-700">
+            <span className="text-[0.75rem] font-semibold uppercase tracking-kicker text-bronze-700">
               {category}
             </span>
           )}
@@ -62,7 +62,7 @@ export default function ArticleCard({ article }: { article: Article }) {
         </Link>
       </h3>
 
-      <p className="mt-2 line-clamp-2 flex-1 text-[15px] leading-relaxed text-ink">
+      <p className="mt-2 line-clamp-2 flex-1 text-[0.9375rem] leading-relaxed text-ink">
         {article.description}
       </p>
 
@@ -71,7 +71,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       <Link
         href={`/${article.slug}/`}
         aria-label={`${article.title} — devamını oku`}
-        className="btn-tertiary mt-4 self-start text-[14px]"
+        className="btn-tertiary mt-4 self-start text-[0.875rem]"
       >
         Oku
         <ArrowRight size={15} strokeWidth={1.5} className="btn-arrow" />

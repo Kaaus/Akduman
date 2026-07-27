@@ -70,10 +70,10 @@ export default function HakkimizdaPage() {
 
             {/* İmza bloğu — sol 3px bronz çizgi */}
             <div className="mt-3 border-l-[3px] border-bronze-500 pl-5">
-              <p className="font-serif text-[20px] font-semibold text-ink-strong">
+              <p className="font-serif text-[1.25rem] font-semibold text-ink-strong">
                 {SITE.lawyer}
               </p>
-              <p className="mt-1 text-[15px] text-muted">
+              <p className="mt-1 text-[0.9375rem] text-muted">
                 Ankara Barosu
                 {/* Sicil yalnızca {{BARO_SICIL_NO}} doluysa eklenir */}
                 {PLACEHOLDERS.BARO_SICIL_NO &&
@@ -136,7 +136,7 @@ export default function HakkimizdaPage() {
                 <h2>{SITE.lawyer}</h2>
                 {/* Sicil satırı yalnızca {{BARO_SICIL_NO}} doluysa basılır */}
                 {PLACEHOLDERS.BARO_SICIL_NO && (
-                  <p className="mt-2 text-[15px] font-semibold text-bronze-700">
+                  <p className="mt-2 text-[0.9375rem] font-semibold text-bronze-700">
                     Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
                   </p>
                 )}

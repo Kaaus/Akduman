@@ -46,7 +46,7 @@ export default function FaqAccordion({
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left font-sans text-[17px] font-semibold text-ink transition-colors duration-200 hover:text-ink-strong"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left font-sans text-[1.0625rem] font-semibold text-ink transition-colors duration-200 hover:text-ink-strong"
               >
                 {item.question}
                 <Plus

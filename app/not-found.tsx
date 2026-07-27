@@ -30,7 +30,7 @@ export default function NotFound() {
               <li key={s.slug}>
                 <Link
                   href={`/${s.slug}/`}
-                  className="text-[15px] font-semibold text-navy-800 transition-colors hover:text-bronze-700"
+                  className="text-[0.9375rem] font-semibold text-navy-800 transition-colors hover:text-bronze-700"
                 >
                   {s.title}
                 </Link>

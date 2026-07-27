@@ -50,7 +50,7 @@ export default function ServiceHero({
           />
           <h1 className="mt-5 !text-[#F4F1EA]">{service.h1}</h1>
           {/* Lead: mevcut giriş metninin ilk cümlesi */}
-          <p className="mt-4 text-[20px] leading-relaxed text-[#F4F1EA]/85">
+          <p className="mt-4 text-[1.25rem] leading-relaxed text-[#F4F1EA]/85">
             {children}
           </p>
           <a href={SITE.telHref} className="btn-tertiary-dark mt-5">
