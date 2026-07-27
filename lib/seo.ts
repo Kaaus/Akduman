@@ -81,6 +81,20 @@ export function legalServiceSchema() {
   };
 }
 
+/** Hakkımızda sayfası için Person şeması (avukatın biyografi bilgileri). */
+export function personSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: SITE.lawyer,
+    jobTitle: "Avukat",
+    url: `${SITE.url}/hakkimizda/`,
+    worksFor: { "@id": `${SITE.url}/#legalservice` },
+    alumniOf: "Hacettepe Üniversitesi",
+    knowsLanguage: ["tr", "en"],
+  };
+}
+
 /** SSS içeren sayfalar için FAQPage şeması. */
 export function faqSchema(items: FaqItem[]) {
   return {

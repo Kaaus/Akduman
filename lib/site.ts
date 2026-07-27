@@ -120,7 +120,7 @@ export const IMAGES: Record<string, ImageEntry> = {
     alt: "Ankara avukatlık ve hukuki danışmanlık — Akduman Hukuk Bürosu",
     ready: false, // TODO: eski sitedeki Slider-1.webp → public/images/hero.webp
   },
-  /** Gerçek piksel oranı 1402×1122 ≈ 5:4 — bkz. Hakkımızda avukat kartı. */
+  /** Gerçek piksel oranı 1167×993 ≈ 1.18:1 — bkz. Hakkımızda avukat kartı. */
   avukat: {
     src: "/images/av-samed-akduman.jpg",
     alt: "Av. Samed Akduman",

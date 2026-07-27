@@ -3,7 +3,7 @@ import JsonLd from "@/components/JsonLd";
 import PageHeading from "@/components/PageHeading";
 import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
-import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { breadcrumbSchema, buildMetadata, personSchema } from "@/lib/seo";
 import { IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
 export const metadata = buildMetadata({
@@ -22,6 +22,7 @@ export default function HakkimizdaPage() {
           { name: "Hakkımızda", path: "/hakkimizda/" },
         ])}
       />
+      <JsonLd data={personSchema()} />
 
       <section className="bg-white">
         <div className="container-site pt-8">
@@ -119,7 +120,7 @@ export default function HakkimizdaPage() {
         <div className="container-site py-12">
           <Reveal>
             {/* Avukat kartı — v2 kart stili + canlı (framed) çerçeveli portre.
-                Kaynak fotoğrafın gerçek oranı (1402×1122 ≈ 5:4) birebir
+                Kaynak fotoğrafın gerçek oranı (1167×993 ≈ 1.18:1) birebir
                 kullanılır — kırpım yok. Görsel sütunu ~%45 pay alır, 560px'te
                 sınırlanır (md:max-w-[560px]); kartın kendisi de genişledi
                 (max-w-4xl → max-w-5xl). */}
@@ -127,7 +128,7 @@ export default function HakkimizdaPage() {
               <PhotoSurface
                 image={IMAGES.avukat}
                 variant="framed"
-                aspectRatio="5/4"
+                aspectRatio="1167/993"
                 sizes="(max-width: 768px) 100vw, 560px"
                 className="md:max-w-[560px]"
               />
@@ -139,13 +140,22 @@ export default function HakkimizdaPage() {
                     Ankara Barosu — Sicil No: {PLACEHOLDERS.BARO_SICIL_NO}
                   </p>
                 )}
-                <p className="mt-4 text-muted">
-                  Akduman Hukuk Bürosu, Ankara&rsquo;da siz değerli
-                  müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta
-                  Hukuku, Ticaret ve Şirketler Hukuku, Rekabet Hukuku ve diğer
-                  tüm hukuki alanlarda hukuki danışmanlık ve avukatlık
-                  hizmeti vermektedir.
-                </p>
+                {/* Biyografi — birebir (müşteri onaylı) */}
+                <div className="mt-4 space-y-3 text-muted">
+                  <p>
+                    Hacettepe Üniversitesi Hukuk Fakültesi mezunu olan Av.
+                    Samed Akduman, Ankara&rsquo;da faaliyet gösteren Akduman
+                    Hukuk Bürosu&rsquo;nun kurucusudur. Başta gayrimenkul
+                    hukuku, ceza hukuku ve sigorta hukuku olmak üzere çeşitli
+                    hukuk alanlarında bireysel ve kurumsal müvekkillerine
+                    danışmanlık ve avukatlık hizmeti sunmaktadır.
+                  </p>
+                  <p>
+                    İngilizce dilinde de hukuki iletişim kurabilen Av. Samed
+                    Akduman, yerli ve yabancı gerçek kişiler ile şirketlere
+                    danışmanlık ve dava takibi hizmeti sunmaktadır.
+                  </p>
+                </div>
               </div>
             </div>
           </Reveal>
