@@ -71,6 +71,7 @@ tüm rotalarda, "home" yalnız Ana Sayfa'da, "off" tamamen kapalı.
   eski kayıt: Bestekar Cd.)
 - Makale tarihleri GEÇİCİDİR — müşteri gerçeklerini verecek.
 - Boş tokenlar: BARO_SICIL_NO, CALISMA_SAATLERI, HARITA_EMBED_URL, sosyal URL'ler
-  (boşken ilgili blok render edilmez; sosyal üst-bar ikonları istisna, "#" ile durur).
+  (Footer + Header üst-bar/mobil menü dahil hepsi boşken ilgili blok/ikon hiç
+  render edilmez — istisna kalmadı, HEADER_SOCIAL de "" varsayılanına geçti).
 - İletişim formu: Resend env (`RESEND_API_KEY`, `CONTACT_TO`) tanımlanana kadar
   zarif fallback gösterir.

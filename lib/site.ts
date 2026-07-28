@@ -79,17 +79,16 @@ export const PLACEHOLDERS = {
 
 /**
  * Header üst şeridindeki sosyal ikonlar (+ mobil menü altı).
- * PLACEHOLDERS'tan BİLEREK ayrı tutulur: Footer'daki SOSYAL_* sabitleri
- * "boşsa gizle" kuralına tabidir (bkz. PLACEHOLDERS yorumu) ve bu kurala
- * Footer.tsx'te dokunulmaması gerekiyor — aynı sabitleri paylaşmak,
- * değerleri dolduran an Footer'da da istenmeyen şekilde ikon belirmesine
- * yol açardı. Buradaki üç ikon ise kuraldan MUAF: değer ne olursa olsun
- * (şimdilik "#") Header'da HER ZAMAN render edilir.
+ * PLACEHOLDERS'tan BİLEREK ayrı tutulur: Footer'daki SOSYAL_* sabitleriyle
+ * aynı sabitleri paylaşmak, değerleri dolduran an Footer'da da istenmeyen
+ * şekilde ikon belirmesine yol açardı. Ama sözleşme AYNI — boş ("") olan
+ * her platform Header.tsx'te render edilmez; hesaplar açılınca buraya
+ * gerçek URL girildiği an ilgili ikon kendiliğinden geri gelir.
  */
 export const HEADER_SOCIAL = {
-  instagram: "#", // TODO: hesaplar açılınca gerçek URL girilecek
-  facebook: "#", // TODO: hesaplar açılınca gerçek URL girilecek
-  linkedin: "#", // TODO: hesaplar açılınca gerçek URL girilecek
+  instagram: "", // TODO: hesaplar açılınca gerçek URL girilecek
+  facebook: "", // TODO: hesaplar açılınca gerçek URL girilecek
+  linkedin: "", // TODO: hesaplar açılınca gerçek URL girilecek
 } as const;
 
 // ─── Görsel Manifesti ────────────────────────────────────────────────────────

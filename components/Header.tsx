@@ -16,12 +16,17 @@ import {
 import BrandLockup from "@/components/BrandLockup";
 import { HEADER_SOCIAL, NAV, SITE } from "@/lib/site";
 
-/** Üst şerit + mobil menüde paylaşılan sosyal ikon üçlüsü. */
+/**
+ * Üst şerit + mobil menüde paylaşılan sosyal ikon üçlüsü.
+ * PLACEHOLDERS sözleşmesiyle aynı kural: href boşsa ("") o ikon hiç
+ * render edilmez — hesaplar açılınca lib/site.ts → HEADER_SOCIAL'e
+ * gerçek URL girildiği an ikon kendiliğinden geri gelir.
+ */
 const SOCIAL_LINKS = [
   { href: HEADER_SOCIAL.instagram, label: "Instagram sayfamız", Icon: Instagram },
   { href: HEADER_SOCIAL.facebook, label: "Facebook sayfamız", Icon: Facebook },
   { href: HEADER_SOCIAL.linkedin, label: "LinkedIn sayfamız", Icon: Linkedin },
-];
+].filter((social) => social.href);
 
 /** Trailing slash farklarını yok sayarak yol karşılaştırır. */
 function samePath(a: string, b: string) {
@@ -170,21 +175,23 @@ export default function Header() {
               {SITE.email}
             </a>
           </div>
-          {/* Sosyal ikonlar — daima görünür (bkz. lib/site.ts HEADER_SOCIAL) */}
-          <div className="flex items-center gap-4">
-            {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="text-[#F4F1EA]/75 transition-colors duration-150 hover:text-bronze-300"
-              >
-                <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
-              </a>
-            ))}
-          </div>
+          {/* Sosyal ikonlar — yalnız dolu URL'ler render edilir (bkz. lib/site.ts HEADER_SOCIAL) */}
+          {SOCIAL_LINKS.length > 0 && (
+            <div className="flex items-center gap-4">
+              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-[#F4F1EA]/75 transition-colors duration-150 hover:text-bronze-300"
+                >
+                  <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -392,24 +399,27 @@ export default function Header() {
               <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
               Hemen Ara
             </a>
-            {/* Sosyal ikonlar — üst şeritle aynı üçlü, mobilde şerit gizli olduğu için burada tekrar edilir */}
-            <div
-              className="hero-line mt-8 flex items-center gap-5"
-              style={{ animationDelay: `${(NAV.length + 1) * 60}ms` }}
-            >
-              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="text-[#F4F1EA]/75 transition-colors duration-150 hover:text-bronze-300"
-                >
-                  <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
-                </a>
-              ))}
-            </div>
+            {/* Sosyal ikonlar — üst şeritle aynı üçlü (yalnız dolu URL'ler),
+                mobilde şerit gizli olduğu için burada tekrar edilir */}
+            {SOCIAL_LINKS.length > 0 && (
+              <div
+                className="hero-line mt-8 flex items-center gap-5"
+                style={{ animationDelay: `${(NAV.length + 1) * 60}ms` }}
+              >
+                {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="text-[#F4F1EA]/75 transition-colors duration-150 hover:text-bronze-300"
+                  >
+                    <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            )}
           </nav>
         </div>
       )}

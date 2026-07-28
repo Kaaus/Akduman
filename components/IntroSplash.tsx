@@ -172,29 +172,31 @@ export default function IntroSplash() {
         }`}
       >
         <svg
-          viewBox="0 0 120 140"
+          viewBox="0 0 140 150"
           className="h-[110px] w-auto md:h-[160px]"
           fill="none"
           stroke="#BFA05C"
           strokeWidth={1.75}
           strokeLinecap="round"
         >
-          {/* Dikey mil */}
-          <line className="intro-draw" style={{ animationDelay: "0ms" }} pathLength={1} x1="60" y1="24" x2="60" y2="122" />
+          {/* Halka — logo-monogram.png'deki ince çember */}
+          <circle className="intro-draw" style={{ animationDelay: "0ms" }} pathLength={1} cx="70" cy="76" r="60" />
+          {/* A'nın iki bacağı — birlikte, hafif dışa kıvrımla (logodaki
+              akışkan serif hissi; abartısız, tek path'lik yumuşak bombe) */}
+          <path className="intro-draw" style={{ animationDelay: "110ms" }} pathLength={1} d="M70,20 Q45,75 33,130" />
+          <path className="intro-draw" style={{ animationDelay: "110ms" }} pathLength={1} d="M70,20 Q95,75 107,130" />
+          {/* A'nın orta mili — terazinin dikey miliyle çakışır */}
+          <line className="intro-draw" style={{ animationDelay: "280ms" }} pathLength={1} x1="70" y1="30" x2="70" y2="76" />
           {/* Yatay denge kolu */}
-          <line className="intro-draw" style={{ animationDelay: "80ms" }} pathLength={1} x1="18" y1="22" x2="102" y2="22" />
-          {/* Taban */}
-          <line className="intro-draw" style={{ animationDelay: "160ms" }} pathLength={1} x1="42" y1="122" x2="78" y2="122" />
-          {/* Sol askı */}
-          <line className="intro-draw" style={{ animationDelay: "240ms" }} pathLength={1} x1="18" y1="22" x2="18" y2="50" />
-          {/* Sağ askı */}
-          <line className="intro-draw" style={{ animationDelay: "320ms" }} pathLength={1} x1="102" y1="22" x2="102" y2="50" />
-          {/* Sol çanak yayı */}
-          <path className="intro-draw" style={{ animationDelay: "400ms" }} pathLength={1} d="M4,50 Q18,66 32,50" />
-          {/* Sağ çanak yayı */}
-          <path className="intro-draw" style={{ animationDelay: "480ms" }} pathLength={1} d="M88,50 Q102,66 116,50" />
-          {/* Mil ekseni */}
-          <circle className="intro-pivot" cx="60" cy="22" r="2.5" fill="#BFA05C" stroke="none" />
+          <line className="intro-draw" style={{ animationDelay: "400ms" }} pathLength={1} x1="30" y1="76" x2="110" y2="76" />
+          {/* İki askı — birlikte */}
+          <line className="intro-draw" style={{ animationDelay: "520ms" }} pathLength={1} x1="36" y1="76" x2="36" y2="98" />
+          <line className="intro-draw" style={{ animationDelay: "520ms" }} pathLength={1} x1="104" y1="76" x2="104" y2="98" />
+          {/* İki çanak yayı — birlikte */}
+          <path className="intro-draw" style={{ animationDelay: "640ms" }} pathLength={1} d="M24,98 Q36,112 48,98" />
+          <path className="intro-draw" style={{ animationDelay: "640ms" }} pathLength={1} d="M92,98 Q104,112 116,98" />
+          {/* Mil ekseni — en son */}
+          <circle className="intro-pivot" cx="70" cy="76" r="2.6" fill="#BFA05C" stroke="none" />
         </svg>
         <p className="intro-kicker kicker-dark">Akduman Hukuk Bürosu</p>
       </div>
