@@ -84,7 +84,7 @@ export default function CezaHukukuPage() {
           <div className="article-body min-w-0 max-w-[70ch]">
             {/* Giriş (kalan cümleler) — lead stili */}
             <p className="lead">
-              Akduman Hukuk Bürosu, ceza hukuku alanında şüpheli, sanık,
+              Akduman Hukuk ve Danışmanlık, ceza hukuku alanında şüpheli, sanık,
               müşteki ve mağdur konumundaki müvekkillerine soruşturma ve
               kovuşturma aşamalarında hukuki destek sağlamaktadır. Ceza
               yargılaması, kişi özgürlüğünü doğrudan etkileyen sonuçlar

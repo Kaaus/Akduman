@@ -79,7 +79,7 @@ export default function RekabetHukukuPage() {
           <div className="article-body min-w-0 max-w-[70ch]">
             {/* Giriş (kalan cümleler) — lead stili */}
             <p className="lead">
-              Akduman Hukuk Bürosu, rekabet hukuku alanında Rekabet Kurumu
+              Akduman Hukuk ve Danışmanlık, rekabet hukuku alanında Rekabet Kurumu
               nezdindeki soruşturma ve savunma süreçlerinden birleşme
               devralma bildirimlerine, rekabet ihlalinden doğan tazminat
               taleplerine kadar müvekkillerine hukuki destek sağlamaktadır.

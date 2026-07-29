@@ -2,7 +2,7 @@
   "name": "akduman-hukuk-burosu",
   "version": "1.0.0",
   "private": true,
-  "description": "akduman.av.tr — Akduman Hukuk Bürosu kurumsal web sitesi (Next.js + Tailwind)",
+  "description": "akduman.av.tr — Akduman Hukuk ve Danışmanlık kurumsal web sitesi (Next.js + Tailwind)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -26,6 +26,7 @@
     "@types/react-dom": "18.3.1",
     "autoprefixer": "10.4.20",
     "eslint-config-next": "^14.2.35",
+    "png-to-ico": "^3.0.2",
     "postcss": "8.5.16",
     "satori": "^0.12.2",
     "tailwindcss": "3.4.15",

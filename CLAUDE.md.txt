@@ -1,8 +1,10 @@
-# CLAUDE.md — Akduman Hukuk Bürosu Sitesi
+# CLAUDE.md — Akduman Hukuk ve Danışmanlık Sitesi
 
-Ankara'daki Akduman Hukuk Bürosu'nun (Av. Samed Akduman) kurumsal sitesi.
+Ankara'daki Akduman Hukuk ve Danışmanlık'ın (Av. Samed Akduman) kurumsal sitesi.
 Stack: Next.js 14 App Router · TypeScript · Tailwind · MDX makaleler · Vercel.
 Canlı önizleme: akduman.vercel.app — gerçek domain (akduman.av.tr) DNS geçişi bekliyor.
+Marka adı "Akduman Hukuk Bürosu"dan "Akduman Hukuk ve Danışmanlık"a site sahibinin
+talebiyle değiştirildi (eski ad SEO sürekliliği için lib/seo.ts'te alternateName olarak korunur).
 
 ## DEĞİŞMEZLER (her görevde geçerli, ihlal edilemez)
 1. **Metinler korunur.** Sayfa metinleri ve `content/makaleler/*.mdx` birebir sabittir.

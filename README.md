@@ -1,4 +1,4 @@
-# akduman.av.tr — Akduman Hukuk Bürosu
+# akduman.av.tr — Akduman Hukuk ve Danışmanlık
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS ile geliştirilmiş kurumsal
 web sitesi. Tasarım sistemi: **Lacivert & Bronz** — koyu, tipografi ağırlıklı,

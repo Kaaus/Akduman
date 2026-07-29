@@ -134,7 +134,7 @@ export default function Footer() {
       {/* Alt şerit — üst 1px ayraç */}
       <div className="border-t border-white/[0.14]">
         <div className="container-site space-y-2 py-6 text-center text-[0.8125rem] text-white/50">
-          <p>© 2026 Akduman Hukuk Bürosu — Tüm hakları saklıdır.</p>
+          <p>© 2026 Akduman Hukuk ve Danışmanlık — Tüm hakları saklıdır.</p>
           <p className="mx-auto max-w-4xl">{DISCLAIMER}</p>
         </div>
       </div>

@@ -79,7 +79,7 @@ export default function TicaretVeSirketlerHukukuPage() {
           <div className="article-body min-w-0 max-w-[70ch]">
             {/* Giriş (kalan cümleler) — lead stili */}
             <p className="lead">
-              Akduman Hukuk Bürosu, ticaret ve şirketler hukuku alanında
+              Akduman Hukuk ve Danışmanlık, ticaret ve şirketler hukuku alanında
               bireysel tacirlere, şirketlere ve ortaklarına kuruluştan
               günlük işleyişe, ortaklar arası uyuşmazlıklardan ticari
               alacağın takibine kadar geniş bir yelpazede hukuki destek

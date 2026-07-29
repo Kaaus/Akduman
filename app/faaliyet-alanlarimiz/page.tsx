@@ -7,7 +7,7 @@ import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { SERVICES } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Faaliyet Alanlarımız | Akduman Hukuk Bürosu",
+  title: "Faaliyet Alanlarımız | Akduman Hukuk ve Danışmanlık",
   description:
     "Ceza, aile, miras, iş, sigorta, gayrimenkul, idare ve yabancılar hukuku alanlarındaki hizmetlerimizi inceleyin.",
   path: "/faaliyet-alanlarimiz/",

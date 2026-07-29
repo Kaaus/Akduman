@@ -26,7 +26,9 @@ export const INTRO_SPLASH_MODE: "global" | "home" | "off" = "global";
 // ─── Kimlik & İletişim ───────────────────────────────────────────────────────
 
 export const SITE = {
-  name: "Akduman Hukuk Bürosu",
+  name: "Akduman Hukuk ve Danışmanlık",
+  /** Eski marka adı — SEO sürekliliği için lib/seo.ts LegalService şemasında alternateName olarak kullanılır. */
+  legacyName: "Akduman Hukuk Bürosu",
   lawyer: "Av. Samed Akduman",
   url: "https://akduman.av.tr",
   /** Görünen telefon metni — sitede HER yerde bu biçim kullanılır. */
@@ -71,7 +73,7 @@ export const PLACEHOLDERS = {
   /** Örn: "Hafta içi 09.00–18.00" */
   CALISMA_SAATLERI: "", // TODO: müşteriden alınacak
   SOSYAL_FACEBOOK_URL: "", // TODO: müşteriden alınacak
-  SOSYAL_INSTAGRAM_URL: "", // TODO: müşteriden alınacak
+  SOSYAL_INSTAGRAM_URL: "https://www.instagram.com/samedakduman/",
   SOSYAL_YOUTUBE_URL: "", // TODO: müşteriden alınacak
   /** Google Maps embed linki (iframe src). */
   HARITA_EMBED_URL: "", // TODO: müşteriden alınacak
@@ -86,9 +88,9 @@ export const PLACEHOLDERS = {
  * gerçek URL girildiği an ilgili ikon kendiliğinden geri gelir.
  */
 export const HEADER_SOCIAL = {
-  instagram: "", // TODO: hesaplar açılınca gerçek URL girilecek
-  facebook: "", // TODO: hesaplar açılınca gerçek URL girilecek
-  linkedin: "", // TODO: hesaplar açılınca gerçek URL girilecek
+  instagram: "https://www.instagram.com/samedakduman/",
+  facebook: "", // TODO: hesap açılınca gerçek URL girilecek
+  linkedin: "https://www.linkedin.com/in/samedakduman/",
 } as const;
 
 // ─── Görsel Manifesti ────────────────────────────────────────────────────────
@@ -104,19 +106,27 @@ export type ImageEntry = {
 
 export const IMAGES: Record<string, ImageEntry> = {
   /**
-   * Kare monogram — hem açık hem koyu zeminde AYNI dosya (altın+koyu yeşil
-   * tonları her iki zeminde de okunur). Açık/koyu zemin için ayrı dosya
-   * kullanan eski ikili logo sistemi tamamen emekli edildi; bkz.
-   * components/BrandLockup.tsx.
+   * Kare monogram (şeffaf, 485×485) — hem açık hem koyu zeminde AYNI dosya
+   * (altın tonları her iki zeminde de okunur). Dar alanlarda (mobil header,
+   * mobil menü, footer küçük ekran) BrandLockup bunu + yazılı metni kullanır.
    */
   logoMonogram: {
     src: "/images/logo-monogram.png",
-    alt: "Akduman Hukuk Bürosu logosu",
+    alt: "Akduman Hukuk ve Danışmanlık logosu",
+    ready: true,
+  },
+  /**
+   * Yazılı tam logo (şeffaf, 1435×486 ≈ 2.95:1) — monogram + "AKDUMAN HUKUK
+   * & DANIŞMANLIK" birlikte. BrandLockup masaüstünde (lg+) bunu kullanır.
+   */
+  logoTam: {
+    src: "/images/logo-tam.png",
+    alt: "Akduman Hukuk ve Danışmanlık",
     ready: true,
   },
   hero: {
     src: "/images/hero.webp",
-    alt: "Ankara avukatlık ve hukuki danışmanlık — Akduman Hukuk Bürosu",
+    alt: "Ankara avukatlık ve hukuki danışmanlık — Akduman Hukuk ve Danışmanlık",
     ready: false, // TODO: eski sitedeki Slider-1.webp → public/images/hero.webp
   },
   /** Gerçek piksel oranı 1167×993 ≈ 1.18:1 — bkz. Hakkımızda avukat kartı. */
@@ -216,7 +226,7 @@ export const SERVICES: Service[] = [
     title: "Ceza Hukuku",
     oneLiner: "Soruşturma ve kovuşturma aşamalarında savunma ve hak takibi.",
     h1: "Ankara Ceza Avukatı — Ceza Hukuku",
-    metaTitle: "Ankara Ceza Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara Ceza Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "Ankara'da ceza hukuku: soruşturma ve kovuşturmada müdafilik, tutukluluğa itiraz, istinaf ve temyiz süreçlerinde hukuki destek.",
     alan: "ceza",
@@ -227,7 +237,7 @@ export const SERVICES: Service[] = [
     title: "Gayrimenkul Hukuku",
     oneLiner: "Tapu, kira ve taşınmaz uyuşmazlıklarında hukuki destek.",
     h1: "Ankara Gayrimenkul Avukatı — Gayrimenkul Hukuku",
-    metaTitle: "Ankara Gayrimenkul Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara Gayrimenkul Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "Tapu iptali ve tescil, ortaklığın giderilmesi, ecrimisil, kira ve tahliye uyuşmazlıklarında Ankara'da hukuki destek.",
     alan: "gayrimenkul",
@@ -238,7 +248,7 @@ export const SERVICES: Service[] = [
     title: "Aile Hukuku",
     oneLiner: "Boşanma, velayet, nafaka ve mal rejimi uyuşmazlıkları.",
     h1: "Ankara Boşanma ve Aile Hukuku Avukatı",
-    metaTitle: "Ankara Boşanma ve Aile Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara Boşanma ve Aile Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "Anlaşmalı ve çekişmeli boşanma, velayet, nafaka ve mal rejimi davalarında Ankara'da avukatlık hizmeti.",
     alan: "aile",
@@ -249,7 +259,7 @@ export const SERVICES: Service[] = [
     title: "İş Hukuku",
     oneLiner: "İşçi-işveren uyuşmazlıkları, tazminat ve işe iade süreçleri.",
     h1: "Ankara İş Hukuku Avukatı",
-    metaTitle: "Ankara İş Hukuku Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara İş Hukuku Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "Kıdem ve ihbar tazminatı, işe iade, işçilik alacakları ve arabuluculuk süreçlerinde Ankara'da hukuki destek.",
     alan: "is",
@@ -271,7 +281,7 @@ export const SERVICES: Service[] = [
     title: "Miras Hukuku",
     oneLiner: "Miras paylaşımı, reddi miras ve veraset işlemleri.",
     h1: "Ankara Miras Avukatı — Miras Hukuku",
-    metaTitle: "Ankara Miras Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara Miras Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "Miras paylaşımı, reddi miras, veraset ilamı, tenkis ve muris muvazaası davalarında Ankara'da avukatlık hizmeti.",
     alan: "miras",
@@ -293,7 +303,7 @@ export const SERVICES: Service[] = [
     title: "İdare Hukuku",
     oneLiner: "İptal ve tam yargı davaları, idari başvurular.",
     h1: "Ankara İdare Hukuku Avukatı",
-    metaTitle: "Ankara İdare Hukuku Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara İdare Hukuku Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "İptal ve tam yargı davaları, idari başvurular ve disiplin cezalarına itiraz süreçlerinde hukuki destek.",
     alan: "idare",
@@ -315,7 +325,7 @@ export const SERVICES: Service[] = [
     title: "Rekabet Hukuku",
     oneLiner: "Rekabet Kurumu süreçleri ve rekabet ihlali uyuşmazlıkları.",
     h1: "Ankara Rekabet Hukuku Avukatı",
-    metaTitle: "Ankara Rekabet Hukuku Avukatı | Akduman Hukuk Bürosu",
+    metaTitle: "Ankara Rekabet Hukuku Avukatı | Akduman Hukuk ve Danışmanlık",
     metaDescription:
       "Rekabet Kurumu soruşturmaları, birleşme-devralma bildirimleri ve rekabet ihlallerinden doğan uyuşmazlıklarda hukuki destek.",
     alan: "rekabet",
@@ -376,7 +386,7 @@ export const HOME_FAQ: FaqItem[] = [
 
 /** Footer 1. sütun büro tanımı (birebir). */
 export const FOOTER_TAGLINE =
-  "Akduman Hukuk Bürosu, Ankara'da siz değerli müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta Hukuku ve diğer tüm hukuki alanlarda hukuki danışmanlık ve avukatlık hizmeti vermektedir.";
+  "Akduman Hukuk ve Danışmanlık, Ankara'da siz değerli müvekkiller için Ceza Hukuku, Gayrimenkul Hukuku, Sigorta Hukuku ve diğer tüm hukuki alanlarda hukuki danışmanlık ve avukatlık hizmeti vermektedir.";
 
 /** Footer alt şerit disclaimer'ı (zorunlu, birebir). */
 export const DISCLAIMER =

@@ -81,7 +81,7 @@ export default function IsHukukuPage() {
           <div className="article-body min-w-0 max-w-[70ch]">
             {/* Giriş (kalan cümleler) — lead stili */}
             <p className="lead">
-              Akduman Hukuk Bürosu; işçi ve işveren taraflarının karşı karşıya
+              Akduman Hukuk ve Danışmanlık; işçi ve işveren taraflarının karşı karşıya
               geldiği uyuşmazlıklarda dava ve arabuluculuk süreçlerinin takibi
               ile hukuki danışmanlık hizmeti sunmaktadır. İşçilik alacakları
               ve işe iade talepleri; katı sürelere, ispat kurallarına ve

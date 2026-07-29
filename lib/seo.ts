@@ -15,7 +15,7 @@ const OG_DEFAULT = {
   url: "/og-default.png",
   width: 1200,
   height: 630,
-  alt: "Akduman Hukuk Bürosu — Ankara • Avukatlık & Hukuki Danışmanlık",
+  alt: "Akduman Hukuk ve Danışmanlık — Ankara • Avukatlık & Hukuki Danışmanlık",
 };
 
 export function buildMetadata(opts: {
@@ -53,6 +53,9 @@ export function legalServiceSchema() {
     "@type": "LegalService",
     "@id": `${SITE.url}/#legalservice`,
     name: SITE.name,
+    // Eski marka adı — SEO sürekliliği için (arama motorları geçmiş
+    // sorgularda/geri linklerde bu adı hâlâ ilişkilendirebilir).
+    alternateName: SITE.legacyName,
     url: SITE.url,
     logo: `${SITE.url}/images/logo-monogram.png`,
     telephone: SITE.phoneE164,

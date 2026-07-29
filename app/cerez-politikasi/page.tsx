@@ -9,7 +9,7 @@ import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
  */
 
 export const metadata = buildMetadata({
-  title: "Çerez Politikası | Akduman Hukuk Bürosu",
+  title: "Çerez Politikası | Akduman Hukuk ve Danışmanlık",
   description:
     "akduman.av.tr üzerinde kullanılan çerezler ve çerez tercihlerinizi nasıl yönetebileceğiniz hakkında bilgilendirme.",
   path: "/cerez-politikasi/",

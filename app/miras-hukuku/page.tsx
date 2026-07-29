@@ -82,7 +82,7 @@ export default function MirasHukukuPage() {
             <p className="lead">
               Türk Medeni Kanunu'nda düzenlenen bu alan; mirasçılık sıfatının
               belirlenmesinden terekenin paylaşılmasına kadar uzanan geniş bir
-              süreci kapsamaktadır. Akduman Hukuk Bürosu; mirasçılık belgesinin
+              süreci kapsamaktadır. Akduman Hukuk ve Danışmanlık; mirasçılık belgesinin
               alınmasından miras paylaşımına, reddi mirastan tenkis ve muris
               muvazaası davalarına kadar miras hukukundan doğan uyuşmazlıklarda
               müvekkillerine hukuki destek sağlamaktadır. Miras süreçleri hem

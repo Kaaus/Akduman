@@ -10,9 +10,9 @@ import { breadcrumbSchema, buildMetadata, contactPageSchema } from "@/lib/seo";
 import { HOME_FAQ, IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "İletişim | Akduman Hukuk Bürosu – Çankaya, Ankara",
+  title: "İletişim | Akduman Hukuk ve Danışmanlık – Çankaya, Ankara",
   description:
-    "Akduman Hukuk Bürosu iletişim bilgileri: adres, telefon ve iletişim formu. Çankaya/Ankara. ☎ +90 534 089 10 70",
+    "Akduman Hukuk ve Danışmanlık iletişim bilgileri: adres, telefon ve iletişim formu. Çankaya/Ankara. ☎ +90 534 089 10 70",
   path: "/iletisim/",
 });
 
@@ -140,7 +140,7 @@ export default function IletisimPage() {
         <section aria-label="Konum" className="border-t border-line">
           <iframe
             src={PLACEHOLDERS.HARITA_EMBED_URL}
-            title="Akduman Hukuk Bürosu konumu"
+            title="Akduman Hukuk ve Danışmanlık konumu"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="block h-[380px] w-full border-0"

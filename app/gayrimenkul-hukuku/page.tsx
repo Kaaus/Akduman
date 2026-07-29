@@ -80,7 +80,7 @@ export default function GayrimenkulHukukuPage() {
           <div className="article-body min-w-0 max-w-[70ch]">
             {/* Giriş (kalan cümleler) — lead stili */}
             <p className="lead">
-              Akduman Hukuk Bürosu; tapu iptali ve tescil, ortaklığın
+              Akduman Hukuk ve Danışmanlık; tapu iptali ve tescil, ortaklığın
               giderilmesi, ecrimisil, kira ve tahliye uyuşmazlıkları ile kat
               karşılığı inşaat sözleşmelerinden doğan ihtilaflarda
               müvekkillerine hukuki destek sağlamaktadır. Taşınmaz

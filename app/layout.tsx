@@ -30,7 +30,7 @@ const hanken = Hanken_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   // Varsayılan başlık — her sayfa kendi başlığını mutlak olarak tanımlar.
-  title: { absolute: "Ankara Avukat | Akduman Hukuk Bürosu – Av. Samed Akduman" },
+  title: { absolute: "Ankara Avukat | Akduman Hukuk ve Danışmanlık – Av. Samed Akduman" },
   description:
     "Ankara'da ceza, aile, miras, iş, sigorta, gayrimenkul, idare ve yabancılar hukuku alanlarında avukatlık ve hukuki danışmanlık. ☎ +90 534 089 10 70",
   // Kendi metadata'sını tanımlamayan sayfalar (örn. 404) için varsayılan
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: "Akduman Hukuk Bürosu — Ankara • Avukatlık & Hukuki Danışmanlık",
+        alt: "Akduman Hukuk ve Danışmanlık — Ankara • Avukatlık & Hukuki Danışmanlık",
       },
     ],
   },

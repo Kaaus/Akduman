@@ -6,7 +6,8 @@ Dosya gelene kadar sitede zarif bir yer tutucu ("Görsel eklenecek") görünür.
 
 | Dosya adı | Kaynak | Kullanım yeri |
 |---|---|---|
-| `logo-monogram.png` | Kare monogram (654×660, şeffaf) — hem açık hem koyu zeminde aynı dosya | Header + Footer + mobil menü (`BrandLockup`) + JSON-LD + favicon/og |
+| `logo-monogram.png` | Kare monogram (485×485, şeffaf) — hem açık hem koyu zeminde aynı dosya | Header/Footer/mobil menü (`BrandLockup`, dar alan) + JSON-LD + favicon/og |
+| `logo-tam.png` | Yazılı tam logo (1435×486 ≈ 2.95:1, şeffaf) — monogram + "AKDUMAN HUKUK & DANIŞMANLIK" | `BrandLockup`, yalnız masaüstü (≥1024px) |
 | `hero.webp` | Eski sitedeki `Slider-1.webp` | Anasayfa hero görseli |
 | `av-samed-akduman.jpg` | Portre fotoğrafı | Hakkımızda avukat kartı + makale yazar kutusu |
 

@@ -79,7 +79,7 @@ export default function AileHukukuPage() {
           <div className="article-body min-w-0 max-w-[70ch]">
             {/* Giriş (kalan cümleler) — lead stili */}
             <p className="lead">
-              Akduman Hukuk Bürosu, aile hukukundan kaynaklanan
+              Akduman Hukuk ve Danışmanlık, aile hukukundan kaynaklanan
               uyuşmazlıklarda dava takibi ve hukuki danışmanlık hizmeti
               sunmaktadır. Bu alandaki uyuşmazlıklar; tarafların özel
               hayatını, çocukların geleceğini ve ekonomik dengeleri doğrudan

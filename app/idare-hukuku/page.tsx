@@ -81,7 +81,7 @@ export default function IdareHukukuPage() {
             <p className="lead">
               Kamu gücü kullanılarak tesis edilen bir işlem; kişilerin çalışma
               hayatını, mülkiyetini ve gündelik yaşamını doğrudan
-              etkileyebilmektedir. Akduman Hukuk Bürosu; iptal ve tam yargı
+              etkileyebilmektedir. Akduman Hukuk ve Danışmanlık; iptal ve tam yargı
               davaları, idari başvurular, disiplin süreçleri ve kamulaştırma
               uyuşmazlıkları başta olmak üzere idare hukuku alanında
               müvekkillerine hukuki destek sağlamaktadır. İdari yargıda

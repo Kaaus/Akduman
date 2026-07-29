@@ -9,9 +9,9 @@ import { SITE } from "@/lib/site";
  */
 
 export const metadata = buildMetadata({
-  title: "KVKK Aydınlatma Metni | Akduman Hukuk Bürosu",
+  title: "KVKK Aydınlatma Metni | Akduman Hukuk ve Danışmanlık",
   description:
-    "Akduman Hukuk Bürosu kişisel verilerin korunması aydınlatma metni: işlenen veriler, işleme amaçları ve KVKK kapsamındaki haklarınız.",
+    "Akduman Hukuk ve Danışmanlık kişisel verilerin korunması aydınlatma metni: işlenen veriler, işleme amaçları ve KVKK kapsamındaki haklarınız.",
   path: "/kvkk-aydinlatma-metni/",
 });
 

@@ -181,10 +181,12 @@ export default function IntroSplash() {
         >
           {/* Halka — logo-monogram.png'deki ince çember */}
           <circle className="intro-draw" style={{ animationDelay: "0ms" }} pathLength={1} cx="70" cy="76" r="60" />
-          {/* A'nın iki bacağı — birlikte, hafif dışa kıvrımla (logodaki
-              akışkan serif hissi; abartısız, tek path'lik yumuşak bombe) */}
-          <path className="intro-draw" style={{ animationDelay: "110ms" }} pathLength={1} d="M70,20 Q45,75 33,130" />
-          <path className="intro-draw" style={{ animationDelay: "110ms" }} pathLength={1} d="M70,20 Q95,75 107,130" />
+          {/* A'nın iki bacağı — birlikte. Sol bacak yeni logodaki kaligrafik
+              kuyruğu ima edecek şekilde alt uçta sola doğru kıvrılarak
+              uzatıldı (tek akıcı path, abartısız); sağ bacak logodaki serif
+              tabanı için küçük bir ayrı taban çizgisiyle tamamlanıyor. */}
+          <path className="intro-draw" style={{ animationDelay: "110ms" }} pathLength={1} d="M70,20 Q45,75 32,124 Q20,146 4,136" />
+          <path className="intro-draw" style={{ animationDelay: "110ms" }} pathLength={1} d="M70,20 Q95,75 107,130 M97,130 L119,128" />
           {/* A'nın orta mili — terazinin dikey miliyle çakışır */}
           <line className="intro-draw" style={{ animationDelay: "280ms" }} pathLength={1} x1="70" y1="30" x2="70" y2="76" />
           {/* Yatay denge kolu */}
@@ -198,7 +200,7 @@ export default function IntroSplash() {
           {/* Mil ekseni — en son */}
           <circle className="intro-pivot" cx="70" cy="76" r="2.6" fill="#BFA05C" stroke="none" />
         </svg>
-        <p className="intro-kicker kicker-dark">Akduman Hukuk Bürosu</p>
+        <p className="intro-kicker kicker-dark">Akduman Hukuk ve Danışmanlık</p>
       </div>
     </div>
   );

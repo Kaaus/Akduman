@@ -40,7 +40,7 @@ export function generateMetadata({ params }: { params: { makaleSlug: string } })
   const article = getArticle(params.makaleSlug);
   if (!article) return {};
   return buildMetadata({
-    title: `${article.title} | Akduman Hukuk Bürosu`,
+    title: `${article.title} | Akduman Hukuk ve Danışmanlık`,
     description: article.description,
     path: `/${article.slug}/`,
     ogType: "article",
@@ -187,7 +187,7 @@ export default function MakalePage({
                   {SITE.lawyer}
                 </p>
                 <p className="mt-1 text-[0.875rem] text-muted">
-                  Akduman Hukuk Bürosu, Ankara
+                  Akduman Hukuk ve Danışmanlık, Ankara
                 </p>
               </div>
             </aside>

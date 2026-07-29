@@ -8,7 +8,7 @@ import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
  */
 
 export const metadata = buildMetadata({
-  title: "Yasal Uyarı | Akduman Hukuk Bürosu",
+  title: "Yasal Uyarı | Akduman Hukuk ve Danışmanlık",
   description:
     "akduman.av.tr sitesindeki içeriklerin kullanımına ilişkin yasal uyarı ve sorumluluk kaydı.",
   path: "/yasal-uyari/",

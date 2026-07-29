@@ -7,7 +7,7 @@ import { getAllArticles } from "@/lib/articles";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Hukuki Makaleler | Akduman Hukuk Bürosu",
+  title: "Hukuki Makaleler | Akduman Hukuk ve Danışmanlık",
   description:
     "Miras, trafik kazası, kira ve iş hukuku başta olmak üzere güncel hukuki bilgilendirme yazıları.",
   path: "/hukuki-makaleler/",

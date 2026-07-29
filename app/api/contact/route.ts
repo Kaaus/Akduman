@@ -119,7 +119,7 @@ export async function POST(request: Request) {
   }
 
   const to = process.env.CONTACT_TO || "info@akduman.av.tr";
-  const from = process.env.CONTACT_FROM || "Akduman Hukuk <onboarding@resend.dev>";
+  const from = process.env.CONTACT_FROM || "Akduman Hukuk ve Danışmanlık <onboarding@resend.dev>";
 
   const text = [
     `Ad Soyad: ${adSoyad.trim()}`,

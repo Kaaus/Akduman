@@ -82,7 +82,7 @@ export default function YabancilarHukukuPage() {
               Bu alandaki iş ve işlemler ağırlıklı olarak idari başvurulara
               dayandığından; belge eksikliği, yanlış izin türü seçimi veya
               sürelerin kaçırılması gibi nedenler sürecin uzamasına ya da hak
-              kaybına yol açabilmektedir. Akduman Hukuk Bürosu; ikamet izni,
+              kaybına yol açabilmektedir. Akduman Hukuk ve Danışmanlık; ikamet izni,
               çalışma izni, vatandaşlık başvuruları, sınır dışı kararına
               itiraz ile tanıma ve tenfiz süreçlerinde yabancı uyruklu
               müvekkillerine ve yabancı personel istihdam eden işverenlere

@@ -7,9 +7,9 @@ import { breadcrumbSchema, buildMetadata, personSchema } from "@/lib/seo";
 import { IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Hakkımızda | Akduman Hukuk Bürosu – Ankara",
+  title: "Hakkımızda | Akduman Hukuk ve Danışmanlık – Ankara",
   description:
-    "Akduman Hukuk Bürosu ve Av. Samed Akduman hakkında bilgi alın. Ankara Çankaya'da avukatlık ve hukuki danışmanlık hizmetleri.",
+    "Akduman Hukuk ve Danışmanlık ile Av. Samed Akduman hakkında bilgi alın. Ankara Çankaya'da avukatlık ve hukuki danışmanlık hizmetleri.",
   path: "/hakkimizda/",
 });
 
@@ -47,10 +47,10 @@ export default function HakkimizdaPage() {
           <div className="max-w-3xl">
             {/* Gövde metni birebir — onaylı reklam yasağı düzeltmeleri uygulanmış hâli */}
             <p className="kicker">Hakkımızda</p>
-            <h2 className="mt-2">Akduman Hukuk Bürosu</h2>
+            <h2 className="mt-2">Akduman Hukuk ve Danışmanlık</h2>
             <div className="mt-3 space-y-2">
               <p>
-                <strong>Akduman Hukuk Bürosu</strong>, Ankara&rsquo;da
+                <strong>Akduman Hukuk ve Danışmanlık</strong>, Ankara&rsquo;da
                 faaliyet gösteren, hukukun temel ilkelerine bağlı ve
                 müvekkil odaklı yaklaşımı benimseyen bir hukuk bürosudur.
                 Bireysel ve kurumsal müvekkillerimize, dava takibi, hukuki
@@ -61,7 +61,7 @@ export default function HakkimizdaPage() {
                 savunmaktır.
               </p>
               <p>
-                Akduman Hukuk Bürosunun kurucusu olan{" "}
+                Akduman Hukuk ve Danışmanlık&rsquo;ın kurucusu olan{" "}
                 <strong>Av. Samed Akduman</strong> öncülüğünde
                 müvekkillerine özenli, hızlı ve çözüm odaklı hizmet sunma
                 amacı ile faaliyetlerini sürdürmektedir.
@@ -145,7 +145,7 @@ export default function HakkimizdaPage() {
                   <p>
                     Hacettepe Üniversitesi Hukuk Fakültesi mezunu olan Av.
                     Samed Akduman, Ankara&rsquo;da faaliyet gösteren Akduman
-                    Hukuk Bürosu&rsquo;nun kurucusudur. Başta gayrimenkul
+                    Hukuk ve Danışmanlık&rsquo;ın kurucusudur. Başta gayrimenkul
                     hukuku, ceza hukuku ve sigorta hukuku olmak üzere çeşitli
                     hukuk alanlarında bireysel ve kurumsal müvekkillerine
                     danışmanlık ve avukatlık hizmeti sunmaktadır.

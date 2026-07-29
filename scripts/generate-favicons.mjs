@@ -3,8 +3,8 @@
  *
  *   node scripts/generate-favicons.mjs
  *
- * Kaynak: public/images/logo-monogram.png (654×660, RGBA, hem açık hem koyu
- * zeminde okunur kare monogram). satori ile <img> data URI'si üzerinden
+ * Kaynak: public/images/logo-monogram.png (485×485, RGBA, şeffaf, hem açık
+ * hem koyu zeminde okunur kare monogram). satori ile <img> data URI'si üzerinden
  * kare bir tuvale yerleştirilip resvg ile PNG'ye çevrilir (generate-og.mjs
  * ile aynı yöntem — sisteme yeni bir görsel-işleme bağımlılığı eklemez).
  *
@@ -27,9 +27,9 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MONOGRAM_PATH = path.join(ROOT, "public", "images", "logo-monogram.png");
 const monogramB64 = fs.readFileSync(MONOGRAM_PATH).toString("base64");
 const monogramSrc = `data:image/png;base64,${monogramB64}`;
-// Kaynak dosyanın gerçek piksel oranı (654×660 ≈ kare) — img'ye doğru
+// Kaynak dosyanın gerçek piksel oranı (485×485 — tam kare) — img'ye doğru
 // width/height verilmezse satori oranı bozabilir.
-const RATIO = 654 / 660;
+const RATIO = 485 / 485;
 
 /**
  * `size`×`size` bir kare üretir. `bg` verilirse opak zemin + `paddingPct`

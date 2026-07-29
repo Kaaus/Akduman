@@ -4,9 +4,10 @@
  *   node scripts/generate-og.mjs
  *
  * Tasarım v2: 1200×630 · navy-950 zemin · bronz keyline çerçeve · ortada
- * monogram (public/images/logo-monogram.png, ~280px) · altında beyaz
- * Fraunces "Akduman Hukuk Bürosu" + bronze-300 "Ankara • Avukatlık &
- * Hukuki Danışmanlık". Fontlar sitenin GERÇEK tipografisiyle (Fraunces +
+ * monogram (public/images/logo-monogram.png, 485×485 şeffaf, ~280px) ·
+ * altında beyaz Fraunces "Akduman Hukuk ve Danışmanlık" + bronze-300
+ * "Ankara • Avukatlık & Hukuki Danışmanlık". Fontlar sitenin GERÇEK
+ * tipografisiyle (Fraunces +
  * Hanken Grotesk) eşleşir — önceki sürüm yanlışlıkla Cormorant
  * Garamond/Source Sans 3 kullanıyordu (sitede hiç yer almayan fontlar).
  * Fontlar Google Fonts'tan indirilir (yalnızca gereken karakterler,
@@ -24,7 +25,7 @@ import { fileURLToPath } from "node:url";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 
-const TITLE = "Akduman Hukuk Bürosu";
+const TITLE = "Akduman Hukuk ve Danışmanlık";
 const SUBTITLE = "ANKARA • AVUKATLIK & HUKUKİ DANIŞMANLIK";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -32,7 +33,7 @@ const monogramB64 = fs
   .readFileSync(path.join(ROOT, "public", "images", "logo-monogram.png"))
   .toString("base64");
 const monogramSrc = `data:image/png;base64,${monogramB64}`;
-const MONOGRAM_RATIO = 654 / 660; // kaynağın gerçek piksel oranı
+const MONOGRAM_RATIO = 485 / 485; // kaynağın gerçek piksel oranı (tam kare)
 
 /** Google Fonts'tan yalnızca gereken karakterleri kapsayan TTF indirir. */
 async function loadGoogleFont(family, weight, text) {

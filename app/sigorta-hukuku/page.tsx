@@ -82,7 +82,7 @@ export default function SigortaHukukuPage() {
             <p className="lead">
               Uygulamada bu alandaki uyuşmazlıkların önemli bir bölümünü,
               trafik kazalarından doğan maddi ve bedensel tazminat talepleri
-              oluşturmaktadır. Akduman Hukuk Bürosu; trafik kazası tazminatı,
+              oluşturmaktadır. Akduman Hukuk ve Danışmanlık; trafik kazası tazminatı,
               araç değer kaybı, kasko ve zorunlu mali sorumluluk sigortası
               uyuşmazlıkları ile Sigorta Tahkim Komisyonu başvurularında
               müvekkillerine hukuki destek sağlamaktadır. Bu süreçlerin

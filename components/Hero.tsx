@@ -34,14 +34,14 @@ export default function Hero() {
               Akduman{" "}
             </span>
             <span className="hero-line block" style={{ animationDelay: "180ms" }}>
-              Hukuk Bürosu
+              Hukuk ve Danışmanlık
             </span>
           </h1>
           <p
             className="hero-line mt-6 max-w-xl text-lg leading-relaxed text-[#F4F1EA]/[.82]"
             style={{ animationDelay: "270ms" }}
           >
-            Akduman Hukuk Bürosu, Ankara&rsquo;da müvekkillerine çeşitli hukuk
+            Akduman Hukuk ve Danışmanlık, Ankara&rsquo;da müvekkillerine çeşitli hukuk
             alanlarında avukatlık ve hukuki danışmanlık hizmeti sunmaktadır.
           </p>
           <div
