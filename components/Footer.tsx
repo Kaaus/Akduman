@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import BrandLockup from "@/components/BrandLockup";
-import { DISCLAIMER, FOOTER_TAGLINE, PLACEHOLDERS, SERVICES, SITE } from "@/lib/site";
+import { DISCLAIMER, FOOTER_TAGLINE, GOOGLE_MAPS_URL, PLACEHOLDERS, SERVICES, SITE } from "@/lib/site";
 
 /** Footer sütun başlığı — koyu zeminde bronze-300 kicker. */
 function ColumnTitle({ children }: { children: string }) {
@@ -98,9 +98,17 @@ export default function Footer() {
         <div>
           <ColumnTitle>İletişim</ColumnTitle>
           <ul className="space-y-3.5">
-            <li className="flex gap-2.5">
-              <MapPin size={16} strokeWidth={1.5} className="mt-1 shrink-0 text-bronze-500" aria-hidden="true" />
-              <span>{SITE.address.full}</span>
+            <li>
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Adresi Google Haritalar'da aç"
+                className="group flex gap-2.5 text-[#C7D2DE] transition-colors hover:text-white"
+              >
+                <MapPin size={16} strokeWidth={1.5} className="mt-1 shrink-0 text-bronze-500" aria-hidden="true" />
+                <span>{SITE.address.full}</span>
+              </a>
             </li>
             <li>
               <a href={SITE.telHref} className="group flex items-center gap-2.5 text-[#C7D2DE] transition-colors hover:text-white">

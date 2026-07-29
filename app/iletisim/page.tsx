@@ -7,7 +7,7 @@ import PhotoSurface from "@/components/PhotoSurface";
 import Reveal from "@/components/Reveal";
 import { WhatsAppIcon } from "@/components/WhatsAppFloat";
 import { breadcrumbSchema, buildMetadata, contactPageSchema } from "@/lib/seo";
-import { HOME_FAQ, IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
+import { GOOGLE_MAPS_URL, HOME_FAQ, IMAGES, PLACEHOLDERS, SITE } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "İletişim | Akduman Hukuk ve Danışmanlık – Çankaya, Ankara",
@@ -22,11 +22,13 @@ function PanelRow({
   label,
   children,
   href,
+  ariaLabel,
 }: {
   icon: React.ReactNode;
   label: string;
   children: React.ReactNode;
   href?: string;
+  ariaLabel?: string;
 }) {
   const inner = (
     <span className="flex gap-4">
@@ -49,7 +51,13 @@ function PanelRow({
     "group block transition-transform duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:translate-x-1";
 
   return href ? (
-    <a href={href} className={rowClass} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>
+    <a
+      href={href}
+      className={rowClass}
+      aria-label={ariaLabel}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+    >
       {inner}
     </a>
   ) : (
@@ -85,6 +93,8 @@ export default function IletisimPage() {
                   <PanelRow
                     icon={<MapPin size={24} strokeWidth={1.5} />}
                     label="Adres"
+                    href={GOOGLE_MAPS_URL}
+                    ariaLabel="Adresi Google Haritalar'da aç"
                   >
                     {SITE.address.full}
                   </PanelRow>

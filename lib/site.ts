@@ -63,6 +63,15 @@ export const SITE = {
   },
 } as const;
 
+/**
+ * Adresi Google Haritalar'da açan link — SITE.address.full'den türetilir
+ * (elle kopyalanmaz), adres güncellenirse otomatik günceller. İletişim
+ * sayfası + Footer'daki adres bloklarında kullanılır.
+ */
+export const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  SITE.address.full
+)}`;
+
 // ─── Placeholder Sözleşmesi ──────────────────────────────────────────────────
 // Kural: değer boş ("") ise ilgili UI bloğu ve schema alanı HİÇ basılmaz.
 // Boş satır, "—" veya "yakında" gibi dolgu ASLA yazılmaz.
