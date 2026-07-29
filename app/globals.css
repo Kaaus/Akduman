@@ -453,7 +453,10 @@ html[data-intro-pending] .hero-line {
 }
 .intro-pivot {
   opacity: 0;
-  animation: intro-fade-in 250ms var(--ease) 560ms forwards;
+  /* 700ms: A monogramındaki son çizim öğeleri (çanak yayları) 640ms'de
+     başlayıp ~1020ms'de bitiyor — nokta bu aralıkta değil, sona doğru
+     belirsin diye 560ms'ten yükseltildi. */
+  animation: intro-fade-in 250ms var(--ease) 700ms forwards;
 }
 .intro-kicker {
   opacity: 0;
