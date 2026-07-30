@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
+import { Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import BrandLockup from "@/components/BrandLockup";
 import { DISCLAIMER, FOOTER_TAGLINE, GOOGLE_MAPS_URL, PLACEHOLDERS, SERVICES, SITE } from "@/lib/site";
 
@@ -12,6 +12,7 @@ export default function Footer() {
   const socials = [
     { url: PLACEHOLDERS.SOSYAL_FACEBOOK_URL, label: "Facebook", Icon: Facebook },
     { url: PLACEHOLDERS.SOSYAL_INSTAGRAM_URL, label: "Instagram", Icon: Instagram },
+    { url: PLACEHOLDERS.SOSYAL_LINKEDIN_URL, label: "LinkedIn profilimiz", Icon: Linkedin },
     { url: PLACEHOLDERS.SOSYAL_YOUTUBE_URL, label: "YouTube", Icon: Youtube },
   ].filter((s) => s.url); // boş {{SOSYAL_*}} → ikon HİÇ render edilmez
 

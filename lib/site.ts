@@ -83,6 +83,7 @@ export const PLACEHOLDERS = {
   CALISMA_SAATLERI: "", // TODO: müşteriden alınacak
   SOSYAL_FACEBOOK_URL: "", // TODO: müşteriden alınacak
   SOSYAL_INSTAGRAM_URL: "https://www.instagram.com/samedakduman/",
+  SOSYAL_LINKEDIN_URL: "https://www.linkedin.com/in/samedakduman/",
   SOSYAL_YOUTUBE_URL: "", // TODO: müşteriden alınacak
   /** Google Maps embed linki (iframe src). */
   HARITA_EMBED_URL: "", // TODO: müşteriden alınacak
