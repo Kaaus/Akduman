@@ -8,7 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceRow from "@/components/ServiceRow";
-import { buildMetadata, faqSchema } from "@/lib/seo";
+import { buildMetadata, faqSchema, webSiteSchema } from "@/lib/seo";
 import { HOME_FAQ, SERVICES } from "@/lib/site";
 
 export const metadata = buildMetadata({
@@ -23,6 +23,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={faqSchema(HOME_FAQ)} />
+      <JsonLd data={webSiteSchema()} />
 
       {/* Açılış perdesi artık app/template.tsx üzerinden layout düzeyinde,
           TÜM rota geçişlerinde (Ana Sayfa dahil) mount edilir. */}

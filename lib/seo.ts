@@ -84,6 +84,22 @@ export function legalServiceSchema() {
   };
 }
 
+/**
+ * Anasayfaya özel WebSite şeması — Google arama sonuçlarında site adının
+ * "akduman.av.tr" yerine marka adıyla görünmesi içindir. Yalnız anasayfada
+ * basılır (bkz. app/page.tsx); LegalService/FAQPage/Service/Article
+ * şemalarına EK'tir, alternatifi değildir.
+ */
+export function webSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.name,
+    alternateName: ["Akduman", SITE.legacyName],
+    url: SITE.url,
+  };
+}
+
 /** Hakkımızda sayfası için Person şeması (avukatın biyografi bilgileri). */
 export function personSchema() {
   return {
