@@ -7,18 +7,18 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Hesaplamalar — smoke", () => {
   test("hub sayfası render olur ve araca linkler", async ({ page }) => {
-    await page.goto("/hesaplamalar/");
-    await expect(page.locator("h1", { hasText: "Hesaplamalar" })).toBeVisible();
-    const kart = page.locator('a[href="/hesaplamalar/iscilik-alacagi/"]');
+    await page.goto("/araclar/");
+    await expect(page.locator("h1", { hasText: "Araçlar" })).toBeVisible();
+    const kart = page.locator('a[href="/araclar/iscilik-alacagi/"]');
     await expect(kart).toBeVisible();
     await kart.click();
-    await expect(page).toHaveURL(/\/hesaplamalar\/iscilik-alacagi\/$/);
+    await expect(page).toHaveURL(/\/araclar\/iscilik-alacagi\/$/);
   });
 
   test("araç sayfası: hesaplayıcı + açıklayıcı bölüm render olur", async ({
     page,
   }) => {
-    await page.goto("/hesaplamalar/iscilik-alacagi/");
+    await page.goto("/araclar/iscilik-alacagi/");
     await expect(
       page.locator("h1", { hasText: "İşçilik Alacağı Hesaplama" })
     ).toBeVisible();
@@ -37,7 +37,7 @@ test.describe("Hesaplamalar — smoke", () => {
   });
 
   test("kıdem & ihbar hesabı istemci tarafında çalışır", async ({ page }) => {
-    await page.goto("/hesaplamalar/iscilik-alacagi/");
+    await page.goto("/araclar/iscilik-alacagi/");
     await page.fill("#ih-giris", "2019-03-14");
     await page.fill("#ih-cikis", "2026-06-02");
     await page.fill("#ih-brut", "85000");
@@ -53,7 +53,7 @@ test.describe("Hesaplamalar — smoke", () => {
   });
 
   test("geçersiz tarih aralığında satır içi hata görünür", async ({ page }) => {
-    await page.goto("/hesaplamalar/iscilik-alacagi/");
+    await page.goto("/araclar/iscilik-alacagi/");
     await page.fill("#ih-giris", "2026-06-02");
     await page.fill("#ih-cikis", "2019-03-14");
     await page.fill("#ih-brut", "85000");

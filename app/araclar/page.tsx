@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Calculator } from "lucide-react";
+import { ArrowRight, Calculator, CalendarClock, type LucideIcon } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import PageHeading from "@/components/PageHeading";
@@ -7,10 +7,10 @@ import Reveal from "@/components/Reveal";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Hesaplama Araçları | Akduman Hukuk ve Danışmanlık",
+  title: "Araçlar | Akduman Hukuk ve Danışmanlık",
   description:
-    "İşçilik alacağı (kıdem, ihbar, fazla mesai, yıllık izin) hesaplama aracı. Sonuçlar bilgilendirme amaçlıdır; hukuki tavsiye niteliği taşımaz.",
-  path: "/hesaplamalar/",
+    "İşçilik alacağı ve infaz (koşullu salıverilme) hesaplama araçları. Sonuçlar bilgilendirme amaçlıdır; hukuki tavsiye niteliği taşımaz.",
+  path: "/araclar/",
 });
 
 /**
@@ -18,28 +18,36 @@ export const metadata = buildMetadata({
  * (ikon + serif başlık + açıklama + ok, hover'da paper-deep zemin); veri
  * modeli Service olmadığı için yerel, sade bir kopya.
  */
-const TOOLS = [
+const TOOLS: { href: string; title: string; aciklama: string; Icon: LucideIcon }[] = [
   {
-    href: "/hesaplamalar/iscilik-alacagi/",
+    href: "/araclar/iscilik-alacagi/",
     title: "İşçilik Alacağı Hesaplama",
     aciklama:
       "Kıdem ve ihbar tazminatı, fazla mesai ve yıllık izin ücreti hesaplayın.",
+    Icon: Calculator,
+  },
+  {
+    href: "/araclar/infaz-hesaplama/",
+    title: "İnfaz Hesaplama",
+    aciklama:
+      "Koşullu salıverilme ve denetimli serbestlik tarihlerini yaklaşık olarak hesaplayın.",
+    Icon: CalendarClock,
   },
 ];
 
-export default function HesaplamalarPage() {
+export default function AraclarPage() {
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
           { name: "Ana Sayfa", path: "/" },
-          { name: "Hesaplamalar", path: "/hesaplamalar/" },
+          { name: "Araçlar", path: "/araclar/" },
         ])}
       />
 
       <section className="bg-white">
         <div className="container-site pt-8 pb-12 md:pb-16">
-          <PageHeading crumbs={[{ label: "Hesaplamalar" }]} title="Hesaplamalar">
+          <PageHeading crumbs={[{ label: "Araçlar" }]} title="Araçlar">
             Sık ihtiyaç duyulan hukuki hesaplamalar için hazırladığımız
             araçlar aşağıdadır. Sonuçlar bilgilendirme amaçlıdır; hukuki
             tavsiye niteliği taşımaz.
@@ -51,7 +59,7 @@ export default function HesaplamalarPage() {
                   href={tool.href}
                   className="group grid grid-cols-[24px_1fr_auto] items-center gap-x-5 border-b border-line-strong px-2 py-6 transition-colors duration-[260ms] ease-[cubic-bezier(.22,1,.36,1)] hover:border-navy-800 hover:bg-paper-deep sm:px-4 md:grid-cols-[24px_1fr_auto_auto]"
                 >
-                  <Calculator
+                  <tool.Icon
                     size={24}
                     strokeWidth={1.5}
                     aria-hidden="true"

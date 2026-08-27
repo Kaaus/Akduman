@@ -96,6 +96,24 @@ const nextConfig = {
         destination: "/hukuki-makaleler/",
         permanent: true,
       },
+
+      // 6. Hesaplamalar → Araçlar yeniden adlandırması (eski rota kısa süre
+      //    yayında kaldığı için) — alt yollar birebir taşınır.
+      {
+        source: "/hesaplamalar",
+        destination: "/araclar/",
+        permanent: true,
+      },
+      {
+        source: "/hesaplamalar/",
+        destination: "/araclar/",
+        permanent: true,
+      },
+      {
+        source: "/hesaplamalar/:path*",
+        destination: "/araclar/:path*",
+        permanent: true,
+      },
     ];
   },
 };

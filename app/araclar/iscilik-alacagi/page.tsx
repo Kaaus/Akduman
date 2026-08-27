@@ -19,7 +19,7 @@ export const metadata = buildMetadata({
   title: "İşçilik Alacağı Hesaplama 2026 | Kıdem, İhbar, Fazla Mesai",
   description:
     "Kıdem tazminatı, ihbar tazminatı, fazla mesai ve yıllık izin ücreti hesaplama aracı. 2026 kıdem tavanı ile güncel, bilgilendirme amaçlı hesaplama.",
-  path: "/hesaplamalar/iscilik-alacagi/",
+  path: "/araclar/iscilik-alacagi/",
 });
 
 const FAQ: FaqItem[] = [
@@ -51,8 +51,8 @@ export default function IscilikAlacagiPage() {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Ana Sayfa", path: "/" },
-          { name: "Hesaplamalar", path: "/hesaplamalar/" },
-          { name: "İşçilik Alacağı Hesaplama", path: "/hesaplamalar/iscilik-alacagi/" },
+          { name: "Araçlar", path: "/araclar/" },
+          { name: "İşçilik Alacağı Hesaplama", path: "/araclar/iscilik-alacagi/" },
         ])}
       />
 
@@ -60,7 +60,7 @@ export default function IscilikAlacagiPage() {
         <div className="container-site pt-8 pb-12 md:pb-16">
           <PageHeading
             crumbs={[
-              { label: "Hesaplamalar", href: "/hesaplamalar/" },
+              { label: "Araçlar", href: "/araclar/" },
               { label: "İşçilik Alacağı Hesaplama" },
             ]}
             title="İşçilik Alacağı Hesaplama"

@@ -357,9 +357,9 @@ export const NAV: NavItem[] = [
     children: SERVICES.map((s) => ({ label: s.title, href: `/${s.slug}/` })),
   },
   { label: "Hukuki Makaleler", href: "/hukuki-makaleler/" },
-  // Şimdilik tek araç olduğundan düz link (dropdown yok); araç sayısı
-  // artarsa Faaliyet Alanlarımız gibi children eklenebilir.
-  { label: "Hesaplamalar", href: "/hesaplamalar/" },
+  // Düz link (dropdown yok); araç sayısı artarsa Faaliyet Alanlarımız
+  // gibi children eklenebilir.
+  { label: "Araçlar", href: "/araclar/" },
   { label: "İletişim", href: "/iletisim/" },
 ];
 
