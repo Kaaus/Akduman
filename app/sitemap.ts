@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/faaliyet-alanlarimiz/",
     ...SERVICES.map((s) => `/${s.slug}/`),
     "/hukuki-makaleler/",
+    "/hesaplamalar/",
+    "/hesaplamalar/iscilik-alacagi/",
     "/iletisim/",
     "/kvkk-aydinlatma-metni/",
     "/cerez-politikasi/",

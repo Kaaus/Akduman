@@ -212,8 +212,10 @@ export default function Header() {
               altı ekranlarda metin gizlenir, yalnız monogram kalır. */}
           <BrandLockup compact={scrolled} />
 
-          {/* Masaüstü menü */}
-          <nav aria-label="Ana menü" className="hidden items-center gap-7 lg:flex">
+          {/* Masaüstü menü — 6. öğe (Hesaplamalar) eklenince gap-7 1280px'te
+              satır kırıyordu; kural gereği yazı boyutu DEĞİL aralık daraltıldı
+              (gap-7 → gap-5, tüm masaüstü kırılımlarında). */}
+          <nav aria-label="Ana menü" className="hidden items-center gap-5 lg:flex">
             {NAV.map((item) =>
               item.children ? (
                 <div
